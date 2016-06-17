@@ -1,0 +1,25 @@
+{
+  "name": "educhain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bkrem/educhain.git"
+  },
+  "keywords": [
+    "educhain"
+  ],
+  "author": "Ben Kremer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bkrem/educhain/issues"
+  },
+  "homepage": "https://github.com/bkrem/educhain#readme",
+  "dependencies": {
+    "openchain": "^0.2.2"
+  }
+}
