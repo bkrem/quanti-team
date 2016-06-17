@@ -1,0 +1,3 @@
+rootProject.name = 'EduChainApp'
+
+include ':app'
