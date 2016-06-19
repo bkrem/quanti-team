@@ -6,3 +6,10 @@
 
 'use strict';
 
+export type Tab =
+    'home'
+  | 'notifications'
+  | 'tasks'
+  | 'team'
+  | 'me'
+  ;
