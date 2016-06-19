@@ -40,9 +40,9 @@ export default class TabsView extends Component {
     render() {
         return (
             <TabBarIOS
-                unselectedTintColor="yellow"
-                tintColor="white"
-                barTintColor="darkslateblue">
+                unselectedTintColor="#80807e"
+                tintColor="#fff"
+                barTintColor="#15171a">
                 <TabBarIOS.Item
                     title="Home"
                     selected={this.state.selectedTab === 'home'}
