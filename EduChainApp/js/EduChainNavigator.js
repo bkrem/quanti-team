@@ -10,7 +10,7 @@ import {
     Navigator,
     StyleSheet
 } from 'react-native'
-import TabsView from './tabs/TabsView'
+import App from './App'
 import First from './First'
 import Second from './Second'
 
@@ -28,7 +28,7 @@ export default class EduChainNavigator extends Component {
                 return (<Second navigator={navigator} title="second" />);
 
             default:
-                return (<EduChainApp navigator={navigator} />);
+                return (<App navigator={navigator} />);
         }
     }
 
@@ -42,11 +42,4 @@ export default class EduChainNavigator extends Component {
         );
     }
 
-} // END CLASS
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'black'
-    }
-});
+}

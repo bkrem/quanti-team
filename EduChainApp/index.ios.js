@@ -5,6 +5,6 @@
 
 import React, { Component } from 'react'
 import { AppRegistry } from 'react-native'
-import EduChainApp from './js/EduChainApp'
+import EduChainApp from './js/App'
 
 AppRegistry.registerComponent('EduChainApp', () => EduChainApp);
