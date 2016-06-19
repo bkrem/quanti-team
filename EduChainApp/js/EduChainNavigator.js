@@ -10,6 +10,7 @@ import {
     Navigator,
     StyleSheet
 } from 'react-native'
+import TabsView from './tabs/TabsView'
 import First from './First'
 import Second from './Second'
 
@@ -24,7 +25,10 @@ export default class EduChainNavigator extends Component {
                 return (<First navigator={navigator} title="first" />);
 
             case "second":
-                return (<Second navigator={navigator} title="second" />)
+                return (<Second navigator={navigator} title="second" />);
+
+            default:
+                return (<EduChainApp navigator={navigator} />);
         }
     }
 
@@ -32,7 +36,7 @@ export default class EduChainNavigator extends Component {
         return (
             <Navigator
                 ref="navigator"
-                initialRoute={ {id: "first"} }
+                initialRoute={ {} }
                 renderScene={this.renderScene}
             />
         );

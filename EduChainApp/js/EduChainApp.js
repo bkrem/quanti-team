@@ -13,7 +13,7 @@ import {
     Text,
     View
 } from 'react-native'
-import EduChainNavigator from './EduChainNavigator'
+import TabsView from './tabs/TabsView'
 
 export default class EduChainApp extends Component {
     render() {
@@ -29,7 +29,7 @@ export default class EduChainApp extends Component {
                     Shake or press menu button for dev menu
                 </Text>
 
-                <EduChainNavigator />
+                <TabsView />
             </View>
         );
     }
