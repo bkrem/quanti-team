@@ -11,11 +11,17 @@ import {
     TabBarIOS,
     Navigator
 } from 'react-native'
-import {Tab} from './../reducers/navigation'
+import type {Tab} from './../reducers/navigation'
 import First from './../First'
 import Second from './../Second'
 
+type State = {
+    selectedTab: string
+};
+
 export default class TabsView extends Component {
+    state: State;
+
     constructor(props: Object) {
         super(props);
         this.state = {
