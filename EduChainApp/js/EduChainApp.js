@@ -1,3 +1,11 @@
+/**
+ * Created by BK on 19/06/16.
+ *
+ * @flow
+ */
+
+'use strict';
+
 import React, { Component } from 'react'
 import {
     AppRegistry,
@@ -5,6 +13,7 @@ import {
     Text,
     View
 } from 'react-native'
+import EduChainNavigator from './EduChainNavigator'
 
 export default class EduChainApp extends Component {
     render() {
@@ -19,6 +28,8 @@ export default class EduChainApp extends Component {
                 <Text style={styles.instructions}>
                     Shake or press menu button for dev menu
                 </Text>
+
+                <EduChainNavigator />
             </View>
         );
     }
@@ -27,8 +38,8 @@ export default class EduChainApp extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        //justifyContent: 'center',
+        //alignItems: 'center',
         backgroundColor: '#F5FCFF',
     },
     welcome: {
