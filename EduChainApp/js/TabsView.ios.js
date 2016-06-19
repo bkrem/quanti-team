@@ -8,71 +8,70 @@
 
 import React, {Component} from 'react'
 import {
-    TabBarIOS
-    TabBarItemIOS
+    TabBarIOS,
+    Navigator
 } from 'react-native'
+import {Tab} from './reducers/navigation'
+import First from './First'
+import Second from './Second'
 
 export default class TabsView extends Component {
     constructor(props: Object) {
         super(props);
+        this.state = {
+            selectedTab: 'home'
+        }
     }
 
-    onTabSelect(tab: Tab) {
-        if (this.props.tab !== tab) {
-            this.props.onTabSelect(tab);
+    onTabSelect(tab: Tab): void {
+        if (this.state.selectedTab !== tab) {
+            this.setState({
+                selectedTab: tab
+            })
         }
     }
 
     render() {
         return (
-            <TabBarIOS tintColor="green">
-                <TabBarItemIOS
+            <TabBarIOS
+                unselectedTintColor="yellow"
+                tintColor="white"
+                barTintColor="darkslateblue">
+                <TabBarIOS.Item
                     title="Home"
-                    selected={this.props.tab === 'home'}
+                    selected={this.state.selectedTab === 'home'}
                     onPress={this.onTabSelect.bind(this, 'home')}
-                    icon={scheduleIcon}
-                    selectedIcon={scheduleIconSelected}>
-                    <GeneralScheduleView
-                        navigator={this.props.navigator}
-                        onDayChange={this.handleDayChange}
-                    />
-                </TabBarItemIOS>
-                <TabBarItemIOS
-                    title="My F8"
-                    selected={this.props.tab === 'my-schedule'}
-                    onPress={this.onTabSelect.bind(this, 'my-schedule')}
-                    icon={require('./schedule/img/my-schedule-icon.png')}
-                    selectedIcon={require('./schedule/img/my-schedule-icon-active.png')}>
-                    <MyScheduleView
-                        navigator={this.props.navigator}
-                        onJumpToSchedule={() => this.props.onTabSelect('schedule')}
-                    />
-                </TabBarItemIOS>
-                <TabBarItemIOS
-                    title="Maps"
-                    selected={this.props.tab === 'map'}
-                    onPress={this.onTabSelect.bind(this, 'map')}
-                    icon={require('./maps/img/maps-icon.png')}
-                    selectedIcon={require('./maps/img/maps-icon-active.png')}>
-                    <F8MapView />
-                </TabBarItemIOS>
-                <TabBarItemIOS
+                    icon={require('./img/iconbeast-lite/png/home-7.png')}>
+                    <First navigator={{}} />
+                </TabBarIOS.Item>
+                <TabBarIOS.Item
                     title="Notifications"
-                    selected={this.props.tab === 'notifications'}
+                    selected={this.state.selectedTab === 'notifications'}
                     onPress={this.onTabSelect.bind(this, 'notifications')}
-                    badge={this.props.notificationsBadge || null}
-                    icon={require('./notifications/img/notifications-icon.png')}
-                    selectedIcon={require('./notifications/img/notifications-icon-active.png')}>
-                    <F8NotificationsView navigator={this.props.navigator} />
-                </TabBarItemIOS>
-                <TabBarItemIOS
-                    title="Info"
-                    selected={this.props.tab === 'info'}
-                    onPress={this.onTabSelect.bind(this, 'info')}
-                    icon={require('./info/img/info-icon.png')}
-                    selectedIcon={require('./info/img/info-icon-active.png')}>
-                    <F8InfoView navigator={this.props.navigator} />
-                </TabBarItemIOS>
+                    icon={require('./img/iconbeast-lite/png/bell-7.png')}>
+                    <Second navigator={{}} />
+                </TabBarIOS.Item>
+                <TabBarIOS.Item
+                    title="My Tasks"
+                    selected={this.state.selectedTab === 'tasks'}
+                    onPress={this.onTabSelect.bind(this, 'tasks')}
+                    icon={require('./img/iconbeast-lite/png/file-list-tick-7.png')}>
+                    <Second navigator={{}} />
+                </TabBarIOS.Item>
+                <TabBarIOS.Item
+                    title="My Team"
+                    selected={this.state.selectedTab === 'team'}
+                    onPress={this.onTabSelect.bind(this, 'team')}
+                    icon={require('./img/iconbeast-lite/png/woman-man-7.png')}>
+                    <Second navigator={{}} />
+                </TabBarIOS.Item>
+                <TabBarIOS.Item
+                    title="Me"
+                    selected={this.state.selectedTab === 'me'}
+                    onPress={this.onTabSelect.bind(this, 'me')}
+                    icon={require('./img/iconbeast-lite/png/circle-user-7.png')}>
+                    <Second navigator={{}} />
+                </TabBarIOS.Item>
             </TabBarIOS>
         );
     }
