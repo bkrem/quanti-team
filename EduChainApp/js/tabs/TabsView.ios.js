@@ -14,6 +14,8 @@ import {
 import type {Tab} from './../reducers/navigation'
 import First from './../First'
 import Second from './../Second'
+import HomeView from './home/HomeView'
+import Colors from '../common/Colors'
 
 type State = {
     selectedTab: string
@@ -40,15 +42,15 @@ export default class TabsView extends Component {
     render() {
         return (
             <TabBarIOS
-                unselectedTintColor="#80807e"
-                tintColor="#fff"
-                barTintColor="#15171a">
+                unselectedTintColor={Colors.unselectedGrey}
+                tintColor={Colors.tintColor}
+                barTintColor={Colors.darkBackground}>
                 <TabBarIOS.Item
                     title="Home"
                     selected={this.state.selectedTab === 'home'}
                     onPress={this.onTabSelect.bind(this, 'home')}
                     icon={require('./../img/iconbeast-lite/png/home-7.png')}>
-                    <First navigator={{}} />
+                    <HomeView />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Notifications"
