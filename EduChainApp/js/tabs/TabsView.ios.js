@@ -11,11 +11,12 @@ import {
     TabBarIOS,
     Navigator
 } from 'react-native'
+import Colors from '../common/Colors'
 import type {Tab} from './../reducers/navigation'
 import First from './../First'
 import Second from './../Second'
 import HomeView from './home/HomeView'
-import Colors from '../common/Colors'
+import TasksListView from './tasks/TasksListView'
 
 type State = {
     selectedTab: string
@@ -64,7 +65,7 @@ export default class TabsView extends Component {
                     selected={this.state.selectedTab === 'tasks'}
                     onPress={this.onTabSelect.bind(this, 'tasks')}
                     icon={require('./../img/iconbeast-lite/png/file-list-tick-7.png')}>
-                    <Second navigator={{}} />
+                    <TasksListView />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="My Team"
