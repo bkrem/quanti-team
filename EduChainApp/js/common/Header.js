@@ -3,6 +3,8 @@
  * @flow
  */
 
+ 'use strict';
+
 import React, {Component} from 'react'
 import {
     View,
@@ -13,7 +15,7 @@ import {
 } from 'react-native'
 import Colors from './Colors'
 
-export type Props = {
+type Props = {
     title: string;
     style: any;
     children: any;
