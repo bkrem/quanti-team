@@ -10,9 +10,9 @@ import {
     Navigator,
     StyleSheet
 } from 'react-native'
-import App from './App'
 import First from './First'
 import Second from './Second'
+import HomeView from './tabs/home/HomeView'
 
 export default class EduChainNavigator extends Component {
     constructor(props: Object) {
@@ -28,7 +28,7 @@ export default class EduChainNavigator extends Component {
                 return (<Second navigator={navigator} title="second" />);
 
             default:
-                return (<App navigator={navigator} />);
+                return (<HomeView navigator={navigator} />);
         }
     }
 
