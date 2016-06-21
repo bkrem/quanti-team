@@ -13,7 +13,6 @@ import {
 } from 'react-native'
 import Colors from '../common/Colors'
 import type {Tab} from './../reducers/navigation'
-import First from './../First'
 import Second from './../Second'
 import HomeView from './home/HomeView'
 import TasksListView from './tasks/TasksListView'

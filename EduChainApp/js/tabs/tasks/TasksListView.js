@@ -10,8 +10,6 @@ import React, { Component } from 'react';
 import {
     Text,
     View,
-    Image,
-    TextInput,
     ListView,
     StyleSheet
 } from 'react-native';
@@ -90,7 +88,6 @@ export default class TaskView extends Component {
 
 const styles = StyleSheet.create({
     listView: {
-        paddingTop: 20,
         backgroundColor: '#F5FCFF',
     },
     separator: {
