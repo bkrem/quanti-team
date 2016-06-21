@@ -15,6 +15,7 @@ import {
     ListView,
     StyleSheet
 } from 'react-native';
+import TaskRow from './TaskRow'
 
 type Rows = Array<Object>;
 type RowsAndSections = {
@@ -68,21 +69,6 @@ export default class TaskView extends Component {
         );
     }
 
-    renderRow(row: Object) {
-        return (
-            <View style={styles.container}>
-                <View style={styles.leftColumn}>
-                    <Text style={styles.title}>{row.title}</Text>
-                    <Text style={styles.desc}>{row.desc}</Text>
-                </View>
-                <View style={styles.rightColumn}>
-                    <Text style={styles.reward}>{row.reward}</Text>
-                    <Text style={styles.complete}>{row.complete}</Text>
-                </View>
-            </View>
-        );
-    }
-
     render() {
         if (!this.state.loaded)
         return this.renderLoadingView();
@@ -92,7 +78,7 @@ export default class TaskView extends Component {
               <ListView
                   style={styles.listView}
                   dataSource={this.state.dataSource}
-                  renderRow={this.renderRow}
+                  renderRow={(rowData) => <TaskRow row={rowData} />}
               />
             </View>
         );
@@ -101,35 +87,8 @@ export default class TaskView extends Component {
 } // END CLASS
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    marginBottom: 10,
-    backgroundColor: '#dedede'
-  },
-  leftColumn: {
-      flex: 1,
-      backgroundColor: '#ededed',
-      justifyContent: 'center',
-      alignItems: 'center'
-  },
-  rightColumn: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  title: {
-    fontSize: 20,
-    //marginBottom: 8,
-  },
-  desc: {
-
-  },
-  reward: {
-
-  },
-  listView: {
-    paddingTop: 20,
-    backgroundColor: '#F5FCFF',
-  }
+    listView: {
+        paddingTop: 20,
+        backgroundColor: '#F5FCFF',
+    }
 });
