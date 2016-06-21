@@ -22,7 +22,7 @@ type RowsAndSections = {
   [sectionID: string]: Object;
 };
 
-export type Data = Rows | RowsAndSections;
+type Data = Rows | RowsAndSections;
 
 type State = {
     dataSource: Data, // FIXME
