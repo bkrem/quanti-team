@@ -15,6 +15,7 @@ import Colors from '../common/Colors'
 import type {Tab} from './../reducers/navigation'
 import Second from './../Second'
 import HomeView from './home/HomeView'
+import NotificationsListView from './notifications/NotificationsListView'
 import TasksListView from './tasks/TasksListView'
 
 type State = {
@@ -57,7 +58,7 @@ export default class TabsView extends Component {
                     selected={this.state.selectedTab === 'notifications'}
                     onPress={this.onTabSelect.bind(this, 'notifications')}
                     icon={require('./../img/iconbeast-lite/png/bell-7.png')}>
-                    <Second navigator={{}} />
+                    <NotificationsListView />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="My Tasks"
