@@ -46,9 +46,9 @@
 
  const styles = StyleSheet.create({
      container: {
-       flex: 1,
-       flexDirection: 'row',
-       backgroundColor: '#dedede'
+         flex: 1,
+         flexDirection: 'row',
+         backgroundColor: '#dedede'
      },
      leftColumn: {
          flex: 1,
@@ -57,13 +57,12 @@
          alignItems: 'center'
      },
      rightColumn: {
-       flex: 1,
-       justifyContent: 'center',
-       alignItems: 'center'
+         flex: 1,
+         justifyContent: 'center',
+         alignItems: 'center'
      },
      title: {
-       fontSize: 20,
-       //marginBottom: 8,
+         fontSize: 20,
      },
      desc: {
 
@@ -71,4 +70,7 @@
      reward: {
 
      },
+     complete: {
+
+     }
  })
