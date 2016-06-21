@@ -23,7 +23,7 @@ type RowsAndSections = {
 type Data = Rows | RowsAndSections;
 
 type State = {
-    dataSource: Data, // FIXME
+    dataSource: Data,
     loaded: boolean
 }
 
