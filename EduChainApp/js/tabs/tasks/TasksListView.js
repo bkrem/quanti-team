@@ -79,6 +79,7 @@ export default class TaskView extends Component {
                   style={styles.listView}
                   dataSource={this.state.dataSource}
                   renderRow={(rowData) => <TaskRow row={rowData} />}
+                  renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
               />
             </View>
         );
@@ -90,5 +91,10 @@ const styles = StyleSheet.create({
     listView: {
         paddingTop: 20,
         backgroundColor: '#F5FCFF',
+    },
+    separator: {
+        flex: 1,
+        height: StyleSheet.hairlineWidth,
+        backgroundColor: '#8E8E8E',
     }
 });

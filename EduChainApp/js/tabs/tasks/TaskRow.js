@@ -45,7 +45,6 @@
      container: {
        flex: 1,
        flexDirection: 'row',
-       marginBottom: 10,
        backgroundColor: '#dedede'
      },
      leftColumn: {
