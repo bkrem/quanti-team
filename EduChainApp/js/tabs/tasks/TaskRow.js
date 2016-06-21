@@ -13,7 +13,18 @@
      StyleSheet
  } from 'react-native';
 
+ type Props = {
+     row: {
+         title: string,
+         desc: string,
+         reward: string,
+         complete: string
+     }
+ }
+
  export default class TaskRow extends Component {
+     props: Props;
+
      render() {
          return (
              <View style={styles.container}>

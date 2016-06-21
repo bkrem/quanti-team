@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import TaskRow from './TaskRow'
 
-type Rows = Array<Object>;
+type Rows = Array<TaskRow>;
 type RowsAndSections = {
   [sectionID: string]: Object;
 };
@@ -25,7 +25,7 @@ type RowsAndSections = {
 export type Data = Rows | RowsAndSections;
 
 type State = {
-    dataSource: any, // FIXME
+    dataSource: Data, // FIXME
     loaded: boolean
 }
 
