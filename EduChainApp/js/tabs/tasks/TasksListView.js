@@ -69,6 +69,7 @@ export default class TaskView extends Component {
         );
     }
 
+    // TODO GH #6; add searchBar header
     render() {
         if (!this.state.loaded)
         return this.renderLoadingView();
