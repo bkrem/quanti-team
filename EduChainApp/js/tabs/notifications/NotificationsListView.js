@@ -15,6 +15,7 @@ import {
     StyleSheet
 } from 'react-native';
 import NotificationsRow from './NotificationsRow'
+import HeaderIOS from '../../common/Header'
 
 type State = {
     dataSource: Object,
@@ -56,12 +57,17 @@ export default class NotificationsListView extends Component {
     render() {
         return (
             <View>
-              <ListView
-                  style={styles.listView}
-                  dataSource={this.state.dataSource}
-                  renderRow={(rowData) => <NotificationsRow row={rowData} />}
-                  renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-              />
+                <HeaderIOS title="Notifications" />
+                <ListView
+                    style={styles.listView}
+                    dataSource={this.state.dataSource}
+                    renderRow={(rowData) =>
+                        <NotificationsRow row={rowData} />
+                    }
+                    renderSeparator={(sectionId, rowId) =>
+                        <View key={rowId} style={styles.separator} />
+                    }
+                    />
             </View>
         );
     }

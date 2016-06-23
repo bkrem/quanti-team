@@ -11,11 +11,13 @@ import {
     View,
     Text
 } from 'react-native'
+import HeaderIOS from '../../common/Header'
 
 export default class HomeView extends Component {
     render() {
         return (
             <View>
+                <HeaderIOS title="Home" />
                 <Text>
                     Test Text
                 </Text>

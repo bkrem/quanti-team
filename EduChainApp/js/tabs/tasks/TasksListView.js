@@ -13,6 +13,7 @@ import {
     ListView,
     StyleSheet
 } from 'react-native';
+import HeaderIOS from '../../common/Header'
 import TaskRow from './TaskRow'
 
 type Rows = Array<TaskRow>;
@@ -74,12 +75,17 @@ export default class TaskView extends Component {
 
         return (
             <View>
-              <ListView
-                  style={styles.listView}
-                  dataSource={this.state.dataSource}
-                  renderRow={(rowData) => <TaskRow row={rowData} />}
-                  renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-              />
+                <HeaderIOS title="My Tasks" />
+                <ListView
+                    style={styles.listView}
+                    dataSource={this.state.dataSource}
+                    renderRow={(rowData) =>
+                        <TaskRow row={rowData} />
+                    }
+                    renderSeparator={(sectionId, rowId) =>
+                        <View key={rowId} style={styles.separator} />
+                    }
+                />
             </View>
         );
     }
