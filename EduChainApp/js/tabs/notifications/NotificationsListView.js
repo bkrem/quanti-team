@@ -42,7 +42,7 @@ export default class NotificationsListView extends Component {
                 title: `Notification ${i}`,
                 desc: `desc for notification ${i}`,
                 timestamp: dateString,
-                thumb: `https://randomuser.me/api/portraits/thumb/women/${i}.jpg`
+                thumbURI: `https://randomuser.me/api/portraits/thumb/women/${i}.jpg`
             });
             return arr;
         }

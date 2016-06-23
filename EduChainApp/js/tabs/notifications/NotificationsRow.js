@@ -18,7 +18,7 @@
 
 type Props = {
     row: {
-        thumb: string,
+        thumbURI: string,
         title: string,
         desc: string,
         timestamp: string
@@ -36,7 +36,7 @@ export default class NotificationsRow extends Component {
                         <View style={styles.thumbContainer}>
                             <Image
                                 style={styles.thumb}
-                                source={{uri: this.props.row.thumb}}
+                                source={{uri: this.props.row.thumbURI}}
                             />
                         </View>
                         <View style={styles.textContainer}>
