@@ -17,6 +17,7 @@ import Second from './../Second'
 import HomeView from './home/HomeView'
 import NotificationsListView from './notifications/NotificationsListView'
 import TasksListView from './tasks/TasksListView'
+import ProfileView from './me/ProfileView'
 
 type State = {
     selectedTab: string
@@ -79,7 +80,7 @@ export default class TabsView extends Component {
                     selected={this.state.selectedTab === 'me'}
                     onPress={this.onTabSelect.bind(this, 'me')}
                     icon={require('./../img/iconbeast-lite/png/circle-user-7.png')}>
-                    <Second navigator={{}} />
+                    <ProfileView />
                 </TabBarIOS.Item>
             </TabBarIOS>
         );
