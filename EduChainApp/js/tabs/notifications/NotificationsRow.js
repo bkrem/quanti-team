@@ -21,7 +21,7 @@ type Props = {
         thumb: string,
         title: string,
         desc: string,
-        timestamp: Date
+        timestamp: string
     }
 }
 
