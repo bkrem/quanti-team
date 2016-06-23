@@ -22,7 +22,9 @@
                          title: "Settings",
                          layout: "icon",
                          icon: "ios-settings"
-                     }} />
+                     }}
+                 />
+                
              </View>
          );
      }
