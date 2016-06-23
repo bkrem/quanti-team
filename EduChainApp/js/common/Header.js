@@ -35,8 +35,8 @@ export type Props = {
   rightItem?: Item;
   extraItems?: Array<Item>;
   //foreground?: Foreground;
-  style: any;
-  children: any;
+  style?: any;
+  children?: any;
 };
 
 class HeaderIOS extends Component {
@@ -159,7 +159,7 @@ var styles = StyleSheet.create({
 });
 
 
-const Header = Platform.OS === 'ios' ? HeaderIOS : null; // TODO GH issue #4
+const Header = HeaderIOS // Platform.OS === 'ios' ? HeaderIOS : null; // TODO GH issue #4
 //Header.height = HEADER_HEIGHT;
 
 module.exports = Header;
