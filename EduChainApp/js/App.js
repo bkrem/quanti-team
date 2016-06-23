@@ -17,7 +17,6 @@ import {
     StatusBar
 } from 'react-native'
 import TabsView from './tabs/TabsView'
-import Header from './common/Header'
 
 export default class App extends Component {
     render() {
