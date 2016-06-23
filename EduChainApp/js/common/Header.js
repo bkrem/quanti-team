@@ -11,40 +11,106 @@ import {
     Text,
     StyleSheet,
     StatusBar,
+    Image,
+    TouchableOpacity,
     Platform
 } from 'react-native'
 import Colors from './Colors'
+import Icon from 'react-native-vector-icons/Ionicons'
 
-type Props = {
-    title: string;
-    style: any;
-    children: any;
+export type Layout =
+    'default'      // Use platform defaults (icon on Android, text on iOS)
+  | 'icon'         // Always use icon
+  | 'title';       // Always use title
+
+export type Item = {
+  title?: string;
+  icon?: string;
+  layout?: Layout;
+  onPress?: () => void;
+};
+
+export type Props = {
+  title: string;
+  leftItem?: Item;
+  rightItem?: Item;
+  extraItems?: Array<Item>;
+  //foreground?: Foreground;
+  style: any;
+  children: any;
 };
 
 class HeaderIOS extends Component {
   props: Props;
 
     render() {
+        const {title, leftItem, rightItem} = this.props;
         const content = React.Children.count(this.props.children) === 0
           ? <Text style={styles.titleText}>
-              EduChain
+              {title}
             </Text>
           : this.props.children;
 
         return (
-          <View style={[styles.header, this.props.style]}>
-              <StatusBar
-                  backgroundColor="white"
-                  barStyle="light-content"
-              />
-            <View
-              accessible={true}
-              accessibilityLabel="TestTitle"
-              accessibilityTraits="header"
-              style={styles.centerItem}>
-              {content}
+            <View>
+                <StatusBar
+                    backgroundColor="white"
+                    barStyle="light-content"
+                />
+                <View style={[styles.header, this.props.style]}>
+                    <View style={styles.leftItem}>
+                        <ItemWrapperIOS item={leftItem} />
+                    </View>
+                    <View
+                      accessible={true}
+                      accessibilityLabel={title}
+                      accessibilityTraits="header"
+                      style={styles.centerItem}>
+                      {content}
+                    </View>
+                    <View style={styles.leftItem}>
+                        <ItemWrapperIOS item={rightItem} />
+                    </View>
+                </View>
             </View>
-          </View>
+        );
+    }
+}
+
+class ItemWrapperIOS extends React.Component {
+    props: {
+        item: Item;
+    };
+
+    render() {
+        const {item} = this.props;
+        if (!item) {
+            return null;
+        }
+
+        let content;
+        const {title, icon, layout, onPress} = item;
+
+        if (layout !== 'icon' && title) {
+            content = (
+                <Text style={styles.itemText}>
+                    {title.toUpperCase()}
+                </Text>
+            );
+        } else if (icon) { // TODO GH #8 let props pass any icon set
+            content =
+            <Icon style={styles.icon} name={icon} size={30} />
+            ;
+        }
+
+        return (
+            <TouchableOpacity
+                accessibilityLabel={title}
+                accessibilityTraits="button"
+                onPress={onPress}
+                style={styles.itemWrapper}>
+                {content}
+            </TouchableOpacity>
         );
     }
 }
@@ -68,13 +134,13 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
   titleText: {
-    color: 'white',
+    color: '#DDDDDD',
     fontWeight: 'bold',
     fontSize: 20,
   },
   leftItem: {
     flex: 1,
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   centerItem: {
     flex: 2,
@@ -92,6 +158,9 @@ var styles = StyleSheet.create({
     fontSize: 12,
     color: 'white',
   },
+  icon: {
+      color: '#DDDDDD'
+  }
 });
 
 
