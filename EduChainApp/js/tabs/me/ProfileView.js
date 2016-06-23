@@ -11,6 +11,7 @@
      View,
  } from 'react-native'
  import HeaderIOS from '../../common/Header'
+ import ProfileSummary from './ProfileSummary'
 
  export default class ProfileView extends Component {
      render() {
@@ -24,7 +25,7 @@
                          icon: "ios-settings"
                      }}
                  />
-                
+             <ProfileSummary username="@bkrem" name="Ben Kremer" teamname="Team λαμδα" />
              </View>
          );
      }
