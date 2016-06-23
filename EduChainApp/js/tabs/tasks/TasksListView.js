@@ -75,7 +75,14 @@ export default class TaskView extends Component {
 
         return (
             <View>
-                <HeaderIOS title="My Tasks" />
+                <HeaderIOS
+                    title="My Tasks"
+                    rightItem={{
+                        title: "Add Task",
+                        layout: "icon",
+                        icon: "ios-add"
+                    }}
+                />
                 <ListView
                     style={styles.listView}
                     dataSource={this.state.dataSource}
