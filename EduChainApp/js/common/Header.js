@@ -10,7 +10,6 @@ import {
     View,
     Text,
     StyleSheet,
-    StatusBar,
     Image,
     TouchableOpacity,
     Platform
@@ -53,10 +52,6 @@ class HeaderIOS extends Component {
 
         return (
             <View>
-                <StatusBar
-                    backgroundColor="white"
-                    barStyle="light-content"
-                />
                 <View style={[styles.header, this.props.style]}>
                     <View style={styles.leftItem}>
                         <ItemWrapperIOS item={leftItem} />

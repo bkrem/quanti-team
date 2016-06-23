@@ -13,7 +13,8 @@ import {
     AppRegistry,
     StyleSheet,
     Text,
-    View
+    View,
+    StatusBar
 } from 'react-native'
 import TabsView from './tabs/TabsView'
 import Header from './common/Header'
@@ -22,7 +23,10 @@ export default class App extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Header />
+                <StatusBar
+                    backgroundColor="white"
+                    barStyle="light-content"
+                />
                 <TabsView />
             </View>
         );
