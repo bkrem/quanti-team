@@ -10,7 +10,7 @@
  import {
      Text,
      View,
-     TouchableHighlight,
+     TouchableOpacity,
      StyleSheet
  } from 'react-native';
 
@@ -28,7 +28,7 @@
 
      render() {
          return (
-             <TouchableHighlight>
+             <TouchableOpacity>
                  <View style={styles.container}>
                      <View style={styles.leftColumn}>
                          <Text style={styles.title}>{this.props.row.title}</Text>
@@ -39,7 +39,7 @@
                          <Text style={styles.complete}>{this.props.row.complete}</Text>
                      </View>
                  </View>
-             </TouchableHighlight>
+             </TouchableOpacity>
          );
      }
  }
