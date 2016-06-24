@@ -15,6 +15,7 @@
  } from 'react-native';
 
  type Props = {
+     onPress: () => void,
      row: {
          title: string,
          desc: string,
@@ -28,7 +29,7 @@
 
      render() {
          return (
-             <TouchableOpacity>
+             <TouchableOpacity onPress={this.props.onPress.bind(this)}>
                  <View style={styles.container}>
                      <View style={styles.leftColumn}>
                          <Text style={styles.title}>{this.props.row.title}</Text>
