@@ -59,6 +59,7 @@ export default class TabsView extends Component {
                     icon={require('./../img/iconbeast-lite/png/home-7.png')}>
                     <HomeView navigator={this.props.navigator} />
                 </TabBarIOS.Item>
+
                 <TabBarIOS.Item
                     title="Notifications"
                     selected={this.state.selectedTab === 'notifications'}
@@ -66,6 +67,7 @@ export default class TabsView extends Component {
                     icon={require('./../img/iconbeast-lite/png/bell-7.png')}>
                     <NotificationsListView navigator={this.props.navigator} />
                 </TabBarIOS.Item>
+
                 <TabBarIOS.Item
                     title="My Tasks"
                     selected={this.state.selectedTab === 'tasks'}
@@ -73,6 +75,7 @@ export default class TabsView extends Component {
                     icon={require('./../img/iconbeast-lite/png/file-list-tick-7.png')}>
                     <TasksListView navigator={this.props.navigator} />
                 </TabBarIOS.Item>
+
                 <TabBarIOS.Item
                     title="My Team"
                     selected={this.state.selectedTab === 'team'}
@@ -80,6 +83,7 @@ export default class TabsView extends Component {
                     icon={require('./../img/iconbeast-lite/png/woman-man-7.png')}>
                     <TeamView navigator={this.props.navigator} />
                 </TabBarIOS.Item>
+
                 <TabBarIOS.Item
                     title="Me"
                     selected={this.state.selectedTab === 'me'}
