@@ -87,7 +87,7 @@ export default class TaskView extends Component {
                     style={styles.listView}
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) =>
-                        <TasksListRow row={rowData} />
+                        <TasksListRow row={rowData} onPress={() => this.props.navigator.push({id: "task"})} />
                     }
                     renderSeparator={(sectionId, rowId) =>
                         <View key={rowId} style={styles.separator} />
