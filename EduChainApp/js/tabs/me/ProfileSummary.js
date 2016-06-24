@@ -24,6 +24,8 @@ type Props = {
      props: Props;
 
      render() {
+         const {name, username, teamname} = this.props;
+
          return (
              <View style={styles.container}>
                  <Image
@@ -31,9 +33,15 @@ type Props = {
                      source={require("../../img/ben.png")}
                  />
                  <View style={styles.textContainer}>
-                     <Text style={styles.name}>{this.props.name}</Text>
-                     <Text style={styles.username}>{this.props.username}</Text>
-                     <Text style={styles.teamname}>{this.props.teamname}</Text>
+                     <Text style={styles.name}>
+                         {name}
+                     </Text>
+                     <Text style={styles.username}>
+                         {username}
+                     </Text>
+                     <Text style={styles.teamname}>
+                         {teamname}
+                     </Text>
                  </View>
              </View>
          );
@@ -46,7 +54,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingTop: 20,
-        backgroundColor: '#bbb',
+        //backgroundColor: '#bbb',
     },
     textContainer: {
         flex: 2,
@@ -62,6 +70,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     username: {
-        color: '#dedede'
+        color: '#bbb'
     }
 })
