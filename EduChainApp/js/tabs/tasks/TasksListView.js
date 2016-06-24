@@ -14,9 +14,9 @@ import {
     StyleSheet
 } from 'react-native';
 import HeaderIOS from '../../common/Header'
-import TaskRow from './TaskRow'
+import TasksListRow from './TasksListRow'
 
-type Rows = Array<TaskRow>;
+type Rows = Array<TasksListRow>;
 type RowsAndSections = {
   [sectionID: string]: Object;
 };
@@ -87,7 +87,7 @@ export default class TaskView extends Component {
                     style={styles.listView}
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) =>
-                        <TaskRow row={rowData} />
+                        <TasksListRow row={rowData} />
                     }
                     renderSeparator={(sectionId, rowId) =>
                         <View key={rowId} style={styles.separator} />

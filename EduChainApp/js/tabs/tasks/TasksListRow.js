@@ -23,7 +23,7 @@
      }
  }
 
- export default class TaskRow extends Component {
+ export default class TasksListRow extends Component {
      props: Props;
 
      render() {
