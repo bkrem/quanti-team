@@ -42,7 +42,7 @@ export default class TaskView extends Component {
     componentDidMount() {
         let testRows = () => {
             let arr = [];
-            for (let i = 0; i < 50; i++) arr.push({
+            for (let i = 0; i < 10; i++) arr.push({
                 title: `row${i}`,
                 desc: `desc for row${i}`,
                 reward: '200 XP',
