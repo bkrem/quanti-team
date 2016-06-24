@@ -23,8 +23,13 @@ type State = {
     selectedTab: string
 };
 
+type Props = {
+    navigator: Navigator
+}
+
 export default class TabsView extends Component {
     state: State;
+    props: Props;
 
     constructor(props: Object) {
         super(props);
@@ -52,35 +57,35 @@ export default class TabsView extends Component {
                     selected={this.state.selectedTab === 'home'}
                     onPress={this.onTabSelect.bind(this, 'home')}
                     icon={require('./../img/iconbeast-lite/png/home-7.png')}>
-                    <HomeView />
+                    <HomeView navigator={this.props.navigator} />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Notifications"
                     selected={this.state.selectedTab === 'notifications'}
                     onPress={this.onTabSelect.bind(this, 'notifications')}
                     icon={require('./../img/iconbeast-lite/png/bell-7.png')}>
-                    <NotificationsListView />
+                    <NotificationsListView navigator={this.props.navigator} />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="My Tasks"
                     selected={this.state.selectedTab === 'tasks'}
                     onPress={this.onTabSelect.bind(this, 'tasks')}
                     icon={require('./../img/iconbeast-lite/png/file-list-tick-7.png')}>
-                    <TasksListView />
+                    <TasksListView navigator={this.props.navigator} />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="My Team"
                     selected={this.state.selectedTab === 'team'}
                     onPress={this.onTabSelect.bind(this, 'team')}
                     icon={require('./../img/iconbeast-lite/png/woman-man-7.png')}>
-                    <TeamView />
+                    <TeamView navigator={this.props.navigator} />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Me"
                     selected={this.state.selectedTab === 'me'}
                     onPress={this.onTabSelect.bind(this, 'me')}
                     icon={require('./../img/iconbeast-lite/png/circle-user-7.png')}>
-                    <ProfileView />
+                    <ProfileView navigator={this.props.navigator} />
                 </TabBarIOS.Item>
             </TabBarIOS>
         );

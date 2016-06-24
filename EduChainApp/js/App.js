@@ -16,7 +16,7 @@ import {
     View,
     StatusBar
 } from 'react-native'
-import TabsView from './tabs/TabsView'
+import EduChainNavigator from './EduChainNavigator'
 
 export default class App extends Component {
     render() {
@@ -26,7 +26,7 @@ export default class App extends Component {
                     backgroundColor="white"
                     barStyle="light-content"
                 />
-                <TabsView />
+                <EduChainNavigator />
             </View>
         );
     }

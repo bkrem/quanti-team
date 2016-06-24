@@ -10,7 +10,7 @@ import {
     Navigator,
     StyleSheet
 } from 'react-native'
-import HomeView from './tabs/home/HomeView'
+import TabsView from './tabs/TabsView'
 
 export default class EduChainNavigator extends Component {
     constructor(props: Object) {
@@ -20,7 +20,7 @@ export default class EduChainNavigator extends Component {
     renderScene(route: Object, navigator: Navigator) {
         switch (route.id) {
             default:
-                return (<HomeView navigator={navigator} />);
+                return (<TabsView navigator={navigator} />);
         }
     }
 
