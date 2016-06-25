@@ -21,7 +21,7 @@ export default class CommentBox extends Component {
         return (
             <View>
                 <Text style={GlobalStyles.sectionHeader}>Comments</Text>
-                <CommentList />
+                <CommentList comments={this.props.comments} />
                 <CommentForm />
             </View>
         );
