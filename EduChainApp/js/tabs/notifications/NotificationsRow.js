@@ -15,6 +15,7 @@
      TouchableHighlight,
      StyleSheet
  } from 'react-native';
+ import GlobalStyles from '../../common/GlobalStyles'
 
 type Props = {
     row: {
@@ -35,7 +36,7 @@ export default class NotificationsRow extends Component {
                     <View style={styles.container}>
                         <View style={styles.thumbContainer}>
                             <Image
-                                style={styles.thumb}
+                                style={[GlobalStyles.thumbnail, styles.thumbnail]}
                                 source={{uri: this.props.row.thumbURI}}
                             />
                         </View>
@@ -78,9 +79,7 @@ const styles = StyleSheet.create({
     timestamp: {
 
     },
-    thumb: {
-        height: 45,
-        width: 45,
-        borderRadius: 22, // why dafuq is 22 circular??
+    thumbnail: {
+
     },
 })
