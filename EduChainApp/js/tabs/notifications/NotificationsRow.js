@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     textContainer: {
-        flex: 4,
+        flex: 6,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
