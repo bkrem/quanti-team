@@ -43,6 +43,7 @@ export default class TaskView extends Component {
         let testRows = () => {
             let arr = [];
             for (let i = 0; i < 10; i++) arr.push({
+                id: i,
                 title: `row${i}`,
                 desc: `desc for row${i}`,
                 reward: '200 XP',
@@ -87,7 +88,7 @@ export default class TaskView extends Component {
                     style={styles.listView}
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) =>
-                        <TasksListRow row={rowData} onPress={() => this.props.navigator.push({id: "task"})} />
+                        <TasksListRow row={rowData} onPress={() => this.props.navigator.push({id: "task", task: rowData})} />
                     }
                     renderSeparator={(sectionId, rowId) =>
                         <View key={rowId} style={styles.separator} />

@@ -14,14 +14,11 @@
      StyleSheet
  } from 'react-native';
 
+ import type {Task} from './TaskView'
+
  type Props = {
      onPress: () => void,
-     row: {
-         title: string,
-         desc: string,
-         reward: string,
-         complete: string
-     }
+     row: Task
  }
 
  export default class TasksListRow extends Component {
