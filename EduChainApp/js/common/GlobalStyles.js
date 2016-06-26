@@ -19,6 +19,14 @@
          width: 45,
          borderRadius: 22, // why dafuq is 22 circular??
      },
+     buttonContainer: {
+         padding:10,
+         paddingTop: 11,
+         height:45,
+         overflow:'hidden',
+         borderRadius:4,
+         backgroundColor: '#ddd'
+     },
  }
 
  module.exports = GlobalStyles;
