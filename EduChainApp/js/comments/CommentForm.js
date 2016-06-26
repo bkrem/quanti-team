@@ -16,6 +16,12 @@
  import t from 'tcomb-form-native'
 
 export default class CommentForm extends Component {
+    onPress() {
+        const val = this.refs.form.getValue();
+        if (val) console.log(val);
+        // TODO GH #13 add action dispatch
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -27,6 +33,7 @@ export default class CommentForm extends Component {
                 <Button
                     containerStyle={GlobalStyles.buttonContainer}
                     style={styles.button}
+                    onPress={this.onPress.bind(this)}
                 >
                     Submit
                 </Button>
