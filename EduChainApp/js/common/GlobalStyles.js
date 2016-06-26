@@ -25,7 +25,7 @@
          height:45,
          overflow:'hidden',
          borderRadius:4,
-         backgroundColor: '#ddd'
+         backgroundColor: '#ededed'
      },
  }
 
