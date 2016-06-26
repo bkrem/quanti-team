@@ -11,6 +11,7 @@ import {
     TabBarIOS,
     Navigator
 } from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
 import Colors from '../common/Colors'
 import type {Tab} from './../reducers/navigation'
 import HomeView from './home/HomeView'
@@ -18,6 +19,8 @@ import NotificationsListView from './notifications/NotificationsListView'
 import TasksListView from './tasks/TasksListView'
 import ProfileView from './me/ProfileView'
 import TeamView from './team/TeamView'
+
+const ICONSIZE = 30;
 
 type State = {
     selectedTab: string
@@ -51,46 +54,62 @@ export default class TabsView extends Component {
             <TabBarIOS
                 unselectedTintColor={Colors.unselectedGrey}
                 tintColor={Colors.tintColor}
-                barTintColor={Colors.darkBackground}>
-                <TabBarIOS.Item
+                barTintColor={Colors.darkBackground}
+            >
+                <Icon.TabBarItemIOS
                     title="Home"
                     selected={this.state.selectedTab === 'home'}
                     onPress={this.onTabSelect.bind(this, 'home')}
-                    icon={require('./../img/iconbeast-lite/png/home-7.png')}>
+                    iconName="ios-home-outline"
+                    selectedIconName="ios-home"
+                    iconSize={ICONSIZE}
+                >
                     <HomeView navigator={this.props.navigator} />
-                </TabBarIOS.Item>
+                </Icon.TabBarItemIOS>
 
-                <TabBarIOS.Item
+                <Icon.TabBarItemIOS
                     title="Notifications"
                     selected={this.state.selectedTab === 'notifications'}
                     onPress={this.onTabSelect.bind(this, 'notifications')}
-                    icon={require('./../img/iconbeast-lite/png/bell-7.png')}>
+                    iconName="ios-notifications-outline"
+                    selectedIconName="ios-notifications"
+                    iconSize={ICONSIZE}
+                >
                     <NotificationsListView navigator={this.props.navigator} />
-                </TabBarIOS.Item>
+                </Icon.TabBarItemIOS>
 
-                <TabBarIOS.Item
+                <Icon.TabBarItemIOS
                     title="My Tasks"
                     selected={this.state.selectedTab === 'tasks'}
                     onPress={this.onTabSelect.bind(this, 'tasks')}
-                    icon={require('./../img/iconbeast-lite/png/file-list-tick-7.png')}>
-                    <TasksListView navigator={this.props.navigator} />
-                </TabBarIOS.Item>
+                    iconName="ios-checkmark-circle-outline"
+                    selectedIconName="ios-checkmark-circle"
+                    iconSize={ICONSIZE}
+                >
+                        <TasksListView navigator={this.props.navigator} />
+                    </Icon.TabBarItemIOS>
 
-                <TabBarIOS.Item
+                <Icon.TabBarItemIOS
                     title="My Team"
                     selected={this.state.selectedTab === 'team'}
                     onPress={this.onTabSelect.bind(this, 'team')}
-                    icon={require('./../img/iconbeast-lite/png/woman-man-7.png')}>
+                    iconName="ios-people-outline"
+                    selectedIconName="ios-people"
+                    iconSize={ICONSIZE}
+                >
                     <TeamView navigator={this.props.navigator} />
-                </TabBarIOS.Item>
+                </Icon.TabBarItemIOS>
 
-                <TabBarIOS.Item
+                <Icon.TabBarItemIOS
                     title="Me"
                     selected={this.state.selectedTab === 'me'}
                     onPress={this.onTabSelect.bind(this, 'me')}
-                    icon={require('./../img/iconbeast-lite/png/circle-user-7.png')}>
+                    iconName="ios-contact-outline"
+                    selectedIconName="ios-contact"
+                    iconSize={ICONSIZE}
+                >
                     <ProfileView navigator={this.props.navigator} />
-                </TabBarIOS.Item>
+                </Icon.TabBarItemIOS>
             </TabBarIOS>
         );
     }
