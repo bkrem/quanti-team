@@ -43,7 +43,7 @@
                        </Text>
                    </View>
 
-                   <View ref="statsContainer" style={styles.bioContainer}>
+                   <View ref="statsContainer" style={styles.statsContainer}>
                        <Text ref="statsTitle" style={[GlobalStyles.sectionHeader, styles.statsTitle]}>Statistics</Text>
                        {/* TODO GH issue #10 */}
                    </View>
@@ -54,7 +54,5 @@
  }
 
  const styles = StyleSheet.create({
-     bioContainer: {
-         flex: 1,
-     },
+
  })
