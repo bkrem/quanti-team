@@ -79,7 +79,7 @@ export default class TabsView extends Component {
                 </Icon.TabBarItemIOS>
 
                 <Icon.TabBarItemIOS
-                    title="My Tasks"
+                    title="Tasks"
                     selected={this.state.selectedTab === 'tasks'}
                     onPress={this.onTabSelect.bind(this, 'tasks')}
                     iconName="ios-checkmark-circle-outline"
@@ -90,7 +90,7 @@ export default class TabsView extends Component {
                     </Icon.TabBarItemIOS>
 
                 <Icon.TabBarItemIOS
-                    title="My Team"
+                    title="Team"
                     selected={this.state.selectedTab === 'team'}
                     onPress={this.onTabSelect.bind(this, 'team')}
                     iconName="ios-people-outline"
