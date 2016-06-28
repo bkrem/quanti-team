@@ -6,18 +6,18 @@
 
  'use strict';
 
- import React, { Component } from 'react';
+ import React from 'react';
  import {
      View,
      StyleSheet,
      Text,
- } from 'react-native'
- import GlobalStyles from '../../common/GlobalStyles'
- import HeaderIOS from '../../common/Header'
- import ProfileSummary from './ProfileSummary'
+ } from 'react-native';
+ import GlobalStyles from '../../common/GlobalStyles';
+ import HeaderIOS from '../../common/Header';
+ import ProfileSummary from './ProfileSummary';
 
 // TODO How to avoid declaring types twice, once here in top-lvl, once at component lvl?
- export default class ProfileView extends Component {
+ export default class ProfileView extends React.Component {
      render() {
          return (
              <View>
@@ -26,7 +26,8 @@
                      rightItem={{
                          title: "Settings",
                          layout: "icon",
-                         icon: "ios-settings"
+                         icon: "ios-settings",
+                         onPress: () => this.props.navigator.push({id: "settings"})
                      }}
                  />
              <View style={GlobalStyles.contentWrapper}>

@@ -5,18 +5,21 @@
 
 'use strict';
 
-import React, { Component } from 'react'
+import React from 'react';
 import {
     Navigator,
     StyleSheet
-} from 'react-native'
-import TabsView from './tabs/TabsView'
-import TaskView from './tabs/tasks/TaskView'
+} from 'react-native';
+import TabsView from './tabs/TabsView';
+import TaskView from './tabs/tasks/TaskView';
+import SettingsListView from './settings/SettingsListView'
 
-export default class EduChainNavigator extends Component {
+export default class EduChainNavigator extends React.Component {
     renderScene(route: Object, navigator: Navigator) {
         switch (route.id) {
-            case "task":
+            case 'settings':
+                return (<SettingsListView navigator={navigator} />)
+            case 'task':
                 return (<TaskView task={route.task} navigator={navigator} />);
 
             default:
