@@ -13,8 +13,9 @@ import {
     ListView,
     StyleSheet
 } from 'react-native';
-import HeaderIOS from '../../common/Header'
-import TasksListRow from './TasksListRow'
+import HeaderIOS from '../../common/Header';
+import Loader from '../../common/Loader';
+import TasksListRow from './TasksListRow';
 
 type Rows = Array<TasksListRow>;
 type RowsAndSections = {
@@ -59,20 +60,10 @@ export default class TaskView extends React.Component {
         })
     }
 
-    renderLoadingView() {
-        return (
-            <View style={styles.container}>
-              <Text>
-                Loading Tasks...
-              </Text>
-            </View>
-        );
-    }
-
     // TODO GH #6; add searchBar header
     render() {
         if (!this.state.loaded)
-        return this.renderLoadingView();
+            return <Loader title='Tasks' />
 
         return (
             <View>

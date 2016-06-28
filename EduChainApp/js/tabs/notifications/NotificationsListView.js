@@ -14,8 +14,9 @@ import {
     ListView,
     StyleSheet
 } from 'react-native';
-import NotificationsRow from './NotificationsRow'
-import HeaderIOS from '../../common/Header'
+import NotificationsRow from './NotificationsRow';
+import HeaderIOS from '../../common/Header';
+import Loader from '../../common/Loader';
 
 type Rows = Array<NotificationsRow>;
 type NotificationData = Rows;
@@ -58,9 +59,12 @@ export default class NotificationsListView extends Component {
     }
 
     render() {
+        if (!this.state.loaded)
+            return <Loader title='Notifications' />
+
         return (
             <View>
-                <HeaderIOS title="Notifications" />
+                <HeaderIOS title='Notifications' />
                 <ListView
                     style={styles.listView}
                     dataSource={this.state.dataSource}
