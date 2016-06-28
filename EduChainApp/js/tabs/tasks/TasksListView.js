@@ -67,7 +67,7 @@ export default class TaskView extends React.Component {
             return <Loader title='Tasks' />
 
         return (
-            <View>
+            <View style={styles.container}>
                 <Header
                     title="My Tasks"
                     rightItem={{
@@ -93,7 +93,7 @@ export default class TaskView extends React.Component {
 } // END CLASS
 
 const styles = StyleSheet.create({
-    listView: {
-        backgroundColor: '#F5FCFF',
+    container: {
+        flex: 1,
     },
 });

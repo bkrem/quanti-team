@@ -43,7 +43,7 @@ export default class NotificationsListView extends Component {
         let dateString = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
         let testRows = () => {
             let arr = [];
-            for (let i = 1; i < 50; i++) arr.push({
+            for (let i = 1; i < 5; i++) arr.push({
                 title: `Notification ${i}`,
                 desc: `desc for notification ${i}`,
                 timestamp: dateString,
@@ -64,7 +64,7 @@ export default class NotificationsListView extends Component {
             return <Loader title='Notifications' />
 
         return (
-            <View>
+            <View style={styles.container}>
                 <Header
                     title='Notifications'
                     rightItem={{
@@ -73,7 +73,6 @@ export default class NotificationsListView extends Component {
                     }}
                 />
                 <ListView
-                    style={styles.listView}
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) =>
                         <NotificationsRow row={rowData} />
@@ -88,7 +87,7 @@ export default class NotificationsListView extends Component {
 }
 
 const styles = StyleSheet.create({
-    listView: {
-        backgroundColor: '#F5FCFF',
+    container: {
+        flex: 1,
     },
 });

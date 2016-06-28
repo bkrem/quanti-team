@@ -58,7 +58,7 @@ export default class SettingsListView extends React.Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <Header
                     title="Settings"
                     leftItem={{
@@ -85,5 +85,7 @@ export default class SettingsListView extends React.Component {
 }
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+    }
 })
