@@ -17,8 +17,11 @@ import {
 import NotificationsRow from './NotificationsRow'
 import HeaderIOS from '../../common/Header'
 
+type Rows = Array<NotificationsRow>;
+type NotificationData = Rows;
+
 type State = {
-    dataSource: Object,
+    dataSource: NotificationData,
     loaded: boolean
 }
 
