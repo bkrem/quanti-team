@@ -49,12 +49,12 @@ export default class TaskView extends React.Component {
     componentDidMount() {
         let testRows = () => {
             let arr = [];
-            for (let i = 0; i < 10; i++) arr.push({
+            for (let i = 0; i < 20; i++) arr.push({
                 id: i,
-                title: `row${i}`,
-                desc: `desc for row${i}`,
-                reward: '200 XP',
-                complete: '3/5'
+                title: `Task ${i}`,
+                desc: `desc for task ${i}`,
+                reward: 'Reward: 200 XP',
+                complete: 'Completed: 3/5'
             });
             return arr;
         }
