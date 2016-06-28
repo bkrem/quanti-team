@@ -65,7 +65,13 @@ export default class NotificationsListView extends Component {
 
         return (
             <View>
-                <Header title='Notifications' />
+                <Header
+                    title='Notifications'
+                    rightItem={{
+                        title: "Clear",
+                        layout: "title"
+                    }}
+                />
                 <ListView
                     style={styles.listView}
                     dataSource={this.state.dataSource}
