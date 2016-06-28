@@ -72,7 +72,11 @@ export default class SettingsListView extends React.Component {
                     scrollEnabled={false}
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) =>
-                        <GenericListRow rowData={rowData} style={styles} />
+                        <GenericListRow
+                            style={styles}
+                            rowData={rowData}
+                            onPress={() => {/* TODO */}}
+                        />
                     }
                     renderSeparator={(sectionId, rowId) =>
                         <View key={rowId} style={GlobalStyles.separator} />
