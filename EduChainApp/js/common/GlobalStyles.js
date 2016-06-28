@@ -27,6 +27,6 @@
          borderRadius:4,
          backgroundColor: '#ededed'
      },
- }
+ };
 
  module.exports = GlobalStyles;

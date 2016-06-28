@@ -3,12 +3,12 @@
  * @flow
  */
 
- 'use strict';
+'use strict';
 
 const Colors = {
-     darkBackground: "#15171a",
-     unselectedGrey: "#80807e",
-     tintColor: "#fff"
- }
+    darkBackground: '#15171a',
+    unselectedGrey: '#80807e',
+    tintColor: '#fff'
+};
 
- module.exports = Colors;
+module.exports = Colors;

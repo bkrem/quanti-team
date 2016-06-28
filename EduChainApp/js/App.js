@@ -8,17 +8,15 @@
 
 'use strict';
 
-import React, { Component } from 'react'
+import React from 'react';
 import {
-    AppRegistry,
     StyleSheet,
-    Text,
     View,
     StatusBar
-} from 'react-native'
-import EduChainNavigator from './EduChainNavigator'
+} from 'react-native';
+import EduChainNavigator from './EduChainNavigator';
 
-export default class App extends Component {
+export default class App extends React.Component {
     render() {
         return (
             <View style={styles.container}>
