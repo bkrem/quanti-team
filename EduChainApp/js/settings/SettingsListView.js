@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import GenericListRow from '../common/GenericListRow';
 import GlobalStyles from '../common/GlobalStyles';
-import HeaderIOS from '../common/Header';
+import Header from '../common/Header';
 
 type SettingsItem = // Put into reducer & export?
     'General'
@@ -59,7 +59,7 @@ export default class SettingsListView extends React.Component {
     render() {
         return (
             <View>
-                <HeaderIOS
+                <Header
                     title="Settings"
                     leftItem={{
                         title: "Back",

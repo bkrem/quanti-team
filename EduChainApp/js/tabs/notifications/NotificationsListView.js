@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import NotificationsRow from './NotificationsRow';
 import GlobalStyles from '../../common/GlobalStyles';
-import HeaderIOS from '../../common/Header';
+import Header from '../../common/Header';
 import Loader from '../../common/Loader';
 
 type Rows = Array<NotificationsRow>;
@@ -65,7 +65,7 @@ export default class NotificationsListView extends Component {
 
         return (
             <View>
-                <HeaderIOS title='Notifications' />
+                <Header title='Notifications' />
                 <ListView
                     style={styles.listView}
                     dataSource={this.state.dataSource}

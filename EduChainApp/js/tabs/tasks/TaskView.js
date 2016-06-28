@@ -14,7 +14,7 @@ import {
     Navigator,
 } from 'react-native'
 import GlobalStyles from '../../common/GlobalStyles'
-import HeaderIOS from '../../common/Header'
+import Header from '../../common/Header'
 import CommentBox from '../../comments/CommentBox'
 
 export type Task = {
@@ -43,7 +43,7 @@ export default class TaskView extends Component {
         /* TODO pass taskId to CommentBox and fetch comments */
         return (
             <View>
-                <HeaderIOS
+                <Header
                     title="Task"
                     leftItem={{
                         title: "Back",

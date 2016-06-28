@@ -13,7 +13,7 @@
      Text,
  } from 'react-native';
  import GlobalStyles from '../../common/GlobalStyles';
- import HeaderIOS from '../../common/Header';
+ import Header from '../../common/Header';
  import ProfileSummary from './ProfileSummary';
 
 // TODO How to avoid declaring types twice, once here in top-lvl, once at component lvl?
@@ -21,7 +21,7 @@
      render() {
          return (
              <View>
-                 <HeaderIOS
+                 <Header
                      title="Me"
                      rightItem={{
                          title: "Settings",

@@ -10,13 +10,13 @@
  import {
      View,
  } from 'react-native'
- import HeaderIOS from '../../common/Header'
+ import Header from '../../common/Header'
 
  export default class TeamView extends Component {
      render() {
          return(
              <View>
-                 <HeaderIOS title="My Team" />
+                 <Header title="My Team" />
              </View>
          );
      }

@@ -13,7 +13,7 @@ import {
     ListView,
     StyleSheet
 } from 'react-native';
-import HeaderIOS from '../../common/Header';
+import Header from '../../common/Header';
 import GlobalStyles from '../../common/GlobalStyles';
 import Loader from '../../common/Loader';
 import TasksListRow from './TasksListRow';
@@ -68,7 +68,7 @@ export default class TaskView extends React.Component {
 
         return (
             <View>
-                <HeaderIOS
+                <Header
                     title="My Tasks"
                     rightItem={{
                         title: "Add Task",
