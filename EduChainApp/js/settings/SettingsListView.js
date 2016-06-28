@@ -69,6 +69,7 @@ export default class SettingsListView extends React.Component {
                     }}
                 />
                 <ListView
+                    scrollEnabled={false}
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) =>
                         <GenericListRow rowData={rowData} style={styles} />
