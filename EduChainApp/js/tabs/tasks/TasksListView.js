@@ -6,7 +6,7 @@
 
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 import {
     Text,
     View,
@@ -21,14 +21,14 @@ type RowsAndSections = {
   [sectionID: string]: Object;
 };
 
-type Data = Rows | RowsAndSections;
+type TaskData = Rows | RowsAndSections;
 
 type State = {
-    dataSource: Data,
+    dataSource: TaskData,
     loaded: boolean
 }
 
-export default class TaskView extends Component {
+export default class TaskView extends React.Component {
     state: State;
 
     constructor(props: Object) {
