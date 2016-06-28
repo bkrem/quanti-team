@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "eslint ."
   },
   "dependencies": {
     "react": "^15.1.0",
@@ -11,5 +12,11 @@
     "react-native-button": "^1.6.0",
     "react-native-vector-icons": "^2.0.3",
     "tcomb-form-native": "^0.5.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.1.0",
+    "eslint": "^2.13.1",
+    "eslint-plugin-react": "^5.2.2",
+    "eslint-plugin-react-native": "^1.1.0"
   }
 }
