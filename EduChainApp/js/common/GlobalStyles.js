@@ -3,7 +3,9 @@
  * @flow
  */
 
- 'use strict';
+'use strict';
+
+import {StyleSheet} from 'react-native';
 
  const GlobalStyles = {
      contentWrapper: {
@@ -26,6 +28,11 @@
          overflow:'hidden',
          borderRadius:4,
          backgroundColor: '#ededed'
+     },
+     separator: {
+         flex: 1,
+         height: StyleSheet.hairlineWidth,
+         backgroundColor: '#8E8E8E',
      },
  };
 

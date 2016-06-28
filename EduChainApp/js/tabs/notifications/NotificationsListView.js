@@ -15,6 +15,7 @@ import {
     StyleSheet
 } from 'react-native';
 import NotificationsRow from './NotificationsRow';
+import GlobalStyles from '../../common/GlobalStyles';
 import HeaderIOS from '../../common/Header';
 import Loader from '../../common/Loader';
 
@@ -72,7 +73,7 @@ export default class NotificationsListView extends Component {
                         <NotificationsRow row={rowData} />
                     }
                     renderSeparator={(sectionId, rowId) =>
-                        <View key={rowId} style={styles.separator} />
+                        <View key={rowId} style={GlobalStyles.separator} />
                     }
                     />
             </View>
@@ -84,9 +85,4 @@ const styles = StyleSheet.create({
     listView: {
         backgroundColor: '#F5FCFF',
     },
-    separator: {
-        flex: 1,
-        height: StyleSheet.hairlineWidth,
-        backgroundColor: '#8E8E8E',
-    }
 });

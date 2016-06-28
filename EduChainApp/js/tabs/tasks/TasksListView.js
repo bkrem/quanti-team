@@ -14,6 +14,7 @@ import {
     StyleSheet
 } from 'react-native';
 import HeaderIOS from '../../common/Header';
+import GlobalStyles from '../../common/GlobalStyles';
 import Loader from '../../common/Loader';
 import TasksListRow from './TasksListRow';
 
@@ -82,7 +83,7 @@ export default class TaskView extends React.Component {
                         <TasksListRow row={rowData} onPress={() => this.props.navigator.push({id: "task", task: rowData})} />
                     }
                     renderSeparator={(sectionId, rowId) =>
-                        <View key={rowId} style={styles.separator} />
+                        <View key={rowId} style={GlobalStyles.separator} />
                     }
                 />
             </View>
@@ -95,9 +96,4 @@ const styles = StyleSheet.create({
     listView: {
         backgroundColor: '#F5FCFF',
     },
-    separator: {
-        flex: 1,
-        height: StyleSheet.hairlineWidth,
-        backgroundColor: '#8E8E8E',
-    }
 });
