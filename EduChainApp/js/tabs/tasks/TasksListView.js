@@ -36,7 +36,12 @@ export default class TaskView extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {
-            dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+            dataSource: new ListView.DataSource({
+                getRowData: (dataBlob, sid, rid) => dataBlob[sid][rid],
+                getSectionHeaderData: (dataBlob, sid) => dataBlob[sid],
+                rowHasChanged: (row1, row2) => row1 !== row2,
+                sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
+            }),
             loaded: false
         }
     }
