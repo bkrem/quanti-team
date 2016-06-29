@@ -18,7 +18,7 @@ export default class EduChainNavigator extends React.Component {
     renderScene(route: Object, navigator: Navigator) {
         switch (route.id) {
             case 'settings':
-                return (<SettingsListView navigator={navigator} />)
+                return (<SettingsListView navigator={navigator} />);
             case 'task':
                 return (<TaskView task={route.task} navigator={navigator} />);
 
