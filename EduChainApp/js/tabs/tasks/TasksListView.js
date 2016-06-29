@@ -17,6 +17,7 @@ import Header from '../../common/Header';
 import GlobalStyles from '../../common/GlobalStyles';
 import Loader from '../../common/Loader';
 import TasksListRow from './TasksListRow';
+import type {Task} from './TaskView'
 
 type Rows = Array<TasksListRow>;
 type RowsAndSections = {
@@ -49,21 +50,65 @@ export default class TaskView extends React.Component {
     componentDidMount() {
         let testRows = () => {
             let arr = [];
-            for (let i = 0; i < 20; i++) arr.push({
-                id: i,
-                title: `Task ${i}`,
-                desc: `desc for task ${i}`,
-                reward: 'Reward: 200 XP',
-                complete: 'Completed: 3/5'
-            });
+            let flip = false;
+            for (let i = 0; i < 20; i++) {
+                arr.push({
+                    id: i,
+                    title: `Task ${i}`,
+                    desc: `desc for task ${i}`,
+                    reward: 'Reward: 200 XP',
+                    complete: 'Completed: 3/5',
+                    status: flip ? 'To Do' : 'Done'
+                });
+                flip = !flip;
+            }
             return arr;
         }
         let tr = testRows();
+        let {dataBlob, sectionIds} = this.renderListViewData(tr);
 
         this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(tr),
+            dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlob, sectionIds),
             loaded: true
         })
+    }
+
+    renderListViewData(tasks: Array<Task>) {
+        let dataBlob = {};
+        const sectionIds = ["To Do", "Done"];
+
+        tasks.map((task: Task) => {
+            let section = task.status;
+            // add section key to `dataBlob` if not present yet
+            if (!dataBlob[section]) dataBlob[section] = [];
+            // add this task to said section
+            dataBlob[section].push(task);
+        });
+
+        return {dataBlob, sectionIds};
+    }
+
+    renderSectionHeader(data: Object, sectionId: string) {
+        return (
+            <View style={styles.sectionHeader}>
+                <Text style={styles.sectionHeaderText}>{sectionId}</Text>
+            </View>
+        );
+    }
+
+    renderRow(rowData: Object) {
+        return (
+            <TasksListRow
+                row={rowData}
+                onPress={() => this.props.navigator.push({id: "task", task: rowData})}
+            />
+        );
+    }
+
+    renderSeparator(sectionId: string, rowId: string) {
+        return (
+            <View key={sectionId+rowId} style={GlobalStyles.separator} />
+        );
     }
 
     // TODO GH #6; add searchBar header
@@ -82,14 +127,12 @@ export default class TaskView extends React.Component {
                     }}
                 />
                 <ListView
+                    automaticallyAdjustContentInsets={false}
                     style={styles.listView}
                     dataSource={this.state.dataSource}
-                    renderRow={(rowData) =>
-                        <TasksListRow row={rowData} onPress={() => this.props.navigator.push({id: "task", task: rowData})} />
-                    }
-                    renderSeparator={(sectionId, rowId) =>
-                        <View key={rowId} style={GlobalStyles.separator} />
-                    }
+                    renderRow={this.renderRow}
+                    renderSectionHeader={this.renderSectionHeader}
+                    renderSeparator={this.renderSeparator}
                 />
             </View>
         );
@@ -97,8 +140,23 @@ export default class TaskView extends React.Component {
 
 } // END CLASS
 
+/*
+renderSeparator={(sectionId, rowId) =>
+    <View key={() => rowId+1} style={GlobalStyles.separator} />
+}
+*/
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    sectionHeader: {
+        backgroundColor: '#48D1CC'
+    },
+    sectionHeaderText: {
+        fontFamily: 'AvenirNext-Medium',
+        fontSize: 16,
+        color: 'white',
+        paddingLeft: 10
     },
 });
