@@ -23,6 +23,7 @@ export type Task = {
     desc: string,
     reward: string,
     complete: string,
+    status: string,
 }
 
 type Props = {
