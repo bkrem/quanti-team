@@ -49,13 +49,13 @@
          backgroundColor: '#dedede'
      },
      leftColumn: {
-         flex: 1,
+         flex: 7,
          backgroundColor: '#ededed',
          justifyContent: 'center',
          alignItems: 'center'
      },
      rightColumn: {
-         flex: 1,
+         flex: 3,
          justifyContent: 'center',
          alignItems: 'center'
      },
