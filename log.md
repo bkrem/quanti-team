@@ -37,3 +37,8 @@
 
 # 28/06
 - Added linting tools (ESlint)
+
+# 29/06
+- Added JSX and logic for TasksListView sectionHeaders
+
+# 30/06
