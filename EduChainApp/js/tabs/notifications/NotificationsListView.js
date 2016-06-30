@@ -73,6 +73,7 @@ export default class NotificationsListView extends Component {
                     }}
                 />
                 <ListView
+                    automaticallyAdjustContentInsets={false}
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) =>
                         <NotificationsRow row={rowData} />
