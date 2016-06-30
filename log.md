@@ -1,7 +1,7 @@
 # 17/06/2016
 - [App] Set up Docker on localhost
-- [App] [App] Removed initial OpenChain experimentation due to lacking documentation
-- [App] [App] Substituted for Eris (TenderMint) chain
+- [App] Removed initial OpenChain experimentation due to lacking documentation
+- [App] Substituted for Eris (TenderMint) chain
 
 # 18/06
 - [App] Set up functioning test chain
