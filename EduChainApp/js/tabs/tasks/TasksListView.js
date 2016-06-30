@@ -140,21 +140,14 @@ export default class TaskView extends React.Component {
 
 } // END CLASS
 
-/*
-renderSeparator={(sectionId, rowId) =>
-    <View key={() => rowId+1} style={GlobalStyles.separator} />
-}
-*/
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
     sectionHeader: {
-        backgroundColor: '#48D1CC'
+        backgroundColor: 'gray'
     },
     sectionHeaderText: {
-        fontFamily: 'AvenirNext-Medium',
         fontSize: 16,
         color: 'white',
         paddingLeft: 10
