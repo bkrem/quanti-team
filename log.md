@@ -42,3 +42,7 @@
 - [App] Added JSX and logic for TasksListView sectionHeaders
 
 # 30/06
+- [App] Fixed insets on all ListViews
+
+# 02/07
+
