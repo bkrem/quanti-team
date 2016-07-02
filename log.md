@@ -45,4 +45,7 @@
 - [App] Fixed insets on all ListViews
 
 # 02/07
+- [App] Fixed bug related to `this` binding
+- [Tooling] Add NPM scripts to simplify emulator invocation
+- [Chain] Add test configs for eris smart contracts, set up `app.js` correctly for dev environment
 
