@@ -35,7 +35,7 @@ export default class TaskView extends Component {
     props: Props;
 
     render() {
-        const {id, title, desc, reward, complete} = this.props.task;
+        const {id, title, status, desc, reward, complete} = this.props.task;
 
         var comments = [
             {id: 1, author: "Pete Hunt", thumbURI: "https://randomuser.me/api/portraits/thumb/men/1.jpg", text: "This is one comment"},
@@ -56,8 +56,9 @@ export default class TaskView extends Component {
                 <View style={GlobalStyles.contentWrapper}>
                     <View style={styles.taskSummary}>
                         <Text style={[GlobalStyles.sectionHeader, styles.taskTitle]}>{title}</Text>
-                        <Text style={styles.reward}>{reward}</Text>
-                        <Text style={styles.complete}>{complete}</Text>
+                        <Text style={styles.status}>Status: {status}</Text>
+                        <Text style={styles.reward}>Reward: {reward}</Text>
+                        <Text style={styles.complete}>Completed: {complete}</Text>
                     </View>
                     <View style={styles.desc}>
                         <Text style={GlobalStyles.sectionHeader}>Description</Text>
