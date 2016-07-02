@@ -130,7 +130,7 @@ export default class TaskView extends React.Component {
                     automaticallyAdjustContentInsets={false}
                     style={styles.listView}
                     dataSource={this.state.dataSource}
-                    renderRow={this.renderRow}
+                    renderRow={this.renderRow.bind(this)}
                     renderSectionHeader={this.renderSectionHeader}
                     renderSeparator={this.renderSeparator}
                 />
