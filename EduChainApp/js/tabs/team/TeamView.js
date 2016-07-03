@@ -16,7 +16,7 @@
      render() {
          return(
              <View>
-                 <Header title="My Team" />
+                 <Header title="Team" />
              </View>
          );
      }

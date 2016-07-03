@@ -119,7 +119,7 @@ export default class TaskView extends React.Component {
         return (
             <View style={styles.container}>
                 <Header
-                    title="My Tasks"
+                    title="Tasks"
                     rightItem={{
                         title: "Add Task",
                         layout: "icon",
