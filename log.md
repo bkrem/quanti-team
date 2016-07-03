@@ -50,5 +50,5 @@
 - [Chain] Add test configs for eris smart contracts, set up `app.js` correctly for dev environment
 
 # 03/07
-
-
+- [Chain] Configured custom REST eris service by building custom Docker image
+- [Chain] Learned how to build a REST API to interface with a given chain via HTTP calls
