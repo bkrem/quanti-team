@@ -76,7 +76,7 @@ export default class NotificationsListView extends Component {
                     automaticallyAdjustContentInsets={false}
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) =>
-                        <NotificationsRow row={rowData} />
+                        <NotificationsRow row={rowData} onPress={() => console.log("tapped notification")} />
                     }
                     renderSeparator={(sectionId, rowId) =>
                         <View key={rowId} style={GlobalStyles.separator} />

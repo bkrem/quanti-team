@@ -18,12 +18,13 @@
  import GlobalStyles from '../../common/GlobalStyles'
 
 type Props = {
+    onPress: () => void,
     row: {
         thumbURI: string,
         title: string,
         desc: string,
         timestamp: string
-    }
+    },
 }
 
 export default class NotificationsRow extends Component {
@@ -32,7 +33,7 @@ export default class NotificationsRow extends Component {
     render() {
         return (
             <View>
-                <TouchableHighlight>
+                <TouchableHighlight onPress={this.props.onPress.bind(this)}>
                     <View style={styles.container}>
                         <View style={styles.thumbContainer}>
                             <Image
