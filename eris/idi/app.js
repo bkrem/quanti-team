@@ -51,6 +51,7 @@ function changeValue() {
 function setValue(value) {
   idisContract.set(value, function(error, result){
     if (error) { throw error }
+    console.log("Value was set to " + value + " successfully!");
     getValue(function(){});
   });
 }
