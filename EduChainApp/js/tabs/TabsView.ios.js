@@ -34,8 +34,8 @@ export default class TabsView extends Component {
     state: State;
     props: Props;
 
-    constructor(props: Object) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             selectedTab: 'home'
         }

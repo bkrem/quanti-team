@@ -30,8 +30,8 @@ type State = {
 export default class NotificationsListView extends Component {
     state: State;
 
-    constructor(props: Object) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
             loaded: false

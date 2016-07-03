@@ -34,8 +34,8 @@ type State = {
 export default class TaskView extends React.Component {
     state: State;
 
-    constructor(props: Object) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             dataSource: new ListView.DataSource({
                 getRowData: (dataBlob, sid, rid) => dataBlob[sid][rid],

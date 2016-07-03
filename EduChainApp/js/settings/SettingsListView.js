@@ -33,8 +33,8 @@ type State = {
 export default class SettingsListView extends React.Component {
     state: State;
 
-    constructor(props: Object) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
             loaded: false,
