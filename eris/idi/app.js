@@ -1,61 +1,79 @@
-// requires
-var fs = require ('fs');
-var prompt = require('prompt');
-var erisC = require('eris-contracts');
+'use strict';
 
-// NOTE. On Windows/OSX do not use localhost. find the
-// url of your chain with:
-// docker-machine ls
-// and find the docker machine name you are using (usually default or eris).
-// for example, if the URL returned by docker-machine is tcp://192.168.99.100:2376
-// then your erisdbURL should be http://192.168.99.100:1337/rpc
-var erisdbURL = "http://192.168.99.100:1337/rpc";
+var contracts = require('eris-contracts');
+var fs = require('fs');
+var http = require('http');
+var address = require('./epm.json').deployStorageK;
+var abi = JSON.parse(fs.readFileSync('./abi/' + address, 'utf8'));
+var accounts = require('./accounts.json');
+var chainUrl;
+var manager;
+var contract;
+var server;
 
-// get the abi and deployed data squared away
-var contractData = require('./epm.json');
-var idisContractAddress = contractData["deployStorageK"];
-var idisAbi = JSON.parse(fs.readFileSync("./abi/" + idisContractAddress));
+chainUrl = 'http://simplechain:1337/rpc';
 
-// properly instantiate the contract objects manager using the erisdb URL
-// and the account data (which is a temporary hack)
-var accountData = require('./accounts.json');
-var contractsManager = erisC.newContractManagerDev(erisdbURL, accountData.simplechain_full_000);
+// Instantiate the contract object manager using the chain URL and the account
+// data.
+manager = contracts.newContractManagerDev(chainUrl,
+  accounts.simplechain_full_000);
 
-// properly instantiate the contract objects using the abi and address
-var idisContract = contractsManager.newContractFactory(idisAbi).at(idisContractAddress);
+// Instantiate the contract object using the ABI and the address.
+contract = manager.newContractFactory(abi).at(address);
 
-// display the current value of idi's contract by calling
-// the `get` function of idi's contract
-function getValue(callback) {
-  idisContract.get(function(error, result){
-    if (error) { throw error }
-    console.log("Idi's number is:\t\t\t" + result.toNumber());
-    callback();
-  });
-}
+// Create an HTTP server.
+server = http.createServer(function (request, response) {
+  var body;
+  var value;
 
-// prompt the user to change the value of idi's contract
-function changeValue() {
-  prompt.message = "What number should Idi make it?";
-  prompt.delimiter = "\t";
-  prompt.start();
-  prompt.get(['value'], function (error, result) {
-    if (error) { throw error }
-    setValue(result.value)
-  });
-}
+  switch (request.method) {
+    case 'GET':
+      console.log("Received request to get Idi's number.");
 
-// using eris-contracts call the `set` function of idi's
-// contract using the value which was recieved from the
-// changeValue prompt
-function setValue(value) {
-  idisContract.set(value, function(error, result){
-    if (error) { throw error }
-    console.log("Value was set to " + value + " successfully!");
-    getValue(function(){});
-  });
-}
+      // Get the value from the contract and return it to the HTTP client.
+      contract.get(function (error, result) {
+        if (error) {
+          response.statusCode = 500;
+          console.error(error);
+        } else {
+          response.statusCode = 200;
+          response.setHeader('Content-Type', 'application/json');
+          response.write(JSON.stringify(result['c'][0]));
+        }
 
-// run
-getValue(changeValue);
+        response.end('\n');
+      });
 
+      break;
+
+    case 'PUT':
+      body = '';
+
+      request.on('data', function (chunk) {
+        body += chunk;
+      });
+
+      request.on('end', function () {
+        value = JSON.parse(body);
+        console.log("Received request to set Idi's number to " + value + '.');
+
+        // Set the value in the contract.
+        contract.set(value, function (error) {
+          response.statusCode = error ? 500 : 200;
+          response.end();
+        })
+      });
+
+      break;
+
+    default:
+      response.statusCode = 501;
+      response.end();
+  }
+});
+
+// Tell the server to listen to incoming requests on the port specified in the
+// environment.
+server.listen(process.env.IDI_PORT, function () {
+  console.log('Listening for HTTP requests on port ' + process.env.IDI_PORT + '.')
+});
