@@ -54,4 +54,4 @@
 - [Chain] Learned how to build a REST API to interface with a given chain via HTTP calls
 
 # 04/07
-- [Chain] Research on internal structure of Tendermint blockchain in order to leverage voting & consensus correctly
+- [Chain] Research on internal structure of Tendermint blockchain in order to leverage voting & consensus correctly; [TenderMint Consensus Algo](https://github.com/tendermint/tendermint/wiki/Byzantine-Consensus-Algorithm)
