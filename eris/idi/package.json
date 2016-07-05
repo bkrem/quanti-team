@@ -2,7 +2,9 @@
   "name": "idis_app",
   "version": "0.0.1",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "servicelog": "eris services logs idi -f",
+    "chainlog": "eris chains logs simplechain -f"
   },
   "dependencies": {
     "eris-contracts": "^0.13.1",
