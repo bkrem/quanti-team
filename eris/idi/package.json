@@ -2,7 +2,8 @@
   "name": "idis_app",
   "version": "0.0.1",
   "scripts": {
-    "start": "node app.js",
+    "start": "eris services start idi",
+    "stop": "eris services stop idi",
     "servicelog": "eris services logs idi -f",
     "chainlog": "eris chains logs simplechain -f"
   },
