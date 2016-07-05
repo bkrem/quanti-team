@@ -4,16 +4,16 @@
 
  'use strict';
 
- import React, { Component } from 'react'
+ import React, { Component } from 'react';
  import {
      View,
      StyleSheet,
      TouchableHighlight,
      Text,
- } from 'react-native'
- import GlobalStyles from '../common/GlobalStyles'
- import Button from 'react-native-button'
- import t from 'tcomb-form-native'
+ } from 'react-native';
+ import GlobalStyles from '../common/GlobalStyles';
+ import Button from 'react-native-button';
+ import t from 'tcomb-form-native';
 
 export default class CommentForm extends Component {
     onPress() {
