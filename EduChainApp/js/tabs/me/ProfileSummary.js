@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingTop: 20,
+        marginBottom: 10,
         //backgroundColor: '#bbb',
     },
     textContainer: {
