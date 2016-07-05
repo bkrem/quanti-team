@@ -11,13 +11,46 @@
      View,
      StyleSheet,
      Text,
+     Alert,
  } from 'react-native';
  import GlobalStyles from '../../common/GlobalStyles';
  import Header from '../../common/Header';
  import ProfileSummary from './ProfileSummary';
+ import Button from 'react-native-button';
+
+ const educhain = 'http://192.168.99.100:8082'; // TODO configure as global
 
 // TODO How to avoid declaring types twice, once here in top-lvl, once at component lvl?
  export default class ProfileView extends React.Component {
+
+     // GET simplechain_full_000's balance
+     async getBalance(): Promise {
+         try {
+             let balance = await fetch(educhain);
+             let balanceText = await balance.text();
+             console.log(balanceText);
+             Alert.alert(
+                 "GET Balance",
+                 "Current balance: " + balanceText
+             );
+             return balanceText;
+         } catch(err) {
+             console.error("Error at getBalance():", err);
+         }
+     }
+
+     setBalance(amount: number): void {
+         try {
+             fetch(educhain, {
+                 method: 'PUT',
+                 body: `${amount}`
+             })
+         } catch(err) {
+             console.error(`Error at setBalance(${amount}):`, err)
+         }
+         console.info(`setBalance(): Balance set to ${amount} successfully.`);
+     }
+
      render() {
          return (
              <View>
@@ -36,6 +69,15 @@
                         name="Ben Kremer"
                         teamname="Team λαμδα"
                     />
+
+                    <View style={styles.balanceContainer}>
+                        <Button
+                            containerStyle={GlobalStyles.buttonContainer}
+                            onPress={this.getBalance.bind(this)}
+                        >
+                            Get Balance
+                        </Button>
+                    </View>
 
                     <View ref="bioContainer" style={styles.bioContainer}>
                         <Text ref="bioTitle" style={[GlobalStyles.sectionHeader, styles.bioTitle]}>Bio</Text>
