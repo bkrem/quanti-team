@@ -56,3 +56,7 @@
 # 04/07
 - [Chain] Research on internal structure of Tendermint blockchain in order to leverage voting & consensus correctly; [TenderMint Consensus Algo](https://github.com/tendermint/tendermint/wiki/Byzantine-Consensus-Algorithm)
 - [Report] Summarise project report targets in order to structure project milestones appropriately
+
+# 05/07
+- [General] Meeting with Ghita; decision to tighten scope and move away from a formal user testing study for the actual report.
+- [Tooling] Composed bash script for local env setup
