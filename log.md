@@ -60,3 +60,4 @@
 # 05/07
 - [General] Meeting with Ghita; decision to tighten scope and move away from a formal user testing study for the actual report.
 - [Tooling] Composed bash script for local env setup
+- [App] Added basic REST API methods (`getBalance()`, `setBalance()`) to interact with locally running chain
