@@ -193,3 +193,6 @@ contract HelloSystem {
 
 }
 ```
+_"Note that msg.sender is not the same in the constructor as it is in the remove function. **The constructor is called when the contract is added, so msg.sender will be the contract creator**, but in all other functions it will be the address of the account that is calling it."_
+
+---
