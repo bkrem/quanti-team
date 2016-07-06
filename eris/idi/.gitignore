@@ -1,4 +1,6 @@
 node_modules/*
-abi/*
-
 npm-debug.log
+
+# Don't track compile-time generated data
+abi/*
+epm.json
