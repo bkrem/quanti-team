@@ -4,7 +4,7 @@
 #### nameReg contract
 Source: https://docs.erisindustries.com/tutorials/solidity/solidity-1/
 
-```
+```js
 contract Users {
     // Here we store the names. Make it public to automatically generate an
     // accessor function named 'users' that takes a fixed-length string as argument.
@@ -32,7 +32,7 @@ contract Users {
 #### Voting (with delegation)
 Source: http://solidity.readthedocs.io/en/latest/solidity-by-example.html
 
-```
+```js
 /// @title Voting with delegation.
 contract Ballot {
     // This declares a new complex type which will
