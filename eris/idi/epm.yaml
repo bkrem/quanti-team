@@ -40,12 +40,12 @@ jobs:
   job:
     assert:
       key: $queryOwner
-      relation: ne
+      relation: ne # !=
       val: 0
 
 - name: assertBalance
   job:
     assert:
       key: $queryBalance
-      relation: eq
+      relation: eq # ==
       val: $setBalanceBase
