@@ -10,7 +10,6 @@
     "rebuild": "docker build -t idiservice .; eris services rm --force idi; eris services start idi; eris services logs idi -f"
   },
   "dependencies": {
-    "eris-contracts": "^0.13.1",
-    "prompt": "*"
+    "eris-contracts": "^0.13.1"
   }
 }
