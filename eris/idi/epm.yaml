@@ -1,15 +1,17 @@
 jobs:
 
-- name: setBalanceBase
-  job:
-    set:
-      val: 5
-
+# META
 - name: deployContract
   job:
     deploy:
       contract: idi.sol
       wait: true
+
+# SETTERS
+- name: setBalanceBase
+  job:
+    set:
+      val: 5
 
 - name: setBalance
   job:
@@ -18,6 +20,8 @@ jobs:
       data: set $setBalanceBase
       wait: true
 
+# QUERIES
+# Queries for the public accessor functions of the contract
 - name: queryOwner
   job:
     query-contract:
@@ -30,6 +34,8 @@ jobs:
       destination: $deployContract
       data: getBalance
 
+
+# TESTS
 - name: assertOwner
   job:
     assert:
