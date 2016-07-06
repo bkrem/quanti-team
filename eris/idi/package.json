@@ -2,10 +2,12 @@
   "name": "idis_app",
   "version": "0.0.1",
   "scripts": {
-    "start": "eris services start idi",
-    "stop": "eris services stop idi",
+    "start": "node app.js",
+    "stop": "eris services stop",
     "servicelog": "eris services logs idi -f",
-    "chainlog": "eris chains logs simplechain -f"
+    "chainlog": "eris chains logs simplechain -f",
+    "compile": "eris pkgs do --chain simplechain --address $addr",
+    "rebuild": "docker build -t idiservice .; eris services rm --force idi; eris services start idi; eris services logs idi -f"
   },
   "dependencies": {
     "eris-contracts": "^0.13.1",
