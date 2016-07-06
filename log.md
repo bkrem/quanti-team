@@ -63,4 +63,6 @@
 - [App] Added basic REST API methods (`getBalance()`, `setBalance()`) to interact with locally running chain
 
 # 06/07
-- Worked through in-depth tutorial on solidity contracts [Solidity Tutorial](https://docs.erisindustries.com/tutorials/solidity/)
+- Worked through in-depth tutorial on solidity contracts 
+    - [Eris Solidity Tutorial](https://docs.erisindustries.com/tutorials/solidity/)
+    - [Official Solidity Docs](http://solidity.readthedocs.io/en/latest/introduction-to-smart-contracts.html)
