@@ -1,32 +1,45 @@
 jobs:
 
-- name: setStorageBase
+- name: setBalanceBase
   job:
     set:
       val: 5
 
-- name: deployStorageK
+- name: deployContract
   job:
     deploy:
       contract: idi.sol
       wait: true
 
-- name: setStorage
+- name: setBalance
   job:
     call:
-      destination: $deployStorageK
-      data: set $setStorageBase
+      destination: $deployContract
+      data: set $setBalanceBase
       wait: true
 
-- name: queryStorage
+- name: queryOwner
   job:
     query-contract:
-      destination: $deployStorageK
-      data: get
+      destination: $deployContract
+      data: getOwner
 
-- name: assertStorage
+- name: queryBalance
+  job:
+    query-contract:
+      destination: $deployContract
+      data: getBalance
+
+- name: assertOwner
   job:
     assert:
-      key: $queryStorage
+      key: $queryOwner
+      relation: ne
+      val: 0
+
+- name: assertBalance
+  job:
+    assert:
+      key: $queryBalance
       relation: eq
-      val: $setStorageBase
+      val: $setBalanceBase
