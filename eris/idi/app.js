@@ -31,7 +31,7 @@ server = http.createServer(function (request, response) {
       console.log("Received request to get Idi's number.");
 
       // Get the value from the contract and return it to the HTTP client.
-      contract.get(function (error, result) {
+      contract.getBalance(function (error, result) {
         if (error) {
           response.statusCode = 500;
           console.error(error);
