@@ -1,1 +1,4 @@
 node_modules/*
+abi/*
+
+npm-debug.log
