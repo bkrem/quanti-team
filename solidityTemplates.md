@@ -170,3 +170,26 @@ contract Ballot {
 ```
 
 ---
+
+#### Removing a contract (via owner's permission)
+Source: https://docs.erisindustries.com/tutorials/solidity/solidity-1/
+
+
+```js
+contract HelloSystem {
+
+    address owner;
+
+    // Constructor
+    function HelloSystem(){
+        owner = msg.sender;
+    }
+
+    function remove() {
+        if (msg.sender == owner){
+            suicide(owner);
+        }
+    }
+
+}
+```
