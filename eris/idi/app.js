@@ -3,7 +3,7 @@
 var contracts = require('eris-contracts');
 var fs = require('fs');
 var http = require('http');
-var address = require('./epm.json').deployStorageK;
+var address = require('./epm.json').deployContract;
 var abi = JSON.parse(fs.readFileSync('./abi/' + address, 'utf8'));
 var accounts = require('./accounts.json');
 var chainUrl;
