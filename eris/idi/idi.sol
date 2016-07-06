@@ -1,11 +1,21 @@
 contract IdisContractsFTW {
-  uint storedData;
 
-  function set(uint x) {
-    storedData = x;
+  struct Account {
+    address owner;
+    uint balance;
   }
 
-  function get() constant returns (uint retVal) {
-    return storedData;
+  Account example;
+
+  function set(uint x) {
+    example = Account(msg.sender, x);
+  }
+
+  function getBalance() constant returns (uint retVal) {
+    return example.balance;
+  }
+
+  function getOwner() constant returns (address retVal) {
+    return example.owner;
   }
 }
