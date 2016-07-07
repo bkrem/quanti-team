@@ -63,13 +63,13 @@
 - [App] Added basic REST API methods (`getBalance()`, `setBalance()`) to interact with locally running chain
 
 # 06/07
-- Worked through in-depth tutorial on solidity contracts
+- [Chain] Worked through in-depth tutorial on solidity contracts
     - [Eris Solidity Tutorial](https://docs.erisindustries.com/tutorials/solidity/)
     - [Official Solidity Docs](http://solidity.readthedocs.io/en/latest/introduction-to-smart-contracts.html)
-- Started template collection file for Solidity contracts
-- Improved `envsetup.sh`'s environment variables
-- Simplified sequences of `eris` commands into NPM scripts (`run rebuild`, `run compile`)
-- Expanded on `idi.sol` boilerplate with `Account` struct and `getBalance()` & `getOwner()` methods
-- Fixed up queries and test assertions in `epm.yaml` to match new contract methods
+- [Chain] Started template collection file for Solidity contracts
+- [Tooling] Improved `envsetup.sh`'s environment variables
+- [Tooling] Simplified sequences of `eris` commands into NPM scripts (`run rebuild`, `run compile`)
+- [Chain] Expanded on `idi.sol` boilerplate with `Account` struct and `getBalance()` & `getOwner()` methods
+- [Chain] Fixed up queries and test assertions in `epm.yaml` to match new contract methods
 
 # 07/07
