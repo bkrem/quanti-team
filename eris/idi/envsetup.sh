@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# This script should be run to configure `docker-machine`'s environment within the
+# terminal session, as well as to set up local environment variables which
+# simplify the usage of `eris` drastically, such as the chain directory ($chain_dir)
+# and the address of the contract owner ($addr) if a contract is to be deployed onto the chain.
+
 echo "Running eduChain environment setup..."
 
 # Set references to the chain & account
