@@ -71,3 +71,5 @@
 - Simplified sequences of `eris` commands into NPM scripts (`run rebuild`, `run compile`)
 - Expanded on `idi.sol` boilerplate with `Account` struct and `getBalance()` & `getOwner()` methods
 - Fixed up queries and test assertions in `epm.yaml` to match new contract methods
+
+# 07/07
