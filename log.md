@@ -72,4 +72,4 @@
 - [Chain] Expanded on `idi.sol` boilerplate with `Account` struct and `getBalance()` & `getOwner()` methods
 - [Chain] Fixed up queries and test assertions in `epm.yaml` to match new contract methods
 
-# 07/07
+# 08/07
