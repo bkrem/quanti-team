@@ -63,7 +63,7 @@
 - [App] Added basic REST API methods (`getBalance()`, `setBalance()`) to interact with locally running chain
 
 # 06/07
-- [Chain] Worked through in-depth tutorial on solidity contracts
+- [Chain] Started in-depth tutorial on solidity contracts
     - [Eris Solidity Tutorial](https://docs.erisindustries.com/tutorials/solidity/)
     - [Official Solidity Docs](http://solidity.readthedocs.io/en/latest/introduction-to-smart-contracts.html)
 - [Chain] Started template collection file for Solidity contracts
@@ -73,3 +73,5 @@
 - [Chain] Fixed up queries and test assertions in `epm.yaml` to match new contract methods
 
 # 08/07
+- [Chain] Advanced Solidity contracts (Manager contracts)
+- [Chain] [Five-Types Model](https://docs.erisindustries.com/tutorials/solidity/solidity-1/#tocAnchor-1-9)
