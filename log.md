@@ -76,3 +76,9 @@
 - [Chain] Advanced Solidity contracts (Manager contracts)
 - [Chain] Learned smart contract design patterns via the [Five-Types Model](https://docs.erisindustries.com/tutorials/solidity/solidity-1/#tocAnchor-1-9)
 - [General] Started `awesome-solidity` repo
+
+# 09/07
+- [Chain] Learned [Advanced Solidity Features](https://docs.erisindustries.com/tutorials/solidity/solidity-3/)
+- [Chain] Experimented with event handlers for the JSON RPC
+
+# 10/07
