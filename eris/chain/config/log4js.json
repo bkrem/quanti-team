@@ -1,0 +1,25 @@
+{
+  "loggers" : [
+    {
+      "name": "default",
+      "level": "INFO"
+    },
+    {
+      "name": "erisDbLogger",
+      "level": "DEBUG",
+      "category": "eris.wrapper"
+    }
+  ],
+  "appenders": [
+    {
+      "type": "console"
+    },
+    {
+      "type": "file",
+      "filename": "logs/eris.log",
+      "maxLogSize": 2048,
+      "backups": 3,
+      "category": "eris.hello"
+    }
+  ]
+}
