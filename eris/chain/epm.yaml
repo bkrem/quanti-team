@@ -4,7 +4,7 @@ jobs:
 - name: deployContract
   job:
     deploy:
-      contract: idi.sol
+      contract: TaskManager.sol
       wait: true
 
 # SETTERS
