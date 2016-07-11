@@ -21,6 +21,16 @@ manager = contracts.newContractManagerDev(chainUrl,
 // Instantiate the contract object using the ABI and the address.
 contract = manager.newContractFactory(abi).at(address);
 
+var contractEvent = contract.ActionEvent(function (err,data) {
+    if (err)
+        return console.error(err);
+    return console.log(data.args.actionType);
+});
+
+var cbFunc = (function (eventData) {
+    console.log(eventData.args);
+});
+
 // Create an HTTP server.
 server = http.createServer(function (request, response) {
   var body;
@@ -55,13 +65,24 @@ server = http.createServer(function (request, response) {
 
       request.on('end', function () {
         value = JSON.parse(body);
-        console.log("Received request to set Idi's number to " + value + '.');
+        console.log("PUT value: " + value);
 
-        // Set the value in the contract.
-        contract.set(value, function (error) {
-          response.statusCode = error ? 500 : 200;
-          response.end();
-        })
+        if (value === -1) {
+            console.log("Received request to destroy contract!");
+            contract.destroy(function (err) {
+                if (err)
+                    console.error(err);
+                response.statusCode = err ? 500 : 200;
+                response.end();
+            });
+        } else {
+            // Set the value in the contract.
+            console.log("Received request to set Idi's number to " + value + '.');
+            contract.set(value, function (error) {
+              response.statusCode = error ? 500 : 200;
+              response.end();
+            });
+        }
       });
 
       break;
