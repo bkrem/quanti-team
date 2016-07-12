@@ -5,10 +5,10 @@ contract Task {
     bytes32 public desc; // mutable
     bytes32 public status; // mutable
     bytes32 public complete; // mutable
-    uint public reward; // immutable
+    bytes32 public reward; // immutable
 
     // Constructor
-    function Task(bytes32 _id, bytes32 _title, bytes32 _desc, bytes32 _status, bytes32 _complete, uint _reward) {
+    function Task(bytes32 _id, bytes32 _title, bytes32 _desc, bytes32 _status, bytes32 _complete, bytes32 _reward) {
         id = _id;
         title = _title;
         desc = _desc;
