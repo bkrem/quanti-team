@@ -70,11 +70,13 @@ var server = http.createServer(function (request, response) {
 
       request.on('end', function () {
         value = JSON.parse(body);
+        var hexVal = eris.str2hex("12345678");
         console.log("PUT value: " + value);
+        console.log("hex val: " + hexVal);
 
         if (value === -1) {
             console.log("Fetch address");
-            taskManager.getAddress(1245, function (err, result) {
+            taskManager.getAddress(hexVal, function (err, result) {
                 if (err) {
                     console.error(err);
                 } else {
@@ -87,7 +89,7 @@ var server = http.createServer(function (request, response) {
         } else {
             // Set the value in the contract.
             console.log("Received request to set Idi's number to " + value + '.');
-            taskManager.addTask(value, function (error) {
+            taskManager.addTask(hexVal, function (error) {
               response.statusCode = error ? 500 : 200;
               response.end();
             });
