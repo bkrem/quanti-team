@@ -1,7 +1,7 @@
 jobs:
 
 # META
-- name: deployContract
+- name: TaskManager
   job:
     deploy:
       contract: TaskManager.sol
