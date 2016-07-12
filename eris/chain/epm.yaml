@@ -8,44 +8,44 @@ jobs:
       wait: true
 
 # SETTERS
-- name: setBalanceBase
-  job:
-    set:
-      val: 5
+#- name: setBalanceBase
+#  job:
+#    set:
+#      val: 5
 
-- name: setBalance
-  job:
-    call:
-      destination: $deployContract
-      data: set $setBalanceBase
-      wait: true
+#- name: setBalance
+#  job:
+#    call:
+#      destination: $deployContract
+#      data: set $setBalanceBase
+#      wait: true
 
 # QUERIES
 # Queries for the public accessor functions of the contract
-- name: queryOwner
-  job:
-    query-contract:
-      destination: $deployContract
-      data: getOwner
+#- name: queryOwner
+#  job:
+#    query-contract:
+#      destination: $deployContract
+#      data: getOwner
 
-- name: queryBalance
-  job:
-    query-contract:
-      destination: $deployContract
-      data: getBalance
+#- name: queryBalance
+#  job:
+#    query-contract:
+#      destination: $deployContract
+#      data: getBalance
 
 
 # TESTS
-- name: assertOwner
-  job:
-    assert:
-      key: $queryOwner
-      relation: ne # !=
-      val: 0
+#- name: assertOwner
+#  job:
+#    assert:
+#      key: $queryOwner
+#      relation: ne # !=
+#      val: 0
 
-- name: assertBalance
-  job:
-    assert:
-      key: $queryBalance
-      relation: eq # ==
-      val: $setBalanceBase
+#- name: assertBalance
+#  job:
+#    assert:
+#      key: $queryBalance
+#      relation: eq # ==
+#      val: $setBalanceBase
