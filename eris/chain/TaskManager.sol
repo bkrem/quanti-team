@@ -3,8 +3,10 @@
  */
 
 import "Task.sol";
+import "LinkedList.sol";
 
 contract TaskManager {
+    DoublyLinkedList list;
 
     mapping (bytes32 => AddressElement) tasks;
     // array of known keys
@@ -15,6 +17,8 @@ contract TaskManager {
         uint keyIdx;
         address value;
     }
+
+    address ref;
 
     /*modifier onlyOwner() {
         if (msg.sender != owner)
@@ -29,53 +33,23 @@ contract TaskManager {
       ActionEvent(msg.sender, actionType);
     }
 
-
-
     /**
-     * @notice Inserts the given address value at the specified key.
-     *
-     * @param key the key
-     * @param value the value
-     * @return true, if the entry already existed and was replaced, false if a new entry was created
+     * Adds a new task with the specified attributes
      */
-    function insert(bytes32 key, address value) returns (bool exists)
+    function addTask(bytes32 _id, bytes32 _title, bytes32 _desc, bytes32 _status, bytes32 _complete, bytes32 _reward)
+        returns (bool success)
     {
-        exists = tasks[key].value != 0x0;
-        if (!exists) {
-            var keyIndex = keys.length++;
-            keys[keyIndex] = key;
-            tasks[key] = AddressElement(keyIndex, value);
-            mapSize++;
-        } else {
-            tasks[key].value = value;
-        }
-    }
+        Task t = new Task(_id, _title, _desc, _status, _complete, _reward);
 
-    /**
-     * @return true if the map contains a value at the specified key, false otherwise.
-     */
-    function exists(bytes32 key) constant returns (bool exists) {
-        return tasks[key].value != 0x0;
-    }
-
-    /**
-     * @return the address value registered at the specified key
-     */
-    function getAddress(bytes32 key) constant returns (address addr) {
-       if(tasks[key].value != 0x0) {
-           return tasks[key].value;
-       }
-       else return 0x0;
-    }
-
-    /**
-     * Adds a new deal with the specified attributes
-     */
-    function addTask(bytes32 _id) returns (bool) {
-        Task t = new Task(_id, "TestTask", "Test Description", "To Do", "0/?", 200);
-        insert(_id, t);
+        ref = msg.sender;
+        list.addElement(msg.sender, _id);
         registerActionEvent("addTask");
         return true;
+    }
+
+    // TODO
+    function getTask(bytes32 _id) constant returns (bytes32 taskData) {
+        return list.getData(ref);
     }
 
     /*function set(uint x) {
