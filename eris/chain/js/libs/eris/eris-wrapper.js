@@ -42,7 +42,7 @@ var logger = require(__libs+'/eris/eris-logger');
         //TODO check inputs, check existing contract at name
 
         if(log.isDebugEnabled()) {
-            log.debug('Creating contract factory with ABI '+abi+' at address '+address+'.');
+            log.debug('Creating contract factory with ABI '+ JSON.stringify(abi) +' at address '+ address +'.');
         }
         // instantiate the contract objects using the abi and address
         var contract;
