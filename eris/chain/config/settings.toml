@@ -1,0 +1,11 @@
+[eris]
+
+    [eris.server]
+        port_http =               # default: 3080
+        port_https =              # default: 3443
+        context_path =            # default: dcc
+
+    [eris.chain]
+        host = "simplechain"
+        port = 1337
+        devAccount = "eris_full_000"     # for testing only! The account to use from test/chain-config/accounts.json
