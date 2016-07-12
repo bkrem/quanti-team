@@ -1,6 +1,12 @@
 jobs:
 
 # CONTRACT DEPLOYMENTS
+- name: LinkedList
+  job:
+    deploy:
+      contract: LinkedList.sol
+      wait: true
+
 - name: Task
   job:
     deploy:
