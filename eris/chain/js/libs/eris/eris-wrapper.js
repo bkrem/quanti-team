@@ -56,7 +56,7 @@ var logger = require(__libs+'/eris/eris-logger');
             contract.setOutputFormatter(erisC.outputFormatters.jsonStrings);
         }
         return contract;
-    }
+    };
 
     /*
      Wraps the given callback and executes the 'convert' function on the result,
@@ -66,17 +66,17 @@ var logger = require(__libs+'/eris/eris-logger');
         return function(err, res) {
             callback(err, (res && convert) ? convert(res) : res);
         };
-    }
+    };
 
     /* Converts given string to hex */
     var str2hex = function (str) {
         return binstring(str, { in:'binary', out:'hex' });
-    }
+    };
 
     /* Converts given hex to string and removes trailing null character */
     var hex2str = function (hexx) {
         return String(Buffer(hexx, 'hex')).replace(/\0/g, '');
-    }
+    };
 
     module.exports = {
         'NewWrapper': ErisWrapper,
