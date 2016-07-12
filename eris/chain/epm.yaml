@@ -1,6 +1,12 @@
 jobs:
 
-# META
+# CONTRACT DEPLOYMENTS
+- name: Task
+  job:
+    deploy:
+      contract: Task.sol
+      wait: true
+
 - name: TaskManager
   job:
     deploy:

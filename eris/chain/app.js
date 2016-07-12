@@ -1,38 +1,43 @@
 'use strict';
 
+// Globals for directories
+global.__libs = __dirname + '/js/libs';
+global.__routes = __dirname + '/js/routes';
+global.__config = __dirname + '/config';
+global.__contracts = __dirname + '/solidity/contracts';
+global.__abi = __dirname + '/abi';
+
 var contracts = require('eris-contracts');
 var fs = require('fs');
 var http = require('http');
-var address = require('./epm.json').deployContract;
-var abi = JSON.parse(fs.readFileSync('./abi/' + address, 'utf8'));
-var accounts = require('./accounts.json');
-var chainUrl;
-var manager;
-var contract;
-var server;
+var toml = require('toml-js');
 
-chainUrl = 'http://simplechain:1337/rpc';
+var logger = require(__libs+'/eris/eris-logger');
+var eris = require(__libs+'/eris/eris-wrapper');
+
+// Read configuration
+global.__settings = toml.parse( fs.readFileSync(__config+'/settings.toml') );
+
+
+var epmJSON = require('./epm.json');
+var taskManagerAbi = JSON.parse(fs.readFileSync(__abi+'/TaskManager'));
+var accounts = require('./accounts.json');
+
+var erisWrapper = new eris.NewWrapper(__settings.eris.chain.host, __settings.eris.chain.port, accounts.simplechain_full_000);
+var log = logger.getLogger('eris.chain.app');
 
 // Instantiate the contract object manager using the chain URL and the account
 // data.
-manager = contracts.newContractManagerDev(chainUrl,
-  accounts.simplechain_full_000);
+var taskManager = erisWrapper.createContract(taskManagerAbi, epmJSON['TaskManager']); // contracts.newContractManagerDev(chainUrl, accounts.simplechain_full_000);
 
-// Instantiate the contract object using the ABI and the address.
-contract = manager.newContractFactory(abi).at(address);
-
-var contractEvent = contract.ActionEvent(function (err,data) {
+var contractEvent = taskManager.ActionEvent(function (err,data) {
     if (err)
         return console.error(err);
     return console.log(data.args.actionType);
 });
 
-var cbFunc = (function (eventData) {
-    console.log(eventData.args);
-});
-
 // Create an HTTP server.
-server = http.createServer(function (request, response) {
+var server = http.createServer(function (request, response) {
   var body;
   var value;
 
@@ -41,7 +46,7 @@ server = http.createServer(function (request, response) {
       console.log("Received request to get Idi's number.");
 
       // Get the value from the contract and return it to the HTTP client.
-      contract.getBalance(function (error, result) {
+      TaskManager.getAddress(function (error, result) {
         if (error) {
           response.statusCode = 500;
           console.error(error);
@@ -68,17 +73,21 @@ server = http.createServer(function (request, response) {
         console.log("PUT value: " + value);
 
         if (value === -1) {
-            console.log("Received request to destroy contract!");
-            contract.destroy(function (err) {
-                if (err)
+            console.log("Fetch address");
+            taskManager.getAddress(1245, function (err, result) {
+                if (err) {
                     console.error(err);
+                } else {
+                    response.setHeader('Content-Type', 'application/json');
+                    response.write(JSON.stringify(result));
+                }
                 response.statusCode = err ? 500 : 200;
-                response.end();
+                response.end('\n');
             });
         } else {
             // Set the value in the contract.
             console.log("Received request to set Idi's number to " + value + '.');
-            contract.set(value, function (error) {
+            taskManager.addTask(value, function (error) {
               response.statusCode = error ? 500 : 200;
               response.end();
             });
