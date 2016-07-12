@@ -81,4 +81,8 @@
 - [Chain] Learned [Advanced Solidity Features](https://docs.erisindustries.com/tutorials/solidity/solidity-3/)
 - [Chain] Experimented with event handlers for the JSON RPC
 
-# 10/07
+# 11/07
+- [Chain] Began work on `Task.sol` and `TaskManager.sol` contracts
+- [Chain] Added eris library modules `eris-logger` & `eris-wrapper` to facilitate building of Node app architecture
+
+# 12/07
