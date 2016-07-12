@@ -2,6 +2,13 @@
     "env": {
         "node": true
     },
+    "globals": {
+        "__libs": false,
+        "__settings": false,
+        "__config": false,
+        "__contracts": false,
+        "__abi": false
+    },
     "extends": "eslint:recommended",
     "rules": {
         "accessor-pairs": "error",
