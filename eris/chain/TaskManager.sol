@@ -7,17 +7,6 @@ import "LinkedList.sol";
 
 contract TaskManager {
     DoublyLinkedList list;
-
-    mapping (bytes32 => AddressElement) tasks;
-    // array of known keys
-    bytes32[] keys;
-    uint mapSize;
-
-    struct AddressElement {
-        uint keyIdx;
-        address value;
-    }
-
     address ref;
 
     /*modifier onlyOwner() {
