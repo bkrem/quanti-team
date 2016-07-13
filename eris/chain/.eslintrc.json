@@ -3,6 +3,7 @@
         "node": true
     },
     "globals": {
+        "__js": false,
         "__libs": false,
         "__settings": false,
         "__config": false,
@@ -161,6 +162,7 @@
         "no-unneeded-ternary": "error",
         "no-unsafe-finally": "error",
         "no-unused-expressions": "error",
+        "no-unused-vars": "warn",
         "no-use-before-define": "error",
         "no-useless-call": "error",
         "no-useless-computed-key": "error",
