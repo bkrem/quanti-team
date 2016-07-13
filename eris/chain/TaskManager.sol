@@ -46,22 +46,4 @@ contract TaskManager {
         registerActionEvent("ACTION: GET SIZE");
         return list.size();
     }
-
-    /*function set(uint x) {
-    example = Account(msg.sender, x);
-    }
-
-    function getBalance() constant returns (uint retVal) {
-        registerActionEvent("getBalance");
-        return example.balance;
-    }
-
-    function getOwner() constant returns (address retVal) {
-        return example.owner;
-    }
-
-    function destroy() onlyOwner {
-        selfdestruct(example.owner);
-    }*/
-
 }
