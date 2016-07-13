@@ -84,11 +84,23 @@ var server = http.createServer(function (request, response) {
                 response.statusCode = err ? 500 : 200;
                 response.end('\n');
             });
+        } else if (value === 0) {
+            console.log("Get mapSize");
+            taskManager.getTaskListSize(function (err, result) {
+                if (err) {
+                    console.error(err);
+                } else {
+                    console.log(result);
+                    response.setHeader('Content-Type', 'application/json');
+                    response.write(JSON.stringify(result));
+                }
+                response.statusCode = err ? 500 : 200;
+                response.end('\n');
+            });
         } else {
             // Set the value in the contract.
-            console.log("Received request to set Idi's number to " + value + '.');
             taskManager.addTask(
-                eris.str2hex("1"),
+                eris.str2hex(String(value)),
                 eris.str2hex("TestTitle"),
                 eris.str2hex("Test Description"),
                 eris.str2hex("To Do"),
@@ -96,7 +108,7 @@ var server = http.createServer(function (request, response) {
                 eris.str2hex("200"),
                  function (error, result) {
                      response.statusCode = error ? 500 : 200;
-                     console.log("Added: ", result);
+                     console.log("Overwrite?: ", result);
                      response.write(JSON.stringify(result));
                      response.end();
             });

@@ -3,11 +3,11 @@
  */
 
 import "Task.sol";
-import "LinkedList.sol";
+import "SequenceList.sol";
 
 contract TaskManager {
-    DoublyLinkedList list;
     address ref;
+    SequenceList list = new SequenceList();
 
     /*modifier onlyOwner() {
         if (msg.sender != owner)
@@ -26,20 +26,25 @@ contract TaskManager {
      * Adds a new task with the specified attributes
      */
     function addTask(bytes32 _id, bytes32 _title, bytes32 _desc, bytes32 _status, bytes32 _complete, bytes32 _reward)
-        returns (bool status)
+        returns (bool isOverwrite)
     {
         Task t = new Task(_id, _title, _desc, _status, _complete, _reward);
 
         ref = msg.sender;
-        status = list.addElement(msg.sender, _id);
-        registerActionEvent(_id);
-        return status;
+        isOverwrite = list.insert(_id, t);
+        registerActionEvent("ACTION: ADD TASK");
+        return isOverwrite;
     }
 
     // TODO
-    function getTask(bytes32 _id) constant returns (bytes32 taskData) {
-        registerActionEvent(_id);
-        return list.getData(ref);
+    function getTask(bytes32 _id) constant returns (address, uint) {
+        registerActionEvent("ACTION: GET TASK");
+        return list.valueAtIndexHasNext(0);
+    }
+
+    function getTaskListSize() constant returns (uint) {
+        registerActionEvent("ACTION: GET SIZE");
+        return list.size();
     }
 
     /*function set(uint x) {
