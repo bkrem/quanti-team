@@ -26,27 +26,29 @@ var logger = require(__libs+'/eris/eris-logger');
      * DEALS
      */
 
-    // GET muliple
-    app.get('/deals', function (req, res) {
-        res.send("/deals endpoint");
+    // GET multiple
+    app.get('/tasks', function (req, res) {
+        res.send("/tasks endpoint");
     });
 
     // GET single
-    app.get('/deal/:id', function (req, res) {
-        res.send("/deals endpoint with ID: " + req.params.id);
+    app.get('/task/:id', function (req, res) {
+        res.send("/tasks endpoint with ID: " + req.params.id);
     });
 
-    // POST new deal
-    /* app.post('/deals', function (req, res) {
-        var deal = req.body;
+    // POST new task
+    app.post('/task', function (req, res) {
+        var task = req.body;
 
-        chain.addDeal(deal, function (error) {
+        res.send("POST /task endpoint");
+
+        /* chain.addDeal(deal, function (error) {
             // needs timeout!
             db.listen.once( db.events.NEW_DEAL+'_'+deal.id, function(deal) {
                 res.sendStatus(200);
             });
-        });
-    }); */
+        }); */
+    });
 
     http.createServer(app).listen(portHTTP, function () {
         console.log('Listening for HTTP requests on port ' + portHTTP + '.');
