@@ -72,12 +72,12 @@ var server = http.createServer(function (request, response) {
 
         if (value === -1) {
             console.log("Fetch address");
-            taskManager.getTask(eris.str2hex("FIXME"), function (err, result) {
+            taskManager.getTask(eris.str2hex("1"), function (err, result) {
                 if (err) {
                     console.error(err);
                 } else {
-                    console.log(eris.str2hex("FIXME"));
-                    console.log(eris.hex2str(result));
+                    console.log("Expected:", eris.hex2str(eris.str2hex("1")));
+                    console.log("Actual:", result);
                     response.setHeader('Content-Type', 'application/json');
                     response.write(JSON.stringify(result));
                 }
@@ -88,14 +88,16 @@ var server = http.createServer(function (request, response) {
             // Set the value in the contract.
             console.log("Received request to set Idi's number to " + value + '.');
             taskManager.addTask(
-                eris.str2hex("001"),
+                eris.str2hex("1"),
                 eris.str2hex("TestTitle"),
                 eris.str2hex("Test Description"),
                 eris.str2hex("To Do"),
                 eris.str2hex("0/?"),
                 eris.str2hex("200"),
-                 function (error) {
+                 function (error, result) {
                      response.statusCode = error ? 500 : 200;
+                     console.log("Added: ", result);
+                     response.write(JSON.stringify(result));
                      response.end();
             });
         }
