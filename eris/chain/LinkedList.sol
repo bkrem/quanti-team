@@ -23,8 +23,8 @@ contract DoublyLinkedList {
     return elements[key].data;
   }
 
-  function getElement(address key) private constant returns (Element){
-      return elements[key];
+  function getElement(address key) constant returns (address prev, address next, bytes32 elemData){
+      return (elements[key].previous, elements[key].next, elements[key].data);
   }
 
   function addElement(address key, bytes32 data) returns (bool){
