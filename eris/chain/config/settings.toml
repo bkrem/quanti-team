@@ -1,7 +1,7 @@
 [eris]
 
     [eris.server]
-        port_http =               # default: 3080
+        port_http =               # default: 8082
         port_https =              # default: 3443
         context_path =            # default: dcc
 
