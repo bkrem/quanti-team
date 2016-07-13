@@ -1,17 +1,18 @@
 'use strict';
 
 // Globals for directories
+global.__js = __dirname + '/js';
 global.__libs = __dirname + '/js/libs';
 global.__config = __dirname + '/config';
 global.__contracts = __dirname + '/solidity/contracts';
 global.__abi = __dirname + '/abi';
 
 var fs = require('fs');
-var http = require('http');
 var toml = require('toml-js');
 
 var logger = require(__libs+'/eris/eris-logger');
 var eris = require(__libs+'/eris/eris-wrapper');
+var server = require(__js+'/server');
 
 // Read configuration
 global.__settings = toml.parse( fs.readFileSync(__config+'/settings.toml') );
@@ -35,7 +36,7 @@ var contractEvent = taskManager.ActionEvent(function (err,data) {
 });
 
 // Create an HTTP server.
-var server = http.createServer(function (request, response) {
+ /* var server = http.createServer(function (request, response) {
   var body;
   var value;
 
@@ -127,4 +128,4 @@ var server = http.createServer(function (request, response) {
 // environment.
 server.listen(process.env.IDI_PORT, function () {
   console.log('Listening for HTTP requests on port ' + process.env.IDI_PORT + '.');
-});
+}); */
