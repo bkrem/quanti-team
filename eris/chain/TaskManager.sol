@@ -17,8 +17,8 @@ contract TaskManager {
     }*/
 
   // TODO extend with eventObject if possible; `bytes32[]`?
-    event ActionEvent(address indexed userAddr, string actionType);
-    function registerActionEvent(string actionType) {
+    event ActionEvent(address indexed userAddr, bytes32 actionType);
+    function registerActionEvent(bytes32 actionType) {
       ActionEvent(msg.sender, actionType);
     }
 
@@ -26,18 +26,19 @@ contract TaskManager {
      * Adds a new task with the specified attributes
      */
     function addTask(bytes32 _id, bytes32 _title, bytes32 _desc, bytes32 _status, bytes32 _complete, bytes32 _reward)
-        returns (bool success)
+        returns (bool status)
     {
         Task t = new Task(_id, _title, _desc, _status, _complete, _reward);
 
         ref = msg.sender;
-        list.addElement(msg.sender, _id);
-        registerActionEvent("addTask");
-        return true;
+        status = list.addElement(msg.sender, _id);
+        registerActionEvent(_id);
+        return status;
     }
 
     // TODO
     function getTask(bytes32 _id) constant returns (bytes32 taskData) {
+        registerActionEvent(_id);
         return list.getData(ref);
     }
 
