@@ -1,4 +1,7 @@
 node_modules/*
+
+# Debug logs
+logs/*
 npm-debug.log
 
 # Don't track compile-time generated data
