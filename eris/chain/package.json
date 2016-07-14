@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "binstring": "^0.2.1",
+    "body-parser": "^1.15.2",
     "eris-contracts": "^0.13.3",
     "express": "^4.14.0",
     "log4js": "^0.6.37",
