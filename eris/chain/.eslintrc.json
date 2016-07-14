@@ -3,6 +3,7 @@
         "node": true
     },
     "globals": {
+        "__root": false,
         "__js": false,
         "__libs": false,
         "__settings": false,
@@ -178,7 +179,7 @@
         "object-curly-newline": "error",
         "object-curly-spacing": "error",
         "object-property-newline": "error",
-        "object-shorthand": "error",
+        "object-shorthand": "off",
         "one-var": "off",
         "one-var-declaration-per-line": "error",
         "operator-assignment": [
