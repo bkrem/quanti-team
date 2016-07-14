@@ -3,7 +3,7 @@
 var fs = require('fs');
 var express = require('express');
 var http = require('http');
-// var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 
 var logger = require(__libs+'/eris/eris-logger');
 // var chain = require(__libs+'/hello-chain');
@@ -20,10 +20,11 @@ var logger = require(__libs+'/eris/eris-logger');
     // app.use('/'+(__settings.eris.server.contextPath || 'hello-eris'), express.static(__dirname + '/ui'));
 
     // Configure JSON parsing as default
-    // app.use(bodyParser.json());
+    app.use(bodyParser.json());
+
 
     /**
-     * DEALS
+     * ROUTING
      */
 
     // GET multiple
@@ -37,10 +38,11 @@ var logger = require(__libs+'/eris/eris-logger');
     });
 
     // POST new task
-    app.post('/task', function (req, res) {
+    app.post('/tasks', function (req, res) {
         var task = req.body;
 
-        res.send("POST /task endpoint");
+        console.log("POST task: ", task);
+        res.send("POST /task endpoint for task " + JSON.stringify(task));
 
         /* chain.addDeal(deal, function (error) {
             // needs timeout!
