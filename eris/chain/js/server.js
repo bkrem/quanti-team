@@ -5,8 +5,8 @@ var http = require('http');
 var bodyParser = require('body-parser');
 
 var logger = require(__libs+'/eris/eris-logger');
-// var chain = require(__libs+'/hello-chain');
-// var db = require(__libs+'/hello-db');
+var taskManager = require(__js+'/taskManager');
+var taskDb = require(__js+'/taskDb');
 
 (function () {
 
@@ -41,7 +41,14 @@ var logger = require(__libs+'/eris/eris-logger');
         var task = req.body;
 
         console.log("POST task: ", task);
-        res.send("POST /task endpoint for task " + JSON.stringify(task));
+        taskManager.addTask(task, function (err) {
+            if (err) {
+                console.error(err);
+                res.sendStatus(500);
+            } else {
+                res.sendStatus(200);
+            }
+        });
 
         /* chain.addDeal(deal, function (error) {
             // needs timeout!
