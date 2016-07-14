@@ -10,8 +10,10 @@ global.__abi = __dirname + '/abi';
 var fs = require('fs');
 var toml = require('toml-js');
 
+// Libraries
 var logger = require(__libs+'/eris/eris-logger');
 var eris = require(__libs+'/eris/eris-wrapper');
+
 var server = require(__js+'/server');
 
 // Read configuration
