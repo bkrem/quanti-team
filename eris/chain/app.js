@@ -20,7 +20,7 @@ var eris = require(__libs+'/eris/eris-wrapper');
 
 var server = require(__js+'/server');
 
-
+server.init();
 
 var epmJSON = require('./epm.json');
 var taskManagerAbi = JSON.parse(fs.readFileSync(__abi+'/TaskManager'));

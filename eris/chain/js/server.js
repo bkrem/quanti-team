@@ -8,7 +8,7 @@ var logger = require(__libs+'/eris/eris-logger');
 var taskManager = require(__js+'/taskManager');
 var taskDb = require(__js+'/taskDb');
 
-(function () {
+var init = function () {
 
     var log = logger.getLogger('eris.chain.server');
 
@@ -61,5 +61,6 @@ var taskDb = require(__js+'/taskDb');
     http.createServer(app).listen(portHTTP, function () {
         console.log('Listening for HTTP requests on port ' + portHTTP + '.');
     });
+};
 
-}());
+module.exports = {"init": init};
