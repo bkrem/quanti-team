@@ -19,14 +19,14 @@ var eris = require(__libs+'/eris/eris-wrapper');
 
     var log = logger.getLogger('eris.chain.taskManager');
 
-    /* var events = {NEW_MESSAGE: "newMessage"};
+    var events = {NEW_MESSAGE: "newMessage"};
 
     // Set up event emitter
     function ChainEventEmitter () {
         EventEmitter.call(this);
     }
     util.inherits(ChainEventEmitter, EventEmitter);
-    var chainEvents = new ChainEventEmitter(); */
+    var chainEvents = new ChainEventEmitter();
 
     // ##############
     // The following part depends on local files that are generated during contract deployment via EPM
@@ -43,17 +43,17 @@ var eris = require(__libs+'/eris/eris-wrapper');
     var taskContract = erisWrapper.createContract(taskAbi, epmJSON['Task']);
 
     /* TODO Event Registration */
-    /* dealManager.NewDeal(
+    taskManager.ActionEvent(
         function (error, eventSub) {
-            if(error) { throw error; }
-            //eventSubNew = eventSub; // ignoring this for now
+            if (error)
+                throw error;
         },
         function (error, event) {
-            if(event) {
-                chainEvents.emit(events.NEW_DEAL, event.args.contractAddress, eris.hex2str(event.args.id),
-                    eris.hex2str(event.args.buyer), eris.hex2str(event.args.seller), event.args.amount);
+            if (event) {
+                // console.log("***EVENT***\n", eris.hex2str(event.args.actionType));
+                chainEvents.emit(events.NEW_DEAL, eris.hex2str(event.args.actionType));
             }
-        }); */
+        });
 
     /**
      * The init function can be used to perform further configuration on contracts
@@ -78,7 +78,6 @@ var eris = require(__libs+'/eris/eris-wrapper');
             eris.str2hex("0/?"),
             eris.str2hex("200"),
              function (error, result) {
-                 console.log("Added new task: " + result);
                  log.debug("Added new task: " + result);
                  callback(error);
         });
