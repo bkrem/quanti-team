@@ -23,6 +23,10 @@ eval $(docker-machine env)
 host=$(docker-machine ip)
 echo "'host' set to docker-machine IP: ${host}"
 
+# Get the IP address for the local compiler
+compiler_addr=$(eris services inspect compilers NetworkSettings.IPAddress)
+echo "compiler_addr: ${compiler_addr}"
+
 # Set the port for the node app to listen to for requests by querying the eris service for the port
 export IDI_PORT=$( eris services ports idi|cut -d ":" -f 2 )
 echo "IDI_PORT set to ${IDI_PORT}"
