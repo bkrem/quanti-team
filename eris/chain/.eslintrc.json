@@ -79,7 +79,7 @@
         "max-statements-per-line": "error",
         "new-parens": "error",
         "newline-after-var": [
-            "error",
+            "warn",
             "always"
         ],
         "newline-before-return": "off",
