@@ -12,6 +12,11 @@
         "__abi": false
     },
     "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 5,
+        "sourceType": "module",
+        "impliedStrict": "true"
+    },
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-spacing": "error",
@@ -46,7 +51,7 @@
             "error",
             "never"
         ],
-        "func-style": "error",
+        "func-style": "warn",
         "generator-star-spacing": "error",
         "global-require": "error",
         "guard-for-in": "error",
@@ -190,11 +195,10 @@
         "padded-blocks": "off",
         "prefer-arrow-callback": "off",
         "prefer-const": "error",
-        "prefer-reflect": "error",
         "prefer-rest-params": "error",
         "prefer-spread": "error",
         "prefer-template": "off",
-        "quote-props": "error",
+        "quote-props": ["error", "as-needed"],
         "quotes": "off",
         "radix": "error",
         "require-jsdoc": "error",
