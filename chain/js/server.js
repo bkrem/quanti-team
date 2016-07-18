@@ -26,19 +26,29 @@ var init = function () {
 
     // GET multiple
     app.get('/tasks', function (req, res) {
-        res.send("/tasks endpoint");
+        taskManager.getTaskListSize(function (size) {
+            res.send("TaskListSize:" + size);
+        });
     });
 
     // GET single
     app.get('/task/:id', function (req, res) {
-        res.send("/tasks endpoint with ID: " + req.params.id);
+        taskManager.getTaskAtIndex(req.params.id, function (data) {
+            res.send(data);
+        });
+    });
+
+    app.get('/keyatidx/:idx', function (req, res) {
+        taskManager.getTaskKeyAtIndex(req.params.idx, function (data) {
+            res.send(data);
+        });
     });
 
     // POST new task
     app.post('/tasks', function (req, res) {
         var task = req.body;
 
-        console.log("POST task: ", task);
+        log.debug("POST task: ", task);
         taskManager.addTask(task, function (err) {
             if (err) {
                 console.error(err);
@@ -61,4 +71,4 @@ var init = function () {
     });
 };
 
-module.exports = {"init": init};
+module.exports = {init: init};
