@@ -5,9 +5,6 @@
 
  /* eslint */
 
-'use strict';
-
-
 var fs = require('fs');
 var EventEmitter = require('events');
 var util = require('util');

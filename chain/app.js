@@ -1,5 +1,3 @@
-'use strict';
-
 // Globals for directories
 global.__root = __dirname;
 global.__js = __dirname + '/js';
