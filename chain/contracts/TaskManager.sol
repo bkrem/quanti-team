@@ -32,18 +32,23 @@ contract TaskManager {
 
         ref = msg.sender;
         isOverwrite = list.insert(_id, t);
-        registerActionEvent("ACTION: ADD TASK");
+        registerActionEvent("ADD TASK");
         return isOverwrite;
     }
 
     // TODO
-    function getTask(bytes32 _id) constant returns (address, uint) {
-        registerActionEvent("ACTION: GET TASK");
+    function getTaskAtIndex(uint _idx) constant returns (address, uint) {
+        registerActionEvent("GET TASK");
         return list.valueAtIndexHasNext(0);
     }
 
     function getTaskListSize() constant returns (uint) {
-        registerActionEvent("ACTION: GET SIZE");
+        registerActionEvent("GET SIZE");
         return list.size();
+
+    }
+
+    function getTaskKeyAtIndex(uint _idx) constant returns (bytes32) {
+        return list.keyAtIndex(_idx);
     }
 }
