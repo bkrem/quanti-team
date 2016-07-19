@@ -10,7 +10,7 @@ describe("Task Manager", function () {
     describe("addTask", function () {
         it("adds the given task to the chain and returns true if a record was overwritten, false otherwise", function(done) {
             var testTask = {
-                id: eris.str2hex("test1"),
+                id: eris.str2hex("test0"),
                 title: eris.str2hex("TestTitle"),
                 desc: eris.str2hex("Test Description"),
                 status: eris.str2hex("To Do"),
@@ -26,6 +26,28 @@ describe("Task Manager", function () {
         });
     });
 
+    describe("getTaskAtIndex", function () {
+        it("returns the address of the task at the passed index and its `nextIndex` indicator", function (done) {
+            taskManager.getTaskAtIndex(0, function (error, data) {
+                assert.equal(error, null);
+                assert.notEqual(data[0], null, "returned address should never be null");
+                assert.notEqual(data[1], null, "returned nextIdx should never be null");
+                done();
+            })
+        })
+    })
+
+     describe("getAllTasks", function () {
+        it("retrieves all tasks from the given start index onwards", function (done) {
+            var startIdx = 0;
+            taskManager.getAllTasks(startIdx, function (addresses) {
+                // assert.equal(error, null);
+                assert.notEqual(addresses, null, "`addresses` array should not be null");
+                done();
+            });
+        })
+    });
+
     describe("getTaskListSize", function () {
         it("returns the current total size of the task list map", function (done) {
             taskManager.getTaskListSize(function (error, size) {
@@ -34,7 +56,7 @@ describe("Task Manager", function () {
                 done();
             })
         })
-    })
+    });
 
 
 });
