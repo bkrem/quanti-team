@@ -167,7 +167,7 @@
         "no-unmodified-loop-condition": "error",
         "no-unneeded-ternary": "error",
         "no-unsafe-finally": "error",
-        "no-unused-expressions": "error",
+        "no-unused-expressions": ["error", {"allowTernary": true}],
         "no-unused-vars": "warn",
         "no-use-before-define": "error",
         "no-useless-call": "error",
