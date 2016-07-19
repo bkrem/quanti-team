@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "scripts": {
     "start": "node app.js",
+    "test": "./node_modules/.bin/mocha --reporter spec",
     "stop": "eris services stop",
     "servicelog": "eris services logs idi -f",
     "chainlog": "eris chains logs simplechain -f",
     "compile": "eris pkgs do --compiler=https://compilers.eris.industries:10113 --chain simplechain --address",
-    "rebuild": "docker build -t idiservice .; eris services rm --force idi; eris services start idi; eris services logs idi -f"
+    "build": "docker build -t idiservice .; eris services rm --force idi; eris services start idi; eris services logs idi -f"
   },
   "dependencies": {
     "binstring": "^0.2.1",
