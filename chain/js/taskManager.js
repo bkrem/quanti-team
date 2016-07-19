@@ -78,17 +78,30 @@ var eris = require(__libs+'/eris/eris-wrapper');
         });
     }
 
+    /* TODO */
+    function getAllTasks() {
+        var idx = 0;
+
+        _collectTaskAddresses(idx, function (error, addresses) {
+            if (error)
+                throw error;
+            return addresses;
+        });
+    }
+
 
     /**
      * getTaskAtIndex - description
      *
-     * @param  {type} id       description
+     * @param  {type} idx       description
      * @param  {type} callback description
      * @return {type}          description
      */
-    function getTaskAtIndex (id, callback) {
-        taskManagerContract.getTaskAtIndex(eris.str2hex(id), function (error, data) {
-            error ? console.error(error) : log.debug("getTaskAtIndex " + id, data);
+    function getTaskAtIndex (idx, callback) {
+        taskManagerContract.getTaskAtIndex(idx, function (error, data) {
+            error ? console.error(error) : log.debug("getTaskAtIndex " + idx, data);
+            // Extract `nextIdx` from the encasing object + array
+            data[1] = data[1]["c"][0];
             callback(error, data);
         });
     }
@@ -122,8 +135,44 @@ var eris = require(__libs+'/eris/eris-wrapper');
         });
     }
 
+
+    // ################################
+    // PRIVATE FUNCTIONS
+    // ################################
+
+    function _collectTaskAddresses (startIdx, callback) {
+        var addresses = [];
+        var idx = 0;
+
+        taskManagerContract.getTaskAtIndex(startIdx, function (error, result) {
+            log.debug("Current addr: " + result[0]);
+            log.debug("Current startIdx: " + startIdx);
+
+            if (error) log.debug(error);
+
+            // If address is not a 0x0 nullPointer => push to array
+            if (result[0] !== 0)
+                addresses.push(result[0]);
+
+            // Reassign `startIdx` to next index
+            nextIdx = result[1];
+            // Recurse if new startIdx is valid...
+            if (nextIdx > 0) {
+                startIdx++;
+                _collectTaskAddresses(startIdx, callback);
+                // ...or hand over to start collecting data
+            } else {
+                log.info('Found '+addresses.length+' task addresses.');
+                // createDealObjects(addresses)
+                log.info(addresses);
+                return callback(error, addresses);
+            }
+        });
+    }
+
     module.exports = {
         addTask: addTask,
+        getAllTasks: getAllTasks,
         getTaskAtIndex: getTaskAtIndex,
         getTaskListSize: getTaskListSize,
         getTaskKeyAtIndex: getTaskKeyAtIndex
