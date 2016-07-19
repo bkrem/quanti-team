@@ -37,7 +37,7 @@ contract TaskManager {
     // TODO
     function getTaskAtIndex(uint _idx) constant returns (address, uint) {
         registerActionEvent("GET TASK");
-        return list.valueAtIndexHasNext(0);
+        return list.valueAtIndexHasNext(_idx);
     }
 
     function getTaskListSize() constant returns (uint) {
