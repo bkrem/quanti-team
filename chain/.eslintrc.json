@@ -51,7 +51,7 @@
             "error",
             "never"
         ],
-        "func-style": "warn",
+        "func-style": ["warn", "declaration"],
         "generator-star-spacing": "error",
         "global-require": "error",
         "guard-for-in": "error",
