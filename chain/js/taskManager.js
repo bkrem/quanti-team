@@ -3,8 +3,6 @@
  * SOURCE: https://github.com/eris-ltd/hello-eris/blob/master/js/libs/hello-chain.js
  */
 
- /* eslint */
-
 var fs = require('fs');
 var EventEmitter = require('events');
 var util = require('util');
@@ -58,6 +56,7 @@ var eris = require(__libs+'/eris/eris-wrapper');
             }
         });
 
+
     /**
      * addTask - Adds a single task to the chain
      *
@@ -74,8 +73,7 @@ var eris = require(__libs+'/eris/eris-wrapper');
             task.complete,
             task.reward,
              function (error, result) {
-                 if (error) console.error(error);
-                 log.debug("Overwrite?: " + result);
+                 error ? console.error(error) : log.debug("Overwrite?: " + result);
                  callback(error, result);
         });
     }
@@ -90,8 +88,8 @@ var eris = require(__libs+'/eris/eris-wrapper');
      */
     function getTaskAtIndex (id, callback) {
         taskManagerContract.getTaskAtIndex(eris.str2hex(id), function (error, data) {
-            log.debug(data);
-            return error ? callback(error) : callback(data);
+            error ? console.error(error) : log.debug("getTaskAtIndex " + id, data);
+            callback(error, data);
         });
     }
 
@@ -104,8 +102,8 @@ var eris = require(__libs+'/eris/eris-wrapper');
      */
     function getTaskListSize (callback) {
         taskManagerContract.getTaskListSize(function (error, size) {
-            log.debug("TaskListSize: " + size);
-            return error ? callback(error) : callback(size);
+            error ? console.error(error) : log.debug("getTaskListSize: " + size);
+            callback(error, size);
         });
     }
 
@@ -119,8 +117,8 @@ var eris = require(__libs+'/eris/eris-wrapper');
      */
     function getTaskKeyAtIndex (idx, callback) {
         taskManagerContract.getTaskKeyAtIndex(idx, function (error, key) {
-            log.debug(eris.hex2str(key));
-            return error ? callback(error) : callback(key);
+            error ? console.error(error) : log.debug("getTaskKeyAtIndex " + idx, eris.hex2str(key));
+            callback(error, key);
         });
     }
 
