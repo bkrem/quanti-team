@@ -59,44 +59,70 @@ var eris = require(__libs+'/eris/eris-wrapper');
         });
 
     /**
-     * Adds a single task to the chain
-     * @param task
-     * @param callback
+     * addTask - Adds a single task to the chain
+     *
+     * @param {Object} task - The task to be anchored in the chain
+     * @param {func} callback - Passes `result` up the call chain
+     * @returns {void}
      */
-    var addTask = function (task, callback) {
+    function addTask (task, callback) {
         taskManagerContract.addTask(
-            eris.str2hex("003"),
-            eris.str2hex("TestTitle"),
-            eris.str2hex("Test Description"),
-            eris.str2hex("To Do"),
-            eris.str2hex("0/?"),
-            eris.str2hex("200"),
+            task.id,
+            task.title,
+            task.desc,
+            task.status,
+            task.complete,
+            task.reward,
              function (error, result) {
+                 if (error) console.error(error);
                  log.debug("Overwrite?: " + result);
-                 callback(error);
+                 callback(error, result);
         });
-    };
+    }
 
-    var getTaskAtIndex = function (id, callback) {
+
+    /**
+     * getTaskAtIndex - description
+     *
+     * @param  {type} id       description
+     * @param  {type} callback description
+     * @return {type}          description
+     */
+    function getTaskAtIndex (id, callback) {
         taskManagerContract.getTaskAtIndex(eris.str2hex(id), function (error, data) {
             log.debug(data);
             return error ? callback(error) : callback(data);
         });
-    };
+    }
 
-    var getTaskListSize = function (callback) {
+
+    /**
+     * getTaskListSize - description
+     *
+     * @param  {type} callback description
+     * @return {type}          description
+     */
+    function getTaskListSize (callback) {
         taskManagerContract.getTaskListSize(function (error, size) {
             log.debug("TaskListSize: " + size);
             return error ? callback(error) : callback(size);
         });
-    };
+    }
 
-     var getTaskKeyAtIndex = function (idx, callback) {
+
+    /**
+     * getTaskKeyAtIndex - description
+     *
+     * @param  {type} idx      description
+     * @param  {type} callback description
+     * @return {type}          description
+     */
+    function getTaskKeyAtIndex (idx, callback) {
         taskManagerContract.getTaskKeyAtIndex(idx, function (error, key) {
             log.debug(eris.hex2str(key));
             return error ? callback(error) : callback(key);
         });
-    };
+    }
 
     module.exports = {
         addTask: addTask,
