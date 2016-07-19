@@ -79,13 +79,14 @@ var eris = require(__libs+'/eris/eris-wrapper');
     }
 
     /* TODO */
-    function getAllTasks() {
+    function getAllTasks(callback) {
         var idx = 0;
+        var addresses = [];
 
-        _collectTaskAddresses(idx, function (error, addresses) {
+        _collectTaskAddresses(idx, addresses, function (error, addresses) {
             if (error)
                 throw error;
-            return addresses;
+            return callback(addresses);
         });
     }
 
@@ -140,9 +141,7 @@ var eris = require(__libs+'/eris/eris-wrapper');
     // PRIVATE FUNCTIONS
     // ################################
 
-    function _collectTaskAddresses (startIdx, callback) {
-        var addresses = [];
-        var idx = 0;
+    function _collectTaskAddresses (startIdx, addresses, callback) {
 
         taskManagerContract.getTaskAtIndex(startIdx, function (error, result) {
             log.debug("Current addr: " + result[0]);
@@ -155,11 +154,12 @@ var eris = require(__libs+'/eris/eris-wrapper');
                 addresses.push(result[0]);
 
             // Reassign `startIdx` to next index
-            nextIdx = result[1];
+            var nextIdx = result[1]['c'][0];
+            log.debug("nextIdx: ", nextIdx);
             // Recurse if new startIdx is valid...
             if (nextIdx > 0) {
                 startIdx++;
-                _collectTaskAddresses(startIdx, callback);
+                _collectTaskAddresses(startIdx, addresses, callback);
                 // ...or hand over to start collecting data
             } else {
                 log.info('Found '+addresses.length+' task addresses.');
