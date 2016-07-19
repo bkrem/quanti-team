@@ -15,7 +15,6 @@ var eris = require(__libs+'/eris/eris-wrapper');
     var log = logger.getLogger('eris.chain.taskManager');
 
     var EVENTS = {
-        NEW_MESSAGE: "newMessage",
         ADD_TASK: "ADD_TASK"
     };
 
@@ -56,13 +55,50 @@ var eris = require(__libs+'/eris/eris-wrapper');
             }
         });
 
+        /**
+         * _collectTaskAddresses - description
+         *
+         * @param  {int} startIdx  description
+         * @param  {Array} addresses description
+         * @param  {func} callback  description
+         * @return {type}           description
+         */
+        function _collectTaskAddresses (startIdx, addresses, callback) {
+
+            taskManagerContract.getTaskAtIndex(startIdx, function (error, result) {
+                log.debug("Current addr: " + result[0]);
+                log.debug("Current startIdx: " + startIdx);
+
+                if (error) log.debug(error);
+
+                // If address is not a 0x0 nullPointer => push to array
+                if (result[0] !== 0)
+                    addresses.push(result[0]);
+
+                // Reassign `startIdx` to next index
+                var nextIdx = result[1]['c'][0];
+                log.debug("nextIdx: ", nextIdx);
+                // Recurse if new startIdx is valid...
+                if (nextIdx > 0) {
+                    startIdx++;
+                    _collectTaskAddresses(startIdx, addresses, callback);
+                    // ...or hand over to start collecting data
+                } else {
+                    log.info('Found '+addresses.length+' task addresses.');
+                    // createDealObjects(addresses)
+                    log.info(addresses);
+                    return callback(error, addresses);
+                }
+            });
+        }
+
 
     /**
      * addTask - Adds a single task to the chain
      *
      * @param {Object} task - The task to be anchored in the chain
      * @param {func} callback - Passes `result` up the call chain
-     * @returns {void}
+     * @return {void}
      */
     function addTask (task, callback) {
         taskManagerContract.addTask(
@@ -78,8 +114,15 @@ var eris = require(__libs+'/eris/eris-wrapper');
         });
     }
 
-    /* TODO */
-    function getAllTasks(callback) {
+
+    /**
+     * getAllTasks - Retrieves ALL elements in the `TaskManager` contract's
+     * map of `Task` contracts
+     *
+     * @param  {func} callback description
+     * @return {@callback}     description
+     */
+    function getAllTasks (callback) {
         var idx = 0;
         var addresses = [];
 
@@ -133,40 +176,6 @@ var eris = require(__libs+'/eris/eris-wrapper');
         taskManagerContract.getTaskKeyAtIndex(idx, function (error, key) {
             error ? console.error(error) : log.debug("getTaskKeyAtIndex " + idx, eris.hex2str(key));
             callback(error, key);
-        });
-    }
-
-
-    // ################################
-    // PRIVATE FUNCTIONS
-    // ################################
-
-    function _collectTaskAddresses (startIdx, addresses, callback) {
-
-        taskManagerContract.getTaskAtIndex(startIdx, function (error, result) {
-            log.debug("Current addr: " + result[0]);
-            log.debug("Current startIdx: " + startIdx);
-
-            if (error) log.debug(error);
-
-            // If address is not a 0x0 nullPointer => push to array
-            if (result[0] !== 0)
-                addresses.push(result[0]);
-
-            // Reassign `startIdx` to next index
-            var nextIdx = result[1]['c'][0];
-            log.debug("nextIdx: ", nextIdx);
-            // Recurse if new startIdx is valid...
-            if (nextIdx > 0) {
-                startIdx++;
-                _collectTaskAddresses(startIdx, addresses, callback);
-                // ...or hand over to start collecting data
-            } else {
-                log.info('Found '+addresses.length+' task addresses.');
-                // createDealObjects(addresses)
-                log.info(addresses);
-                return callback(error, addresses);
-            }
         });
     }
 
