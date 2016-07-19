@@ -7,10 +7,10 @@ var taskManager = require('../js/taskManager');
 
 describe("Task Manager", function () {
 
-    describe("Add Task", function () {
+    describe("addTask", function () {
         it("adds the given task to the chain and returns true if a record was overwritten, false otherwise", function(done) {
             var testTask = {
-                id: eris.str2hex("test"),
+                id: eris.str2hex("test1"),
                 title: eris.str2hex("TestTitle"),
                 desc: eris.str2hex("Test Description"),
                 status: eris.str2hex("To Do"),
@@ -25,6 +25,16 @@ describe("Task Manager", function () {
             });
         });
     });
+
+    describe("getTaskListSize", function () {
+        it("returns the current total size of the task list map", function (done) {
+            taskManager.getTaskListSize(function (error, size) {
+                assert.equal(error, null);
+                assert.notEqual(size, null, "`size` should return 0 or greater");
+                done();
+            })
+        })
+    })
 
 
 });
