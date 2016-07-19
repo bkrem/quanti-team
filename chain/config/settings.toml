@@ -6,6 +6,6 @@
         context_path =            # default: dcc
 
     [eris.chain]
-        host = "simplechain"
+        host = "192.168.99.100"
         port = 1337
         devAccount = "eris_full_000"     # for testing only! The account to use from test/chain-config/accounts.json
