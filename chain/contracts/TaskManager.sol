@@ -6,7 +6,6 @@ import "Task.sol";
 import "SequenceList.sol";
 
 contract TaskManager {
-    address ref;
     SequenceList list = new SequenceList();
 
     /*modifier onlyOwner() {
@@ -30,7 +29,6 @@ contract TaskManager {
     {
         Task t = new Task(_id, _title, _desc, _status, _complete, _reward);
 
-        ref = msg.sender;
         isOverwrite = list.insert(_id, t);
         registerActionEvent("ADD TASK");
         return isOverwrite;
