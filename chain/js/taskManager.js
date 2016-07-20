@@ -9,6 +9,7 @@ var util = require('util');
 
 var logger = require(__libs+'/eris/eris-logger');
 var eris = require(__libs+'/eris/eris-wrapper');
+var chainUtils = require(__js+'/util/chainUtils');
 
 (function () {
 
@@ -76,7 +77,7 @@ var eris = require(__libs+'/eris/eris-wrapper');
                     addresses.push(result[0]);
 
                 // Reassign `startIdx` to next index
-                var nextIdx = result[1]['c'][0];
+                var nextIdx = chainUtils.extractInt(result, 1);
                 log.debug("nextIdx: ", nextIdx);
                 // Recurse if new startIdx is valid...
                 if (nextIdx > 0) {
@@ -145,7 +146,7 @@ var eris = require(__libs+'/eris/eris-wrapper');
         taskManagerContract.getTaskAtIndex(idx, function (error, data) {
             error ? console.error(error) : log.debug("getTaskAtIndex " + idx, data);
             // Extract `nextIdx` from the encasing object + array
-            data[1] = data[1]["c"][0];
+            data[1] = chainUtils.extractInt(data, 1);
             callback(error, data);
         });
     }
