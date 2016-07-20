@@ -3,6 +3,7 @@
  * SOURCE: https://github.com/eris-ltd/hello-eris/blob/master/js/libs/eris-wrapper.js
  */
 
+/* eslint-disable */
 
 var binstring = require('binstring');
 var erisC = require('eris-contracts');
