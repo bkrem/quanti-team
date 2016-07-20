@@ -51,7 +51,7 @@ describe("Task Manager", function () {
        it("retrieves all tasks from the given start index onwards", function (done) {
            taskManager.getAllTasks(function (addresses) {
                assert.isNotNull(addresses, "`addresses` array should not be null");
-               assert.lengthOf(addresses, 1, "There should be at least 1 element from running the `addTask` test");
+               assert.isAtLeast(addresses.length, 1, "There should be at least 1 element from running the `addTask` test");
                done();
            });
        })
