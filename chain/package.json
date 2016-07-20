@@ -11,6 +11,7 @@
     "build": "docker build -t idiservice .; eris services rm --force idi; eris services start idi; eris services logs idi -f"
   },
   "dependencies": {
+    "async": "^2.0.0",
     "binstring": "^0.2.1",
     "body-parser": "^1.15.2",
     "eris-contracts": "^0.13.3",
