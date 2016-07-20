@@ -6,7 +6,7 @@
 var chainUtils = {
 
     /**
-     * extractInt - description    
+     * extractInt - Extracts an integer from a `uint`/`int` Solidity type value
      *
      * @param  {type} bcObject description
      * @param  {type} index    description
