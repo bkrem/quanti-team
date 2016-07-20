@@ -18,7 +18,7 @@ describe("Task Manager", function () {
                 reward: eris.str2hex("200")
             };
             taskManager.addTask(testTask, function (error, result) {
-                assert.equal(error, null);
+                assert.isNull(error);
                 // TODO reactivate this and the inverse when deletion is implemented
                 // assert.equal(result, false, "no overwrite on first pass => false");
                 done();
@@ -29,7 +29,7 @@ describe("Task Manager", function () {
     describe("getTaskAtIndex", function () {
         it("returns the address of the task at the passed index and its `nextIndex` indicator", function (done) {
             taskManager.getTaskAtIndex(0, function (error, data) {
-                assert.equal(error, null);
+                assert.isNull(error);
                 assert.notEqual(data[0], null, "returned address should never be null");
                 assert.notEqual(data[1], null, "returned nextIdx should never be null");
                 done();
@@ -40,7 +40,7 @@ describe("Task Manager", function () {
     describe("getTaskListSize", function () {
         it("returns the current total size of the task list map", function (done) {
             taskManager.getTaskListSize(function (error, size) {
-                assert.equal(error, null);
+                assert.isNull(error);
                 assert.notEqual(size, null, "`size` should return 0 or greater");
                 done();
             })
@@ -50,8 +50,8 @@ describe("Task Manager", function () {
     describe("getAllTasks", function () {
        it("retrieves all tasks from the given start index onwards", function (done) {
            taskManager.getAllTasks(function (addresses) {
-               // assert.equal(error, null);
-               assert.notEqual(addresses, null, "`addresses` array should not be null");
+               assert.isNotNull(addresses, "`addresses` array should not be null");
+               assert.lengthOf(addresses, 1, "There should be at least 1 element from running the `addTask` test");
                done();
            });
        })
