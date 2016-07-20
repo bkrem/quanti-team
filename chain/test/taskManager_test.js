@@ -5,6 +5,8 @@ var app = require('../app');
 var eris = require(__libs+'/eris/eris-wrapper');
 var taskManager = require('../js/taskManager');
 
+var refAddr;
+
 describe("Task Manager", function () {
 
     describe("addTask", function () {
@@ -52,9 +54,23 @@ describe("Task Manager", function () {
            taskManager.getAllTasks(function (addresses) {
                assert.isNotNull(addresses, "`addresses` array should not be null");
                assert.isAtLeast(addresses.length, 1, "There should be at least 1 element from running the `addTask` test");
+               refAddr = addresses[0];
                done();
            });
        })
+    });
+
+    describe("getTaskAtAddress", function () {
+        it("retrieves the task contract registered at the passed address and transforms it into a task object", function (done) {
+            var taskType = [ 'address', 'status', 'reward', 'title', 'complete', 'desc', 'id' ];
+
+            taskManager.getTaskAtAddress(refAddr, function (err, task) {
+                assert.isNull(err);
+                assert.notDeepEqual(task, {}, "returned task object should not be empty");
+                assert.sameMembers(Object.keys(task), taskType, "returned task object's keys should adhere to Task type");
+                done();
+            });
+        });
     });
 
 });
