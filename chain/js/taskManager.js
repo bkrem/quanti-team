@@ -126,7 +126,7 @@ var eris = require(__libs+'/eris/eris-wrapper');
         var idx = 0;
         var addresses = [];
 
-        _collectTaskAddresses(idx, addresses, function (error, addresses) {
+        _collectTaskAddresses(idx, addresses, function (error) {
             if (error)
                 throw error;
             return callback(addresses);
