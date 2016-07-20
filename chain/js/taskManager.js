@@ -6,6 +6,7 @@
 var fs = require('fs');
 var EventEmitter = require('events');
 var util = require('util');
+var async = require('async');
 
 var logger = require(__libs+'/eris/eris-logger');
 var eris = require(__libs+'/eris/eris-wrapper');
@@ -32,13 +33,13 @@ var chainUtils = require(__js+'/util/chainUtils');
     var epmJSON = require(__root+'/epm.json');
     var accounts = require(__root+'/accounts.json');
     var taskManagerAbi = JSON.parse(fs.readFileSync(__abi+'/TaskManager'));
-    // var taskAbi = JSON.parse(fs.readFileSync(__abi+'/Task'));
+    var taskAbi = JSON.parse(fs.readFileSync(__abi+'/Task'));
 
     // Instantiate connection
     var erisWrapper = new eris.NewWrapper(__settings.eris.chain.host, __settings.eris.chain.port, accounts.simplechain_full_000);
     // Create contract objects
     var taskManagerContract = erisWrapper.createContract(taskManagerAbi, epmJSON['TaskManager']);
-    // var taskContract = erisWrapper.createContract(taskAbi, epmJSON['Task']);
+    var taskContract = erisWrapper.createContract(taskAbi, epmJSON['Task']);
 
     taskManagerContract.ActionEvent(
         function (error, eventSub) {
@@ -56,43 +57,87 @@ var chainUtils = require(__js+'/util/chainUtils');
             }
         });
 
-        /**
-         * _collectTaskAddresses - description
-         *
-         * @param  {int} startIdx  description
-         * @param  {Array} addresses description
-         * @param  {func} callback  description
-         * @return {type}           description
-         */
-        function _collectTaskAddresses (startIdx, addresses, callback) {
+    /**
+     * _collectTaskAddresses - description
+     *
+     * @param  {int} startIdx  description
+     * @param  {Array} addresses description
+     * @param  {func} callback  description
+     * @return {type}           description
+     */
+    function _collectTaskAddresses (startIdx, addresses, callback) {
 
-            taskManagerContract.getTaskAtIndex(startIdx, function (error, result) {
-                log.debug("Current addr: " + result[0]);
-                log.debug("Current startIdx: " + startIdx);
+        taskManagerContract.getTaskAtIndex(startIdx, function (error, result) {
+            log.debug("Current addr: " + result[0]);
+            log.debug("Current startIdx: " + startIdx);
 
-                if (error) log.debug(error);
+            if (error) log.debug(error);
 
-                // If address is not a 0x0 nullPointer => push to array
-                if (result[0] !== 0)
-                    addresses.push(result[0]);
+            // If address is not a 0x0 nullPointer => push to array
+            if (result[0] !== 0)
+                addresses.push(result[0]);
 
-                // Reassign `startIdx` to next index
-                var nextIdx = chainUtils.extractInt(result, 1);
-                log.debug("nextIdx: ", nextIdx);
-                // Recurse if new startIdx is valid...
-                if (nextIdx > 0) {
-                    startIdx++;
-                    _collectTaskAddresses(startIdx, addresses, callback);
-                    // ...or hand over to start collecting data
-                } else {
-                    log.info('Found '+addresses.length+' task addresses.');
-                    // createDealObjects(addresses)
-                    log.info(addresses);
-                    return callback(error, addresses);
-                }
-            });
-        }
+            // Reassign `startIdx` to next index
+            var nextIdx = chainUtils.extractInt(result, 1);
+            log.debug("nextIdx: ", nextIdx);
+            // Recurse if new startIdx is valid...
+            if (nextIdx > 0) {
+                startIdx++;
+                _collectTaskAddresses(startIdx, addresses, callback);
+                // ...or hand over to start collecting data
+            } else {
+                log.info('Found '+addresses.length+' task addresses.');
+                // createDealObjects(addresses)
+                log.info(addresses);
+                return callback(error, addresses);
+            }
+        });
+    }
 
+
+    /**
+     * _createTaskFromContract - Initializes a task object from the given contract.
+     *
+     * @param  {type} contract - A Solidity contract passed down from the public accessor function.
+     * @param  {func} callback - A callback passed down from the public accessor function.
+     * @return {callback} - Returns an error & empty object if `err` is not `null`,
+     *                      returns `null` & a task object otherwise.
+     */
+    function _createTaskFromContract (contract, callback) {
+        var task = {};
+        // Get all keys purely related to a task object by filtering out the `abi` key
+        // var taskKeys = Object.keys(contract).filter(function (key) { return key !== 'abi'; });
+
+        /* TODO potential refactor to iterate all keys automatically with `taskKeys` */
+        async.parallel({
+            id: function (callback) {
+                    contract.id( eris.convertibleCallback(callback, eris.hex2str) );
+                },
+            title: function (callback) {
+                contract.title( eris.convertibleCallback(callback, eris.hex2str) );
+            },
+            desc: function (callback) {
+                contract.desc( eris.convertibleCallback(callback, eris.hex2str) );
+            },
+            status: function (callback) {
+                contract.status( eris.convertibleCallback(callback, eris.hex2str) );
+            },
+            complete: function (callback) {
+                contract.complete( eris.convertibleCallback(callback, eris.hex2str) );
+            },
+            reward: function (callback) {
+                contract.reward( eris.convertibleCallback(callback, eris.hex2str) );
+            }
+        },
+        function (err, results) {
+            if (err)
+                return callback(err, task);
+            task = results;
+            task.address = contract.address;
+            log.debug("Compiled task object:\n", task);
+            return callback(null, task);
+        });
+    }
 
     /**
      * addTask - Adds a single task to the chain
@@ -153,6 +198,23 @@ var chainUtils = require(__js+'/util/chainUtils');
 
 
     /**
+     * getTaskAtAddress - description
+     *
+     * @param  {type} address  description
+     * @param  {type} callback description
+     * @return {type}          description
+     */
+    function getTaskAtAddress (address, callback) {
+        log.debug("getTaskAtAddress: Passed address:\n" + address);
+        taskContract.at(address, function (error, contract) {
+            if (error)
+                throw error;
+            _createTaskFromContract(contract, callback);
+        });
+    }
+
+
+    /**
      * getTaskListSize - description
      *
      * @param  {type} callback description
@@ -184,6 +246,7 @@ var chainUtils = require(__js+'/util/chainUtils');
         addTask: addTask,
         getAllTasks: getAllTasks,
         getTaskAtIndex: getTaskAtIndex,
+        getTaskAtAddress: getTaskAtAddress,
         getTaskListSize: getTaskListSize,
         getTaskKeyAtIndex: getTaskKeyAtIndex
     };
