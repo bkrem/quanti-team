@@ -95,13 +95,25 @@
 # 14/07
 - [Server] Implemented the Express `server.js` module
 - [Server] Added some endpoints to test with in `server.js`
-- [Server] Added `taskManager` and `taskDb` modules to begin design pattern implementation _(which pattern?)_
+- [Server] Added `taskManager` and `taskDb` modules to begin design pattern implementation **(which pattern?)**
 
 # 16/07
-- Added a test implementation of the Node `EventEmitter`
+- [Server] Added a test implementation of the Node `EventEmitter`
 
 # 17/07
 - **!Issue!** Eris online compiler broke --> took forever to figure out that port `10113` was viable option because no goddamn documentation of it
 - **!Issue!** Eris local compiler Docker image did not do anything basically, TOTAL FAIL
 
 # 18/07
+- [Server] Expanded methods for `taskManager.js` to match those of the contract
+
+# 19/07
+- [QA] Added `chai` + `mocha` test suite
+- [QA] Implemented tests for taskManager with `taskManager_test.js`
+- [Chain] Moved back to `0.11.4` compiler once it started working again
+
+# 20/07
+- [Server] Added `chainUtils.js` module to simplify handling strangely formatted data coming off the chain
+- [Server] Began proper JSDoc documentation for methods
+
+# 21/07
