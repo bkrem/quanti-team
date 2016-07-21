@@ -86,3 +86,22 @@
 - [Chain] Added eris library modules `eris-logger` & `eris-wrapper` to facilitate building of Node app architecture
 
 # 12/07
+- [Chain] Experimented with different data structure implementations, i.e. LinkedList & SequenceList, to find best fit for project
+- [Chain] **!Issue!** Had to find a workaround for the `library` keyword bug in the eris platform --> simply turned it into a contract --> less flexible than an actual library type though.
+
+# 13/07
+- [Chain] **!Issue!** Tested out the LinkedList implementation and replaced it with the SequenceArray implementation after running into retrieval issues
+
+# 14/07
+- [Server] Implemented the Express `server.js` module
+- [Server] Added some endpoints to test with in `server.js`
+- [Server] Added `taskManager` and `taskDb` modules to begin design pattern implementation _(which pattern?)_
+
+# 16/07
+- Added a test implementation of the Node `EventEmitter`
+
+# 17/07
+- **!Issue!** Eris online compiler broke --> took forever to figure out that port `10113` was viable option because no goddamn documentation of it
+- **!Issue!** Eris local compiler Docker image did not do anything basically, TOTAL FAIL
+
+# 18/07
