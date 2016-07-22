@@ -75,7 +75,7 @@ export default class TaskView extends React.Component {
 
     renderListViewData(tasks: Array<Task>) {
         let dataBlob = {};
-        const sectionIds = ["To Do", "Done"];
+        const sectionIds = ["To Do", "Completed"];
 
         tasks.map((task: Task) => {
             let section = task.status;
