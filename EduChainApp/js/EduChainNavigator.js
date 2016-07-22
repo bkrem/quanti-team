@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import TabsView from './tabs/TabsView';
 import TaskView from './tabs/tasks/TaskView';
-import SettingsListView from './settings/SettingsListView'
+import SettingsListView from './settings/SettingsListView';
 
 export default class EduChainNavigator extends React.Component {
     renderScene(route: Object, navigator: Navigator) {

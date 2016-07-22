@@ -17,7 +17,7 @@ import Header from '../../common/Header';
 import GlobalStyles from '../../common/GlobalStyles';
 import Loader from '../../common/Loader';
 import TasksListRow from './TasksListRow';
-import type {Task} from './TaskView'
+import type {Task} from '../../reducers/tasks';
 
 type Rows = Array<TasksListRow>;
 type RowsAndSections = {
@@ -44,7 +44,7 @@ export default class TaskView extends React.Component {
                 sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
             }),
             loaded: false
-        }
+        };
     }
 
     componentDidMount() {
@@ -63,14 +63,14 @@ export default class TaskView extends React.Component {
                 flip = !flip;
             }
             return arr;
-        }
+        };
         let tr = testRows();
         let {dataBlob, sectionIds} = this.renderListViewData(tr);
 
         this.setState({
             dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlob, sectionIds),
             loaded: true
-        })
+        });
     }
 
     renderListViewData(tasks: Array<Task>) {

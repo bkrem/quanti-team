@@ -14,7 +14,7 @@
      StyleSheet
  } from 'react-native';
 
- import type {Task} from './TaskView'
+ import type {Task} from '../../reducers/tasks';
 
  type Props = {
      onPress: () => void,
@@ -73,4 +73,4 @@
      complete: {
 
      }
- })
+ });
