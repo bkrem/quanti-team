@@ -13,12 +13,15 @@
     "react-native": "0.28.0",
     "react-native-button": "^1.6.0",
     "react-native-vector-icons": "^2.0.3",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
     "tcomb-form-native": "^0.5.1"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.0",
     "eslint": "^2.13.1",
     "eslint-plugin-react": "^5.2.2",
-    "eslint-plugin-react-native": "^1.1.0"
+    "eslint-plugin-react-native": "^1.1.0",
+    "redux-devtools": "^3.3.1"
   }
 }
