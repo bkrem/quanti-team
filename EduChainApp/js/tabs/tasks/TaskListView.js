@@ -13,11 +13,14 @@ import {
     ListView,
     StyleSheet
 } from 'react-native';
+import {connect} from 'react-redux';
 import Header from '../../common/Header';
 import GlobalStyles from '../../common/GlobalStyles';
 import Loader from '../../common/Loader';
-import TasksListRow from './TasksListRow';
+import TasksListRow from './TaskListRow';
+
 import type {Task} from '../../reducers/tasks';
+import {loadTasks} from '../../actions/tasks';
 
 type Rows = Array<TasksListRow>;
 type RowsAndSections = {
@@ -64,7 +67,8 @@ export default class TaskView extends React.Component {
             }
             return arr;
         };
-        let tr = testRows();
+        let tr: Array<Task> = testRows();
+
         let {dataBlob, sectionIds} = this.renderListViewData(tr);
 
         this.setState({
@@ -114,7 +118,7 @@ export default class TaskView extends React.Component {
     // TODO GH #6; add searchBar header
     render() {
         if (!this.state.loaded)
-            return <Loader title='Tasks' />
+            return (<Loader title='Tasks' />);
 
         return (
             <View style={styles.container}>
