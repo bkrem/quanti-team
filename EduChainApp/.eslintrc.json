@@ -3,6 +3,12 @@
     "env": {
         "es6": true
     },
+    "globals": {
+        "window": false,
+        "console": false,
+        "module": false,
+        "__DEV__": true
+    },
     "extends": "eslint:recommended",
     "installedESLint": true,
     "parserOptions": {
@@ -37,6 +43,7 @@
             "error",
             "only-multiline"
         ],
-        "no-unused-vars": "warn"
+        "no-unused-vars": "warn",
+        "no-console": "off"
     }
 }
