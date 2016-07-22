@@ -6,32 +6,24 @@
 
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 import {
     View,
     Text,
     StyleSheet,
     Navigator,
-} from 'react-native'
-import GlobalStyles from '../../common/GlobalStyles'
-import Header from '../../common/Header'
-import CommentBox from '../../comments/CommentBox'
-
-export type Task = {
-    id: number,
-    title: string,
-    desc: string,
-    reward: string,
-    complete: string,
-    status: string,
-}
+} from 'react-native';
+import GlobalStyles from '../../common/GlobalStyles';
+import Header from '../../common/Header';
+import CommentBox from '../../comments/CommentBox';
+import type {Task} from '../../reducers/tasks';
 
 type Props = {
     task: Task,
     navigator: Navigator,
 }
 
-export default class TaskView extends Component {
+export default class TaskView extends React.Component {
     props: Props;
 
     render() {
@@ -80,4 +72,4 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         textDecorationLine: 'underline',
     },
-})
+});
