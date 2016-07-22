@@ -5,10 +5,11 @@
 'use strict';
 
 import type {Action, ThunkAction} from './types';
+import type {Task} from '../reducers/tasks';
 
 module.exports = {
-    loadTasks: (): Action => ({
+    loadTasks: (tasks: Array<Task>): Action => ({
         type: 'TASKS_LOADED',
-        taskList: ["test1", "test2"]
+        taskList: tasks
     })
 };

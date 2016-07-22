@@ -9,8 +9,6 @@ import {Provider} from 'react-redux';
 import configureStore from './store/configureStore';
 import App from './App';
 
-import {loadTasks} from './actions/tasks';
-
 export default class Root extends React.Component {
     state: {
         store: any
@@ -25,7 +23,6 @@ export default class Root extends React.Component {
 
     render() {
         console.info("store state at root:", this.state.store.getState());
-        this.state.store.dispatch(loadTasks());
 
         return (
             <Provider store={this.state.store}>

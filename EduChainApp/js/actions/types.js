@@ -9,7 +9,6 @@ import type {Task} from '../reducers/tasks';
 
 export type Action =
     { type: 'TASKS_LOADED', taskList: Array<Task> }
-  | { type: 'TASK_TEST', val: string }
   ;
 
 
