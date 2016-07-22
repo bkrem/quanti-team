@@ -35,6 +35,7 @@
         "comma-dangle": [
             "error",
             "only-multiline"
-        ]
+        ],
+        "no-unused-vars": "warn"
     }
 }
