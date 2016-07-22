@@ -3,8 +3,9 @@
  *
  * @flow
  */
-
 'use strict';
+
+import type {Action} from '../actions/types';
 
 export type Tab =
     'home'
@@ -13,3 +14,15 @@ export type Tab =
   | 'team'
   | 'me'
   ;
+
+type State = {
+     tab: Tab
+}
+
+const initialState: State = {
+    tab: 'home'
+};
+
+export default function navigation(state: State = initialState, action: Action): State {
+
+}

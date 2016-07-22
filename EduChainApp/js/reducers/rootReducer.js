@@ -11,7 +11,6 @@ import navigation from './navigation';
 import tasks from './tasks';
 
 const rootReducer = combineReducers({
-    navigation,
     tasks
 });
 
