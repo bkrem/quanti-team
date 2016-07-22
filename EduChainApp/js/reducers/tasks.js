@@ -8,7 +8,7 @@
 import type {Action} from '../actions/types';
 
 export type Task = {
-    id: number,
+    id: string,
     title: string,
     desc: string,
     reward: string,
@@ -17,16 +17,20 @@ export type Task = {
 }
 
 type State = {
-    tasks: Array<Task>
+    taskList: Array<Task>
 }
 
 const initialState: State = {
-    tasks: []
+    taskList: []
 };
 
 export default function tasks(state: State = initialState, action: Action): State {
     switch (action.type) {
-        case 'LOADED_TASKS':
-            return {...state, tasks: action.tasks};
+        case 'TASKS_LOADED':
+            return {...state, taskList: action.taskList};
+
+        default:
+            return state;
     }
+
 }
