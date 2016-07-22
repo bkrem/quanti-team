@@ -58,7 +58,7 @@ export default class TaskView extends React.Component {
                     desc: `desc for task ${i}`,
                     reward: '200',
                     complete: '3/5',
-                    status: flip ? 'To Do' : 'Done'
+                    status: flip ? 'To Do' : 'Completed'
                 });
                 flip = !flip;
             }
