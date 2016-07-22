@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
     rowSubtitle: {
         color: 'gray'
     }
-})
+});

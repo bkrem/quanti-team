@@ -12,7 +12,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     Platform
-} from 'react-native'
+} from 'react-native';
 import Colors from './Colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 

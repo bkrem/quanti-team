@@ -4,19 +4,19 @@
  * @flow
  */
 
- 'use strict';
+'use strict';
 
- import React, { Component } from 'react'
- import {
-     View,
-     StyleSheet,
-     Text,
- } from 'react-native'
- import GlobalStyles from '../common/GlobalStyles'
- import CommentList from './CommentList'
- import CommentForm from './CommentForm'
+import React from 'react'
+import {
+    View,
+    StyleSheet,
+    Text,
+} from 'react-native'
+import GlobalStyles from '../common/GlobalStyles'
+import CommentList from './CommentList'
+import CommentForm from './CommentForm'
 
-export default class CommentBox extends Component {
+export default class CommentBox extends React.Component {
     render() {
         return (
             <View>
