@@ -6,19 +6,19 @@
 
 'use strict';
 
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {
     TabBarIOS,
     Navigator
-} from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
-import Colors from '../common/Colors'
-import type {Tab} from './../reducers/navigation'
-import HomeView from './home/HomeView'
-import NotificationsListView from './notifications/NotificationsListView'
-import TasksListView from './tasks/TasksListView'
-import ProfileView from './me/ProfileView'
-import TeamView from './team/TeamView'
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Colors from '../common/Colors';
+import type {Tab} from './../reducers/navigation';
+import HomeView from './home/HomeView';
+import NotificationsListView from './notifications/NotificationsListView';
+import TasksListView from './tasks/TasksListView';
+import ProfileView from './me/ProfileView';
+import TeamView from './team/TeamView';
 
 const ICONSIZE = 30;
 
@@ -38,14 +38,14 @@ export default class TabsView extends Component {
         super();
         this.state = {
             selectedTab: 'home'
-        }
+        };
     }
 
     onTabSelect(tab: Tab): void {
         if (this.state.selectedTab !== tab) {
             this.setState({
                 selectedTab: tab
-            })
+            });
         }
     }
 
