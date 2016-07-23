@@ -1,6 +1,7 @@
 var express = require('express');
 var http = require('http');
 var bodyParser = require('body-parser');
+var async = require('async');
 
 var logger = require(__libs+'/eris/eris-logger');
 var taskManager = require(__js+'/taskManager');
@@ -24,12 +25,28 @@ var init = function () {
      * ROUTING
      */
 
-    // GET multiple
+    // GET all available task objects
     app.get('/tasks', function (req, res) {
-        taskManager.getTaskListSize(function (size) {
-            res.send("TaskListSize:" + size);
+        async.waterfall([
+            // Get all available task contract addresses
+            taskManager.getAllTaskAddresses,
+            // Map each address to the contract and callback an array of task objects
+            function (addresses, callback) {
+                async.map(addresses, taskManager.getTaskAtAddress, function (err, tasks) {
+                    callback(err, tasks);
+                });
+            }
+        ], function (err, tasks) {
+            if (err) {
+                console.error(err);
+                res.sendStatus(500);
+            }
+            console.log("GET /tasks: ", tasks);
+            res.json({"data": tasks});
         });
     });
+
+    // TODO add route for userid/address to get only related tasks `/mytasks`
 
     // GET single
     app.get('/task/:id', function (req, res) {
