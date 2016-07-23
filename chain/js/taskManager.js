@@ -162,20 +162,18 @@ var chainUtils = require(__js+'/util/chainUtils');
 
 
     /**
-     * getAllTasks - Retrieves ALL elements in the `TaskManager` contract's
+     * getAllTaskAddresses - Retrieves ALL elements in the `TaskManager` contract's
      * map of `Task` contracts
      *
      * @param  {func} callback description
      * @return {@callback}     description
      */
-    function getAllTasks (callback) {
+    function getAllTaskAddresses (callback) {
         var idx = 0;
         var addresses = [];
 
         _collectTaskAddresses(idx, addresses, function (error) {
-            if (error)
-                throw error;
-            return callback(addresses);
+            return callback(error, addresses);
         });
     }
 
@@ -244,7 +242,7 @@ var chainUtils = require(__js+'/util/chainUtils');
 
     module.exports = {
         addTask: addTask,
-        getAllTasks: getAllTasks,
+        getAllTaskAddresses: getAllTaskAddresses,
         getTaskAtIndex: getTaskAtIndex,
         getTaskAtAddress: getTaskAtAddress,
         getTaskListSize: getTaskListSize,

@@ -12,7 +12,7 @@ describe("Task Manager", function () {
     describe("addTask", function () {
         it("adds the given task to the chain and returns true if a record was overwritten, false otherwise", function(done) {
             var testTask = {
-                id: eris.str2hex("test1"),
+                id: eris.str2hex("test0"),
                 title: eris.str2hex("TestTitle"),
                 desc: eris.str2hex("Test Description"),
                 status: eris.str2hex("To Do"),
@@ -51,7 +51,8 @@ describe("Task Manager", function () {
 
     describe("getAllTasks", function () {
        it("retrieves all tasks from the given start index onwards", function (done) {
-           taskManager.getAllTasks(function (addresses) {
+           taskManager.getAllTaskAddresses(function (err, addresses) {
+               assert.isNull(err);
                assert.isNotNull(addresses, "`addresses` array should not be null");
                assert.isAtLeast(addresses.length, 1, "There should be at least 1 element from running the `addTask` test");
                refAddr = addresses[0];
