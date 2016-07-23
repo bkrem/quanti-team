@@ -49,8 +49,8 @@ var init = function () {
     // TODO add route for userid/address to get only related tasks `/mytasks`
 
     // GET single
-    app.get('/task/:id', function (req, res) {
-        taskManager.getTaskAtIndex(req.params.id, function (data) {
+    app.get('/task/:idx', function (req, res) {
+        taskManager.getTaskAtIndex(req.params.idx, function (data) {
             res.send(data);
         });
     });
