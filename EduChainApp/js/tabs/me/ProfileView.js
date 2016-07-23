@@ -23,34 +23,6 @@
 // TODO How to avoid declaring types twice, once here in top-lvl, once at component lvl?
  export default class ProfileView extends React.Component {
 
-     // GET simplechain_full_000's balance
-     async getBalance(): Promise {
-         try {
-             let balance = await fetch(educhain);
-             let balanceText = await balance.text();
-             console.log(balanceText);
-             Alert.alert(
-                 "GET Balance",
-                 "Current balance: " + balanceText
-             );
-             return balanceText;
-         } catch(err) {
-             console.error("Error at getBalance():", err);
-         }
-     }
-
-     setBalance(amount: number): void {
-         try {
-             fetch(educhain, {
-                 method: 'PUT',
-                 body: `${amount}`
-             })
-         } catch(err) {
-             console.error(`Error at setBalance(${amount}):`, err)
-         }
-         console.info(`setBalance(): Balance set to ${amount} successfully.`);
-     }
-
      render() {
          return (
              <View>
