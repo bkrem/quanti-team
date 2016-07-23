@@ -34,7 +34,7 @@ type State = {
     loaded: boolean
 }
 
-export default class TaskView extends React.Component {
+export default class TaskListView extends React.Component {
     state: State;
 
     constructor() {
@@ -51,30 +51,24 @@ export default class TaskView extends React.Component {
     }
 
     componentDidMount() {
-        let testRows = () => {
-            let arr = [];
-            let flip = false;
-            for (let i = 0; i < 20; i++) {
-                arr.push({
-                    id: i,
-                    title: `Task ${i}`,
-                    desc: `desc for task ${i}`,
-                    reward: '200',
-                    complete: '3/5',
-                    status: flip ? 'To Do' : 'Completed'
-                });
-                flip = !flip;
-            }
-            return arr;
-        };
-        let tr: Array<Task> = testRows();
+        console.info("TaskListView: this.props.tasks: ", this.props.tasks);
 
-        let {dataBlob, sectionIds} = this.renderListViewData(tr);
+        let {dataBlob, sectionIds} = this.renderListViewData(this.props.tasks);
 
         this.setState({
             dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlob, sectionIds),
             loaded: true
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.tasks !== nextProps.tasks) {
+            console.log("componentWillReceiveProps", nextProps);
+            let {dataBlob, sectionIds} = this.renderListViewData(nextProps.tasks);
+            this.setState({
+                dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlob, sectionIds)
+            });
+        }
     }
 
     renderListViewData(tasks: Array<Task>) {

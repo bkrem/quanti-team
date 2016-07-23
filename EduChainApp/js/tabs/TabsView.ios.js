@@ -16,7 +16,8 @@ import Colors from '../common/Colors';
 import type {Tab} from './../reducers/navigation';
 import HomeView from './home/HomeView';
 import NotificationsListView from './notifications/NotificationsListView';
-import TasksListView from './tasks/TaskListView';
+import TaskListView from './tasks/TaskListView';
+import TaskListContainer from './tasks/TaskListContainer';
 import ProfileView from './me/ProfileView';
 import TeamView from './team/TeamView';
 
@@ -86,7 +87,7 @@ export default class TabsView extends Component {
                     selectedIconName="ios-checkmark-circle"
                     iconSize={ICONSIZE}
                 >
-                        <TasksListView navigator={this.props.navigator} />
+                        <TaskListContainer navigator={this.props.navigator} />
                     </Icon.TabBarItemIOS>
 
                 <Icon.TabBarItemIOS
