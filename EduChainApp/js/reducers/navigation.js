@@ -24,5 +24,5 @@ const initialState: State = {
 };
 
 export default function navigation(state: State = initialState, action: Action): State {
-
+    return state;
 }
