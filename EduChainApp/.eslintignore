@@ -1,3 +1,7 @@
+# Ignore custom library classes
+js/lib/*
+
+
 # Ignore Android until relevant
 index.android.js
 js/tabs/TabsView.android.js
