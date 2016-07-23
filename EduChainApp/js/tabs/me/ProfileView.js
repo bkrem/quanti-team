@@ -45,7 +45,7 @@
                     <View style={styles.balanceContainer}>
                         <Button
                             containerStyle={GlobalStyles.buttonContainer}
-                            onPress={this.getBalance.bind(this)}
+                            onPress={() => {}}
                         >
                             Get Balance
                         </Button>
@@ -70,4 +70,4 @@
 
  const styles = StyleSheet.create({
 
- })
+ });
