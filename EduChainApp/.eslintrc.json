@@ -44,6 +44,7 @@
             "only-multiline"
         ],
         "no-unused-vars": "warn",
-        "no-console": "off"
+        "no-console": "off",
+        "react/jsx-uses-vars": 1
     }
 }
