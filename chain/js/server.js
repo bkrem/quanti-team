@@ -41,7 +41,7 @@ var init = function () {
                 console.error(err);
                 res.sendStatus(500);
             }
-            console.log("GET /tasks: ", tasks);
+            log.info("GET /tasks: ", tasks);
             res.json({"data": tasks});
         });
     });
@@ -66,7 +66,7 @@ var init = function () {
         var task = req.body;
 
         log.debug("POST task: ", task);
-        taskManager.addTask(task, function (err) {
+        taskManager.addTask(task, function (err, isOverwrite) {
             if (err) {
                 console.error(err);
                 res.sendStatus(500);
@@ -74,13 +74,6 @@ var init = function () {
                 res.sendStatus(200);
             }
         });
-
-        /* chain.addDeal(deal, function (error) {
-            // needs timeout!
-            db.listen.once( db.events.NEW_DEAL+'_'+deal.id, function(deal) {
-                res.sendStatus(200);
-            });
-        }); */
     });
 
     http.createServer(app).listen(portHTTP, function () {
