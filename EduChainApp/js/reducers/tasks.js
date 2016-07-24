@@ -14,7 +14,7 @@ export type Task = {
     reward: string,
     complete: string,
     status: string,
-    address: string
+    address?: string
 }
 
 type State = {
