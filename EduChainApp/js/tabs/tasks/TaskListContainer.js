@@ -28,7 +28,7 @@ export default class TaskListContainer extends React.Component {
             let responseJSON = await response.json();
             return responseJSON.data;
         } catch (err) {
-            console.error("Error @ getAllTasks(): ", err);
+            console.error("getAllTasks() -> Error: ", err);
         }
     }
 
