@@ -73,7 +73,7 @@ export default class TaskListView extends React.Component {
 
     renderListViewData(tasks: Array<Task>) {
         let dataBlob = {};
-        const sectionIds = ["To Do", "Completed"];
+        const sectionIds = ["To Do"];
 
         tasks.map((task: Task) => {
             let section = task.status;
@@ -121,7 +121,15 @@ export default class TaskListView extends React.Component {
                     rightItem={{
                         title: "Add Task",
                         layout: "icon",
-                        icon: "ios-add"
+                        icon: "ios-add",
+                        onPress: this.props.addTask.bind(this, {
+                            id: "rnId1",
+                            title: `Task rnId1`,
+                            desc: `desc for task rnId1`,
+                            reward: '200',
+                            complete: '3/5',
+                            status: 'Completed',
+                        })
                     }}
                 />
                 <ListView

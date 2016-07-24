@@ -32,6 +32,22 @@ export default class TaskListContainer extends React.Component {
         }
     }
 
+    // TODO move to `addTaskView` container
+    async addTask(task: Task): Promise {
+        let request = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(task)
+        };
+
+        let response = await fetch(educhain+'/tasks', request);
+        let isOverwrite = await response.text(); // FIXME this should be overwrite bool instead ofstatusText
+        console.info("addTask() -> isOverwrite?: ", isOverwrite);
+    }
+
     componentWillMount() {
         let testRows = () => {
             let arr = [];
@@ -63,7 +79,7 @@ export default class TaskListContainer extends React.Component {
 
     render() {
         return (
-            <TaskListView navigator={this.props.navigator} tasks={this.state.tasks} />
+            <TaskListView navigator={this.props.navigator} tasks={this.state.tasks} addTask={this.addTask} />
         );
     }
 }
