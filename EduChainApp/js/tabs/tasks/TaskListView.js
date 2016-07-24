@@ -17,12 +17,12 @@ import {connect} from 'react-redux';
 import Header from '../../common/Header';
 import GlobalStyles from '../../common/GlobalStyles';
 import Loader from '../../common/Loader';
-import TasksListRow from './TaskListRow';
+import TaskListRow from './TaskListRow';
 
 import type {Task} from '../../reducers/tasks';
 import {loadTasks} from '../../actions/tasks';
 
-type Rows = Array<TasksListRow>;
+type Rows = Array<TaskListRow>;
 type RowsAndSections = {
   [sectionID: string]: Object;
 };
@@ -96,7 +96,7 @@ export default class TaskListView extends React.Component {
 
     renderRow(rowData: Object) {
         return (
-            <TasksListRow
+            <TaskListRow
                 row={rowData}
                 onPress={() => this.props.navigator.push({id: "task", task: rowData})}
             />
