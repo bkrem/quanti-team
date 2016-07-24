@@ -147,16 +147,17 @@ var chainUtils = require(__js+'/util/chainUtils');
      * @return {void}
      */
     function addTask (task, callback) {
+        // TODO refactor, find a DRY solution
         taskManagerContract.addTask(
-            task.id,
-            task.title,
-            task.desc,
-            task.status,
-            task.complete,
-            task.reward,
-             function (error, result) {
-                 error ? console.error(error) : log.debug("Overwrite?: " + result);
-                 callback(error, result);
+            eris.str2hex(task.id),
+            eris.str2hex(task.title),
+            eris.str2hex(task.desc),
+            eris.str2hex(task.status),
+            eris.str2hex(task.complete),
+            eris.str2hex(task.reward),
+             function (err, result) {
+                 err ? log.error("addTask() -> Error: " + err.stack) : log.debug("Overwrite?: " + result);
+                 callback(err, result);
         });
     }
 
@@ -187,7 +188,7 @@ var chainUtils = require(__js+'/util/chainUtils');
      */
     function getTaskAtIndex (idx, callback) {
         taskManagerContract.getTaskAtIndex(idx, function (error, data) {
-            error ? console.error(error) : log.debug("getTaskAtIndex " + idx, data);
+            error ? log.error("getTaskAtIndex() -> Error: " + error.stack) : log.debug("getTaskAtIndex " + idx, data);
             // Extract `nextIdx` from the encasing object + array
             data[1] = chainUtils.extractInt(data, 1);
             callback(error, data);
@@ -220,7 +221,7 @@ var chainUtils = require(__js+'/util/chainUtils');
      */
     function getTaskListSize (callback) {
         taskManagerContract.getTaskListSize(function (error, size) {
-            error ? console.error(error) : log.debug("getTaskListSize: " + size);
+            error ? log.error("getTaskListSize() -> Error: " + error.stack) : log.debug("getTaskListSize: " + size);
             callback(error, size);
         });
     }
@@ -235,7 +236,7 @@ var chainUtils = require(__js+'/util/chainUtils');
      */
     function getTaskKeyAtIndex (idx, callback) {
         taskManagerContract.getTaskKeyAtIndex(idx, function (error, key) {
-            error ? console.error(error) : log.debug("getTaskKeyAtIndex " + idx, eris.hex2str(key));
+            error ? log.error("getTaskKeyAtIndex() -> Error: " + error.stack) : log.debug("getTaskKeyAtIndex " + idx, eris.hex2str(key));
             callback(error, key);
         });
     }
