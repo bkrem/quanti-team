@@ -116,8 +116,17 @@
 - [Server] Added `chainUtils.js` module to simplify handling strangely formatted data coming off the chain
 - [Server] Began proper JSDoc documentation for methods
 
-# 21/07
-
 # 22/07
+- [App] Set up action/constant/reducer configs for Redux
 
 # 23/07
+- [App] Set up `configureStore.js` for Redux
+- [App] Redux sanity checks -> all good, functioning
+- [App] Added `PureListView` library class from facebook/f8app
+- [Server] Properly implemented `GET /tasks` endpoint with `async.waterfall()` to handle callbacks
+- [App] Establish `TaskListContainer` component to separate data handling and view props
+
+# 25/07
+- [App] Added `addTask()` func to communicate with `POST /tasks` API bridge endpoint
+- [App] Fixed bug caused by implicit assumption in my test cases that `addTask()` input will be pre-formatted into HEX
+- [App] Added elementary `AddTaskView` component 
