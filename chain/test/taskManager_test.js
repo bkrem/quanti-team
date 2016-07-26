@@ -69,7 +69,7 @@ describe("Task Manager", function () {
                 assert.isNull(err);
                 assert.notDeepEqual(task, {}, "returned task object should not be empty");
                 assert.sameMembers(Object.keys(task), taskType, "returned task object's keys should adhere to Task type");
-                assert.strictEqual(task.id, "test0")
+                assert.strictEqual(task.id, testTask.id) // can't deepEqual whole object since `address` can't be predicted
                 done();
             });
         });
