@@ -6,19 +6,19 @@ var eris = require(__libs+'/eris/eris-wrapper');
 var taskManager = require('../js/taskManager');
 
 var refAddr;
+var testTask = {
+    id: "test0",
+    title: "TestTitle",
+    desc: "Test Description",
+    status: "To Do",
+    complete: "0/?",
+    reward: "200"
+};
 
 describe("Task Manager", function () {
 
     describe("addTask", function () {
         it("adds the given task to the chain and returns true if a record was overwritten, false otherwise", function(done) {
-            var testTask = {
-                id: eris.str2hex("test0"),
-                title: eris.str2hex("TestTitle"),
-                desc: eris.str2hex("Test Description"),
-                status: eris.str2hex("To Do"),
-                complete: eris.str2hex("0/?"),
-                reward: eris.str2hex("200")
-            };
             taskManager.addTask(testTask, function (error, result) {
                 assert.isNull(error);
                 // TODO reactivate this and the inverse when deletion is implemented
@@ -69,6 +69,7 @@ describe("Task Manager", function () {
                 assert.isNull(err);
                 assert.notDeepEqual(task, {}, "returned task object should not be empty");
                 assert.sameMembers(Object.keys(task), taskType, "returned task object's keys should adhere to Task type");
+                assert.strictEqual(task.id, "test0")
                 done();
             });
         });
