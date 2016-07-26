@@ -53,11 +53,12 @@ export default class AddTaskView extends React.Component {
             return null;
         }
         // temporary hardcoded fill
-        let testTask = Object.assign({}, task, {
+        let testTask = {
+            ...task,
             id: "formTask0",
             complete: "IMPLEMENT ME",
             reward: "200"
-        });
+        };
         console.log("Submitted a task: ", testTask);
         this.addTask(testTask);
     }
