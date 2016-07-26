@@ -2,20 +2,18 @@
  * Created by BK on 25/06/16.
  */
 
- 'use strict';
+'use strict';
 
- import React, { Component } from 'react';
- import {
-     View,
-     StyleSheet,
-     TouchableHighlight,
-     Text,
- } from 'react-native';
- import GlobalStyles from '../common/GlobalStyles';
- import Button from 'react-native-button';
- import t from 'tcomb-form-native';
+import React from 'react';
+import {
+    View,
+    StyleSheet,
+} from 'react-native';
+import GlobalStyles from '../common/GlobalStyles';
+import Button from 'react-native-button';
+import t from 'tcomb-form-native';
 
-export default class CommentForm extends Component {
+export default class CommentForm extends React.Component {
     onPress() {
         const val = this.refs.form.getValue();
         if (val) console.log(val);
@@ -53,7 +51,7 @@ const options = {
             placeholder: 'Add comment...'
         }
     }
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -61,4 +59,4 @@ const styles = StyleSheet.create({
     },
     button: {
     }
-})
+});
