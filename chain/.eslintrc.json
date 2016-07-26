@@ -135,13 +135,13 @@
         "no-new-wrappers": "error",
         "no-octal-escape": "error",
         "no-param-reassign": [
-            "error",
+            "warn",
             {
                 "props": false
             }
         ],
         "no-path-concat": "off",
-        "no-plusplus": "error",
+        "no-plusplus": "warn",
         "no-process-env": "off",
         "no-process-exit": "error",
         "no-proto": "error",
@@ -154,7 +154,7 @@
         "no-script-url": "error",
         "no-self-compare": "error",
         "no-sequences": "error",
-        "no-shadow": "error",
+        "no-shadow": ["error", { "allow": ["done", "cb", "callback"] }],
         "no-shadow-restricted-names": "error",
         "no-spaced-func": "error",
         "no-sync": "off",
