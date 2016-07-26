@@ -16,6 +16,7 @@ import Colors from '../common/Colors';
 import type {Tab} from './../reducers/navigation';
 import HomeView from './home/HomeView';
 import NotificationsListView from './notifications/NotificationsListView';
+import TaskListView from './tasks/TaskListView';
 import TaskListContainer from './tasks/TaskListContainer';
 import ProfileView from './me/ProfileView';
 import TeamView from './team/TeamView';

@@ -34,7 +34,7 @@ type State = {
     loaded: boolean
 }
 
-export default class TaskList extends React.Component {
+export default class TaskListView extends React.Component {
     state: State;
 
     constructor(props: Object) {
@@ -51,7 +51,7 @@ export default class TaskList extends React.Component {
     }
 
     componentDidMount() {
-        console.info("TaskList: this.props.tasks: ", this.props.tasks);
+        console.info("TaskListView: this.props.tasks: ", this.props.tasks);
 
         let {dataBlob, sectionIds} = this.renderListViewData(this.props.tasks);
 
