@@ -92,7 +92,7 @@ export default class AddTaskView extends React.Component {
 const Form = t.form.Form;
 const Task = t.struct({
     title: t.String,
-    desc: t.maybe(t.String),
+    desc: t.String,
     // participants: t.maybe(t.String) // TODO GH #41
 });
 const options = {
