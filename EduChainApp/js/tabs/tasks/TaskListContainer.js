@@ -5,7 +5,7 @@
 'use strict';
 
 import React from 'react';
-import TaskListView from './TaskListView';
+import TaskList from './TaskList';
 import type {Task} from '../../reducers/tasks';
 
 const educhain = 'http://192.168.99.100:8082'; // TODO configure as global
@@ -78,7 +78,7 @@ export default class TaskListContainer extends React.Component {
 
     render() {
         return (
-            <TaskListView navigator={this.props.navigator} tasks={this.state.tasks} addTask={this.addTask} />
+            <TaskList navigator={this.props.navigator} tasks={this.state.tasks} addTask={this.addTask} />
         );
     }
 }
