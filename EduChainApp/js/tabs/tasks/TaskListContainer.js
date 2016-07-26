@@ -7,8 +7,7 @@
 import React from 'react';
 import TaskListView from './TaskListView';
 import type {Task} from '../../reducers/tasks';
-
-const educhain = 'http://192.168.99.100:8082'; // TODO configure as global
+import ENV from '../../common/Environment';
 
 export default class TaskListContainer extends React.Component {
     state: {
@@ -24,28 +23,12 @@ export default class TaskListContainer extends React.Component {
 
     async getAllTasks(): Promise {
         try {
-            let response = await fetch(educhain+'/tasks');
+            let response = await fetch(ENV.__API_BRIDGE+'/tasks');
             let responseJSON = await response.json();
             return responseJSON.data;
         } catch (err) {
             console.error("getAllTasks() -> Error: ", err);
         }
-    }
-
-    // TODO move to `addTaskView` container
-    async addTask(task: Task): Promise {
-        let request = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(task)
-        };
-
-        let response = await fetch(educhain+'/tasks', request);
-        let isOverwrite = await response.text(); // FIXME this should be overwrite bool instead ofstatusText
-        console.info("addTask() -> isOverwrite?: ", isOverwrite);
     }
 
     componentWillMount() {
@@ -78,7 +61,7 @@ export default class TaskListContainer extends React.Component {
 
     render() {
         return (
-            <TaskListView navigator={this.props.navigator} tasks={this.state.tasks} addTask={this.addTask} />
+            <TaskListView navigator={this.props.navigator} tasks={this.state.tasks} />
         );
     }
 }
