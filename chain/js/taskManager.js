@@ -147,14 +147,13 @@ var chainUtils = require(__js+'/util/chainUtils');
      * @return {void}
      */
     function addTask (task, callback) {
-        // TODO refactor, find a DRY solution
         taskManagerContract.addTask(
-            eris.str2hex(task.id),
-            eris.str2hex(task.title),
-            eris.str2hex(task.desc),
-            eris.str2hex(task.status),
-            eris.str2hex(task.complete),
-            eris.str2hex(task.reward),
+            task.id,
+            task.title,
+            task.desc,
+            task.status,
+            task.complete,
+            task.reward,
              function (err, result) {
                  err ? log.error("addTask() -> Error: " + err.stack) : log.debug("Overwrite?: " + result);
                  callback(err, result);
