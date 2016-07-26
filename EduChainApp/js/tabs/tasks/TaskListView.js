@@ -11,6 +11,7 @@ import {
     Text,
     View,
     ListView,
+    Navigator,
     StyleSheet
 } from 'react-native';
 import {connect} from 'react-redux';
@@ -29,6 +30,11 @@ type RowsAndSections = {
 
 type TaskData = Rows | RowsAndSections;
 
+type Props = {
+    tasks: Array<Task>,
+    navigator: Navigator
+}
+
 type State = {
     dataSource: TaskData,
     loaded: boolean
@@ -37,7 +43,7 @@ type State = {
 export default class TaskListView extends React.Component {
     state: State;
 
-    constructor(props: Object) {
+    constructor(props: Props) {
         super(props);
         this.state = {
             dataSource: new ListView.DataSource({
@@ -120,16 +126,9 @@ export default class TaskListView extends React.Component {
                     title="Tasks"
                     rightItem={{
                         title: "Add Task",
-                        layout: "icon",
+                        layout: "title",
                         icon: "ios-add",
-                        onPress: this.props.addTask.bind(this, {
-                            id: "rnId1",
-                            title: `Task rnId1`,
-                            desc: `desc for task rnId1`,
-                            reward: '200',
-                            complete: '3/5',
-                            status: 'Completed',
-                        })
+                        onPress: () => this.props.navigator.push({id: "addTask"})
                     }}
                 />
                 <ListView
