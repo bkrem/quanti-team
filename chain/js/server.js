@@ -71,7 +71,7 @@ var init = function () {
                 console.error(err);
                 res.sendStatus(500);
             } else {
-                res.sendStatus(200);
+                res.send(isOverwrite);
             }
         });
     });

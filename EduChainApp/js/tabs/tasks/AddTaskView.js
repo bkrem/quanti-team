@@ -39,7 +39,7 @@ export default class AddTaskView extends React.Component {
 
         try {
             let response = await fetch(ENV.__API_BRIDGE+'/tasks', request);
-            let isOverwrite = await response.text(); // FIXME this should be overwrite bool instead ofstatusText
+            let isOverwrite = await response.text();
             console.info("addTask() -> isOverwrite?: ", isOverwrite);
         } catch (err) {
             console.error("addTask() -> Error: ", err);
