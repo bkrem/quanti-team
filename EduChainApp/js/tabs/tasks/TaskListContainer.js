@@ -72,7 +72,6 @@ export default class TaskListContainer extends React.Component {
 
     componentDidMount() {
         this.getAllTasks().then(tasks => {
-            console.log("PROMISE RESOLVE", tasks);
             this.setState({tasks: tasks});
         });
     }
