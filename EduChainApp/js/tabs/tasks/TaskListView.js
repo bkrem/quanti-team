@@ -1,5 +1,5 @@
 /**
- * Created by BK on 20/06/16.
+ * TODO add partial FB src
  *
  * @flow
  */
@@ -10,15 +10,14 @@ import React from 'react';
 import {
     Text,
     View,
-    ListView,
     Navigator,
     StyleSheet
 } from 'react-native';
 import {connect} from 'react-redux';
 import Header from '../../common/Header';
 import GlobalStyles from '../../common/GlobalStyles';
-import Loader from '../../common/Loader';
 import TaskListRow from './TaskListRow';
+import PureListView from '../../lib/facebook/PureListView';
 
 import type {Task} from '../../reducers/tasks';
 import {loadTasks} from '../../actions/tasks';
@@ -41,61 +40,51 @@ type State = {
 }
 
 export default class TaskListView extends React.Component {
+    props: Props;
     state: State;
 
     constructor(props: Props) {
         super(props);
-        this.state = {
-            dataSource: new ListView.DataSource({
-                getRowData: (dataBlob, sid, rid) => dataBlob[sid][rid],
-                getSectionHeaderData: (dataBlob, sid) => dataBlob[sid],
-                rowHasChanged: (row1, row2) => row1 !== row2,
-                sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
-            }),
-            loaded: false
-        };
+
+        (this: any).renderEmptyList = this.renderEmptyList.bind(this);
+        (this: any).renderRow = this.renderRow.bind(this);
+        (this: any).renderSeparator = this.renderSeparator.bind(this);
+        (this: any).renderSectionHeader = this.renderSectionHeader.bind(this);
+        (this: any).renderWithSections = this.renderWithSections.bind(this);
     }
 
-    componentDidMount() {
-        console.info("TaskListView: this.props.tasks: ", this.props.tasks);
-
-        let {dataBlob, sectionIds} = this.renderListViewData(this.props.tasks);
-
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlob, sectionIds),
-            loaded: true
-        });
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (this.props.tasks !== nextProps.tasks) {
-            console.log("componentWillReceiveProps", nextProps);
-            let {dataBlob, sectionIds} = this.renderListViewData(nextProps.tasks);
-            this.setState({
-                dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlob, sectionIds)
-            });
-        }
-    }
-
-    renderListViewData(tasks: Array<Task>) {
-        let dataBlob = {};
-        const sectionIds = ["To Do"];
-
-        tasks.map((task: Task) => {
-            let section = task.status;
-            // add section key to `dataBlob` if not present yet
-            if (!dataBlob[section]) dataBlob[section] = [];
-            // add this task to said section
-            dataBlob[section].push(task);
-        });
-
-        return {dataBlob, sectionIds};
-    }
-
-    renderSectionHeader(data: Object, sectionId: string) {
+    // TODO GH #6; add searchBar header
+    render() {
         return (
-            <View style={styles.sectionHeader}>
-                <Text style={styles.sectionHeaderText}>{sectionId}</Text>
+            <View style={styles.container}>
+                <Header
+                    title="Tasks"
+                    rightItem={{
+                        title: "Add Task",
+                        layout: "title",
+                        icon: "ios-add",
+                        onPress: () => this.props.navigator.push({id: "addTask"})
+                    }}
+                />
+                <PureListView
+                    data={(this: any).renderWithSections(this.props.tasks)}
+                    renderEmptyList={this.renderEmptyList}
+                    renderRow={this.renderRow}
+                    renderSectionHeader={this.renderSectionHeader}
+                    renderSeparator={this.renderSeparator}
+                    automaticallyAdjustContentInsets={false}
+                    enableEmptySections={true}
+                />
+            </View>
+        );
+    }
+
+    renderEmptyList() {
+        return (
+            <View style={styles.emptyListContainer}>
+                <Text style={styles.text}>
+                    Looks like there aren't any tasks...
+                </Text>
             </View>
         );
     }
@@ -109,37 +98,31 @@ export default class TaskListView extends React.Component {
         );
     }
 
-    renderSeparator(sectionId: string, rowId: string) {
+    renderWithSections(tasks: Array<Task>) {
+        let dataBlob = {};
+
+        tasks.map((task: Task) => {
+            let section = task.status;
+            // add section key to `dataBlob` if not present yet
+            if (!dataBlob[section]) dataBlob[section] = [];
+            // add this task to said section
+            dataBlob[section].push(task);
+        });
+
+        return dataBlob;
+    }
+
+    renderSectionHeader(data: Object, sectionId: string) {
         return (
-            <View key={sectionId+rowId} style={GlobalStyles.separator} />
+            <View style={styles.sectionHeader}>
+                <Text style={styles.sectionHeaderText}>{sectionId}</Text>
+            </View>
         );
     }
 
-    // TODO GH #6; add searchBar header
-    render() {
-        if (!this.state.loaded)
-            return (<Loader title='Tasks' />);
-
+    renderSeparator(sectionId: string, rowId: string) {
         return (
-            <View style={styles.container}>
-                <Header
-                    title="Tasks"
-                    rightItem={{
-                        title: "Add Task",
-                        layout: "title",
-                        icon: "ios-add",
-                        onPress: () => this.props.navigator.push({id: "addTask"})
-                    }}
-                />
-                <ListView
-                    automaticallyAdjustContentInsets={false}
-                    style={styles.listView}
-                    dataSource={this.state.dataSource}
-                    renderRow={this.renderRow.bind(this)}
-                    renderSectionHeader={this.renderSectionHeader}
-                    renderSeparator={this.renderSeparator}
-                />
-            </View>
+            <View key={sectionId+rowId} style={GlobalStyles.separator} />
         );
     }
 
@@ -148,6 +131,10 @@ export default class TaskListView extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    emptyListContainer: {
+        flex: 1,
+        alignItems: 'center'
     },
     sectionHeader: {
         backgroundColor: 'gray'
