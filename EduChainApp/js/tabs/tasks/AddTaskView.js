@@ -16,6 +16,7 @@ import Button from 'react-native-button';
 import GlobalStyles from '../../common/GlobalStyles';
 import Header from '../../common/Header';
 import ENV from '../../common/Environment';
+import type {Task} from '../../reducers/tasks';
 
 type Props = {
     navigator: Navigator
@@ -47,13 +48,15 @@ export default class AddTaskView extends React.Component {
 
     onPress() {
         const task = this.refs.form.getValue();
-
+        if (!task) {
+            console.info("Form returned null, mandatory fields missing.");
+            return null;
+        }
         // temporary hardcoded fill
         let testTask = Object.assign({}, task, {
             id: "formTask0",
-            complete: "0/participantCount",
-            reward: "200",
-            status: "To Do"
+            complete: "IMPLEMENT ME",
+            reward: "200"
         });
         console.log("Submitted a task: ", testTask);
         this.addTask(testTask);
@@ -74,8 +77,10 @@ export default class AddTaskView extends React.Component {
                 <View style={[GlobalStyles.contentWrapper, styles.container]}>
                      <Form
                          ref="form"
-                         type={Task}
-                         options={options} />
+                         type={TaskForm}
+                         options={options}
+                         value={defaultValues}
+                     />
                      <Button
                          containerStyle={GlobalStyles.buttonContainer}
                          style={styles.button}
@@ -90,11 +95,23 @@ export default class AddTaskView extends React.Component {
 } // END CLASS
 
 const Form = t.form.Form;
-const Task = t.struct({
+const Status = t.enums({
+    "To Do": "To Do",
+    "Completed": "Completed"
+});
+const TaskForm = t.struct({
     title: t.String,
     desc: t.String,
+    status: Status
     // participants: t.maybe(t.String) // TODO GH #41
 });
+
+const defaultValues = {
+    title: '',
+    desc: '',
+    status: "To Do"
+};
+
 const options = {
     fields: {
         title: {
@@ -103,6 +120,9 @@ const options = {
         desc: {
             label: 'Description',
             placeholder: 'Let people know what this task is about'
+        },
+        status: {
+            nullOption: false
         },
         participants: {
             placeholder: 'Add others to this task with "@name"'
