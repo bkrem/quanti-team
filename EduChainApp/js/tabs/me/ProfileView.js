@@ -11,7 +11,6 @@
      View,
      StyleSheet,
      Text,
-     Alert,
  } from 'react-native';
  import GlobalStyles from '../../common/GlobalStyles';
  import Header from '../../common/Header';
