@@ -6,7 +6,7 @@
 
 'use strict';
 
-import React, {Component} from 'react';
+import React from 'react';
 import {
     TabBarIOS,
     Navigator
@@ -30,7 +30,7 @@ type Props = {
     navigator: Navigator
 }
 
-export default class TabsView extends Component {
+export default class TabsView extends React.Component {
     state: State;
     props: Props;
 

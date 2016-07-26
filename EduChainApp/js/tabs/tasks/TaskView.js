@@ -27,7 +27,7 @@ export default class TaskView extends React.Component {
     props: Props;
 
     render() {
-        const {id, title, status, desc, reward, complete} = this.props.task;
+        const {title, status, desc, reward, complete} = this.props.task;
 
         var comments = [
             {id: 1, author: "Pete Hunt", thumbURI: "https://randomuser.me/api/portraits/thumb/men/1.jpg", text: "This is one comment"},

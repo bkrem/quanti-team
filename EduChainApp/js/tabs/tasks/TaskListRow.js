@@ -6,7 +6,7 @@
 
  'use strict';
 
- import React, { Component } from 'react';
+ import React from 'react';
  import {
      Text,
      View,
@@ -21,7 +21,7 @@
      row: Task
  }
 
- export default class TasksListRow extends Component {
+ export default class TasksListRow extends React.Component {
      props: Props;
 
      render() {

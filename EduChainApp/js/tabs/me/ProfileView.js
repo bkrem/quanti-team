@@ -17,9 +17,6 @@
  import ProfileSummary from './ProfileSummary';
  import Button from 'react-native-button';
 
- const educhain = 'http://192.168.99.100:8082'; // TODO configure as global
-
-// TODO How to avoid declaring types twice, once here in top-lvl, once at component lvl?
  export default class ProfileView extends React.Component {
 
      render() {
