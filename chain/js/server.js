@@ -21,6 +21,14 @@ var init = function () {
     app.use(bodyParser.json());
 
 
+    function _handleErr (err, res) {
+        if (err) {
+            console.error(err.stack);
+            res.sendStatus(500);
+        }
+    }
+
+
     /**
      * ROUTING
      */
@@ -37,12 +45,31 @@ var init = function () {
                 });
             }
         ], function (err, tasks) {
-            if (err) {
-                console.error(err);
-                res.sendStatus(500);
-            }
+            _handleErr(err, res);
             log.info("GET /tasks: ", tasks);
             res.json({"data": tasks});
+        });
+    });
+
+    // POST new task
+    app.post('/tasks', function (req, res) {
+        var task = req.body;
+
+        log.debug("POST task: ", task);
+        taskManager.addTask(task, function (err, isOverwrite) {
+            _handleErr(err, res);
+            res.send(isOverwrite);
+        });
+    });
+
+    app.get('/new-id', function (req, res) {
+        var newId;
+
+        taskManager.getTaskListSize(function (err, size) {
+            _handleErr(err, res);
+            // increment size by one to mint a new id number
+            newId = Number(size) + 1;
+            res.json({"newId": newId});
         });
     });
 
@@ -61,20 +88,6 @@ var init = function () {
         });
     });
 
-    // POST new task
-    app.post('/tasks', function (req, res) {
-        var task = req.body;
-
-        log.debug("POST task: ", task);
-        taskManager.addTask(task, function (err, isOverwrite) {
-            if (err) {
-                console.error(err);
-                res.sendStatus(500);
-            } else {
-                res.send(isOverwrite);
-            }
-        });
-    });
 
     http.createServer(app).listen(portHTTP, function () {
         console.log('Listening for HTTP requests on port ' + portHTTP + '.');
