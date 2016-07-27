@@ -46,21 +46,36 @@ export default class AddTaskView extends React.Component {
         }
     }
 
+    async assignTaskId(task: Task): Promise {
+        try {
+            let response = await fetch(ENV.__API_BRIDGE+'/new-id');
+            let responseJSON = await response.json();
+            let taskId = 'task' + responseJSON.newId;
+
+            return {...task, id: taskId};
+        } catch (err) {
+            console.error("assignTaskId() -> Error: ", err);
+        }
+    }
+
     onPress() {
-        const task = this.refs.form.getValue();
-        if (!task) {
+        const taskForm = this.refs.form.getValue();
+        // Validate all mandatory inputs have been filled
+        if (!taskForm) {
             console.info("Form returned null, mandatory fields missing.");
             return null;
         }
-        // temporary hardcoded fill
-        let testTask = {
-            ...task,
-            id: "formTask0",
+        console.log("Submitted a task: ", taskForm);
+        // TODO remove temporary hardcoded fill
+        let partialTask = {
+            ...taskForm,
             complete: "IMPLEMENT ME",
             reward: "200"
         };
-        console.log("Submitted a task: ", testTask);
-        this.addTask(testTask);
+        
+        this.assignTaskId(partialTask).then((fullTask) =>
+            this.addTask(fullTask)
+        );
     }
 
     render() {
