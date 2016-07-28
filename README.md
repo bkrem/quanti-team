@@ -1,1 +1,1 @@
-# Project EduChain
+# QuantiTeam
