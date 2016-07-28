@@ -16,8 +16,9 @@ import {
 import {connect} from 'react-redux';
 import Header from '../../common/Header';
 import GlobalStyles from '../../common/GlobalStyles';
+import Loader from '../../common/Loader';
 import TaskListRow from './TaskListRow';
-import PureListView from '../../lib/facebook/PureListView';
+import RefreshablePureListView from '../../common/RefreshablePureListView';
 
 import type {Task} from '../../reducers/tasks';
 import {loadTasks} from '../../actions/tasks';
@@ -31,6 +32,7 @@ type TaskData = Rows | RowsAndSections;
 
 type Props = {
     tasks: Array<Task>,
+    onRefresh: () => Promise,
     navigator: Navigator
 }
 
@@ -66,12 +68,13 @@ export default class TaskListView extends React.Component {
                         onPress: () => this.props.navigator.push({id: "addTask"})
                     }}
                 />
-                <PureListView
+                <RefreshablePureListView
                     data={(this: any).renderWithSections(this.props.tasks)}
                     renderEmptyList={this.renderEmptyList}
                     renderRow={this.renderRow}
                     renderSectionHeader={this.renderSectionHeader}
                     renderSeparator={this.renderSeparator}
+                    onRefresh={this.props.onRefresh}
                     automaticallyAdjustContentInsets={false}
                     enableEmptySections={true}
                 />
@@ -79,13 +82,10 @@ export default class TaskListView extends React.Component {
         );
     }
 
+    // TODO Implement the loading fragment properly instead of abusing `renderEmptyList`
     renderEmptyList() {
         return (
-            <View style={styles.emptyListContainer}>
-                <Text style={styles.text}>
-                    Looks like there aren't any tasks...
-                </Text>
-            </View>
+            <Loader title={"Tasks"} />
         );
     }
 
