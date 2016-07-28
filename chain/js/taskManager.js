@@ -111,22 +111,25 @@ var chainUtils = require(__js+'/util/chainUtils');
         /* TODO potential refactor to iterate all keys automatically with `taskKeys` */
         async.parallel({
             id: function (callback) {
-                    contract.id( eris.convertibleCallback(callback, eris.hex2str) );
+                    contract.id( eris.convertibleCallback(callback, [eris.hex2str]) );
                 },
             title: function (callback) {
-                contract.title( eris.convertibleCallback(callback, eris.hex2str) );
+                contract.title( eris.convertibleCallback(callback, [eris.hex2str]) );
             },
             desc: function (callback) {
-                contract.desc( eris.convertibleCallback(callback, eris.hex2str) );
+                contract.desc( eris.convertibleCallback(callback, [eris.hex2str]) );
             },
             status: function (callback) {
-                contract.status( eris.convertibleCallback(callback, eris.hex2str) );
+                contract.status( eris.convertibleCallback(callback, [eris.hex2str]) );
             },
             complete: function (callback) {
-                contract.complete( eris.convertibleCallback(callback, eris.hex2str) );
+                contract.complete( eris.convertibleCallback(callback, [eris.hex2str]) );
             },
             reward: function (callback) {
-                contract.reward( eris.convertibleCallback(callback, eris.hex2str) );
+                contract.reward( eris.convertibleCallback(callback, [eris.hex2str]) );
+            },
+            participants: function (callback) {
+                contract.participants( eris.convertibleCallback(callback, [eris.hex2str, JSON.parse]) );
             }
         },
         function (err, results) {
@@ -155,6 +158,7 @@ var chainUtils = require(__js+'/util/chainUtils');
             eris.str2hex(task.status),
             eris.str2hex(task.complete),
             eris.str2hex(task.reward),
+            eris.str2hex(JSON.stringify(task.participants)),
              function (err, result) {
                  err ? log.error("addTask() -> Error: " + err.stack) : log.debug("Overwrite?: " + result);
                  callback(err, result);

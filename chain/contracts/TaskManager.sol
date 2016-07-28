@@ -24,10 +24,18 @@ contract TaskManager {
     /**
      * Adds a new task with the specified attributes
      */
-    function addTask(bytes32 _id, bytes32 _title, bytes32 _desc, bytes32 _status, bytes32 _complete, bytes32 _reward)
+    function addTask(
+        bytes32 _id,
+        bytes32 _title,
+        bytes32 _desc,
+        bytes32 _status,
+        bytes32 _complete,
+        bytes32 _reward,
+        bytes32 _participants
+        )
         returns (bool isOverwrite)
     {
-        Task t = new Task(_id, _title, _desc, _status, _complete, _reward);
+        Task t = new Task(_id, _title, _desc, _status, _complete, _reward, _participants);
 
         isOverwrite = list.insert(_id, t);
         registerActionEvent("ADD TASK");
