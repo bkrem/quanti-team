@@ -12,8 +12,15 @@ var testTask = {
     desc: "Test Description",
     status: "To Do",
     complete: "0/?",
-    reward: "200"
+    reward: "200",
+    participants: ["Ben", "Liza", "Bombo"]
 };
+
+// Establish proper task type by adding `address` key,
+// which is added on by the chain automagically
+var taskType = Object.keys(testTask);
+taskType.push('address');
+
 
 describe("Task Manager", function () {
 
@@ -63,13 +70,15 @@ describe("Task Manager", function () {
 
     describe("getTaskAtAddress", function () {
         it("retrieves the task contract registered at the passed address and transforms it into a task object", function (done) {
-            var taskType = [ 'address', 'status', 'reward', 'title', 'complete', 'desc', 'id' ];
 
             taskManager.getTaskAtAddress(refAddr, function (err, task) {
                 assert.isNull(err);
                 assert.notDeepEqual(task, {}, "returned task object should not be empty");
                 assert.sameMembers(Object.keys(task), taskType, "returned task object's keys should adhere to Task type");
                 assert.strictEqual(task.id, testTask.id) // can't deepEqual whole object since `address` can't be predicted
+                for (var prop in task) {
+                    assert.notStrictEqual(task[prop], '', "returned task object should have no empty string values");
+                }
                 done();
             });
         });
