@@ -21,6 +21,10 @@ export default class TaskListContainer extends React.Component {
         };
     }
 
+    setTasks(tasks: Array<Task>) {
+        return this.setState({tasks: tasks});
+    }
+
     async getAllTasks(): Promise {
         try {
             let response = await fetch(ENV.__API_BRIDGE+'/tasks');
@@ -31,37 +35,23 @@ export default class TaskListContainer extends React.Component {
         }
     }
 
-    componentWillMount() {
-        let testRows = () => {
-            let arr = [];
-            let flip = false;
-            for (let i = 0; i < 20; i++) {
-                arr.push({
-                    id: `${i}`,
-                    title: `Task ${i}`,
-                    desc: `desc for task ${i}`,
-                    reward: '200',
-                    complete: '3/5',
-                    status: flip ? 'To Do' : 'Completed',
-                    address: "asdasdadasdas"
-                });
-                flip = !flip;
-            }
-            return arr;
-        };
-        let tr: Array<Task> = testRows();
-        this.setState({tasks: tr});
+
+    async onRefresh(): Promise {
+        console.log("Refreshing TaskList...");
+        this.getAllTasks().then(tasks => this.setTasks(tasks));
     }
 
     componentDidMount() {
-        this.getAllTasks().then(tasks => {
-            this.setState({tasks: tasks});
-        });
+        this.getAllTasks().then(tasks => this.setTasks(tasks));
     }
 
     render() {
         return (
-            <TaskListView navigator={this.props.navigator} tasks={this.state.tasks} />
+            <TaskListView
+                tasks={this.state.tasks}
+                navigator={this.props.navigator}
+                onRefresh={this.onRefresh.bind(this)}
+            />
         );
     }
 }
