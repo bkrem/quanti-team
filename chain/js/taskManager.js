@@ -16,9 +16,7 @@ var chainUtils = require(__js+'/util/chainUtils');
 
     var log = logger.getLogger('eris.chain.taskManager');
 
-    var EVENTS = {
-        ADD_TASK: "ADD_TASK"
-    };
+    var EVENTS = {ADD_TASK: "ADD_TASK"};
 
     // Set up event emitter
     function ChainEventEmitter () {
@@ -68,18 +66,14 @@ var chainUtils = require(__js+'/util/chainUtils');
     function _collectTaskAddresses (startIdx, addresses, callback) {
 
         taskManagerContract.getTaskAtIndex(startIdx, function (error, result) {
-            log.debug("Current addr: " + result[0]);
-            log.debug("Current startIdx: " + startIdx);
-
             if (error) log.debug(error);
-
             // If address is not a 0x0 nullPointer => push to array
             if (result[0] !== 0)
                 addresses.push(result[0]);
 
             // Reassign `startIdx` to next index
             var nextIdx = chainUtils.extractInt(result, 1);
-            log.debug("nextIdx: ", nextIdx);
+
             // Recurse if new startIdx is valid...
             if (nextIdx > 0) {
                 startIdx++;

@@ -6,19 +6,19 @@
 
  'use strict';
 
- import React, { Component } from 'react'
+ import React, { Component } from 'react';
  import {
      View,
      StyleSheet,
      Text,
      Image,
- } from 'react-native'
- import GlobalStyles from '../common/GlobalStyles'
+ } from 'react-native';
+ import GlobalStyles from '../common/GlobalStyles';
 
-type Props = {
+ type Props = {
     author: string,
     thumbURI: string,
-    children: any,
+    children?: any,
 }
 
  export default class Comment extends Component {
@@ -71,4 +71,4 @@ type Props = {
      text: {
 
      }
- })
+ });
