@@ -1,5 +1,6 @@
 /*
- * This is a third-party library module, originally built by the lovely folks at Eris Ltd.
+ * This is a third-party library module (including some small adjustments of my own),
+ * originally built by the lovely folks at Eris Ltd.
  * SOURCE: https://github.com/eris-ltd/hello-eris/blob/master/js/libs/eris-wrapper.js
  */
 
@@ -59,13 +60,22 @@ var logger = require(__libs+'/eris/eris-logger');
         return contract;
     };
 
-    /*
-     Wraps the given callback and executes the 'convert' function on the result,
-     if there is one, before invoking the callback(error, result).
+
+    /**
+     * convertibleCallback - Wraps the given callback and executes each
+     * conversion function in the `pipeline` array on the result in order,
+     * before invoking the callback(error, result).
+     *
+     * @param  {func} callback description
+     * @param  {Array} pipeline description
+     * @return {type}          description
      */
-    var convertibleCallback = function(callback, convert) {
+    var convertibleCallback = function(callback, pipeline) {
         return function(err, res) {
-            callback(err, (res && convert) ? convert(res) : res);
+            if (res && pipeline) {
+                pipeline.forEach(function(convFn) { res = convFn(res) });
+            }
+            callback(err, res);
         };
     };
 
