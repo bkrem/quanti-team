@@ -22,10 +22,11 @@ export default class Root extends React.Component {
     }
 
     render() {
-        console.info("store state at root:", this.state.store.getState());
+        const {store} = this.state;
+        console.info("store state at root:", store.getState());
 
         return (
-            <Provider store={this.state.store}>
+            <Provider store={store}>
                 <App />
             </Provider>
         );

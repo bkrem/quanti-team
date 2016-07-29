@@ -20,13 +20,13 @@ export type Task = {
 type State = {
     didRefresh: boolean;
     isFetching: boolean;
-    tasks: Array<Task>;
+    taskList: Array<Task>;
 }
 
 const initialState: State = {
     didRefresh: false,
     isFetching: false,
-    tasks: [],
+    taskList: [],
 };
 
 export default function tasks(state: State = initialState, action: Action): State {
@@ -45,8 +45,8 @@ export default function tasks(state: State = initialState, action: Action): Stat
             return {
                 ...state,
                 didRefresh: false,
-                isFetching: true,
-                tasks: action.tasks
+                isFetching: false,
+                taskList: action.tasks
             };
 
         default:

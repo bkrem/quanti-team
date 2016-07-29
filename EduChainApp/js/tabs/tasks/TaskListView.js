@@ -29,14 +29,15 @@ type RowsAndSections = {
 type TaskData = Rows | RowsAndSections;
 
 type Props = {
-    tasks: Array<Task>,
-    onRefresh: () => Promise,
-    navigator: Navigator
+    tasks: Array<Task>;
+    refreshing: boolean;
+    onRefresh: () => Promise;
+    navigator: Navigator;
 }
 
 type State = {
-    dataSource: TaskData,
-    loaded: boolean
+    dataSource: TaskData;
+    loaded: boolean;
 }
 
 export default class TaskListView extends React.Component {
@@ -72,6 +73,7 @@ export default class TaskListView extends React.Component {
                     renderRow={this.renderRow}
                     renderSectionHeader={this.renderSectionHeader}
                     renderSeparator={this.renderSeparator}
+                    refreshing={this.props.refreshing}
                     onRefresh={this.props.onRefresh}
                     automaticallyAdjustContentInsets={false}
                     enableEmptySections={true}

@@ -4,54 +4,29 @@
  */
 'use strict';
 
-import React from 'react';
+import {connect} from 'react-redux';
 import TaskListView from './TaskListView';
-import type {Task} from '../../reducers/tasks';
-import ENV from '../../common/Environment';
+import {refreshTaskList, fetchTasks} from '../../actions/tasks';
 
-export default class TaskListContainer extends React.Component {
-    state: {
-        tasks: Array<Task>
+const mapStateToProps = (state) => {
+    return {
+        refreshing: state.tasks.isFetching,
+        tasks: state.tasks.taskList
     };
+};
 
-    constructor() {
-        super();
-        this.state = {
-            tasks: []
-        };
-    }
-
-    setTasks(tasks: Array<Task>) {
-        return this.setState({tasks: tasks});
-    }
-
-    async getAllTasks(): Promise {
-        try {
-            let response = await fetch(ENV.__API_BRIDGE+'/tasks');
-            let responseJSON = await response.json();
-            return responseJSON.data;
-        } catch (err) {
-            console.error("getAllTasks() -> Error: ", err);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onRefresh: () => {
+            dispatch(refreshTaskList());
+            dispatch(fetchTasks());
         }
-    }
+    };
+};
 
+const TaskListContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TaskListView);
 
-    async onRefresh(): Promise {
-        console.log("Refreshing TaskList...");
-        this.getAllTasks().then(tasks => this.setTasks(tasks));
-    }
-
-    componentDidMount() {
-        this.getAllTasks().then(tasks => this.setTasks(tasks));
-    }
-
-    render() {
-        return (
-            <TaskListView
-                tasks={this.state.tasks}
-                navigator={this.props.navigator}
-                onRefresh={this.onRefresh.bind(this)}
-            />
-        );
-    }
-}
+export default TaskListContainer;

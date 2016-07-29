@@ -13,40 +13,28 @@ import {
 } from 'react-native';
 import PureListView from '../lib/facebook/PureListView';
 
-type State = {
-    refreshing: boolean;
-}
-
 type Props = {
+    refreshing: boolean;
     onRefresh: () => Promise;
 }
 
 export default class RefreshablePureListView extends React.Component {
-    state: State;
     props: Props;
 
     constructor(props: Props) {
         super(props);
-        (this: any).onRefresh = this.onRefresh.bind(this);
-
-        this.state = {
-            refreshing: false
-        };
     }
 
-    onRefresh() {
-        this.setState({refreshing: true});
-
-        this.props.onRefresh().then(() =>
-          this.setState({refreshing: false})
-        );
+    // FIXME GH issue #47
+    componentWillMount() {
+        //this.props.onRefresh();
     }
 
     render() {
         const refreshControl =
             (<RefreshControl
-                refreshing={this.state.refreshing}
-                onRefresh={this.onRefresh}
+                refreshing={this.props.refreshing}
+                onRefresh={this.props.onRefresh}
             />);
 
         return (
