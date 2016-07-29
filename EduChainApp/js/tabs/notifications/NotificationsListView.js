@@ -6,11 +6,9 @@
 
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 import {
-    Text,
     View,
-    Image,
     ListView,
     StyleSheet
 } from 'react-native';
@@ -27,7 +25,7 @@ type State = {
     loaded: boolean
 }
 
-export default class NotificationsListView extends Component {
+export default class NotificationsListView extends React.Component {
     state: State;
 
     constructor() {
@@ -35,12 +33,12 @@ export default class NotificationsListView extends Component {
         this.state = {
             dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
             loaded: false
-        }
+        };
     }
 
     componentDidMount() {
         let date = new Date();
-        let dateString = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+        let dateString = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
         let testRows = () => {
             let arr = [];
             for (let i = 1; i < 5; i++) arr.push({
@@ -50,18 +48,18 @@ export default class NotificationsListView extends Component {
                 thumbURI: `https://randomuser.me/api/portraits/thumb/women/${i}.jpg`
             });
             return arr;
-        }
+        };
         let tr = testRows();
 
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(tr),
             loaded: true
-        })
+        });
     }
 
     render() {
         if (!this.state.loaded)
-            return <Loader title='Notifications' />
+            return (<Loader title='Notifications' />);
 
         return (
             <View style={styles.container}>

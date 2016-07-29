@@ -6,21 +6,21 @@
 
  'use strict';
 
- import React, { Component } from 'react';
+ import React from 'react';
  import {
      View,
      StyleSheet,
      Image,
      Text,
- } from 'react-native'
+ } from 'react-native';
 
-type Props = {
+ type Props = {
     username: string,
     name: string,
     teamname?: string,
-}
+ }
 
- export default class ProfileSummary extends Component {
+ export default class ProfileSummary extends React.Component {
      props: Props;
 
      render() {
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
     username: {
         color: '#bbb'
     }
-})
+});

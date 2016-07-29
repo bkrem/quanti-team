@@ -13,7 +13,6 @@ import {
     Navigator,
     StyleSheet
 } from 'react-native';
-import {connect} from 'react-redux';
 import Header from '../../common/Header';
 import GlobalStyles from '../../common/GlobalStyles';
 import Loader from '../../common/Loader';
@@ -21,7 +20,6 @@ import TaskListRow from './TaskListRow';
 import RefreshablePureListView from '../../common/RefreshablePureListView';
 
 import type {Task} from '../../reducers/tasks';
-import {loadTasks} from '../../actions/tasks';
 
 type Rows = Array<TaskListRow>;
 type RowsAndSections = {
