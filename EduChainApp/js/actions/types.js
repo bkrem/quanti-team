@@ -8,7 +8,10 @@
 import type {Task} from '../reducers/tasks';
 
 export type Action =
-    { type: 'TASKS_LOADED', taskList: Array<Task> }
+    { type: 'REFRESH_TASKLIST' }
+  | { type: 'FETCH_TASKS_REQUEST' }
+  | { type: 'FETCH_TASKS_SUCCESS', tasks: Array<Task>, receivedAt: number }
+  | { type: 'FETCH_TASKS_FAIL', error: Object }
   ;
 
 

@@ -18,17 +18,36 @@ export type Task = {
 }
 
 type State = {
-    taskList: Array<Task>
+    didRefresh: boolean;
+    isFetching: boolean;
+    tasks: Array<Task>;
 }
 
 const initialState: State = {
-    taskList: []
+    didRefresh: false,
+    isFetching: false,
+    tasks: [],
 };
 
 export default function tasks(state: State = initialState, action: Action): State {
     switch (action.type) {
-        case 'TASKS_LOADED':
-            return {...state, taskList: action.taskList};
+        case 'REFRESH_TASKLIST':
+            return {...state, didRefresh: true};
+
+        case 'FETCH_TASKS_REQUEST':
+            return {
+                ...state,
+                didRefresh: false,
+                isFetching: true
+            };
+
+        case 'FETCH_TASKS_SUCCESS':
+            return {
+                ...state,
+                didRefresh: false,
+                isFetching: true,
+                tasks: action.tasks
+            };
 
         default:
             return state;
