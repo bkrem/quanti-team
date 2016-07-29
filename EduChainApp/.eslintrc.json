@@ -7,6 +7,7 @@
         "window": false,
         "console": false,
         "module": false,
+        "require": false,
         "fetch": false,
         "__DEV__": true
     },
@@ -23,11 +24,8 @@
         "react"
     ],
     "rules": {
-        "indent": [
-            "error",
-            4,
-            { "SwitchCase": 1 }
-        ],
+        "react/jsx-uses-vars": 1,
+        "indent": ["error", 4, { "SwitchCase": 1 }],
         "linebreak-style": [
             "error",
             "unix"
@@ -46,6 +44,6 @@
         ],
         "no-unused-vars": "warn",
         "no-console": "off",
-        "react/jsx-uses-vars": 1
+        "no-trailing-spaces": "error"
     }
 }
