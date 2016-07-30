@@ -67,8 +67,8 @@ var init = function () {
 
         taskManager.getTaskListSize(function (err, size) {
             _handleErr(err, res);
-            // increment size by one to mint a new id number
-            newId = Number(size) + 1;
+            // increment size by one to mint a new id number & turn it back into string type
+            newId = String(Number(size) + 1);
             res.json({"newId": newId});
         });
     });

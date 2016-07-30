@@ -50,7 +50,7 @@ export default class AddTaskView extends React.Component {
         try {
             let response = await fetch(ENV.__API_BRIDGE+'/new-id');
             let responseJSON = await response.json();
-            let taskId = 'task' + responseJSON.newId;
+            let taskId = responseJSON.newId;
 
             return {...task, id: taskId};
         } catch (err) {
