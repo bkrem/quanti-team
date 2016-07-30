@@ -17,7 +17,7 @@ import type {Tab} from './../reducers/navigation';
 import HomeView from './home/HomeView';
 import NotificationsListView from './notifications/NotificationsListView';
 import TaskListContainer from './tasks/TaskListContainer';
-import ProfileView from './me/ProfileView';
+import ProfileView from './profile/ProfileView';
 import TeamView from './team/TeamView';
 
 const ICONSIZE = 30;
