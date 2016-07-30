@@ -15,8 +15,6 @@ import t from 'tcomb-form-native';
 import Button from 'react-native-button';
 import GlobalStyles from '../../common/GlobalStyles';
 import Header from '../../common/Header';
-import ENV from '../../common/Environment';
-import type {Task} from '../../reducers/tasks';
 
 type Props = {
     addTask: (partialTask: Object) => Promise;
