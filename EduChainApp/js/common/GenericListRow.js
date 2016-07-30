@@ -1,7 +1,7 @@
 /**
  * Created by BK on 28/06/16.
  *
- * @flow
+ * @/////flow <------ Re-enable flow before use!
  */
 
 'use strict';
