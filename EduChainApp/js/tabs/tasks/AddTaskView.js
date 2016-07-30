@@ -46,13 +46,13 @@ export default class AddTaskView extends React.Component {
         }
     }
 
-    async assignTaskId(task: Task): Promise {
+    async assignTaskId(partialTask: Object): Promise {
         try {
             let response = await fetch(ENV.__API_BRIDGE+'/new-id');
             let responseJSON = await response.json();
             let taskId = responseJSON.newId;
 
-            return {...task, id: taskId};
+            return {...partialTask, id: taskId};
         } catch (err) {
             console.error("assignTaskId() -> Error: ", err);
         }
