@@ -45,9 +45,11 @@ export function fetchTasks(): ThunkAction {
 
         return fetch(ENV.__API_BRIDGE+'/tasks')
             .then(response => response.json())
-            .catch(rejection => console.error('`fetchTasks()` rejected:', rejection))
             .then(json =>
                 dispatch(receiveTasks(json.data))
+            )
+            .catch(rejection =>
+                dispatch(fetchTasksFail(rejection))
             );
     };
 }
