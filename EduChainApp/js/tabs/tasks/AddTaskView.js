@@ -19,43 +19,15 @@ import ENV from '../../common/Environment';
 import type {Task} from '../../reducers/tasks';
 
 type Props = {
-    navigator: Navigator
+    addTask: (partialTask: Object) => Promise;
+    navigator: Navigator;
 }
 
 export default class AddTaskView extends React.Component {
+    props: Props;
+
     constructor(props: Props) {
         super(props);
-    }
-
-    async addTask(task: Task): Promise {
-        let request = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(task)
-        };
-
-        try {
-            let response = await fetch(ENV.__API_BRIDGE+'/tasks', request);
-            let isOverwrite = await response.text();
-            console.info("addTask() -> isOverwrite?: ", isOverwrite);
-        } catch (err) {
-            console.error("addTask() -> Error: ", err);
-        }
-    }
-
-    async assignTaskId(partialTask: Object): Promise {
-        try {
-            let response = await fetch(ENV.__API_BRIDGE+'/new-id');
-            let responseJSON = await response.json();
-            let taskId = responseJSON.newId;
-
-            return {...partialTask, id: taskId};
-        } catch (err) {
-            console.error("assignTaskId() -> Error: ", err);
-        }
     }
 
     onPress() {
@@ -75,9 +47,7 @@ export default class AddTaskView extends React.Component {
             creator: "Ben"
         };
 
-        this.assignTaskId(partialTask).then((fullTask) =>
-            this.addTask(fullTask)
-        );
+        this.props.addTask(partialTask);
     }
 
     render() {

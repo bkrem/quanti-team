@@ -10,7 +10,7 @@ import {Navigator} from 'react-native';
 import TabsView from './tabs/TabsView';
 import TaskView from './tabs/tasks/TaskView';
 import SettingsListView from './settings/SettingsListView';
-import AddTaskView from './tabs/tasks/AddTaskView';
+import AddTaskContainer from './tabs/tasks/AddTaskContainer';
 
 export default class EduChainNavigator extends React.Component {
     renderScene(route: Object, navigator: Navigator) {
@@ -20,7 +20,7 @@ export default class EduChainNavigator extends React.Component {
             case 'task':
                 return (<TaskView task={route.task} navigator={navigator} />);
             case 'addTask':
-                return (<AddTaskView navigator={navigator} />);
+                return (<AddTaskContainer navigator={navigator} />);
 
             default:
                 return (<TabsView navigator={navigator} />);

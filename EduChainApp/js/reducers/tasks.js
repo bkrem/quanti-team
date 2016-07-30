@@ -51,6 +51,12 @@ export default function tasks(state: State = initialState, action: Action): Stat
                 taskList: action.tasks
             };
 
+        case 'FETCH_TASKS_FAIL':
+        case 'ADD_TASK_FAIL':
+        case 'NEW_TASK_ID_FAIL':
+            console.error(action.error);
+            return state;
+
         default:
             return state;
     }
