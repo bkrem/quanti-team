@@ -7,6 +7,7 @@ contract Task {
     bytes32 public complete; // mutable
     bytes32 public reward; // immutable
     bytes32 public participants; // mutable
+    bytes32 public creator; // immutable
 
     // Constructor
     function Task(
@@ -16,7 +17,8 @@ contract Task {
         bytes32 _status,
         bytes32 _complete,
         bytes32 _reward,
-        bytes32 _participants
+        bytes32 _participants,
+        bytes32 _creator
         ) {
         id = _id;
         title = _title;
@@ -25,5 +27,6 @@ contract Task {
         complete = _complete;
         reward = _reward;
         participants = _participants;
+        creator = _creator;
     }
 }

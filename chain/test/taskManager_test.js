@@ -13,7 +13,8 @@ var testTask = {
     status: "To Do",
     complete: "0/?",
     reward: "200",
-    participants: ["Ben", "Liza", "Bombo"]
+    participants: ["Ben", "Liza", "Bombo"],
+    creator: "Ben"
 };
 
 // Establish proper task type by adding `address` key,

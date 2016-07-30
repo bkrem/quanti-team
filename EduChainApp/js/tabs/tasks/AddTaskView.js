@@ -71,7 +71,8 @@ export default class AddTaskView extends React.Component {
             ...taskForm,
             complete: "IMPLEMENT ME",
             reward: "200",
-            participants: ["Ben", "Liza", "Bombo"]
+            participants: ["Ben", "Liza", "Bombo"],
+            creator: "Ben"
         };
 
         this.assignTaskId(partialTask).then((fullTask) =>

@@ -14,6 +14,8 @@ export type Task = {
     reward: string,
     complete: string,
     status: string,
+    participants: Array<string>,
+    creator: string,
     address?: string
 }
 

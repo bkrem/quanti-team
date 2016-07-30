@@ -124,6 +124,9 @@ var chainUtils = require(__js+'/util/chainUtils');
             },
             participants: function (callback) {
                 contract.participants( eris.convertibleCallback(callback, [eris.hex2str, JSON.parse]) );
+            },
+            creator: function (callback) {
+                contract.creator( eris.convertibleCallback(callback, [eris.hex2str]) );
             }
         },
         function (err, results) {
@@ -153,6 +156,7 @@ var chainUtils = require(__js+'/util/chainUtils');
             eris.str2hex(task.complete),
             eris.str2hex(task.reward),
             eris.str2hex(JSON.stringify(task.participants)),
+            eris.str2hex(task.creator),
              function (err, result) {
                  err ? log.error("addTask() -> Error: " + err.stack) : log.debug("Overwrite?: " + result);
                  callback(err, result);
