@@ -38,14 +38,14 @@ export function fetchTasksFail(error: Object): Action {
 // ###############
 // THUNK ACTIONS
 // ###############
-// TODO Handle failed Promise
-export function fetchTasks (): ThunkAction {
+export function fetchTasks(): ThunkAction {
     return (dispatch) => {
         // State is set to `isFetching: true`
         dispatch(requestTasks());
 
         return fetch(ENV.__API_BRIDGE+'/tasks')
             .then(response => response.json())
+            .catch(rejection => console.error('`fetchTasks()` rejected:', rejection))
             .then(json =>
                 dispatch(receiveTasks(json.data))
             );
