@@ -147,16 +147,18 @@ var chainUtils = require(__js+'/util/chainUtils');
      * @return {void}
      */
     function addTask (task, callback) {
+        var hexTask = chainUtils.marshalForChain(task);
+
         // TODO refactor, find a DRY solution
         taskManagerContract.addTask(
-            eris.str2hex(task.id),
-            eris.str2hex(task.title),
-            eris.str2hex(task.desc),
-            eris.str2hex(task.status),
-            eris.str2hex(task.complete),
-            eris.str2hex(task.reward),
-            eris.str2hex(JSON.stringify(task.participants)),
-            eris.str2hex(task.creator),
+            hexTask.id,
+            hexTask.title,
+            hexTask.desc,
+            hexTask.status,
+            hexTask.complete,
+            hexTask.reward,
+            hexTask.participants,
+            hexTask.creator,
              function (err, result) {
                  err ? log.error("addTask() -> Error: " + err.stack) : log.debug("Overwrite?: " + result);
                  callback(err, result);

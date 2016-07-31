@@ -3,6 +3,8 @@
  * transforming data coming from the Eris-TenderMint Chain.
  */
 
+var eris = require(__libs+'/eris/eris-wrapper');
+
 var chainUtils = {
 
     /**
@@ -14,6 +16,32 @@ var chainUtils = {
      */
     extractInt: function (bcObject, index) {
         return bcObject[index]['c'][0];
+    },
+
+
+    /**
+     * marshalForChain - description
+     *
+     * @param  {type} obj description
+     * @return {type}     description
+     */
+    marshalForChain: function (obj) {
+        var hexObj = {};
+
+        for (var prop in obj) {
+            if ({}.hasOwnProperty.call(obj, prop)) {
+                var val = obj[prop];
+
+                if (Array.isArray(val)) {
+                    val = JSON.stringify(val);
+                } else if (typeof val !== "string") {
+                    throw new Error("Error at marshalForChain: " + prop + ":" + val + " is not a string.");
+                }
+                hexObj[prop] = eris.str2hex(val);
+            }
+        }
+
+        return hexObj;
     }
 };
 
