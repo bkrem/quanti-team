@@ -15,7 +15,7 @@ contract TaskManager {
         _ // `_` is synonymous to JS middleware's `next()`
     }*/
 
-  // TODO extend with eventObject if possible; `bytes32[]`?
+    // TODO extend with eventObject if possible; `bytes32[]`?
     event ActionEvent(address indexed userAddr, bytes32 actionType);
     function registerActionEvent(bytes32 actionType) {
       ActionEvent(msg.sender, actionType);
@@ -43,7 +43,6 @@ contract TaskManager {
         return isOverwrite;
     }
 
-    // TODO
     function getTaskAtIndex(uint _idx) constant returns (address, uint) {
         registerActionEvent("GET TASK");
         return list.valueAtIndexHasNext(_idx);
