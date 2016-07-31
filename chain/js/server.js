@@ -5,7 +5,6 @@ var async = require('async');
 
 var logger = require(__libs+'/eris/eris-logger');
 var taskManager = require(__js+'/taskManager');
-var taskDb = require(__js+'/taskDb');
 
 var init = function () {
 
