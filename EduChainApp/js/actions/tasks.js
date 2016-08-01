@@ -7,6 +7,7 @@
 import type {Action, ThunkAction} from './types';
 import type {Task} from '../reducers/tasks';
 import ENV from '../common/Environment';
+import {assignNewId} from './util';
 
 
 // #############################
@@ -21,6 +22,7 @@ export function refreshTaskList(): Action {
 // #############################
 // `/tasks` API ENDPOINT ACTIONS
 // #############################
+// GET
 export function requestTasks(): Action {
     return {
         type: 'FETCH_TASKS_REQUEST'
@@ -40,6 +42,8 @@ export function fetchTasksFail(error: Object): Action {
     };
 }
 
+// POST
+// NOTE These actions do not modify state
 export function requestAddTask(): Action {
     return {
         type: 'ADD_TASK_REQUEST'
@@ -54,29 +58,6 @@ export function responseAddTask(isOverwrite: boolean): Action {
 export function addTaskFail(error: Object): Action {
     return {
         type: 'ADD_TASK_FAIL',
-        error
-    };
-}
-
-// ##############################
-// `/new-id` API ENDPOINT ACTIONS
-// NOTE These actions do not modify state,
-// they simply pipe into the `addTask()` func
-// ##############################
-export function requestNewTaskId(): Action {
-    return {
-        type: 'NEW_TASK_ID_REQUEST'
-    };
-}
-export function receiveNewTaskId(newId: string): Action {
-    return {
-        type: 'NEW_TASK_ID_SUCCESS',
-        newId
-    };
-}
-export function assignNewTaskIdFail(error: Object): Action {
-    return {
-        type: 'NEW_TASK_ID_FAIL',
         error
     };
 }
@@ -105,7 +86,7 @@ export function addTask(partialTask: Task): ThunkAction {
     return (dispatch) => {
         dispatch(requestAddTask());
 
-        return _assignNewTaskId(dispatch).then(newId => {
+        return assignNewId(dispatch, 'task').then(newId => {
             let task = {...partialTask, id: newId};
             let request = {
                 method: 'POST',
@@ -128,7 +109,7 @@ export function addTask(partialTask: Task): ThunkAction {
     };
 }
 
-function _assignNewTaskId(dispatch): Promise {
+/*function _assignNewTaskId(dispatch): Promise {
     dispatch(requestNewTaskId());
 
     return new Promise((resolve, reject) => {
@@ -143,24 +124,4 @@ function _assignNewTaskId(dispatch): Promise {
                 reject(rejection);
             });
     });
-}
-
-
-/* async addTask(task: Task): Promise {
-    let request = {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(task)
-    };
-
-    try {
-        let response = await fetch(ENV.__API_BRIDGE+'/tasks', request);
-        let isOverwrite = await response.text();
-        console.info("addTask() -> isOverwrite?: ", isOverwrite);
-    } catch (err) {
-        console.error("addTask() -> Error: ", err);
-    }
 }*/
