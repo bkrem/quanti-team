@@ -81,7 +81,6 @@ var chainUtils = require(__js+'/util/chainUtils');
                 // ...or hand over to start collecting data
             } else {
                 log.info('Found '+addresses.length+' task addresses.');
-                // createDealObjects(addresses)
                 log.info(addresses);
                 return callback(error, addresses);
             }
