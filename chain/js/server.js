@@ -22,7 +22,7 @@ var init = function () {
 
     function _handleErr (err, res) {
         if (err) {
-            console.error(err.stack);
+            log.error(err.stack);
             res.sendStatus(500);
         }
     }
