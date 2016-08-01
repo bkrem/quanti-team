@@ -21,6 +21,10 @@ export type Action =
   | { type: 'ADD_TASK_REQUEST' }
   | { type: 'ADD_TASK_SUCCESS', isOverwrite: boolean }
   | { type: 'ADD_TASK_FAIL', error: Object }
+
+  | { type: 'ADD_USER_REQUEST' }
+  | { type: 'ADD_USER_SUCCESS', isOverwrite: boolean}
+  | { type: 'ADD_TASK_FAIL', error: Object  }
   ;
 
 export type PromiseAction = Promise<Action>;
