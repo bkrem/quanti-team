@@ -2,7 +2,6 @@
 
 var assert = require('chai').assert;
 var app = require('../app');
-var eris = require(__libs+'/eris/eris-wrapper');
 var taskManager = require('../js/taskManager');
 
 var refAddr;
@@ -26,11 +25,10 @@ taskType.push('address');
 describe("Task Manager", function () {
 
     describe("addTask", function () {
-        it("adds the given task to the chain and returns true if a record was overwritten, false otherwise", function(done) {
+        it("adds the given task object to the chain and returns true if a record was overwritten, false otherwise", function(done) {
             taskManager.addTask(testTask, function (error, result) {
                 assert.isNull(error);
-                // TODO reactivate this and the inverse when deletion is implemented
-                // assert.equal(result, false, "no overwrite on first pass => false");
+                assert.isBoolean(result, "`result` should be a boolean");
                 done();
             });
         });
@@ -78,7 +76,8 @@ describe("Task Manager", function () {
                 assert.sameMembers(Object.keys(task), taskType, "returned task object's keys should adhere to Task type");
                 assert.strictEqual(task.id, testTask.id) // can't deepEqual whole object since `address` can't be predicted
                 for (var prop in task) {
-                    assert.notStrictEqual(task[prop], '', "returned task object should have no empty string values");
+                    if ({}.hasOwnProperty.call(task, prop))
+                        assert.notStrictEqual(task[prop], "", "returned task object should have no empty string values");
                 }
                 done();
             });
