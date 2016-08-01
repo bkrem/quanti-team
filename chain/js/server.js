@@ -61,15 +61,24 @@ var init = function () {
         });
     });
 
-    app.get('/new-id', function (req, res) {
+    // TODO not DRY, abstract this further
+    app.get('/new-id/:target', function (req, res) {
         var newId;
 
-        taskManager.getTaskListSize(function (err, size) {
-            _handleErr(err, res);
-            // increment size by one to mint a new id number & turn it back into string type
-            newId = String(Number(size) + 1);
-            res.json({"newId": newId});
-        });
+        log.debug("GET /new-id/" + req.params.target);
+        switch (req.params.target) {
+            case 'task':
+                return taskManager.getTaskListSize(function (err, size) {
+                    _handleErr(err, res);
+                    // increment size by one to mint a new id number & turn it back into string type
+                    newId = String(Number(size) + 1);
+                    res.json({"newId": newId});
+                });
+
+            default:
+                var err = "Could not match route /new-id/" + req.params.target;
+                _handleErr(err, res);
+        }
     });
 
     // TODO add route for userid/address to get only related tasks `/mytasks`
