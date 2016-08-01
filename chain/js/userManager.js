@@ -3,6 +3,7 @@ var util = require('util');
 var EventEmitter = require('events');
 
 var chainUtils = require(__js+'/util/chainUtils');
+var eris = require(__libs+'/eris/eris-wrapper');
 var logger = require(__libs+'/eris/eris-logger');
 var log = logger.getLogger('eris.chain.userManager');
 
