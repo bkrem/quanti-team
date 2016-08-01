@@ -1,21 +1,15 @@
 jobs:
 
-# CONTRACT DEPLOYMENTS
-#- name: SequenceList
-#  job:
-#    deploy:
-#      contract: SequenceList.sol
-#      wait: true
-
-#- name: Task
-#  job:
-#    deploy:
-#      contract: Task.sol
-#      wait: true
-
 - name: TaskManager
   job:
     deploy:
       contract: TaskManager.sol
+      instance: all
+      wait: true
+
+- name: UserManager
+  job:
+    deploy:
+      contract: UserManager.sol
       instance: all
       wait: true
