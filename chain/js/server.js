@@ -37,7 +37,7 @@ var init = function () {
         async.waterfall([
             // Get all available task contract addresses
             taskManager.getAllTaskAddresses,
-            // Map each address to the contract and callback an array of task objects
+            // Map each address to its task contract and callback an array of task objects
             function (addresses, callback) {
                 async.map(addresses, taskManager.getTaskAtAddress, function (err, tasks) {
                     callback(err, tasks);
