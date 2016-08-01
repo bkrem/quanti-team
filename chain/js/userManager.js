@@ -18,8 +18,8 @@ var userAbi = JSON.parse(fs.readFileSync(__abi+'/User'));
 // Instantiate connection
 var erisWrapper = new eris.NewWrapper(__settings.eris.chain.host, __settings.eris.chain.port, accounts.simplechain_full_000);
 // Create contract objects
-var userManagerContract = erisWrapper.createContract(taskManagerAbi, epmJSON['UserManager']);
-var userContract = erisWrapper.createContract(taskAbi, epmJSON['User']);
+var userManagerContract = erisWrapper.createContract(userManagerAbi, epmJSON['UserManager']);
+var userContract = erisWrapper.createContract(userAbi, epmJSON['User']);
 
 
 // Set up event emitter
@@ -30,6 +30,13 @@ util.inherits(ChainEventEmitter, EventEmitter);
 var chainEvents = new ChainEventEmitter();
 
 
+/**
+ * addUser - description
+ *
+ * @param  {type} user     description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
 function addUser (user, callback) {
     var hexUser = chainUtils.marshalForChain(user);
 
@@ -46,9 +53,21 @@ function addUser (user, callback) {
     );
 }
 
+
+/**
+ * getUserListSize - description
+ *
+ * @param  {type} callback description
+ * @return {type}          description
+ */
 function getUserListSize (callback) {
     userManagerContract.getUserListSize(function (error, size) {
         error ? log.error("getUserListSize() -> Error: " + error.stack) : log.debug("getUserListSize: " + size);
         callback(error, size);
     });
 }
+
+module.exports = {
+    addUser: addUser,
+    getUserListSize: getUserListSize
+};
