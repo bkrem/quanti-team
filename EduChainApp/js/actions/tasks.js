@@ -51,7 +51,7 @@ export function requestAddTask(): Action {
 }
 export function responseAddTask(isOverwrite: boolean): Action {
     return {
-        type: 'ADD_TASK_RESPONSE',
+        type: 'ADD_TASK_SUCCESS',
         isOverwrite
     };
 }
