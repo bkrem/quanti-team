@@ -72,7 +72,7 @@ var chainUtils = require(__js+'/util/chainUtils');
                 addresses.push(result[0]);
 
             // Reassign `startIdx` to next index
-            var nextIdx = chainUtils.extractInt(result, 1);
+            var nextIdx = chainUtils.extractIntFromArray(result, 1);
 
             // Recurse if new startIdx is valid...
             if (nextIdx > 0) {
@@ -191,7 +191,7 @@ var chainUtils = require(__js+'/util/chainUtils');
         taskManagerContract.getTaskAtIndex(idx, function (error, data) {
             error ? log.error("getTaskAtIndex() -> Error: " + error.stack) : log.debug("getTaskAtIndex " + idx, data);
             // Extract `nextIdx` from the encasing object + array
-            data[1] = chainUtils.extractInt(data, 1);
+            data[1] = chainUtils.extractIntFromArray(data, 1);
             callback(error, data);
         });
     }

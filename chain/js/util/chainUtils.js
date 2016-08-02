@@ -11,13 +11,23 @@ var chainUtils = {
      * extractInt - Extracts an integer from a `uint`/`int` Solidity type value
      *
      * @param  {type} bcObject description
+     * @return {type}          description
+     */
+    extractInt: function (bcObject) {
+        return bcObject['c'][0];
+    },
+
+    /**
+     * extractIntFromArray - Extracts an integer from a `uint`/`int` Solidity
+     * type value nested inside an array.
+     *
+     * @param  {type} bcObject description
      * @param  {type} index    description
      * @return {type}          description
      */
-    extractInt: function (bcObject, index) {
+    extractIntFromArray: function (bcObject, index) {
         return bcObject[index]['c'][0];
     },
-
 
     /**
      * marshalForChain - description
