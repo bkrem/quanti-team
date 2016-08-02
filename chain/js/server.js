@@ -20,6 +20,13 @@ var init = function () {
     app.use(bodyParser.json());
 
 
+    /**
+     * _handleErr - description
+     *
+     * @param  {type} err description
+     * @param  {type} res description
+     * @return {type}     description
+     */
     function _handleErr (err, res) {
         if (err) {
             log.error(err.stack);
@@ -46,7 +53,7 @@ var init = function () {
         ], function (err, tasks) {
             _handleErr(err, res);
             log.info("GET /tasks: ", tasks);
-            res.json({"data": tasks});
+            res.json({data: tasks});
         });
     });
 
@@ -72,7 +79,7 @@ var init = function () {
                     _handleErr(err, res);
                     // increment size by one to mint a new id number & turn it back into string type
                     newId = String(Number(size) + 1);
-                    res.json({"newId": newId});
+                    res.json({newId: newId});
                 });
 
             default:
