@@ -156,9 +156,9 @@ var chainUtils = require(__js+'/util/chainUtils');
             hexTask.reward,
             hexTask.participants,
             hexTask.creator,
-             function (err, result) {
-                 err ? log.error("addTask() -> Error: " + err.stack) : log.debug("Overwrite?: " + result);
-                 callback(err, result);
+             function (err, address) {
+                 err ? log.error("addTask() -> Error: " + err.stack) : log.debug("Task address: " + address);
+                 callback(err, address);
         });
     }
 

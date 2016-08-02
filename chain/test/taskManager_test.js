@@ -25,10 +25,10 @@ taskType.push('address');
 describe("Task Manager", function () {
 
     describe("addTask", function () {
-        it("adds the given task object to the chain and returns true if a record was overwritten, false otherwise", function(done) {
-            taskManager.addTask(testTask, function (error, result) {
+        it("adds the given task object to the chain and returns the registered task's hex address", function(done) {
+            taskManager.addTask(testTask, function (error, address) {
                 assert.isNull(error);
-                assert.isBoolean(result, "`result` should be a boolean");
+                assert.isString(address, "`address` should be the registered task's hex address");
                 done();
             });
         });

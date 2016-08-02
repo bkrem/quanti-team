@@ -49,10 +49,10 @@ export function requestAddTask(): Action {
         type: 'ADD_TASK_REQUEST'
     };
 }
-export function responseAddTask(isOverwrite: boolean): Action {
+export function responseAddTask(address: string): Action {
     return {
         type: 'ADD_TASK_SUCCESS',
-        isOverwrite
+        address
     };
 }
 export function addTaskFail(error: Object): Action {
@@ -99,8 +99,8 @@ export function addTask(partialTask: Task): ThunkAction {
 
             fetch(ENV.__API_BRIDGE+'/tasks', request)
                 .then(response => response.text())
-                .then(isOverwrite =>
-                    dispatch(responseAddTask(isOverwrite))
+                .then(address =>
+                    dispatch(responseAddTask(address))
                 )
                 .catch(rejection =>
                     dispatch(addTaskFail(rejection))

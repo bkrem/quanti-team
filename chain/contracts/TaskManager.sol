@@ -34,13 +34,13 @@ contract TaskManager {
         bytes32 _participants,
         bytes32 _creator
         )
-        returns (bool isOverwrite)
+        returns (Task t)
     {
-        Task t = new Task(_id, _title, _desc, _status, _complete, _reward, _participants, _creator);
+        t = new Task(_id, _title, _desc, _status, _complete, _reward, _participants, _creator);
 
-        isOverwrite = list.insert(_id, t);
+        bool isOverwrite = list.insert(_id, t);
         registerActionEvent("ADD TASK");
-        return isOverwrite;
+        return t;
     }
 
     function getTaskAtIndex(uint _idx) constant returns (address, uint) {
