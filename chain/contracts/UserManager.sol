@@ -14,13 +14,14 @@ contract UserManager {
     function addUser(
         bytes32 _id,
         bytes32 _handle,
+        bytes32 _email,
         bytes32 _name,
         bytes32 _score,
         bytes32 _teamId
         )
         returns (bool isOverwrite)
         {
-            User u = new User(_id, _handle, _name, _score, _teamId);
+            User u = new User(_id, _handle, _email, _name, _score, _teamId);
 
             isOverwrite = list.insert(_id, u);
             registerActionEvent("ADD USER");
