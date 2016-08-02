@@ -8,10 +8,10 @@ var eris = require(__libs+'/eris/eris-wrapper');
 var chainUtils = {
 
     /**
-     * extractInt - Extracts an integer from a `uint`/`int` Solidity type value
+     * extractInt - Extracts an integer from a `uint`/`int` Solidity type value.
      *
-     * @param  {type} bcObject description
-     * @return {type}          description
+     * @param  {Object} bcObject The blockchain object to be extracted from.
+     * @return {int}             The extracted integer.
      */
     extractInt: function (bcObject) {
         return bcObject['c'][0];
@@ -21,9 +21,9 @@ var chainUtils = {
      * extractIntFromArray - Extracts an integer from a `uint`/`int` Solidity
      * type value nested inside an array.
      *
-     * @param  {type} bcObject description
-     * @param  {type} index    description
-     * @return {type}          description
+     * @param  {Object} bcObject The blockchain object to be extracted from.
+     * @param  {int} index    Index position of the int in the array.
+     * @return {int}          The extracted integer.
      */
     extractIntFromArray: function (bcObject, index) {
         return bcObject[index]['c'][0];
