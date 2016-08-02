@@ -6,7 +6,7 @@
 var fs = require('fs');
 var EventEmitter = require('events');
 var util = require('util');
-var async = require('async');
+var Async = require('async');
 
 var logger = require(__libs+'/eris/eris-logger');
 var eris = require(__libs+'/eris/eris-wrapper');
@@ -98,11 +98,9 @@ var chainUtils = require(__js+'/util/chainUtils');
      */
     function _createTaskFromContract (contract, callback) {
         var task = {};
-        // Get all keys purely related to a task object by filtering out the `abi` key
-        // var taskKeys = Object.keys(contract).filter(function (key) { return key !== 'abi'; });
 
         /* TODO potential refactor to iterate all keys automatically with `taskKeys` */
-        async.parallel({
+        Async.parallel({
             id: function (callback) {
                     contract.id( eris.convertibleCallback(callback, [eris.hex2str]) );
                 },
