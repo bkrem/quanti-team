@@ -12,7 +12,7 @@ import t from 'tcomb-form-native';
 import Button from 'react-native-button';
 import Colors from '../common/Colors';
 import GlobalStyles from '../common/GlobalStyles';
-var _ = require('lodash');
+var cloneDeep = require('lodash').cloneDeep;
 
 export default class LoginForm extends React.Component {
     constructor(props) {
@@ -50,7 +50,7 @@ const Login = t.struct({
     username: t.String,
     password: t.String
 });
-let formStyles = _.cloneDeep(Form.stylesheet);
+let formStyles = cloneDeep(Form.stylesheet);
 formStyles.controlLabel.normal.color = Colors.softWhite;
 formStyles.textbox.normal.color = Colors.softWhite;
 formStyles.textbox.error.color = Colors.softWhite;
