@@ -1,11 +1,13 @@
 contract User {
 
-    bytes32 id;
-    bytes32 handle;
-    bytes32 email;
-    bytes32 name;
-    bytes32 score;
-    bytes32 teamId;
+    bytes32 public id;
+    bytes32 public handle;
+    bytes32 public email;
+    bytes32 public name;
+    bytes32 public score;
+    bytes32 public teamId;
+
+    bytes public tasks;
 
     // Constructor
     function User(
