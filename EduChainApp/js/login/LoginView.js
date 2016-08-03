@@ -5,16 +5,7 @@
 'use strict';
 
 import React from 'react';
-import {
-     View,
-     StyleSheet,
-     Text,
-     Platform,
-     TouchableOpacity,
-     Navigator
-} from 'react-native';
-import GlobalStyles from '../common/GlobalStyles';
-import Colors from '../common/Colors';
+import {Navigator} from 'react-native';
 import WelcomeView from '../common/WelcomeView';
 import LoginForm from './LoginForm';
 
