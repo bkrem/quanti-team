@@ -13,23 +13,32 @@ contract UserManager {
     // TODO ensure there can't be overwrites from addUser -> make it proper CRUD
     function addUser(
         bytes32 _id,
-        bytes32 _handle,
+        bytes32 _username,
         bytes32 _email,
         bytes32 _name,
         bytes32 _score,
-        bytes32 _teamId
+        bytes32 _teamId,
+        bytes32 _passwHash
         )
-        returns (bool isOverwrite)
+        returns (User u)
         {
-            User u = new User(_id, _handle, _email, _name, _score, _teamId);
-
-            isOverwrite = list.insert(_id, u);
             registerActionEvent("ADD USER");
+            u = new User(_id, _username, _email, _name, _score, _teamId, _passwHash);
+
+            // index on `username` for User map for account retrieval on login
+            bool isOverwrite = list.insert(_username, u);
+            // TODO needs a verification of insert success
+            return u;
     }
 
     function getUserListSize() constant returns (uint) {
-        registerActionEvent("GET SIZE");
+        registerActionEvent("GET USERLIST SIZE");
         return list.size();
 
+    }
+
+    function getUserAddress(bytes32 username) returns (address) {
+        registerActionEvent("LINK TO TASK");
+        return list.value(username);
     }
 }
