@@ -8,20 +8,44 @@ import React from 'react';
 import {
     View,
 } from 'react-native';
+import {connect} from 'react-redux';
 import t from 'tcomb-form-native';
 import Button from 'react-native-button';
 import Colors from '../common/Colors';
 import GlobalStyles from '../common/GlobalStyles';
+import {signup} from '../actions/user';
+import type {User} from '../reducers/user';
+
 var cloneDeep = require('lodash').cloneDeep;
 
-export default class SignupForm extends React.Component {
+type Props = {
+    signup: (form: User) => void;
+}
+
+class SignupFormView extends React.Component {
+    props: Props;
+
     constructor(props) {
         super(props);
     }
 
     onPress() {
-        const formVals = this.refs.form.getValue();
-        if (formVals) console.log(formVals);
+        let formVals = this.refs.form.getValue();
+        if (formVals) {
+            console.log('Submitted form:\n', formVals);
+            console.log('Passwords match?: ', formVals.password === formVals.confirmPassword);
+            //delete formVals.confirmPassword;
+            //console.log(formVals);
+            this.props.signup({
+                id: String(12),
+                name: "Ben Kremer",
+                username: "bkrem_",
+                score: String(0),
+                email: "ben.kremer@hotmail.co.uk",
+                teamId: String(1337),
+                passwHash: '6asdgasda7d8a8sd8a9g7asd'
+            });
+        }
     }
 
     render() {
@@ -63,6 +87,26 @@ const options = {
     fields: {
         password: {
             secureTextEntry: true
+        },
+        confirmPassword: {
+            secureTextEntry: true
         }
     }
 };
+
+
+// ##############
+// REDUX BINDINGS
+// ##############
+const mapStateToProps = (state) => {
+    return {}; // no state to map for now
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signup: (form) => dispatch(signup(form))
+    };
+};
+
+const SignupForm = connect(mapStateToProps, mapDispatchToProps)(SignupFormView);
+export default SignupForm;
