@@ -108,20 +108,3 @@ export function addTask(partialTask: Task): ThunkAction {
         });
     };
 }
-
-/*function _assignNewTaskId(dispatch): Promise {
-    dispatch(requestNewTaskId());
-
-    return new Promise((resolve, reject) => {
-        fetch(ENV.__API_BRIDGE+'/new-id')
-            .then(response => response.json())
-            .then(json => {
-                dispatch(receiveNewTaskId(json.newId));
-                resolve(json.newId);
-            })
-            .catch(rejection => {
-                dispatch(assignNewTaskIdFail(rejection));
-                reject(rejection);
-            });
-    });
-}*/
