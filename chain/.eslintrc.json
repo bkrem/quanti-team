@@ -9,7 +9,8 @@
         "__settings": false,
         "__config": false,
         "__contracts": false,
-        "__abi": false
+        "__abi": false,
+        "__NULL_ADDRESS": false
     },
     "extends": "eslint:recommended",
     "parserOptions": {

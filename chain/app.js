@@ -6,6 +6,8 @@ global.__config = __dirname + '/config';
 global.__contracts = __dirname + '/solidity/contracts';
 global.__abi = __dirname + '/abi';
 
+global.__NULL_ADDRESS = "0000000000000000000000000000000000000000";
+
 var fs = require('fs');
 var toml = require('toml-js');
 
