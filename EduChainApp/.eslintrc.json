@@ -9,6 +9,7 @@
         "module": false,
         "require": false,
         "fetch": false,
+        "store": false,
         "__DEV__": true
     },
     "extends": "eslint:recommended",
