@@ -8,5 +8,6 @@ npm-debug.log
 abi/*
 epm.json
 
-# Ignore test coverage reports
-coverage/*
+# Ignore istanbul config & test coverage reports
+.istanbul.yml
+test/coverage/*
