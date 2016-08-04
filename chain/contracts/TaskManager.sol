@@ -45,21 +45,22 @@ contract TaskManager {
     }
 
     function getTaskAtIndex(uint _idx) constant returns (address, uint) {
-        registerActionEvent("GET TASK");
+        registerActionEvent("GET TASK AT INDEX");
         return list.valueAtIndexHasNext(_idx);
     }
 
-    function getTaskListSize() constant returns (uint) {
-        registerActionEvent("GET TASKLIST SIZE");
-        return list.size();
-
+    function getTaskAddress(bytes32 _id) constant returns (address) {
+        registerActionEvent("GET TASK ADDRESS");
+        return list.value(_id);
     }
 
     function getTaskKeyAtIndex(uint _idx) constant returns (bytes32) {
         return list.keyAtIndex(_idx);
     }
 
-    function getTaskAddress(bytes32 _id) constant returns (address) {
-        return list.value(_id);
+    function getTaskListSize() constant returns (uint) {
+        registerActionEvent("GET TASKLIST SIZE");
+        return list.size();
+
     }
 }
