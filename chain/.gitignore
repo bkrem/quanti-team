@@ -7,3 +7,6 @@ npm-debug.log
 # Don't track compile-time generated data
 abi/*
 epm.json
+
+# Ignore test coverage reports
+coverage/*
