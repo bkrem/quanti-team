@@ -40,6 +40,7 @@ contract TaskManager {
 
         bool isOverwrite = list.insert(_id, t);
         registerActionEvent("ADD TASK");
+        // TODO needs a verification of insert success
         return t;
     }
 
@@ -49,12 +50,16 @@ contract TaskManager {
     }
 
     function getTaskListSize() constant returns (uint) {
-        registerActionEvent("GET SIZE");
+        registerActionEvent("GET TASKLIST SIZE");
         return list.size();
 
     }
 
     function getTaskKeyAtIndex(uint _idx) constant returns (bytes32) {
         return list.keyAtIndex(_idx);
+    }
+
+    function getTaskAddress(bytes32 _id) constant returns (address) {
+        return list.value(_id);
     }
 }
