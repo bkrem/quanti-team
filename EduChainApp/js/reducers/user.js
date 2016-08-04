@@ -7,11 +7,11 @@
 import type {Action} from '../actions/types';
 
 export type User = {
-    id: number;
+    id: string;
     name: string;
-    handle: string;
-    score: number;
-    teamId?: number;
+    username: string;
+    score: string;
+    teamId?: string;
     email?: string;
     address?: string;
 }
