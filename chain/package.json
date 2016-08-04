@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "node app.js",
-    "test": "./node_modules/.bin/mocha --reporter spec",
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R progress",
     "stop": "eris services stop",
     "servicelog": "eris services logs idi -f",
     "chainlog": "eris chains logs simplechain -f",
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "istanbul": "^0.4.4",
     "mocha": "^2.5.3"
   }
 }
