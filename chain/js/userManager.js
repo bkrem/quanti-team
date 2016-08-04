@@ -96,7 +96,41 @@ function addUser (user, callback) {
         hexUser.teamId,
         hexUser.passwHash,
         function (err, address) {
-            err ? log.error("addUser() -> Error: " + err.stack) : log.debug("User address: " + address);
+            err ? log.error("addUser() -> Error: " + err.stack) : log.debug("addUser() -> User contract address: " + address);
+            // Check if `isOverwrite` null address was returned
+            if (address === __NULL_ADDRESS)
+                err = "addUser() for username " + user.username + " failed: username already exists";
+
+            callback(err, address);
+        }
+    );
+}
+
+/**
+ * updateUser - description
+ *
+ * @param  {type} user     description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
+function updateUser (user, callback) {
+    var hexUser = chainUtils.marshalForChain(user);
+
+    userManagerContract.updateUser(
+        hexUser.id,
+        hexUser.username,
+        hexUser.email,
+        hexUser.name,
+        hexUser.score,
+        hexUser.teamId,
+        hexUser.passwHash,
+        function (err, address) {
+            err ? log.error("updateUser() -> Error: " + err.stack)
+                : log.debug("updateUser() -> Updated successfully: " + address);
+            // Check if `isOverwrite` null address was returned
+            if (address === __NULL_ADDRESS)
+                err = "updateUser() for username " + user.username + " failed: record to be updated does not exist";
+
             callback(err, address);
         }
     );
@@ -166,6 +200,7 @@ function linkToTask (username, taskAddr, callback) {
 
 module.exports = {
     addUser: addUser,
+    updateUser: updateUser,
     getUserAddress: getUserAddress,
     getUser: getUser,
     getUserListSize: getUserListSize,

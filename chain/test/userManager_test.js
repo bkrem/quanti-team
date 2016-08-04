@@ -25,21 +25,33 @@ describe('User Manager', function () {
     this.timeout(3000);
 
     describe("addUser()", function () {
-        it("adds the given task to the chain and returns true if a record was overwritten, false otherwise", function (done) {
+        it("adds the given task to the chain and returns its address if successful, a null address otherwise", function (done) {
             userManager.addUser(testUser, function (error, address) {
                 assert.isNull(error);
                 assert.isString(address, "`address` should be a string");
-                refAddr = address;
                 done();
             })
         });
+    });
+
+    describe("updateUser()", function () {
+        it("updates an existing User contract; returns true if successful, false otherwise", function (done) {
+            var userToUpdate = testUser;
+            userToUpdate.name = "Updated name";
+            userManager.updateUser(testUser, function (err, success) {
+                assert.isNull(err);
+                assert.strictEqual(success, true);
+                done();
+            });
+        })
     });
 
     describe("getUserAddress()", function () {
         it("returns the contract address for the passed username", function (done) {
             userManager.getUserAddress(testUser.username, function(err, address) {
                 assert.isNull(err);
-                assert.strictEqual(address, refAddr, "returned address should match the testUser reference address");
+                assert.notStrictEqual(address, __NULL_ADDRESS, "returned address should match the testUser reference address");
+                refAddr = address;
                 done();
             })
         })
