@@ -132,7 +132,7 @@ function getUserAddress (username, callback) {
 }
 
 /**
- * getUserAtAddress - description
+ * getUser - description
  *
  * @param  {type} address  description
  * @param  {type} callback description
