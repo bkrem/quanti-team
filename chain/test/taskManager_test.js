@@ -12,7 +12,7 @@ var testTask = {
     status: "To Do",
     complete: "0/?",
     reward: "200",
-    participants: ["Ben", "Liza", "Bombo"],
+    participants: ["bkrem_", "yellouw", "drBombo"],
     creator: "Ben"
 };
 
