@@ -48,20 +48,23 @@ function _createUserFromContract (contract, callback) {
         id: function (callback) {
                 contract.id( eris.convertibleCallback(callback, [eris.hex2str]) );
             },
-        title: function (callback) {
+        username: function (callback) {
             contract.username( eris.convertibleCallback(callback, [eris.hex2str]) );
         },
-        desc: function (callback) {
+        email: function (callback) {
             contract.email( eris.convertibleCallback(callback, [eris.hex2str]) );
         },
-        status: function (callback) {
+        name: function (callback) {
             contract.name( eris.convertibleCallback(callback, [eris.hex2str]) );
         },
-        complete: function (callback) {
+        score: function (callback) {
             contract.score( eris.convertibleCallback(callback, [eris.hex2str]) );
         },
-        reward: function (callback) {
+        teamId: function (callback) {
             contract.teamId( eris.convertibleCallback(callback, [eris.hex2str]) );
+        },
+        passwHash: function (callback) {
+            contract.passwHash( eris.convertibleCallback(callback, [eris.hex2str]) );
         }
     },
     function (err, results) {
@@ -124,7 +127,7 @@ function getUserAddress (username, callback) {
     log.debug('getUserAddress() -> username: ' + username);
     userManagerContract.getUserAddress(eris.str2hex(username), function (err, address) {
         err ? log.error("getUserAddress() -> Error: " + err.stack) : log.debug("User address: " + address);
-        callback(err, address)
+        callback(err, address);
     });
 }
 
