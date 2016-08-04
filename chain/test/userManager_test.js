@@ -24,7 +24,7 @@ var refAddr;
 describe('User Manager', function () {
     this.timeout(3000);
 
-    describe('addUser', function () {
+    describe("addUser()", function () {
         it("adds the given task to the chain and returns true if a record was overwritten, false otherwise", function (done) {
             userManager.addUser(testUser, function (error, address) {
                 assert.isNull(error);
@@ -35,7 +35,7 @@ describe('User Manager', function () {
         });
     });
 
-    describe("getUserAddress", function () {
+    describe("getUserAddress()", function () {
         it("returns the contract address for the passed username", function (done) {
             userManager.getUserAddress(testUser.username, function(err, address) {
                 assert.isNull(err);
@@ -43,9 +43,19 @@ describe('User Manager', function () {
                 done();
             })
         })
+    });
+
+    describe("getUser()", function () {
+        it("returns a hydrated User object from a passed user contract address", function (done) {
+            userManager.getUser(refAddr, function (err, user) {
+                assert.isNull(err);
+                assert.isNotNull(user); // TODO
+                done();
+            })
+        })
     })
 
-    describe("getUserListSize", function () {
+    describe("getUserListSize()", function () {
         it("returns the current total size of the user list map", function (done) {
             userManager.getUserListSize(function (error, size) {
                 assert.isNull(error);
