@@ -7,14 +7,21 @@
 
 import React from 'react';
 import {Navigator} from 'react-native';
+
 import TabsView from './tabs/TabsView';
 import TaskView from './tabs/tasks/TaskView';
 import SettingsListView from './settings/SettingsListView';
 import AddTaskContainer from './tabs/tasks/AddTaskContainer';
+import LoginView from './login/LoginView';
+import SignupView from './signup/SignupView';
 
 export default class EduChainNavigator extends React.Component {
     renderScene(route: Object, navigator: Navigator) {
         switch (route.id) {
+            case 'signup':
+                return (<SignupView navigator={navigator} />);
+            case 'login':
+                return (<LoginView navigator={navigator} />);
             case 'settings':
                 return (<SettingsListView navigator={navigator} />);
             case 'task':
@@ -28,10 +35,14 @@ export default class EduChainNavigator extends React.Component {
     }
 
     render() {
+        const {user} = store.getState();
+        // `{}` returns TabsView via the switch statement's `default` case
+        const initialRoute = user.isLoggedIn ? {} : {id: 'login'};
+
         return (
             <Navigator
                 ref="navigator"
-                initialRoute={ {} }
+                initialRoute={initialRoute}
                 renderScene={this.renderScene}
             />
         );

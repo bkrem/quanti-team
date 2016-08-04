@@ -19,7 +19,7 @@ const GlobalStyles = {
     thumbnail: {
         height: 45,
         width: 45,
-        borderRadius: 22, // why dafuq is 22 circular??
+        borderRadius: 22,
     },
     buttonContainer: {
         padding:10,

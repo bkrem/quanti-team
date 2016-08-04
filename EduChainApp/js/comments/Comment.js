@@ -6,7 +6,7 @@
 
  'use strict';
 
- import React, { Component } from 'react';
+ import React from 'react';
  import {
      View,
      StyleSheet,
@@ -21,7 +21,7 @@
     children?: any,
 }
 
- export default class Comment extends Component {
+ export default class Comment extends React.Component {
      props: Props;
 
      render() {

@@ -123,26 +123,27 @@ var styles = StyleSheet.create({
         backgroundColor: Colors.darkBackground,
         paddingTop: STATUS_BAR_HEIGHT,
         height: HEADER_HEIGHT,
+        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        //justifyContent: 'space-between',
         alignItems: 'center',
     },
     titleText: {
-        color: '#DDDDDD',
+        color: Colors.softWhite,
         fontWeight: 'bold',
         fontSize: 20,
     },
     leftItem: {
-        flex: 1,
-        alignItems: 'center',
-    },
-    centerItem: {
         flex: 2,
         alignItems: 'center',
     },
+    centerItem: {
+        flex: 8,
+        alignItems: 'center',
+    },
     rightItem: {
-        flex: 1,
-        alignItems: 'flex-end',
+        flex: 2,
+        alignItems: 'center',
     },
     itemWrapper: {
         padding: 11,
@@ -153,7 +154,7 @@ var styles = StyleSheet.create({
         color: 'white',
     },
     icon: {
-        color: '#DDDDDD'
+        color: Colors.softWhite,
     }
 });
 
