@@ -23,11 +23,10 @@ taskType.push('address');
 
 
 describe("Task Manager", function () {
+    this.timeout(3000);
 
     describe("addTask", function () {
         it("adds the given task object to the chain and returns the registered task's hex address", function(done) {
-            this.timeout(3000);
-
             taskManager.addTask(testTask, function (error, address) {
                 assert.isNull(error);
                 assert.isString(address, "`address` should be the registered task's hex address");
