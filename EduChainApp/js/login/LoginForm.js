@@ -15,10 +15,6 @@ import GlobalStyles from '../common/GlobalStyles';
 var cloneDeep = require('lodash').cloneDeep;
 
 export default class LoginForm extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     onPress() {
         const formVals = this.refs.form.getValue();
         if (formVals) console.log(formVals);
