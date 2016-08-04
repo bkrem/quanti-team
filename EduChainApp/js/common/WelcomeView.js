@@ -11,13 +11,12 @@ import {
      Text,
      Platform,
      TouchableOpacity,
-     Navigator
 } from 'react-native';
 import GlobalStyles from '../common/GlobalStyles';
 import Colors from '../common/Colors';
 
 type Props = {
-    children: any;
+    children?: any;
     navigateToAlternate: () => void;
     alternateText: string;
 }
