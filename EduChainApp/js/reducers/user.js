@@ -26,7 +26,16 @@ const initialState: State = {
 
 export default function user(state: State = initialState, action: Action): State {
     switch (action.type) {
-        // TODO
+
+        case 'SIGNUP_SUCCESS':
+            return {
+                ...state,
+                isLoggedIn: true
+            };
+
+        case 'SIGNUP_FAIL':
+            console.error(action.error);
+            return state;
 
         default:
             return state;
