@@ -5,6 +5,7 @@ var async = require('async');
 
 var logger = require(__libs+'/eris/eris-logger');
 var taskManager = require(__js+'/taskManager');
+var userManager = require(__js+'/userManager');
 
 var init = function () {
 
@@ -62,9 +63,28 @@ var init = function () {
         var task = req.body;
 
         log.debug("POST task: ", task);
-        taskManager.addTask(task, function (err, isOverwrite) {
+        taskManager.addTask(task, function (err, address) {
             _handleErr(err, res);
-            res.send(isOverwrite);
+            res.send(address);
+        });
+    });
+
+    // GET single
+    app.get('/task/:idx', function (req, res) {
+        taskManager.getTaskAtIndex(req.params.idx, function (data) {
+            res.send(data);
+        });
+    });
+
+    // ############################
+
+    app.post('/user/signup', function (req, res) {
+        var user = req.body;
+
+        log.debug("POST /user/signup: ", user);
+        userManager.addUser(user, function (err, address) {
+            _handleErr(err, res);
+            res.json({address: address});
         });
     });
 
@@ -82,20 +102,21 @@ var init = function () {
                     res.json({newId: newId});
                 });
 
+            case 'user':
+                return userManager.getUserListSize(function (err, size) {
+                    _handleErr(err, res);
+                    // increment size by one to mint a new id number & turn it back into string type
+                    newId = String(Number(size) + 1);
+                    res.json({newId: newId});
+                });
+
             default:
                 var err = "Could not match route /new-id/" + req.params.target;
-                _handleErr(err, res);
+                return _handleErr(err, res);
         }
     });
 
     // TODO add route for userid/address to get only related tasks `/mytasks`
-
-    // GET single
-    app.get('/task/:idx', function (req, res) {
-        taskManager.getTaskAtIndex(req.params.idx, function (data) {
-            res.send(data);
-        });
-    });
 
     app.get('/keyatidx/:idx', function (req, res) {
         taskManager.getTaskKeyAtIndex(req.params.idx, function (data) {
