@@ -86,13 +86,12 @@ function _createUserFromContract (contract, callback) {
  */
 function addUser (user, callback) {
     var hexUser = chainUtils.marshalForChain(user);
-
+    
     userManagerContract.addUser(
         hexUser.id,
         hexUser.username,
         hexUser.email,
         hexUser.name,
-        hexUser.score,
         hexUser.passwHash,
         function (err, address) {
             err ? log.error("addUser() -> Error: " + err.stack) : log.debug("addUser() -> User contract address: " + address);
@@ -120,7 +119,6 @@ function updateUser (user, callback) {
         hexUser.username,
         hexUser.email,
         hexUser.name,
-        hexUser.score,
         hexUser.passwHash,
         function (err, address) {
             err ? log.error("updateUser() -> Error: " + err.stack)

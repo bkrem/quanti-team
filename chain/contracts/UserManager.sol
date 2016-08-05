@@ -15,7 +15,6 @@ contract UserManager {
         bytes32 _username,
         bytes32 _email,
         bytes32 _name,
-        bytes32 _score,
         bytes32 _passwHash
         )
         returns (address)
@@ -23,7 +22,7 @@ contract UserManager {
             registerActionEvent("ADD USER");
             // index on `username` for User map for account retrieval on login
             bytes32 key = _username;
-            User u = new User(_id, _username, _email, _name, _score, _passwHash);
+            User u = new User(_id, _username, _email, _name, _passwHash);
 
             bool isOverwrite = list.exists(key);
             // if this would be an overwrite -> return null address
@@ -40,7 +39,6 @@ contract UserManager {
         bytes32 _username,
         bytes32 _email,
         bytes32 _name,
-        bytes32 _score,
         bytes32 _passwHash
         )
         returns (bool success)
@@ -48,7 +46,7 @@ contract UserManager {
             registerActionEvent("UPDATE USER");
             // index on `username` for User map for account retrieval on login
             bytes32 key = _username;
-            User u = new User(_id, _username, _email, _name, _score, _passwHash);
+            User u = new User(_id, _username, _email, _name, _passwHash);
 
             bool exists = list.exists(key);
             // if record does not exist -> return null address

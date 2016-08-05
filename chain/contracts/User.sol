@@ -4,9 +4,9 @@ contract User {
     bytes32 public username;
     bytes32 public email;
     bytes32 public name;
-    bytes32 public score;
     bytes32 public passwHash;
 
+    bytes32 public score; // TODO
     bytes32 public teamId; // TODO
 
     bytes public tasks; // TODO
@@ -17,14 +17,15 @@ contract User {
         bytes32 _username,
         bytes32 _email,
         bytes32 _name,
-        bytes32 _score,
         bytes32 _passwHash
         ) {
             id = _id;
             username = _username;
             email = _email;
             name = _name;
-            score = _score;
             passwHash = _passwHash;
+
+            // initialise the `score` prop
+            score = '0';
     }
 }
