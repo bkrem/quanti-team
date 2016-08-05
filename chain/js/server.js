@@ -62,7 +62,7 @@ var init = function () {
     app.post('/tasks', function (req, res) {
         var task = req.body;
 
-        log.debug("POST task: ", task);
+        log.info("POST task: ", task);
         taskManager.addTask(task, function (err, address) {
             _handleErr(err, res);
             res.send(address);
@@ -76,23 +76,35 @@ var init = function () {
         });
     });
 
-    // ############################
+    // ########################################################################
+
+    app.post('/user/taken', function (req, res) {
+        var username = req.body;
+
+        log.info("POST /user/taken: ", username);
+        userManager.isUsernameTaken(username, function (err, isTaken) {
+            _handleErr(err, res);
+            res.json({isTaken: isTaken});
+        });
+    });
 
     app.post('/user/signup', function (req, res) {
         var user = req.body;
 
-        log.debug("POST /user/signup: ", user);
+        log.info("POST /user/signup: ", user);
         userManager.addUser(user, function (err, address) {
             _handleErr(err, res);
             res.json({address: address});
         });
     });
 
+    // ########################################################################
+
     // TODO not DRY, abstract this further
     app.get('/new-id/:target', function (req, res) {
         var newId;
 
-        log.debug("GET /new-id/" + req.params.target);
+        log.info("GET /new-id/" + req.params.target);
         switch (req.params.target) {
             case 'task':
                 return taskManager.getTaskListSize(function (err, size) {
@@ -118,15 +130,9 @@ var init = function () {
 
     // TODO add route for userid/address to get only related tasks `/mytasks`
 
-    app.get('/keyatidx/:idx', function (req, res) {
-        taskManager.getTaskKeyAtIndex(req.params.idx, function (data) {
-            res.send(data);
-        });
-    });
-
 
     http.createServer(app).listen(portHTTP, function () {
-        console.log('Listening for HTTP requests on port ' + portHTTP + '.');
+        log.info('Listening for HTTP requests on port ' + portHTTP + '.');
     });
 };
 
