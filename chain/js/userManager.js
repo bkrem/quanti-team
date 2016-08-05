@@ -93,7 +93,6 @@ function addUser (user, callback) {
         hexUser.email,
         hexUser.name,
         hexUser.score,
-        hexUser.teamId,
         hexUser.passwHash,
         function (err, address) {
             err ? log.error("addUser() -> Error: " + err.stack) : log.debug("addUser() -> User contract address: " + address);
@@ -122,7 +121,6 @@ function updateUser (user, callback) {
         hexUser.email,
         hexUser.name,
         hexUser.score,
-        hexUser.teamId,
         hexUser.passwHash,
         function (err, address) {
             err ? log.error("updateUser() -> Error: " + err.stack)

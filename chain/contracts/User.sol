@@ -5,10 +5,11 @@ contract User {
     bytes32 public email;
     bytes32 public name;
     bytes32 public score;
-    bytes32 public teamId;
     bytes32 public passwHash;
 
-    bytes public tasks;
+    bytes32 public teamId; // TODO
+
+    bytes public tasks; // TODO
 
     // Constructor
     function User(
@@ -17,7 +18,6 @@ contract User {
         bytes32 _email,
         bytes32 _name,
         bytes32 _score,
-        bytes32 _teamId,
         bytes32 _passwHash
         ) {
             id = _id;
@@ -25,7 +25,6 @@ contract User {
             email = _email;
             name = _name;
             score = _score;
-            teamId = _teamId;
             passwHash = _passwHash;
     }
 }
