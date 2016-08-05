@@ -44,7 +44,7 @@ export function signup(partialUser: User): ThunkAction {
     return (dispatch) => {
         dispatch(signupRequest(partialUser));
 
-        return assignNewId(dispatch, 'task').then(newId => {
+        return assignNewId(dispatch, 'user').then(newId => {
             let user = {...partialUser, id: newId};
             let request = {
                 method: 'POST',
