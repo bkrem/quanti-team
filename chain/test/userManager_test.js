@@ -46,6 +46,16 @@ describe('User Manager', function () {
         })
     });
 
+    describe("isUsernameTaken()", function () {
+        it("returns a boolean indicating whether the passed username has been taken", function (done) {
+            userManager.isUsernameTaken(testUser.username, function (err, isTaken) {
+                assert.isNull(err);
+                assert.strictEqual(isTaken, true, "isTaken should be `true` on testUser.username")
+                done();
+            })
+        })
+    })
+
     describe("getUserAddress()", function () {
         it("returns the contract address for the passed username", function (done) {
             userManager.getUserAddress(testUser.username, function(err, address) {

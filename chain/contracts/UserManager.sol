@@ -56,7 +56,13 @@ contract UserManager {
                 bool isOverwrite = list.insert(key, u);
                 return isOverwrite;
             }
-        }
+    }
+
+    function isUsernameTaken(bytes32 _username) constant returns (bool) {
+        registerActionEvent("IS USERNAME TAKEN");
+        return list.exists(_username);
+    }
+
 
     function getUserListSize() constant returns (uint) {
         registerActionEvent("GET USERLIST SIZE");

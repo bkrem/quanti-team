@@ -86,7 +86,7 @@ function _createUserFromContract (contract, callback) {
  */
 function addUser (user, callback) {
     var hexUser = chainUtils.marshalForChain(user);
-    
+
     userManagerContract.addUser(
         hexUser.id,
         hexUser.username,
@@ -128,6 +128,22 @@ function updateUser (user, callback) {
                 err = "updateUser() for username " + user.username + " failed: record to be updated does not exist";
 
             callback(err, address);
+        }
+    );
+}
+
+/**
+ * isUsernameTaken - description
+ *
+ * @param  {type} username description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
+function isUsernameTaken (username, callback) {
+    userManagerContract.isUsernameTaken(
+        eris.str2hex(username),
+        function (err, isTaken) {
+            callback(err, isTaken);
         }
     );
 }
@@ -197,6 +213,7 @@ function linkToTask (username, taskAddr, callback) {
 module.exports = {
     addUser: addUser,
     updateUser: updateUser,
+    isUsernameTaken: isUsernameTaken,
     getUserAddress: getUserAddress,
     getUser: getUser,
     getUserListSize: getUserListSize,
