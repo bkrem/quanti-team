@@ -42,7 +42,9 @@ var chainUtils = {
             if ({}.hasOwnProperty.call(obj, prop)) {
                 var val = obj[prop];
 
-                if (Array.isArray(val)) {
+                if (Number.isInteger(val)) {
+                    val = String(val);
+                } else if (Array.isArray(val)) {
                     val = JSON.stringify(val);
                 } else if (typeof val !== "string") {
                     throw new Error("Error at marshalForChain: " + prop + ":" + val + " is not a string.");
