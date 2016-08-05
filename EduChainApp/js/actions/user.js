@@ -25,7 +25,8 @@ export function signupRequest(form: User): Action {
 }
 export function signupSuccess(address: string): Action {
     return {
-        type: 'SIGNUP_SUCCESS'
+        type: 'SIGNUP_SUCCESS',
+        address
     };
 }
 export function signupFail(error: Object): Action {

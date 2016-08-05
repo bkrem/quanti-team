@@ -28,7 +28,7 @@ export type Action =
   | { type: 'ADD_TASK_FAIL', error: Object  }
 
   | { type: 'SIGNUP_REQUEST', form: User }
-  | { type: 'SIGNUP_SUCCESS' }
+  | { type: 'SIGNUP_SUCCESS', address: string }
   | { type: 'SIGNUP_FAIL', error: Object }
   ;
 
