@@ -35,14 +35,8 @@ type Props = {
     navigator: Navigator;
 }
 
-type State = {
-    dataSource: TaskData;
-    loaded: boolean;
-}
-
 export default class TaskListView extends React.Component {
     props: Props;
-    state: State;
 
     constructor(props: Props) {
         super(props);
