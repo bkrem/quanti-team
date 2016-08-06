@@ -24,6 +24,17 @@ type Props = {
     signup: (form: User) => void;
 }
 
+const alerts = {
+    passwordMismatch: {
+        title: "Passwords don't match",
+        text: "Sorry, the passwords you entered don't match. Please try again."
+    },
+    usernameTaken: {
+        title: "Username already taken",
+        text: "Sorry, your chosen username has already been taken. Please try another one."
+    }
+};
+
 class SignupFormView extends React.Component {
     props: Props;
 
@@ -36,10 +47,7 @@ class SignupFormView extends React.Component {
 
         if (formStruct.password !== formStruct.confirmPassword) {
             console.log("Submitted passwords don't match!");
-            Alert.alert(
-                "Passwords don't match",
-                "Sorry, the passwords you entered don't match. Please try again."
-            );
+            Alert.alert(alerts.passwordMismatch.title, alerts.passwordMismatch.text);
         } else { // TODO `checkUsername` or verify in signup func
             isValid = true;
         }
@@ -63,13 +71,14 @@ class SignupFormView extends React.Component {
             const form = this.processInputs(formStruct);
 
             this.props.isUsernameTaken(form.username)
-                .then(result =>
-                    this.props.signup(form)
-                )
+                .then(isTaken => {
+                    console.info("isTaken:", isTaken);
+                    isTaken ? Alert.alert(alerts.usernameTaken.title, alerts.usernameTaken.text)
+                            : this.props.signup(form);
+                })
                 .catch(rejection =>
                     console.error(rejection)
                 );
-            //this.props.signup(form);
         }
     }
 
