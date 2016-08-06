@@ -11,7 +11,7 @@ var testUser = {
     name: 'test user',
     score: '3.14',
     teamId: 'testTeam0',
-    passwHash: '6asacga7sfza7sfzvaahfah'
+    password: '6asacga7sfza7sfzvaahfah'
 };
 
 // Establish proper user type by adding `address` key,

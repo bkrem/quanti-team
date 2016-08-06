@@ -63,8 +63,8 @@ function _createUserFromContract (contract, callback) {
         teamId: function (callback) {
             contract.teamId( eris.convertibleCallback(callback, [eris.hex2str]) );
         },
-        passwHash: function (callback) {
-            contract.passwHash( eris.convertibleCallback(callback, [eris.hex2str]) );
+        password: function (callback) {
+            contract.password( eris.convertibleCallback(callback, [eris.hex2str]) );
         }
     },
     function (err, results) {
@@ -92,7 +92,7 @@ function addUser (user, callback) {
         hexUser.username,
         hexUser.email,
         hexUser.name,
-        hexUser.passwHash,
+        hexUser.password,
         function (err, address) {
             err ? log.error("addUser() -> Error: " + err.stack) : log.debug("addUser() -> User contract address: " + address);
             // Check if `isOverwrite` null address was returned
@@ -119,7 +119,7 @@ function updateUser (user, callback) {
         hexUser.username,
         hexUser.email,
         hexUser.name,
-        hexUser.passwHash,
+        hexUser.password,
         function (err, address) {
             err ? log.error("updateUser() -> Error: " + err.stack)
                 : log.debug("updateUser() -> Updated successfully: " + address);
