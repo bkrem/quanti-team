@@ -14,7 +14,6 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../common/Colors';
 import type {Tab} from './../reducers/navigation';
-import HomeView from './home/HomeView';
 import NotificationsListView from './notifications/NotificationsListView';
 import TaskListContainer from './tasks/TaskListContainer';
 import ProfileView from './profile/ProfileView';
@@ -57,14 +56,14 @@ export default class TabsView extends React.Component {
                 barTintColor={Colors.darkBackground}
             >
                 <Icon.TabBarItemIOS
-                    title="Home"
-                    selected={this.state.selectedTab === 'home'}
-                    onPress={this.onTabSelect.bind(this, 'home')}
-                    iconName="ios-home-outline"
-                    selectedIconName="ios-home"
+                    title="Tasks"
+                    selected={this.state.selectedTab === 'tasks'}
+                    onPress={this.onTabSelect.bind(this, 'tasks')}
+                    iconName="ios-checkmark-circle-outline"
+                    selectedIconName="ios-checkmark-circle"
                     iconSize={ICONSIZE}
                 >
-                    <HomeView navigator={this.props.navigator} />
+                    <TaskListContainer navigator={this.props.navigator} />
                 </Icon.TabBarItemIOS>
 
                 <Icon.TabBarItemIOS
@@ -77,17 +76,6 @@ export default class TabsView extends React.Component {
                 >
                     <NotificationsListView navigator={this.props.navigator} />
                 </Icon.TabBarItemIOS>
-
-                <Icon.TabBarItemIOS
-                    title="Tasks"
-                    selected={this.state.selectedTab === 'tasks'}
-                    onPress={this.onTabSelect.bind(this, 'tasks')}
-                    iconName="ios-checkmark-circle-outline"
-                    selectedIconName="ios-checkmark-circle"
-                    iconSize={ICONSIZE}
-                >
-                        <TaskListContainer navigator={this.props.navigator} />
-                    </Icon.TabBarItemIOS>
 
                 <Icon.TabBarItemIOS
                     title="Team"
@@ -114,3 +102,14 @@ export default class TabsView extends React.Component {
         );
     }
 }
+
+/* <Icon.TabBarItemIOS
+    title="Home"
+    selected={this.state.selectedTab === 'home'}
+    onPress={this.onTabSelect.bind(this, 'home')}
+    iconName="ios-home-outline"
+    selectedIconName="ios-home"
+    iconSize={ICONSIZE}
+>
+    <HomeView navigator={this.props.navigator} />
+</Icon.TabBarItemIOS> */
