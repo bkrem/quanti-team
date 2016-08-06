@@ -1,7 +1,7 @@
 var express = require('express');
 var http = require('http');
 var bodyParser = require('body-parser');
-var async = require('async');
+var Async = require('async');
 
 var logger = require(__libs+'/eris/eris-logger');
 var taskManager = require(__js+'/taskManager');
@@ -42,7 +42,7 @@ var init = function () {
 
     // GET all available task objects
     app.get('/tasks', function (req, res) {
-        async.waterfall([
+        Async.waterfall([
             // Get all available task contract addresses
             taskManager.getAllTaskAddresses,
             // Map each address to its task contract and callback an array of task objects
