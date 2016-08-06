@@ -25,11 +25,15 @@ export type Action =
 
   | { type: 'ADD_USER_REQUEST' }
   | { type: 'ADD_USER_SUCCESS', isOverwrite: boolean}
-  | { type: 'ADD_TASK_FAIL', error: Object  }
+  | { type: 'ADD_USER_FAIL', error: Object  }
 
   | { type: 'SIGNUP_REQUEST', form: User }
   | { type: 'SIGNUP_SUCCESS', address: string }
   | { type: 'SIGNUP_FAIL', error: Object }
+
+  | { type:'CHECK_USERNAME_REQUEST', username: string }
+  | { type: 'CHECK_USERNAME_SUCCESS', isTaken: boolean }
+  | { type: 'CHECK_USERNAME_FAIL', error: Object }
   ;
 
 export type PromiseAction = Promise<Action>;
