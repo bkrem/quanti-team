@@ -79,7 +79,7 @@ var init = function () {
     // ########################################################################
 
     app.post('/user/taken', function (req, res) {
-        var username = req.body;
+        var username = req.body.username;
 
         log.info("POST /user/taken: ", username);
         userManager.isUsernameTaken(username, function (err, isTaken) {
