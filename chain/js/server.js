@@ -47,7 +47,7 @@ var init = function () {
             taskManager.getAllTaskAddresses,
             // Map each address to its task contract and callback an array of task objects
             function (addresses, callback) {
-                async.map(addresses, taskManager.getTaskAtAddress, function (err, tasks) {
+                Async.map(addresses, taskManager.getTaskAtAddress, function (err, tasks) {
                     callback(err, tasks);
                 });
             }
