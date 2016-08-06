@@ -34,6 +34,7 @@ export default function user(state: State = initialState, action: Action): State
             };
 
         case 'SIGNUP_FAIL':
+        case 'CHECK_USERNAME_FAIL':
             console.error(action.error);
             return state;
 

@@ -22,6 +22,10 @@ export default class SignupView extends React.Component {
         this.props.navigator.push({id: 'login'});
     }
 
+    onSignup() {
+        this.props.navigator.push({});
+    }
+
     render() {
         return (
             <WelcomeView
@@ -33,3 +37,7 @@ export default class SignupView extends React.Component {
         );
     }
 }
+
+const select = (state) => {
+    return state.user.isLoggedIn;
+};

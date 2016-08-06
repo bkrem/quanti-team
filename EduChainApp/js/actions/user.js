@@ -15,7 +15,7 @@ import {assignNewId} from './util';
 
 
 // ####################################
-// POST `/signup` API ENDPOINT ACTIONS
+// POST `/user/signup` API ENDPOINT ACTIONS
 // ####################################
 export function signupRequest(form: User): Action {
     return {
@@ -37,6 +37,29 @@ export function signupFail(error: Object): Action {
 }
 
 
+// ####################################
+// POST `/user/taken` API ENDPOINT ACTIONS
+// ####################################
+export function checkUsernameRequest(username: string): Action {
+    return {
+        type: 'CHECK_USERNAME_REQUEST',
+        username
+    };
+}
+export function checkUsernameSuccess(isTaken: boolean): Action {
+    return {
+        type: 'CHECK_USERNAME_SUCCESS',
+        isTaken
+    };
+}
+export function checkUsernameFail(error: Object): Action {
+    return {
+        type: 'CHECK_USERNAME_FAIL',
+        error
+    };
+}
+
+
 // ##############################
 // THUNK ACTIONS
 // ##############################
@@ -45,8 +68,8 @@ export function signup(partialUser: User): ThunkAction {
         dispatch(signupRequest(partialUser));
 
         return assignNewId(dispatch, 'user').then(newId => {
-            let user = {...partialUser, id: newId};
-            let request = {
+            const user = {...partialUser, id: newId};
+            const request = {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -55,7 +78,7 @@ export function signup(partialUser: User): ThunkAction {
                 body: JSON.stringify(user)
             };
 
-            fetch(ENV.__API_BRIDGE + '/user/signup', request)
+            return fetch(ENV.__API_BRIDGE + '/user/signup', request)
                 .then(response => response.json())
                 .then(json =>
                     dispatch(signupSuccess(json.address))
@@ -64,5 +87,31 @@ export function signup(partialUser: User): ThunkAction {
                     dispatch(signupFail(rejection))
                 );
         });
+    };
+}
+
+export function isUsernameTaken(username: string): ThunkAction {
+    return (dispatch) => {
+        dispatch(checkUsernameRequest(username));
+
+        const request = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({username: username})
+        };
+
+        return fetch(ENV.__API_BRIDGE+'/user/taken', request)
+            .then(response => response.json())
+            .then(json => {
+                dispatch(checkUsernameSuccess(json.isTaken));
+                return json.isTaken;
+            })
+            .catch(rejection => {
+                dispatch(checkUsernameFail(rejection));
+                return rejection;
+            });
     };
 }

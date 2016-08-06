@@ -97,7 +97,7 @@ export function addTask(partialTask: Task): ThunkAction {
                 body: JSON.stringify(task)
             };
 
-            fetch(ENV.__API_BRIDGE+'/tasks', request)
+            return fetch(ENV.__API_BRIDGE+'/tasks', request)
                 .then(response => response.text())
                 .then(address =>
                     dispatch(responseAddTask(address))
