@@ -1,8 +1,7 @@
 /* eslint-disable */
 
 var assert = require('chai').assert;
-var app = require('../app');
-var taskManager = require('../js/taskManager');
+var taskManager = require(__js+'/taskManager');
 
 var refAddr;
 var testTask = {

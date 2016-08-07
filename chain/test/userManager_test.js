@@ -1,17 +1,16 @@
 /* eslint-disable */
 
 var assert = require('chai').assert;
-var app = require('../app');
-var userManager = require('../js/userManager');
+var userManager = require(__js+'/userManager');
 
 var testUser = {
     id: 'test0',
-    username: 'testUser',
+    username: 'test_usermanager',
     email: 'testuser@test.com',
     name: 'test user',
     score: '3.14',
     teamId: 'testTeam0',
-    password: '6asacga7sfza7sfzvaahfah'
+    password: 'testpass'
 };
 
 // Establish proper user type by adding `address` key,
