@@ -6,7 +6,7 @@
 'use strict';
 
 import type {Task} from '../reducers/tasks';
-import type {User} from '../reducers/user';
+import type {User, Login} from '../reducers/user';
 
 export type Action =
     { type: 'REFRESH_TASKLIST' }
@@ -34,6 +34,10 @@ export type Action =
   | { type:'CHECK_USERNAME_REQUEST', username: string }
   | { type: 'CHECK_USERNAME_SUCCESS', isTaken: boolean }
   | { type: 'CHECK_USERNAME_FAIL', error: Object }
+
+  | { type: 'LOGIN_REQUEST', form: Login }
+  | { type: 'LOGIN_RESPONSE', isValid: boolean }
+  | { type: 'LOGIN_FAIL', error: Object }
   ;
 
 export type PromiseAction = Promise<Action>;

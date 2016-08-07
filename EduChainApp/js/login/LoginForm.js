@@ -7,17 +7,48 @@
 import React from 'react';
 import {
     View,
+    Alert,
 } from 'react-native';
+import {connect} from 'react-redux';
 import t from 'tcomb-form-native';
 import Button from 'react-native-button';
 import Colors from '../common/Colors';
 import GlobalStyles from '../common/GlobalStyles';
+import type {Login} from '../reducers/user';
+import {login} from '../actions/user';
 var cloneDeep = require('lodash').cloneDeep;
 
-export default class LoginForm extends React.Component {
+
+
+const alerts = {
+    loginFailed: {
+        title: "Login failed",
+        text: "Sorry, the details you entered were incorrect. Please try again."
+    }
+};
+
+class LoginFormView extends React.Component {
+
+    processInputs(formStruct: Login): Login {
+        const form = {
+            ...formStruct,
+            username: formStruct.username.toLowerCase() // prep for indexing
+        };
+        return form;
+    }
+
     onPress() {
-        const formVals = this.refs.form.getValue();
-        if (formVals) console.log(formVals);
+        const formStruct = this.refs.form.getValue();
+        if (formStruct) {
+            console.log("Submitted login form:\n", formStruct);
+            const form = this.processInputs(formStruct);
+            this.props.login(form)
+                .then(isValid => {
+                    // TODO forward view
+                    isValid ? null
+                            : Alert.alert(alerts.loginFailed.title, alerts.loginFailed.text);
+                });
+        }
     }
 
     render() {
@@ -25,7 +56,7 @@ export default class LoginForm extends React.Component {
             <View>
                 <Form
                     ref="form"
-                    type={Login}
+                    type={LoginStruct}
                     options={options}
                 />
             <Button
@@ -42,7 +73,7 @@ export default class LoginForm extends React.Component {
 }
 
 const Form = t.form.Form;
-const Login = t.struct({
+const LoginStruct = t.struct({
     username: t.String,
     password: t.String
 });
@@ -59,3 +90,20 @@ const options = {
         }
     }
 };
+
+
+// ##############
+// REDUX BINDINGS
+// ##############
+const mapStateToProps = (state) => {
+    return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (form) => dispatch(login(form))
+    };
+};
+
+const LoginForm = connect(mapStateToProps, mapDispatchToProps)(LoginFormView);
+export default LoginForm;

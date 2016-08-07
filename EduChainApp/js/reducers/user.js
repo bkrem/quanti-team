@@ -16,12 +16,19 @@ export type User = {
     address?: string;
 }
 
+export type Login = {
+    username: string;
+    password: string;
+}
+
 type State = {
     isLoggedIn: boolean;
+    username: string;
 }
 
 const initialState: State = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    username: ""
 };
 
 export default function user(state: State = initialState, action: Action): State {
@@ -33,8 +40,22 @@ export default function user(state: State = initialState, action: Action): State
                 isLoggedIn: true
             };
 
+        case 'LOGIN_REQUEST':
+            return {
+                ...state,
+                username: action.form.username
+            };
+
+        case 'LOGIN_RESPONSE':
+            return {
+                ...state,
+                isLoggedIn: action.isValid,
+                username: action.isValid ? state.username : initialState.username
+            };
+
         case 'SIGNUP_FAIL':
         case 'CHECK_USERNAME_FAIL':
+        case 'LOGIN_FAIL':
             console.error(action.error);
             return state;
 
