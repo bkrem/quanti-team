@@ -6,9 +6,9 @@ var log = logger.getLogger('eris.chain.auth');
 /**
  * login - description
  *
- * @param  {type} username description
- * @param  {type} password description
- * @param  {type} callback description
+ * @param  {String} username description
+ * @param  {String} password description
+ * @param  {func} callback description
  * @return {type}          description
  */
 function login (username, password, callback) {
