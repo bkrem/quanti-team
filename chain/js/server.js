@@ -6,6 +6,7 @@ var Async = require('async');
 var logger = require(__libs+'/eris/eris-logger');
 var taskManager = require(__js+'/taskManager');
 var userManager = require(__js+'/userManager');
+var auth = require(__js+'/auth');
 
 var init = function () {
 
@@ -95,6 +96,16 @@ var init = function () {
         userManager.addUser(user, function (err, address) {
             _handleErr(err, res);
             res.json({address: address});
+        });
+    });
+
+    app.post('/user/login', function (req, res) {
+        var login = req.body;
+
+        log.info("POST /user/login", login);
+        auth.login(login.username, login.password, function (err, isValid) {
+            _handleErr(err, res);
+            res.json({isValid: isValid});
         });
     });
 
