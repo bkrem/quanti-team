@@ -48,7 +48,7 @@ class SignupFormView extends React.Component {
         if (formStruct.password !== formStruct.confirmPassword) {
             console.log("Submitted passwords don't match!");
             Alert.alert(alerts.passwordMismatch.title, alerts.passwordMismatch.text);
-        } else { // TODO `checkUsername` or verify in signup func
+        } else {
             isValid = true;
         }
         return isValid;
