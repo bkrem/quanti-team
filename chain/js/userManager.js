@@ -69,7 +69,7 @@ function _createUserFromContract (contract, callback) {
     },
     function (err, results) {
         if (err)
-            return callback(err, user);
+            return callback(err, {});
         user = results;
         user.address = contract.address;
         log.debug("Compiled user object:\n", user);
@@ -192,7 +192,6 @@ function getUser (address, callback) {
         _createUserFromContract(contract, callback);
     });
 }
-
 
 /**
  * linkToTask - description
