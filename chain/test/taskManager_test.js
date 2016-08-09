@@ -85,3 +85,5 @@ describe("Task Manager", function () {
     });
 
 });
+
+require('./userManager_test');

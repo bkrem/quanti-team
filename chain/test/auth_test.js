@@ -33,3 +33,5 @@ describe('auth', function () {
     });
 
 });
+
+require('./taskManager_test');
