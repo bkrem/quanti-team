@@ -71,7 +71,7 @@ contract UserManager {
     }
 
     function getUserAddress(bytes32 username) constant returns (address) {
-        registerActionEvent("LINK TO TASK");
+        registerActionEvent("GET USER ADDRESS");
         return list.value(username);
     }
 }
