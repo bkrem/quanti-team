@@ -35,7 +35,7 @@ export default class EduChainNavigator extends React.Component {
     }
 
     render() {
-        const {user} = store.getState();
+        // const {user} = store.getState();
         // `{}` returns TabsView via the switch statement's `default` case
         // const initialRoute = user.isLoggedIn ? {} : {id: 'login'};
 
