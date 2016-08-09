@@ -36,7 +36,7 @@ export default class TabsView extends React.Component {
     constructor() {
         super();
         this.state = {
-            selectedTab: 'home'
+            selectedTab: 'tasks'
         };
     }
 
