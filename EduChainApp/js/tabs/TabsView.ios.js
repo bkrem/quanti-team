@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../common/Colors';
 import type {Tab} from './../reducers/navigation';
 import NotificationsListView from './notifications/NotificationsListView';
-import TaskListContainer from './tasks/TaskListContainer';
+import TaskList from './tasks/TaskList';
 import ProfileView from './profile/ProfileView';
 import TeamView from './team/TeamView';
 
@@ -63,7 +63,7 @@ export default class TabsView extends React.Component {
                     selectedIconName="ios-checkmark-circle"
                     iconSize={ICONSIZE}
                 >
-                    <TaskListContainer navigator={this.props.navigator} />
+                    <TaskList navigator={this.props.navigator} />
                 </Icon.TabBarItemIOS>
 
                 <Icon.TabBarItemIOS

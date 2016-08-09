@@ -19,6 +19,8 @@ import Loader from '../../common/Loader';
 import TaskListRow from './TaskListRow';
 import RefreshablePureListView from '../../common/RefreshablePureListView';
 
+import {connect} from 'react-redux';
+import {refreshTaskList, fetchTasks} from '../../actions/tasks';
 import type {Task} from '../../reducers/tasks';
 
 type Rows = Array<TaskListRow>;
@@ -35,17 +37,30 @@ type Props = {
     navigator: Navigator;
 }
 
-export default class TaskListView extends React.Component {
+class TaskListView extends React.Component {
     props: Props;
 
     constructor(props: Props) {
         super(props);
+        console.info("constructor");
 
         (this: any).renderEmptyList = this.renderEmptyList.bind(this);
         (this: any).renderRow = this.renderRow.bind(this);
         (this: any).renderSeparator = this.renderSeparator.bind(this);
         (this: any).renderSectionHeader = this.renderSectionHeader.bind(this);
         (this: any).renderWithSections = this.renderWithSections.bind(this);
+    }
+
+    componentWillMount() {
+        console.info("TaskListView will mount");
+    }
+
+    componenDidMount() {
+        console.info("TaskListView did mount");
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.info("TaskListView componentWillReceiveProps:", nextProps);
     }
 
     // TODO GH #6; add searchBar header
@@ -120,7 +135,7 @@ export default class TaskListView extends React.Component {
         );
     }
 
-} // END CLASS
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -139,3 +154,27 @@ const styles = StyleSheet.create({
         paddingLeft: 10
     },
 });
+
+
+// ##############
+// REDUX BINDINGS
+// ##############
+const mapStateToProps = (state) => {
+    return {
+        refreshing: state.tasks.isFetching,
+        tasks: state.tasks.taskList
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onRefresh: () => {
+            dispatch(refreshTaskList());
+            dispatch(fetchTasks());
+        }
+    };
+};
+
+const TaskList = connect(mapStateToProps, mapDispatchToProps)(TaskListView);
+
+export default TaskList;
