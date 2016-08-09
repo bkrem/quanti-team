@@ -16,8 +16,6 @@ var chainUtils = require(__js+'/util/chainUtils');
 
     var log = logger.getLogger('eris.chain.taskManager');
 
-    var EVENTS = {ADD_TASK: "ADD_TASK"};
-
     // Set up event emitter
     function ChainEventEmitter () {
         EventEmitter.call(this);
@@ -39,6 +37,7 @@ var chainUtils = require(__js+'/util/chainUtils');
     var taskManagerContract = erisWrapper.createContract(taskManagerAbi, epmJSON['TaskManager']);
     var taskContract = erisWrapper.createContract(taskAbi, epmJSON['Task']);
 
+    // TODO make this DRY across manager modules
     taskManagerContract.ActionEvent(
         function (error, eventSub) {
             if (error)
@@ -48,10 +47,8 @@ var chainUtils = require(__js+'/util/chainUtils');
             if (event) {
                 var eventString = eris.hex2str(event.args.actionType);
 
-                console.log("***EVENT RAW***\n", event.args);
-                console.log("***EVENT ACTIONTYPE HEX:***\n", event.args.actionType);
-                console.log("***EVENT ACTIONTYPE STRING:***\n", eventString);
-                chainEvents.emit(EVENTS.ADD_TASK, event.args);
+                log.info("***CONTRACT EVENT:***\n", eventString);
+                chainEvents.emit(eventString, event.args);
             }
         });
 

@@ -31,6 +31,20 @@ function ChainEventEmitter () {
 util.inherits(ChainEventEmitter, EventEmitter);
 var chainEvents = new ChainEventEmitter();
 
+userManagerContract.ActionEvent(
+    function (error, eventSub) {
+        if (error)
+            throw error;
+    },
+    function (error, event) {
+        if (event) {
+            var eventString = eris.hex2str(event.args.actionType);
+
+            log.info("***CONTRACT EVENT:***\n", eventString);
+            chainEvents.emit(eventString, event.args);
+        }
+    });
+
 
 /**
  * _createUserFromContract - Initializes a user object from the given contract.
