@@ -202,24 +202,8 @@ function getUser (address, callback) {
     log.debug("getUser: Passed address:\n" + address);
     userContract.at(address, function (error, contract) {
         if (error)
-            throw error;
-        _createUserFromContract(contract, callback);
-    });
-}
-
-/**
- * linkToTask - description
- *
- * @param  {type} username   description
- * @param  {type} taskAddr description
- * @param  {type} callback description
- * @return {type}          description
- */
-function linkToTask (username, taskAddr, callback) {
-    log.debug("linkToTask() -> username passed: ", username);
-    userManagerContract.linkToTask(eris.str2hex(username), taskAddr, function (error, success) {
-        log.debug("linkToTask() -> address returned: ", success);
-        callback(error, success);
+            throw new Error(error);
+        _createUserFromContract(contract, callback); // returns callback(err, userObject)
     });
 }
 
@@ -229,6 +213,5 @@ module.exports = {
     isUsernameTaken: isUsernameTaken,
     getUserAddress: getUserAddress,
     getUser: getUser,
-    getUserListSize: getUserListSize,
-    linkToTask: linkToTask
+    getUserListSize: getUserListSize
 };
