@@ -13,13 +13,13 @@ import TaskView from './tabs/tasks/TaskView';
 import SettingsListView from './settings/SettingsListView';
 import AddTaskContainer from './tabs/tasks/AddTaskContainer';
 import Login from './login/Login';
-import SignupView from './signup/SignupView';
+import Signup from './signup/Signup';
 
 export default class EduChainNavigator extends React.Component {
     renderScene(route: Object, navigator: Navigator) {
         switch (route.id) {
             case 'signup':
-                return (<SignupView navigator={navigator} />);
+                return (<Signup navigator={navigator} />);
             case 'login':
                 return (<Login navigator={navigator} />);
             case 'settings':
