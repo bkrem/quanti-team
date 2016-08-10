@@ -12,7 +12,7 @@ import TabsView from './tabs/TabsView';
 import TaskView from './tabs/tasks/TaskView';
 import SettingsListView from './settings/SettingsListView';
 import AddTaskContainer from './tabs/tasks/AddTaskContainer';
-import LoginView from './login/LoginView';
+import Login from './login/Login';
 import SignupView from './signup/SignupView';
 
 export default class EduChainNavigator extends React.Component {
@@ -21,7 +21,7 @@ export default class EduChainNavigator extends React.Component {
             case 'signup':
                 return (<SignupView navigator={navigator} />);
             case 'login':
-                return (<LoginView navigator={navigator} />);
+                return (<Login navigator={navigator} />);
             case 'settings':
                 return (<SettingsListView navigator={navigator} />);
             case 'task':
@@ -29,6 +29,7 @@ export default class EduChainNavigator extends React.Component {
             case 'addTask':
                 return (<AddTaskContainer navigator={navigator} />);
 
+            case 'home':
             default:
                 return (<TabsView navigator={navigator} />);
         }
@@ -42,7 +43,7 @@ export default class EduChainNavigator extends React.Component {
         return (
             <Navigator
                 ref="navigator"
-                initialRoute={{}}
+                initialRoute={{id: 'login'}}
                 renderScene={this.renderScene}
             />
         );
