@@ -9,7 +9,7 @@ contract User {
     bytes32 public score; // TODO
     bytes32 public teamId; // TODO
 
-    bytes public tasks; // TODO
+    address[] public taskAddresses; // TODO
 
     // Constructor
     function User(
@@ -25,7 +25,12 @@ contract User {
             name = _name;
             password = _password;
 
-            // initialise the `score` prop
+            // initialise the `score` field
             score = '0';
+    }
+
+    function linkToTaskAddress(address taskAddr) returns (address[]) {
+        taskAddresses.push(taskAddr);
+        return taskAddresses;
     }
 }
