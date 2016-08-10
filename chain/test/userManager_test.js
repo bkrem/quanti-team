@@ -101,5 +101,3 @@ describe('User Manager', function () {
 
 
 })
-
-require('./linker_test');
