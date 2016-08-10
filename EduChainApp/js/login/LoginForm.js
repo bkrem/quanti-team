@@ -29,6 +29,25 @@ const alerts = {
 
 class LoginFormView extends React.Component {
 
+    render() {
+        return (
+            <View>
+                <Form
+                    ref="form"
+                    type={LoginStruct}
+                    options={options}
+                />
+            <Button
+                containerStyle={[GlobalStyles.buttonContainer, {backgroundColor: Colors.iosBlue}]}
+                style={{color: Colors.softWhite}}
+                onPress={this.onPress.bind(this)}
+            >
+                Login
+            </Button>
+            </View>
+        );
+    }
+
     processInputs(formStruct: Login): Login {
         const form = {
             ...formStruct,
@@ -49,25 +68,6 @@ class LoginFormView extends React.Component {
                             : Alert.alert(alerts.loginFailed.title, alerts.loginFailed.text);
                 });
         }
-    }
-
-    render() {
-        return (
-            <View>
-                <Form
-                    ref="form"
-                    type={LoginStruct}
-                    options={options}
-                />
-            <Button
-                containerStyle={[GlobalStyles.buttonContainer, {backgroundColor: Colors.iosBlue}]}
-                style={{color: Colors.softWhite}}
-                onPress={this.onPress.bind(this)}
-            >
-                Login
-            </Button>
-            </View>
-        );
     }
 
 }
