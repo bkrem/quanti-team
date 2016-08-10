@@ -25,7 +25,7 @@ describe('auth', function () {
                 // run a login
                 auth.login(testAuthUser.username, testAuthUser.password, function (err, isValid) {
                     assert.isNull(err);
-                    assert.strictEqual(isValid, true, 'testUser should be able to succesfully log in');
+                    assert.strictEqual(isValid, true, 'testUser should be able to successfully log in');
                     done();
                 });
             });
