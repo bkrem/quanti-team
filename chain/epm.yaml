@@ -13,3 +13,10 @@ jobs:
       contract: UserManager.sol
       instance: all
       wait: true
+
+- name: Linker
+  job:
+    deploy:
+      contract: Linker.sol
+      instance: all
+      wait: true
