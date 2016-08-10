@@ -37,7 +37,7 @@ export default class RefreshablePureListView extends React.Component {
     }
 
     componentWillUnmount() {
-        console.info("RefreshablePureListView unmount")
+        console.info("RefreshablePureListView unmount");
     }
 
     render() {
