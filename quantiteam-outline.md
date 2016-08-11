@@ -16,15 +16,16 @@
     - Basic deployment of distributed validator nodes
 - Approach to Project/Project Management/Project Overview
     - waterfall dev?
----
+
+<<<<<<<<<<<<<<<<<<<<<<<<   
 (Probably belongs in main body)
 - Proof-of-concept with the chain running on single node on localhost
 - Experimentation with low-level features of chain & solidity via cURL requests
 - Static mockup of the React Native components initially, linked up with a Redux store once API bridge was established
 
-(Probably belongs in main body)
+/(Probably belongs in main body)  
+<<<<<<<<<<<<<<<<<<<<<<<<   
 
----
 - Report Overview
 
 ## Background Information & Related Applications/Work (~8-10 pages)
@@ -36,7 +37,6 @@
     - _(((Agile, Scrum, Kanban (justify why I ended up with simple Kanban board) )))_
     - Blockchain:
         - OpenChain (contract chaining, but documentation/implementation sucked) vs MultiChain vs Eris+TenderMint
-        -
         - Smart contract design & Solidity's capabilities (Eris Tutorials, Solidity docs)
     - Databases: SQL vs NoSQL vs Blockchain
         - Ease of data structuring/scalability vs. no central point of failure but less storage efficiency and more complex integrity maintenance compared to SQL. Favourable in comparison to noSQL?
@@ -103,10 +103,12 @@
 - Unit Testing
 - End to end testing
 - Testing libraries/frameworks: expect, check
+
 ### Deployment
 - Galaxy
 - mLab
 - Backups
+
 ### Results
 - Launch
 - Feedback
