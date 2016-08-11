@@ -23,12 +23,20 @@ export type Login = {
 
 type State = {
     isLoggedIn: boolean;
-    username: string;
+    details: User;
 }
 
 const initialState: State = {
     isLoggedIn: false,
-    username: ""
+    details: {
+        id: -1,
+        name: 'initialState',
+        username: 'initialState',
+        score: 0,
+        teamId: -1,
+        email: 'initialState',
+        address: 'initialState'
+    }
 };
 
 export default function user(state: State = initialState, action: Action): State {
@@ -43,14 +51,20 @@ export default function user(state: State = initialState, action: Action): State
         case 'LOGIN_REQUEST':
             return {
                 ...state,
-                username: action.form.username
+                details: {
+                    ...state.details,
+                    username: action.form.username
+                }
             };
 
         case 'LOGIN_RESPONSE':
             return {
                 ...state,
                 isLoggedIn: action.isValid,
-                username: action.isValid ? state.username : initialState.username
+                details: {
+                    ...state.details,
+                    username: action.isValid ? state.details.username : initialState.details.username
+                }
             };
 
         case 'SIGNUP_FAIL':
