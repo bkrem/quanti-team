@@ -11,9 +11,9 @@ describe('Linker', function () {
 
     describe('linkTaskToUser()', function () {
         it('links a task address to a user contract', function (done) {
-            linker.linkTaskToUser(pseudoTaskAddr, username, function (err, user) {
+            linker.linkTaskToUser(pseudoTaskAddr, username, function (err, success) {
                 assert.isNull(err);
-                assert.isNotNull(user);
+                assert.strictEqual(success, true, 'linking `pseudoTaskAddr` to `test_usermanager` should return `true`');
                 done();
             })
         })

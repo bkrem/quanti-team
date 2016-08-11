@@ -54,16 +54,22 @@ function linkTaskToUser (taskAddr, username, callback) {
         if (addrErr)
             return callback(addrErr, null);
         log.debug("linkTaskToUser() -> UM.getUserAddress() -> address returned: ", userAddr);
-        // Use the address to fetch user details
-        LinkerContract.linkTaskToUser(taskAddr, userAddr, function (err, user) {
-            log.info("linkTaskToUser() -> LinkerContract -> user: ", user);
-            return err ? callback(err, null) : callback(err, user);
+
+        // Link the task address to the user at address `userAddr`
+        LinkerContract.linkTaskToUser(taskAddr, userAddr, function (err, success) {
+            log.debug("linkTaskToUser() -> LinkerContract -> success: ", success);
+            return err ? callback(err, null) : callback(err, success);
         });
     });
 }
 
+function linkUserToTeam () {
+    // TODO
+}
+
 module.exports = {
-    linkTaskToUser: linkTaskToUser
+    linkTaskToUser: linkTaskToUser,
+    linkUserToTeam: linkUserToTeam
 };
 
 /* userManager.getUser(address, function (err, user) {

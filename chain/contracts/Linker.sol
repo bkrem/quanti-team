@@ -8,9 +8,9 @@ contract Linker {
       ActionEvent(msg.sender, actionType);
     }
 
-    function linkTaskToUser(address taskAddr, address userAddr) returns (User) {
-        User user = User(userAddr);
-        return user;
+
+    function linkTaskToUser(address taskAddr, address userAddr) returns (bool) {
+        return User(userAddr).associateWithTaskAddress(taskAddr);
     }
 
 }
