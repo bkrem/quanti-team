@@ -4,17 +4,18 @@
 - Abstract
 - Acknowledgements
 - List of figures
-- Abbreviations
+- Abbreviations  
+
 ## Introduction (~2-4 pages)
-    - Problem Outline/Problem Domain/Challenges
-        - Learn how to write smart contracts (Solidity)
-        - Experiment with native dev via React Native after using React and Cordova heavily previously, to provide the simplest but powerful UX possible for a complex backend
-    - Goals/Scope
-        - Working public API interface for blockchain via Node server
-        - iOS client-side app for basic task/user/team management
-        - Basic deployment of distributed validator nodes
-    - Approach to Project/Project Management/Project Overview
-        - waterfall dev?
+- Problem Outline/Problem Domain/Challenges
+    - Learn how to write smart contracts (Solidity)
+    - Experiment with native dev via React Native after using React and Cordova heavily previously, to provide the simplest but powerful UX possible for a complex backend
+- Goals/Scope
+    - Working public API interface for blockchain via Node server
+    - iOS client-side app for basic task/user/team management
+    - Basic deployment of distributed validator nodes
+- Approach to Project/Project Management/Project Overview
+    - waterfall dev?
 ---
 (Probably belongs in main body)
 - Proof-of-concept with the chain running on single node on localhost
@@ -24,27 +25,27 @@
 (Probably belongs in main body)
 
 ---
-    - Report Overview
+- Report Overview
 
-##  Background Information & Related Applications/Work (~8-10 pages)
-- Basis of design _(put these points in Aims instead?)_
+## Background Information & Related Applications/Work (~8-10 pages)
+- Basis of design **_(put these points in Aims instead?)_**
     - Blockchains as commonplace novel application for financial auditing/smart contracts
     - Taking blockchains and smart contracts beyond finance: verifiability & incorruptibility of team work metadata
     - Possible application domain: Create opportunity for open-source version of HaikuLearning or WikiSpaces
 - Background Research (investigation) - Software engineering methodologies and technology stack
-    - (((Agile, Scrum, Kanban (justify why I ended up with simple Kanban board) )))
+    - _(((Agile, Scrum, Kanban (justify why I ended up with simple Kanban board) )))_
     - Blockchain:
         - OpenChain (contract chaining, but documentation/implementation sucked) vs MultiChain vs Eris+TenderMint
-        - 
+        -
         - Smart contract design & Solidity's capabilities (Eris Tutorials, Solidity docs)
     - Databases: SQL vs NoSQL vs Blockchain
         - Ease of data structuring/scalability vs. no central point of failure but less storage efficiency and more complex integrity maintenance compared to SQL. Favourable in comparison to noSQL?
-    - Server-side: 
+    - Server-side:
         - Express as useful abstraction from raw Node server+routing
-    - Client-side: 
+    - Client-side:
         - React Native vs WebView implementations (i.e. Cordova), React: DRY, modularity, encapsulation, composable
         - MVC vs Unidirectional dataflow: Advantages of Redux, single source of truth, easy to reason
-    - (((Redux vs Flow vs Reflux etc.)))
+    - _(((Redux vs Flow vs Reflux etc.)))_
     - Smart components vs Dumb components
 - Existing Related Applications
 - Programming Languages/Technologies/Libraries/Software Tools Selected
@@ -96,6 +97,7 @@
     - API: Insert, Update, Remove etc.
 
 ## Testing (~2-4 pages)
+**TODO complete me**
 - Testing phases/strategy
 - Test server: simulating production environment
 - Unit Testing
@@ -119,6 +121,7 @@
 - Final thoughts
 
 ## Bibliography
+
 ## Appendices
 - High-Fi Sketches (given)
 - List of Requirements
@@ -127,4 +130,5 @@
 - System Manual (README from Github)
 - User Manual (derive from Help/FAQ page)
 - Code Examples/Snippets
+
 ## Glossary
