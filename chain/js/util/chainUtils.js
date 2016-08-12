@@ -1,11 +1,45 @@
 /*
- * These are simply some utility functions which I've found come in useful when
- * transforming data coming from the Eris-TenderMint Chain.
+ * Some handy utility functions to handle data coming off the blockchain.
  */
 
+var util = require('util');
+var EventEmitter = require('events');
 var eris = require(__libs+'/eris/eris-wrapper');
 
 var chainUtils = {
+
+
+    /**
+     * createContractEventHandler - Creates an event handler
+     * for `contract` to log any `ActionEvent` events triggered
+     * within the contract.
+     *
+     * @param  {Object} contract description
+     * @param  {Object} log      description
+     * @return {null}          description
+     */
+    createContractEventHandler: function (contract, log) {
+        // Set up event emitter
+        function ChainEventEmitter () {
+            EventEmitter.call(this);
+        }
+        util.inherits(ChainEventEmitter, EventEmitter);
+        var chainEvents = new ChainEventEmitter();
+
+        contract.ActionEvent(
+            function (error, eventSub) {
+                if (error)
+                    throw error;
+            },
+            function (error, event) {
+                if (event) {
+                    var eventString = eris.hex2str(event.args.actionType);
+
+                    log.info("***CONTRACT EVENT:***\n", eventString);
+                    chainEvents.emit(eventString, event.args);
+                }
+            });
+    },
 
     /**
      * extractInt - Extracts an integer from a `uint`/`int` Solidity type value.

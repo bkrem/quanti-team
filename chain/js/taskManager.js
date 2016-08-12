@@ -4,8 +4,6 @@
  */
 
 var fs = require('fs');
-var EventEmitter = require('events');
-var util = require('util');
 var Async = require('async');
 
 var logger = require(__libs+'/eris/eris-logger');
@@ -16,12 +14,6 @@ var chainUtils = require(__js+'/util/chainUtils');
 
     var log = logger.getLogger('eris.chain.taskManager');
 
-    // Set up event emitter
-    function ChainEventEmitter () {
-        EventEmitter.call(this);
-    }
-    util.inherits(ChainEventEmitter, EventEmitter);
-    var chainEvents = new ChainEventEmitter();
 
     // ##############
     // The following part depends on local files that are generated during contract deployment via EPM
@@ -37,20 +29,8 @@ var chainUtils = require(__js+'/util/chainUtils');
     var taskManagerContract = erisWrapper.createContract(taskManagerAbi, epmJSON['TaskManager']);
     var taskContract = erisWrapper.createContract(taskAbi, epmJSON['Task']);
 
-    // TODO make this DRY across manager modules
-    taskManagerContract.ActionEvent(
-        function (error, eventSub) {
-            if (error)
-                throw error;
-        },
-        function (error, event) {
-            if (event) {
-                var eventString = eris.hex2str(event.args.actionType);
-
-                log.info("***CONTRACT EVENT:***\n", eventString);
-                chainEvents.emit(eventString, event.args);
-            }
-        });
+    // Create ActionEvent handler
+    chainUtils.createContractEventHandler(taskManagerContract, log);
 
     /**
      * _collectTaskAddresses - description

@@ -23,28 +23,8 @@ var erisWrapper = new eris.NewWrapper(__settings.eris.chain.host, __settings.eri
 var userManagerContract = erisWrapper.createContract(userManagerAbi, epmJSON['UserManager']);
 var userContract = erisWrapper.createContract(userAbi, epmJSON['User']);
 
-
-// Set up event emitter
-function ChainEventEmitter () {
-    EventEmitter.call(this);
-}
-util.inherits(ChainEventEmitter, EventEmitter);
-var chainEvents = new ChainEventEmitter();
-
-userManagerContract.ActionEvent(
-    function (error, eventSub) {
-        if (error)
-            throw error;
-    },
-    function (error, event) {
-        if (event) {
-            var eventString = eris.hex2str(event.args.actionType);
-
-            log.info("***CONTRACT EVENT:***\n", eventString);
-            chainEvents.emit(eventString, event.args);
-        }
-    });
-
+// Create ActionEvent handler
+chainUtils.createContractEventHandler(userManagerContract, log);
 
 /**
  * _createUserFromContract - Initializes a user object from the given contract.

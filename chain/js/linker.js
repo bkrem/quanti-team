@@ -1,7 +1,6 @@
 var fs = require('fs');
-var util = require('util');
-var EventEmitter = require('events');
 var userManager = require('./userManager');
+var chainUtils = require(__js+'/util/chainUtils');
 var eris = require(__libs+'/eris/eris-wrapper');
 var logger = require(__libs+'/eris/eris-logger');
 var log = logger.getLogger('eris.chain.linker');
@@ -18,26 +17,8 @@ var erisWrapper = new eris.NewWrapper(__settings.eris.chain.host, __settings.eri
 // Create contract objects
 var LinkerContract = erisWrapper.createContract(linkerAbi, epmJSON['Linker']);
 
-// Set up event emitter
-function ChainEventEmitter () {
-    EventEmitter.call(this);
-}
-util.inherits(ChainEventEmitter, EventEmitter);
-var chainEvents = new ChainEventEmitter();
-
-LinkerContract.ActionEvent(
-    function (error, eventSub) {
-        if (error)
-            throw error;
-    },
-    function (error, event) {
-        if (event) {
-            var eventString = eris.hex2str(event.args.actionType);
-
-            log.info("***CONTRACT EVENT:***\n", eventString);
-            chainEvents.emit(eventString, event.args);
-        }
-    });
+// Create ActionEvent handler
+chainUtils.createContractEventHandler(LinkerContract, log);
 
 /**
  * linkTaskToUser - description
