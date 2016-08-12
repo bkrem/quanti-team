@@ -15,7 +15,7 @@ contract User {
     uint16 MAXTASKS = 50000;
     address[50000] public taskAddresses; // address[50000] == 1MB storage
 
-    // `taskAddresses` auto-inits to .length == 2000.
+    // `taskAddresses` auto-inits to .length == MAXTASKS.
     // Separate counter variable is needed to track the
     // actual size of `taskAddresses`.
     uint16 sizeTaskAddresses;
