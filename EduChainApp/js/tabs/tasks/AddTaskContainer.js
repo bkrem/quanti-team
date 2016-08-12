@@ -10,12 +10,14 @@ import AddTaskView from './AddTaskView';
 import {addTask} from '../../actions/tasks';
 
 const mapStateToProps = (state) => {
-    return {}; // no state to map for now
+    return {
+        username: state.user.details.username
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addTask: (partialTask) => dispatch(addTask(partialTask))
+        addTask: (partialTask, username) => dispatch(addTask(partialTask, username))
     };
 };
 

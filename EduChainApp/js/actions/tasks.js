@@ -49,10 +49,11 @@ export function requestAddTask(): Action {
         type: 'ADD_TASK_REQUEST'
     };
 }
-export function responseAddTask(address: string): Action {
+export function responseAddTask(success: boolean, taskAddr: string): Action {
     return {
         type: 'ADD_TASK_SUCCESS',
-        address
+        success,
+        taskAddr
     };
 }
 export function addTaskFail(error: Object): Action {
@@ -82,7 +83,7 @@ export function fetchTasks(): ThunkAction {
     };
 }
 
-export function addTask(partialTask: Task): ThunkAction {
+export function addTask(partialTask: Task, username: string): ThunkAction {
     return (dispatch) => {
         dispatch(requestAddTask());
 
@@ -94,13 +95,13 @@ export function addTask(partialTask: Task): ThunkAction {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(task)
+                body: JSON.stringify({task, username})
             };
 
-            return fetch(ENV.__API_BRIDGE+'/tasks', request)
-                .then(response => response.text())
-                .then(address =>
-                    dispatch(responseAddTask(address))
+            return fetch(ENV.__API_BRIDGE+'/task', request)
+                .then(response => response.json())
+                .then(json =>
+                    dispatch(responseAddTask(json.success, json.taskAddr))
                 )
                 .catch(rejection =>
                     dispatch(addTaskFail(rejection))

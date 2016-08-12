@@ -4,9 +4,10 @@ var bodyParser = require('body-parser');
 var Async = require('async');
 
 var logger = require(__libs+'/eris/eris-logger');
+var auth = require(__js+'/auth');
 var taskManager = require(__js+'/taskManager');
 var userManager = require(__js+'/userManager');
-var auth = require(__js+'/auth');
+var linker = require(__js+'/linker');
 
 var init = function () {
 
@@ -60,13 +61,21 @@ var init = function () {
     });
 
     // POST new task
-    app.post('/tasks', function (req, res) {
-        var task = req.body;
+    app.post('/task', function (req, res) {
+        var task = req.body.task;
+        var username = req.body.username;
 
-        log.info("POST task: ", task);
-        taskManager.addTask(task, function (err, address) {
+        log.info("POST /task: ", task, username);
+        taskManager.addTask(task, function (err, taskAddr) {
             _handleErr(err, res);
-            res.send(address);
+            // use the return task address to link the task to the user's contract
+            linker.linkTaskToUser(taskAddr, username, function (linkErr, success) {
+                _handleErr(linkErr, res);
+                res.json({
+                    success: success,
+                    taskAddr: taskAddr
+                });
+            });
         });
     });
 

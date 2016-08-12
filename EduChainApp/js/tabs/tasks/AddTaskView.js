@@ -17,6 +17,7 @@ import GlobalStyles from '../../common/GlobalStyles';
 import Header from '../../common/Header';
 
 type Props = {
+    username: string;
     addTask: (partialTask: Object) => Promise;
     navigator: Navigator;
 }
@@ -45,7 +46,7 @@ export default class AddTaskView extends React.Component {
             creator: "Ben"
         };
 
-        this.props.addTask(partialTask);
+        this.props.addTask(partialTask, this.props.username);
     }
 
     render() {
