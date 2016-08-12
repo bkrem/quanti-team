@@ -6,6 +6,7 @@ var util = require('util');
 var EventEmitter = require('events');
 var eris = require(__libs+'/eris/eris-wrapper');
 
+/* istanbul ignore next */
 var chainUtils = {
 
 
