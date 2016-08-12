@@ -10,6 +10,7 @@ contract Linker {
 
 
     function linkTaskToUser(address taskAddr, address userAddr) returns (bool) {
+        registerActionEvent('LINK TASK TO USER');
         return User(userAddr).associateWithTaskAddress(taskAddr);
     }
 
