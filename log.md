@@ -129,4 +129,9 @@
 # 25/07
 - [App] Added `addTask()` func to communicate with `POST /tasks` API bridge endpoint
 - [App] Fixed bug caused by implicit assumption in my test cases that `addTask()` input will be pre-formatted into HEX
-- [App] Added elementary `AddTaskView` component 
+- [App] Added elementary `AddTaskView` component
+
+
+### Issues
+- State of Solidity as a bottleneck
+- Didn't make my tests atomic enough -> cascading failures if one test breaks -> lesson for next time
