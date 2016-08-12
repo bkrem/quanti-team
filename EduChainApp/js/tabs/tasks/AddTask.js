@@ -11,6 +11,8 @@ import {
     StyleSheet,
     Navigator
 } from 'react-native';
+import {connect} from 'react-redux';
+import {addTask} from '../../actions/tasks';
 import t from 'tcomb-form-native';
 import Button from 'react-native-button';
 import GlobalStyles from '../../common/GlobalStyles';
@@ -22,7 +24,7 @@ type Props = {
     navigator: Navigator;
 }
 
-export default class AddTaskView extends React.Component {
+class AddTaskView extends React.Component {
     props: Props;
 
     constructor(props: Props) {
@@ -122,3 +124,23 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
 });
+
+
+// ##############
+// REDUX BINDINGS
+// ##############
+const mapStateToProps = (state) => {
+    return {
+        username: state.user.details.username
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addTask: (partialTask, username) => dispatch(addTask(partialTask, username))
+    };
+};
+
+const AddTask = connect(mapStateToProps, mapDispatchToProps)(AddTaskView);
+
+export default AddTask;

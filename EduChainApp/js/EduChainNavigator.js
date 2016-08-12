@@ -11,7 +11,7 @@ import {Navigator} from 'react-native';
 import TabsView from './tabs/TabsView';
 import TaskView from './tabs/tasks/TaskView';
 import SettingsListView from './settings/SettingsListView';
-import AddTaskContainer from './tabs/tasks/AddTaskContainer';
+import AddTask from './tabs/tasks/AddTask';
 import Login from './login/Login';
 import Signup from './signup/Signup';
 
@@ -27,7 +27,7 @@ export default class EduChainNavigator extends React.Component {
             case 'task':
                 return (<TaskView task={route.task} navigator={navigator} />);
             case 'addTask':
-                return (<AddTaskContainer navigator={navigator} />);
+                return (<AddTask navigator={navigator} />);
 
             case 'home':
             default:
