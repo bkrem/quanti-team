@@ -33,6 +33,7 @@ type TaskData = Rows | RowsAndSections;
 type Props = {
     tasks: Array<Task>;
     refreshing: boolean;
+    username: string;
     onRefresh: () => Promise;
     navigator: Navigator;
 }
@@ -83,7 +84,7 @@ class TaskListView extends React.Component {
                     renderSectionHeader={this.renderSectionHeader}
                     renderSeparator={this.renderSeparator}
                     refreshing={this.props.refreshing}
-                    onRefresh={this.props.onRefresh}
+                    onRefresh={this.props.onRefresh.bind(this, this.props.username)}
                     automaticallyAdjustContentInsets={false}
                     enableEmptySections={true}
                 />
@@ -162,15 +163,16 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         refreshing: state.tasks.isFetching,
-        tasks: state.tasks.taskList
+        tasks: state.tasks.taskList,
+        username: state.user.details.username
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onRefresh: () => {
+        onRefresh: (username) => {
             dispatch(refreshTaskList());
-            dispatch(fetchTasks());
+            dispatch(fetchTasks(username));
         }
     };
 };

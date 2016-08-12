@@ -11,7 +11,7 @@ import type {User, Login} from '../reducers/user';
 export type Action =
     { type: 'REFRESH_TASKLIST' }
 
-  | { type: 'FETCH_TASKS_REQUEST' }
+  | { type: 'FETCH_TASKS_REQUEST', username: string }
   | { type: 'FETCH_TASKS_SUCCESS', tasks: Array<Task>, receivedAt: number }
   | { type: 'FETCH_TASKS_FAIL', error: Object }
 
@@ -25,7 +25,7 @@ export type Action =
 
   | { type: 'ADD_USER_REQUEST' }
   | { type: 'ADD_USER_SUCCESS', isOverwrite: boolean}
-  | { type: 'ADD_USER_FAIL', error: Object  }
+  | { type: 'ADD_USER_FAIL', error: Object }
 
   | { type: 'SIGNUP_REQUEST', form: User }
   | { type: 'SIGNUP_SUCCESS', address: string }

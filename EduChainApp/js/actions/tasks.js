@@ -23,9 +23,10 @@ export function refreshTaskList(): Action {
 // `/tasks` API ENDPOINT ACTIONS
 // #############################
 // GET
-export function requestTasks(): Action {
+export function requestTasks(username: string): Action {
     return {
-        type: 'FETCH_TASKS_REQUEST'
+        type: 'FETCH_TASKS_REQUEST',
+        username
     };
 }
 export function receiveTasks(tasks: Array<Task>): Action {
@@ -67,12 +68,12 @@ export function addTaskFail(error: Object): Action {
 // ##############################
 // THUNK ACTIONS
 // ##############################
-export function fetchTasks(): ThunkAction {
+export function fetchTasks(username: string): ThunkAction {
     return (dispatch) => {
         // State is set to `isFetching: true`
-        dispatch(requestTasks());
+        dispatch(requestTasks(username));
 
-        return fetch(ENV.__API_BRIDGE+'/tasks')
+        return fetch(ENV.__API_BRIDGE+`/tasks/${username}`)
             .then(response => response.json())
             .then(json =>
                 dispatch(receiveTasks(json.data))
