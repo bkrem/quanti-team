@@ -40,7 +40,7 @@
             "error",
             "never"
         ],
-        "consistent-return": "error",
+        "consistent-return": "warn",
         "consistent-this": "error",
         "curly": "off",
         "default-case": "error",
@@ -80,7 +80,7 @@
         "max-len": "off",
         "max-lines": "error",
         "max-nested-callbacks": "error",
-        "max-params": "error",
+        "max-params": "warn",
         "max-statements": ["error", 10, { "ignoreTopLevelFunctions": true }],
         "max-statements-per-line": "error",
         "new-parens": "error",
