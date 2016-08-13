@@ -37,9 +37,9 @@ function linkTaskToUser (taskAddr, username, callback) {
         log.debug("linkTaskToUser() -> UM.getUserAddress() -> address returned: ", userAddr);
 
         // Link the task address to the user at address `userAddr`
-        LinkerContract.linkTaskToUser(taskAddr, userAddr, function (err, success) {
-            log.debug("linkTaskToUser() -> LinkerContract -> success: ", success);
-            return err ? callback(err, null) : callback(err, success);
+        LinkerContract.linkTaskToUser(taskAddr, userAddr, function (err, isOverwrite) {
+            log.debug("linkTaskToUser() -> LinkerContract -> isOverwrite: ", isOverwrite);
+            return err ? callback(err, null) : callback(err, isOverwrite);
         });
     });
 }
