@@ -42,6 +42,15 @@ const initialState: State = {
 export default function user(state: State = initialState, action: Action): State {
     switch (action.type) {
 
+        case 'SIGNUP_REQUEST':
+            return {
+                ...state,
+                details: {
+                    ...state.details,
+                    ...action.form
+                }
+            };
+
         case 'SIGNUP_SUCCESS':
             return {
                 ...state,
@@ -60,18 +69,14 @@ export default function user(state: State = initialState, action: Action): State
         case 'LOGIN_RESPONSE':
             return {
                 ...state,
-                isLoggedIn: action.isValid,
-                details: {
-                    ...state.details,
-                    username: action.isValid ? state.details.username : initialState.details.username
-                }
+                isLoggedIn: action.isValid
             };
 
         case 'SIGNUP_FAIL':
         case 'CHECK_USERNAME_FAIL':
         case 'LOGIN_FAIL':
             console.error(action.error);
-            return state;
+            return initialState;
 
         default:
             return state;
