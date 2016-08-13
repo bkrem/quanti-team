@@ -43,10 +43,15 @@ var init = function () {
      */
 
     // GET all available task objects
-    app.get('/tasks', function (req, res) {
+    app.get('/tasks/:username', function (req, res) {
+        var username = req.params.username;
+
+        log.info('GET /tasks/', username);
         Async.waterfall([
             // Get all available task contract addresses
-            taskManager.getAllTaskAddresses,
+            function (callback) {
+                userManager.getUserTaskAddresses(username, callback);
+            },
             // Map each address to its task contract and callback an array of task objects
             function (addresses, callback) {
                 Async.map(addresses, taskManager.getTaskAtAddress, function (err, tasks) {
@@ -55,7 +60,7 @@ var init = function () {
             }
         ], function (err, tasks) {
             _handleErr(err, res);
-            log.info("GET /tasks: ", tasks);
+            log.info("GET /tasks/"+username+": ", tasks);
             res.json({data: tasks});
         });
     });

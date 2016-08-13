@@ -8,7 +8,6 @@ var eris = require(__libs+'/eris/eris-wrapper');
 var logger = require(__libs+'/eris/eris-logger');
 var log = logger.getLogger('eris.chain.userManager');
 
-
 // ##############
 // The following part depends on local files that are generated during contract deployment via EPM
 // ##############
@@ -25,6 +24,39 @@ var userContract = erisWrapper.createContract(userAbi, epmJSON['User']);
 
 // Create ActionEvent handler
 chainUtils.createContractEventHandler(userManagerContract, log);
+
+/**  // TODO refactor to make this DRY
+ * _collectTaskAddresses - description
+ *
+ * @param {String} userAddr description
+ * @param  {int} startIdx  description
+ * @param  {Array} addresses description
+ * @param  {func} callback  description
+ * @return {type}           description
+ */
+function _collectUserTaskAddresses (userAddr, startIdx, addresses, callback) {
+
+    userManagerContract.getUserTaskAtIndex(userAddr, startIdx, function (error, result) {
+        if (error) log.debug(error);
+        // If address is not a 0x0 nullPointer => push to array
+        if (result[0] !== 0)
+            addresses.push(result[0]);
+
+        // Reassign `startIdx` to next index
+        var nextIdx = chainUtils.extractIntFromArray(result, 1);
+
+        // Recurse if new startIdx is valid...
+        if (nextIdx > 0) {
+            startIdx++;
+            _collectUserTaskAddresses(userAddr, startIdx, addresses, callback);
+            // ...or hand over to start collecting data
+        } else {
+            log.info('Found '+addresses.length+' task addresses.');
+            log.info(addresses);
+            return callback(error, addresses);
+        }
+    });
+}
 
 /**
  * _createUserFromContract - Initializes a user object from the given contract.
@@ -187,11 +219,37 @@ function getUser (address, callback) {
     });
 }
 
+
+/**
+ * getUserTaskAddresses - description
+ *
+ * @param  {type} username description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
+function getUserTaskAddresses (username, callback) { // TODO refactor this to be less hacky
+    log.debug('getUserTaskAddresses(): ', username);
+    getUserAddress(username, function (addrErr, userAddr) {
+        if (addrErr)
+            return callback(addrErr, null);
+        log.debug('getUserTaskAddresses() -> getUserAddress() ', userAddr);
+
+        var idx = 0;
+        var addresses = [];
+
+        _collectUserTaskAddresses(userAddr, idx, addresses, function (err) {
+            log.debug('getUserTaskAddresses() -> _collectUserTaskAddresses(): ', addresses);
+            return callback(err, addresses);
+        });
+    });
+}
+
 module.exports = {
     addUser: addUser,
     updateUser: updateUser,
     isUsernameTaken: isUsernameTaken,
     getUserAddress: getUserAddress,
     getUser: getUser,
-    getUserListSize: getUserListSize
+    getUserListSize: getUserListSize,
+    getUserTaskAddresses: getUserTaskAddresses
 };
