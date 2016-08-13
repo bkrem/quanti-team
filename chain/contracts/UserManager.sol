@@ -74,4 +74,8 @@ contract UserManager {
         registerActionEvent("GET USER ADDRESS");
         return list.value(username);
     }
+
+    function getUserTaskAtIndex(address userAddr, uint idx) returns (address, uint) {
+        return User(userAddr).getUserTaskAtIndex(idx);
+    }
 }
