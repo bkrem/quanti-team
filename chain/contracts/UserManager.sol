@@ -22,13 +22,13 @@ contract UserManager {
             registerActionEvent("ADD USER");
             // index on `username` for User map for account retrieval on login
             bytes32 key = _username;
-            User u = new User(_id, _username, _email, _name, _password);
 
             bool isOverwrite = list.exists(key);
             // if this would be an overwrite -> return null address
             if (isOverwrite) {
                 return 0x0;
             } else {
+                User u = new User(_id, _username, _email, _name, _password);
                 list.insert(key, u);
                 return u;
             }
