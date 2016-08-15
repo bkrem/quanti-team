@@ -13,7 +13,7 @@ describe('Linker', function () {
         it('links a task address to a user contract', function (done) {
             linker.linkTaskToUser(pseudoTaskAddr, username, function (err, isOverwrite) {
                 assert.isNull(err);
-                assert.strictEqual(isOverwrite, false, 'linking `pseudoTaskAddr` to `test_usermanager` should return `false` for `isOverwrite`');
+                assert.strictEqual(isOverwrite, false, 'linking `pseudoTaskAddr` to `test_usermanager1` should return `false` for `isOverwrite`');
                 done();
             })
         })
