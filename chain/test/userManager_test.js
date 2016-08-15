@@ -114,8 +114,10 @@ describe('User Manager', function () {
         it("returns the array of a user's task addresses", function (done) {
             var pseudoTaskAddr = '2BEBADFCA9F0A28AF3631BC01E8DFF1AA1829577';
 
+            // mocking the linkage
             linker.linkTaskToUser(pseudoTaskAddr, testUser1.username, function (linkErr, isOverwrite) {
                 assert.isNull(linkErr, 'linkTaskToUser() should return no error');
+                
                 userManager.getUserTaskAddresses(testUser1.username, function (err, addresses) {
                     assert.isNull(err);
                     assert.strictEqual(addresses[0], pseudoTaskAddr);
