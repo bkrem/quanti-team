@@ -21,7 +21,3 @@ var eris = require(__libs+'/eris/eris-wrapper');
 var server = require(__js+'/server');
 
 server.init();
-
-var accounts = require('./accounts.json');
-var erisWrapper = new eris.NewWrapper(__settings.eris.chain.host, __settings.eris.chain.port, accounts.simplechain_full_000);
-var log = logger.getLogger('eris.chain.app');
