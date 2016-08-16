@@ -2,8 +2,9 @@ import "SequenceList.sol";
 
 contract Team {
 
-    bytes32 name;
-    bytes32 desc;
+    bytes32 public name;
+    bytes32 public founderUsername;
+    address public founderAddress;
 
     // SequenceList to manage the members of this team.
     SequenceList members = new SequenceList();
@@ -15,12 +16,12 @@ contract Team {
     // Constructor
     function Team(
         bytes32 _name,
-        bytes32 _desc,
         bytes32 _founderUsername,
         address _founderAddress)
         {
         name = _name;
-        desc = _desc;
+        founderUsername = _founderUsername;
+        founderAddress = _founderAddress;
 
         // team members are tracked in a SequenceList
         members.insert(_founderUsername, _founderAddress);

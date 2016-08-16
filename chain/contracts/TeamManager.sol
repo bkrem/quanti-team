@@ -11,7 +11,6 @@ contract TeamManager {
 
     function addTeam(
         bytes32 _name,
-        bytes32 _desc,
         bytes32 _founderUsername,
         address _founderAddress)
         returns (address)
@@ -21,7 +20,7 @@ contract TeamManager {
             if (teams.exists(_name)) {
                 return 0x0;
             }
-            Team tm = new Team(_name, _desc, _founderUsername, _founderAddress);
+            Team tm = new Team(_name, _founderUsername, _founderAddress);
             teams.insert(_name, tm);
             return tm;
     }
