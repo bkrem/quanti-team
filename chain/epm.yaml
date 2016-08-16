@@ -14,6 +14,13 @@ jobs:
       instance: all
       wait: true
 
+- name: TeamManager
+  job:
+    deploy:
+      contract: TeamManager.sol
+      instance: all
+      wait: true
+
 - name: Linker
   job:
     deploy:
