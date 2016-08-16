@@ -136,3 +136,4 @@
 - State of Solidity as a bottleneck
 - Didn't make my tests atomic enough -> cascading failures if one test breaks -> lesson for next time
 - Trickiness involved in getting ListViews right in RN -> FB's `PureListView` helped a lot here to understand optimal structuring and mapping of data flow
+- Started with IDs in contract schema, didn't really need them -> addresses double as unique IDs
