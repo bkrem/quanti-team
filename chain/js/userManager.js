@@ -35,9 +35,9 @@ chainUtils.createContractEventHandler(userManagerContract, log);
 function _collectUserTaskAddresses (userAddr, startIdx, addresses, callback) {
 
     userManagerContract.getUserTaskAtIndex(userAddr, startIdx, function (error, result) {
-        if (error) log.debug(error);
+        if (error) log.error(error);
         // If address is not a 0x0 nullPointer => push to array
-        if (result[0] !== 0)
+        if (result[0] !== __NULL_ADDRESS)
             addresses.push(result[0]);
 
         // Reassign `startIdx` to next index

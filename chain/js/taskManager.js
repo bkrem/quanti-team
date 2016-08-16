@@ -43,9 +43,9 @@ var chainUtils = require(__js+'/util/chainUtils');
     function _collectTaskAddresses (startIdx, addresses, callback) {
 
         taskManagerContract.getTaskAtIndex(startIdx, function (error, result) {
-            if (error) log.debug(error);
+            if (error) log.error(error);
             // If address is not a 0x0 nullPointer => push to array
-            if (result[0] !== 0)
+            if (result[0] !== __NULL_ADDRESS)
                 addresses.push(result[0]);
 
             // Reassign `startIdx` to next index
