@@ -2,8 +2,8 @@ import "SequenceList.sol";
 
 contract Team {
 
-    bytes32 id;
     bytes32 name;
+    bytes32 desc;
 
     // SequenceList to manage the members of this team.
     SequenceList members = new SequenceList();
@@ -14,13 +14,15 @@ contract Team {
 
     // Constructor
     function Team(
-        bytes32 _id,
         bytes32 _name,
+        bytes32 _desc,
         bytes32 _founderUsername,
         address _founderAddress)
         {
-        id = _id;
         name = _name;
+        desc = _desc;
+
+        // team members are tracked in a SequenceList
         members.insert(_founderUsername, _founderAddress);
     }
 
@@ -45,5 +47,5 @@ contract Team {
     // ###############
     // TASKLIST METHODS
     // ###############
-    
+
 }
