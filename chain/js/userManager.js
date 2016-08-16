@@ -1,6 +1,4 @@
 var fs = require('fs');
-var util = require('util');
-var EventEmitter = require('events');
 var Async = require('async');
 
 var chainUtils = require(__js+'/util/chainUtils');
@@ -26,7 +24,7 @@ var userContract = erisWrapper.createContract(userAbi, epmJSON['User']);
 chainUtils.createContractEventHandler(userManagerContract, log);
 
 /**  // TODO refactor to make this DRY
- * _collectTaskAddresses - description
+ * _collectUserTaskAddresses - description
  *
  * @param {String} userAddr description
  * @param  {int} startIdx  description
@@ -181,9 +179,10 @@ function isUsernameTaken (username, callback) {
  * @return {type}          description
  */
 function getUserListSize (callback) {
-    userManagerContract.getUserListSize(function (error, size) {
-        error ? log.error("getUserListSize() -> Error: " + error.stack) : log.debug("getUserListSize: " + size);
-        callback(error, size);
+    userManagerContract.getUserListSize(function (err, size) {
+        err ? log.error("getUserListSize() -> Error: " + err.stack)
+            : log.debug("getUserListSize: " + size);
+        callback(err, size);
     });
 }
 
@@ -198,7 +197,8 @@ function getUserListSize (callback) {
 function getUserAddress (username, callback) {
     log.debug('getUserAddress() -> username: ' + username);
     userManagerContract.getUserAddress(eris.str2hex(username), function (err, address) {
-        err ? log.error("getUserAddress() -> Error: " + err.stack) : log.debug("User address: " + address);
+        err ? log.error("getUserAddress("+username+") -> Error: " + err.stack)
+            : log.debug("getUserAddress("+username+") -> User address: " + address);
         callback(err, address);
     });
 }
@@ -232,13 +232,13 @@ function getUserTaskAddresses (username, callback) { // TODO refactor this to be
     getUserAddress(username, function (addrErr, userAddr) {
         if (addrErr)
             return callback(addrErr, null);
-        log.debug('getUserTaskAddresses() -> getUserAddress() ', userAddr);
+        log.debug('getUserTaskAddresses('+username+') -> getUserAddress(): ', userAddr);
 
         var idx = 0;
         var addresses = [];
 
         _collectUserTaskAddresses(userAddr, idx, addresses, function (err) {
-            log.debug('getUserTaskAddresses() -> _collectUserTaskAddresses(): ', addresses);
+            log.debug('getUserTaskAddresses('+username+') -> _collectUserTaskAddresses(): ', addresses);
             return callback(err, addresses);
         });
     });
