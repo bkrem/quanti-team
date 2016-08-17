@@ -9,7 +9,7 @@ contract User {
     bytes32 public password;
 
     bytes32 public score; // TODO
-    bytes32 public teamId; // TODO
+    bytes32 public teamname; // TODO
 
     // SequenceList to track all task addresses associated
     // to this User contract.
