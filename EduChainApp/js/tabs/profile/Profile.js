@@ -11,13 +11,24 @@
      View,
      StyleSheet,
      Text,
+     Navigator,
  } from 'react-native';
+ import {connect} from 'react-redux';
  import GlobalStyles from '../../common/GlobalStyles';
  import Header from '../../common/Header';
  import ProfileSummary from './ProfileSummary';
- import Button from 'react-native-button';
+ import type {User} from '../../reducers/user';
+ import {getProfile} from '../../actions/user';
 
- export default class ProfileView extends React.Component {
+ type Props = {
+     username: string;
+     details: User;
+     getProfile: (username: string) => void;
+     navigator: Navigator;
+ }
+
+ class ProfileView extends React.Component {
+     props: Props;
 
      render() {
          return (
@@ -31,21 +42,9 @@
                          onPress: () => this.props.navigator.push({id: "settings"})
                      }}
                  />
-             <View style={GlobalStyles.contentWrapper}>
-                    <ProfileSummary
-                        username="@bkrem"
-                        name="Ben Kremer"
-                        teamname="Team λαμδα"
-                    />
 
-                    <View style={styles.balanceContainer}>
-                        <Button
-                            containerStyle={GlobalStyles.buttonContainer}
-                            onPress={() => {}}
-                        >
-                            Get Balance
-                        </Button>
-                    </View>
+             <View style={GlobalStyles.contentWrapper}>
+                    <ProfileSummary details={this.props.details} />
 
                     <View ref="bioContainer" style={styles.bioContainer}>
                         <Text ref="bioTitle" style={[GlobalStyles.sectionHeader, styles.bioTitle]}>Bio</Text>
@@ -54,10 +53,6 @@
                        </Text>
                    </View>
 
-                   <View ref="statsContainer" style={styles.statsContainer}>
-                       <Text ref="statsTitle" style={[GlobalStyles.sectionHeader, styles.statsTitle]}>Statistics</Text>
-                       {/* TODO GH issue #10 */}
-                   </View>
                 </View>
              </View>
          );
@@ -67,3 +62,21 @@
  const styles = StyleSheet.create({
 
  });
+
+ // ##############
+ // REDUX BINDINGS
+ // ##############
+ const mapStateToProps = (state) => {
+     return {
+         details: state.user.details
+     };
+ };
+
+ const mapDispatchToProps = (dispatch) => {
+     return {
+         getProfile: (username: string) => dispatch(getProfile(username))
+     };
+ };
+
+ const Profile = connect(mapStateToProps, mapDispatchToProps)(ProfileView);
+ export default Profile;

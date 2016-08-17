@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../common/Colors';
 import type {Tab} from './../reducers/navigation';
 import TaskList from './tasks/TaskList';
-import ProfileView from './profile/ProfileView';
+import Profile from './profile/Profile';
 import TeamView from './team/TeamView';
 
 const ICONSIZE = 30;
@@ -84,7 +84,7 @@ export default class TabsView extends React.Component {
                     selectedIconName="ios-contact"
                     iconSize={ICONSIZE}
                 >
-                    <ProfileView navigator={this.props.navigator} />
+                    <Profile navigator={this.props.navigator} />
                 </Icon.TabBarItemIOS>
             </TabBarIOS>
         );
