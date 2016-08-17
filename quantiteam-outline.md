@@ -68,7 +68,8 @@
     - PK/FK simulation via the `linker` and on-chain addresses
     - UML class diagrams
     - Blockchain analysis:
-        - ERD
+        - _(((ERD)))_
+        - Docker/Docker-Machine
         - Data structure/model
             - SequenceList contract
             - Type contracts
@@ -77,6 +78,7 @@
     - Pipeline server analysis:
         - data relay/transformer
         - (almost?) stateless
+        - 2-3 sequence diagrams
     - Client side data flow and structure
         - UML state diagrams: perfect for Redux
         - Redux store
