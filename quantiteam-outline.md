@@ -55,31 +55,34 @@
     - Docker/Docker-Machine
     - Kanban board (GH issues + waffle.io)
     - Testing frameworks: Mocha, Chai (TDD with `assert`), Istanbul (code coverage)
-    - Dev tools: Version control (Git), Code hosting (Github), Editor (Atom+Nuclide+ESLint), Flow (ES6 static type analyser)
+    - Dev tools: Version control (Git), Code hosting (Github), Editor (Atom+Nuclide+ESLint), Flow (ES6 static type analyser), `envsetup.sh` & `simplechain.sh` scripts
     - Debugging: Redux logger+Chrome console, Log4JS+erisLogger, raw logs from the TenderMint chain
 
 ## Requirements & Analysis (~5-6 pages)
-**TODO complete me**
 - Problem Statement
-- Requirements/ Requirements Gathering/Functional requirements vs Non-functional requirements
-- Use Cases/Epics/User Stories
+- Requirements/Requirements Gathering/Functional requirements vs Non-functional requirements
+- Use Cases
 - Analysis & Data Modelling
-    - Entities
-    - Relationships
+    - Initial Deployment diagram
+    - Development of SQL/noSQL-free data structure with blockchain as verifier and store simultaneously (add updated deployment diagram)
+    - PK/FK simulation via the `linker` and on-chain addresses
     - UML class diagrams
-    - Server-side analysis:
+    - Blockchain analysis:
         - ERD
         - Data structure/model
-            - MongoDB collections
-            - Relationships
-            - Hybrid model (embedded documents vs reference model etc.)
-    -  Client side data flow and structure
+            - SequenceList contract
+            - Type contracts
+            - Manager contracts
+            - Linker contract
+    - Pipeline server analysis:
+        - data relay/transformer
+        - (almost?) stateless
+    - Client side data flow and structure
         - UML state diagrams: perfect for Redux
         - Redux store
         - Unidirectional data flow (dispatcher, stores, actions etc.)
 
 ## Design & Implementation (~10+ pages)
-**TODO complete me**
 - Source code structure
     - `chain`
         - Solidity contracts
@@ -111,9 +114,8 @@
 ## Testing (~2-4 pages)
 **TODO complete me**
 - Testing phases/strategy
-- Test server: simulating production environment
 - Unit Testing
-- End to end testing
+- API endpoint testing (?)
 - Testing libraries/frameworks: mocha, chai `assert`, istanbul
 
 ### Deployment
