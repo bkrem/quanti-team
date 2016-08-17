@@ -136,3 +136,4 @@
 - State of Solidity as a bottleneck
 - Didn't make my tests atomic enough -> cascading failures if one test breaks -> lesson for next time
 - Trickiness involved in getting ListViews right in RN -> FB's `PureListView` helped a lot here to understand optimal structuring and mapping of data flow
+- Should've only done quick mocks of views as sketches and then implemented statically ad-hoc, too much time wasted on now not-implemented views
