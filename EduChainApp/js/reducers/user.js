@@ -30,12 +30,12 @@ const initialState: State = {
     isLoggedIn: false,
     details: {
         id: -1,
-        name: 'initialState',
-        username: 'initialState',
+        name: '',
+        username: '',
         score: 0,
-        teamId: -1,
-        email: 'initialState',
-        address: 'initialState'
+        teamname: '',
+        email: '',
+        address: ''
     }
 };
 
