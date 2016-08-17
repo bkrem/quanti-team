@@ -37,7 +37,7 @@
     - _(((Agile, Scrum, Kanban (justify why I ended up with simple Kanban board) )))_
     - Blockchain:
         - OpenChain (contract chaining, but documentation/implementation sucked) vs MultiChain vs Eris+TenderMint
-        - Smart contract design & Solidity's capabilities (Eris Tutorials, Solidity docs)
+        - Smart contract design & Soliditys capabilities (Eris Tutorials, Solidity docs)
     - Databases: SQL vs NoSQL vs Blockchain
         - Ease of data structuring/scalability vs. no central point of failure but less storage efficiency and more complex integrity maintenance compared to SQL. Favourable in comparison to noSQL?
     - Server-side:
@@ -81,20 +81,32 @@
 ## Design & Implementation (~10+ pages)
 **TODO complete me**
 - Source code structure
+    - `chain`
+        - Solidity contracts
+        - `Eris` configs for deployment
+        - Node server as pipeline
+    - `app`
+        - Example implementation in React Native
 - Client side architecture
-    - Startup
-    - UI: React components: template design, component lifecycle, composing in React
-    - Client side data: Redux actions, stores, reducers
-    - Utilities
-    - Stylesheets
+    - `Flow` static typing
+    - UI: React components: template design (abstraction with `common` components), component lifecycle, composing in React
+    - Client side data: Redux actions, stores, reducers, `types.js`
+    - `Navigator`
+    - `actions/util.js`
+    - `TabsView`
 - Server side architecture
-    - Startup
-    - Login & Authentication
-        - Roles
-        - Create Account
-        - Login
-        - Forgot password
-    - API: Insert, Update, Remove etc.
+    - `server` - server startup, endpoint resolution & route handling
+    - `auth` - user signup/login authentication
+    - API
+        - `/tasks/`
+        - `/user/`
+        - `/new-id/` (comes back to serverside `util`)
+        - `/team/` (?)
+    - `taskManager`/`userManager` modules; what they do and why like this
+    - `linker`
+    - Library modules
+        - `eris-logger` - better stack traces, clearer control flow post-mortems
+        - `eris-wrapper` - significantly abstracts fiddly low-level setup for the eris-blockchain JS lib
 
 ## Testing (~2-4 pages)
 **TODO complete me**
@@ -102,12 +114,10 @@
 - Test server: simulating production environment
 - Unit Testing
 - End to end testing
-- Testing libraries/frameworks: expect, check
+- Testing libraries/frameworks: mocha, chai `assert`, istanbul
 
 ### Deployment
-- Galaxy
-- mLab
-- Backups
+- MVP 4-validator-node deployment to DigitalOcean
 
 ### Results
 - Launch
