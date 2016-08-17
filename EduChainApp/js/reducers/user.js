@@ -11,7 +11,7 @@ export type User = {
     name: string;
     username: string;
     score: number;
-    teamId?: number;
+    teamname?: string;
     email?: string;
     address?: string;
 }
@@ -72,9 +72,19 @@ export default function user(state: State = initialState, action: Action): State
                 isLoggedIn: action.isValid
             };
 
+        case 'GET_PROFILE_SUCCESS':
+            return {
+                ...state,
+                details: {
+                    ...state.details,
+                    ...action.profile
+                }
+            }
+
         case 'SIGNUP_FAIL':
         case 'CHECK_USERNAME_FAIL':
         case 'LOGIN_FAIL':
+        case 'GET_PROFILE_FAIL':
             console.error(action.error);
             return initialState;
 
