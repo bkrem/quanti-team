@@ -37,7 +37,7 @@
     - _(((Agile, Scrum, Kanban (justify why I ended up with simple Kanban board) )))_
     - Blockchain:
         - OpenChain (contract chaining, but documentation/implementation sucked) vs MultiChain vs Eris+TenderMint
-        - Smart contract design & Solidity's capabilities (Eris Tutorials, Solidity docs)
+        - Smart contract design & Soliditys capabilities (Eris Tutorials, Solidity docs)
     - Databases: SQL vs NoSQL vs Blockchain
         - Ease of data structuring/scalability vs. no central point of failure but less storage efficiency and more complex integrity maintenance compared to SQL. Favourable in comparison to noSQL?
     - Server-side:
@@ -55,59 +55,73 @@
     - Docker/Docker-Machine
     - Kanban board (GH issues + waffle.io)
     - Testing frameworks: Mocha, Chai (TDD with `assert`), Istanbul (code coverage)
-    - Dev tools: Version control (Git), Code hosting (Github), Editor (Atom+Nuclide+ESLint), Flow (ES6 static type analyser)
+    - Dev tools: Version control (Git), Code hosting (Github), Editor (Atom+Nuclide+ESLint), Flow (ES6 static type analyser), `envsetup.sh` & `simplechain.sh` scripts
     - Debugging: Redux logger+Chrome console, Log4JS+erisLogger, raw logs from the TenderMint chain
 
 ## Requirements & Analysis (~5-6 pages)
-**TODO complete me**
 - Problem Statement
-- Requirements/ Requirements Gathering/Functional requirements vs Non-functional requirements
-- Use Cases/Epics/User Stories
+- Requirements/Requirements Gathering/Functional requirements vs Non-functional requirements
+- Use Cases
 - Analysis & Data Modelling
-    - Entities
-    - Relationships
+    - Initial Deployment diagram
+    - Development of SQL/noSQL-free data structure with blockchain as verifier and store simultaneously (add updated deployment diagram)
+    - PK/FK simulation via the `linker` and on-chain addresses
     - UML class diagrams
-    - Server-side analysis:
-        - ERD
+    - Blockchain analysis:
+        - _(((ERD)))_
+        - Docker/Docker-Machine
         - Data structure/model
-            - MongoDB collections
-            - Relationships
-            - Hybrid model (embedded documents vs reference model etc.)
-    -  Client side data flow and structure
+            - SequenceList contract
+            - Type contracts
+            - Manager contracts
+            - Linker contract
+    - Pipeline server analysis:
+        - data relay/transformer
+        - (almost?) stateless
+        - 2-3 sequence diagrams
+    - Client side data flow and structure
         - UML state diagrams: perfect for Redux
         - Redux store
         - Unidirectional data flow (dispatcher, stores, actions etc.)
 
 ## Design & Implementation (~10+ pages)
-**TODO complete me**
 - Source code structure
+    - `chain`
+        - Solidity contracts
+        - `Eris` configs for deployment
+        - Node server as pipeline
+    - `app`
+        - Example implementation in React Native
 - Client side architecture
-    - Startup
-    - UI: React components: template design, component lifecycle, composing in React
-    - Client side data: Redux actions, stores, reducers
-    - Utilities
-    - Stylesheets
+    - `Flow` static typing
+    - UI: React components: template design (abstraction with `common` components), component lifecycle, composing in React
+    - Client side data: Redux actions, stores, reducers, `types.js`
+    - `Navigator`
+    - `actions/util.js`
+    - `TabsView`
 - Server side architecture
-    - Startup
-    - Login & Authentication
-        - Roles
-        - Create Account
-        - Login
-        - Forgot password
-    - API: Insert, Update, Remove etc.
+    - `server` - server startup, endpoint resolution & route handling
+    - `auth` - user signup/login authentication
+    - API
+        - `/tasks/`
+        - `/user/`
+        - `/new-id/` (comes back to serverside `util`)
+        - `/team/` (?)
+    - `taskManager`/`userManager` modules; what they do and why like this
+    - `linker`
+    - Library modules
+        - `eris-logger` - better stack traces, clearer control flow post-mortems
+        - `eris-wrapper` - significantly abstracts fiddly low-level setup for the eris-blockchain JS lib
 
 ## Testing (~2-4 pages)
 **TODO complete me**
 - Testing phases/strategy
-- Test server: simulating production environment
 - Unit Testing
-- End to end testing
-- Testing libraries/frameworks: expect, check
+- API endpoint testing (?)
+- Testing libraries/frameworks: mocha, chai `assert`, istanbul
 
 ### Deployment
-- Galaxy
-- mLab
-- Backups
+- MVP 4-validator-node deployment to DigitalOcean
 
 ### Results
 - Launch

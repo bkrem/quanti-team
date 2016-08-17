@@ -123,6 +123,19 @@ var init = function () {
         });
     });
 
+    app.get('/user/profile/:username', function (req, res) {
+        var username = req.params.username;
+
+        log.info("GET /user/profile/"+username);
+        userManager.getUserAddress(username, function (addrErr, userAddr) {
+            _handleErr(addrErr, res);
+            userManager.getUser(userAddr, function (err, profile) {
+                _handleErr(err, res);
+                res.json({profile: profile});
+            });
+        });
+    });
+
     // ########################################################################
 
     // TODO not DRY, abstract this further

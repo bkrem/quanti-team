@@ -13,31 +13,33 @@
      Image,
      Text,
  } from 'react-native';
+ import type {User} from '../../reducers/user';
 
  type Props = {
-    username: string,
-    name: string,
-    teamname?: string,
+     details: User
  }
 
  export default class ProfileSummary extends React.Component {
      props: Props;
 
      render() {
-         const {name, username, teamname} = this.props;
+         const {name, username, email, teamname} = this.props.details;
 
          return (
              <View style={styles.container}>
                  <Image
                      style={styles.thumb}
-                     source={require("../../img/ben.png")}
+                     source={require("../../img/avatar-default.png")}
                  />
                  <View style={styles.textContainer}>
                      <Text style={styles.name}>
                          {name}
                      </Text>
                      <Text style={styles.username}>
-                         {username}
+                         @{username}
+                     </Text>
+                     <Text style={styles.email}>
+                         {email}
                      </Text>
                      <Text style={styles.teamname}>
                          {teamname}

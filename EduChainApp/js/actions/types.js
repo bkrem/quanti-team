@@ -31,13 +31,17 @@ export type Action =
   | { type: 'SIGNUP_SUCCESS', address: string }
   | { type: 'SIGNUP_FAIL', error: Object }
 
-  | { type:'CHECK_USERNAME_REQUEST', username: string }
+  | { type: 'CHECK_USERNAME_REQUEST', username: string }
   | { type: 'CHECK_USERNAME_SUCCESS', isTaken: boolean }
   | { type: 'CHECK_USERNAME_FAIL', error: Object }
 
   | { type: 'LOGIN_REQUEST', form: Login }
   | { type: 'LOGIN_RESPONSE', isValid: boolean }
   | { type: 'LOGIN_FAIL', error: Object }
+
+  | { type: 'GET_PROFILE_REQUEST', username: string }
+  | { type: 'GET_PROFILE_SUCCESS', profile: User }
+  | { type: 'GET_PROFILE_FAIL', error: Object }
   ;
 
 export type PromiseAction = Promise<Action>;

@@ -83,6 +83,29 @@ export function loginFail(error: Object) {
 }
 
 
+// ####################################
+// GET `/user/profile/` API ENDPOINT ACTIONS
+// ####################################
+export function getProfileRequest(username: string) {
+    return {
+        type: 'GET_PROFILE_REQUEST',
+        username
+    };
+}
+export function getProfileSuccess(profile: User) {
+    return {
+        type: 'GET_PROFILE_SUCCESS',
+        profile
+    };
+}
+export function getProfileFail(error: Object) {
+    return {
+        type: 'GET_PROFILE_FAIL',
+        error
+    };
+}
+
+
 // ##############################
 // THUNK ACTIONS
 // ##############################
@@ -129,8 +152,10 @@ export function signup(partialUser: User): ThunkAction {
 
             return fetch(ENV.__API_BRIDGE + '/user/signup', request)
                 .then(response => response.json())
-                .then(json =>
-                    dispatch(signupSuccess(json.address))
+                .then(json => {
+                    dispatch(signupSuccess(json.address));
+                    dispatch(getProfile(user.username));
+                }
                 )
                 .catch(rejection =>
                     dispatch(signupFail(rejection))
@@ -155,10 +180,25 @@ export function login(form: Object): ThunkAction {
             .then(response => response.json())
             .then(json => {
                 dispatch(loginResponse(json.isValid));
+                dispatch(getProfile(form.username));
                 return json.isValid;
             })
             .catch(rejection =>
                 dispatch(loginFail(rejection))
+            );
+    };
+}
+
+export function getProfile(username: string): ThunkAction {
+    return (dispatch) => {
+        dispatch(getProfileRequest(username));
+        return fetch(ENV.__API_BRIDGE + `/user/profile/${username}`)
+            .then(response => response.json())
+            .then(json =>
+                dispatch(getProfileSuccess(json.profile))
+            )
+            .catch(rejection =>
+                dispatch(getProfileFail(rejection))
             );
     };
 }
