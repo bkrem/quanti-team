@@ -138,3 +138,6 @@
 - Trickiness involved in getting ListViews right in RN -> FB's `PureListView` helped a lot here to understand optimal structuring and mapping of data flow
 - Started with IDs in contract schema, didn't really need them -> addresses double as unique IDs
 - Should've only done quick mocks of views as sketches and then implemented statically ad-hoc, too much time wasted on now not-implemented views
+
+### Future Work
+- GPG verification of users
