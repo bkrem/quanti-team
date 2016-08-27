@@ -74,10 +74,10 @@ var init = function () {
         taskManager.addTask(task, function (err, taskAddr) {
             _handleErr(err, res);
             // use the return task address to link the task to the user's contract
-            linker.linkTaskToUser(taskAddr, username, function (linkErr, success) {
+            linker.linkTaskToUser(taskAddr, username, function (linkErr, isOverwrite) {
                 _handleErr(linkErr, res);
                 res.json({
-                    success: success,
+                    isOverwrite: isOverwrite,
                     taskAddr: taskAddr
                 });
             });

@@ -50,10 +50,10 @@ export function requestAddTask(): Action {
         type: 'ADD_TASK_REQUEST'
     };
 }
-export function responseAddTask(success: boolean, taskAddr: string): Action {
+export function responseAddTask(isOverwrite: boolean, taskAddr: string): Action {
     return {
         type: 'ADD_TASK_SUCCESS',
-        success,
+        isOverwrite,
         taskAddr
     };
 }
