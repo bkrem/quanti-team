@@ -134,15 +134,15 @@ var styles = StyleSheet.create({
         fontSize: 20,
     },
     leftItem: {
-        flex: 2,
+        flex: 3,
         alignItems: 'center',
     },
     centerItem: {
-        flex: 8,
+        flex: 4,
         alignItems: 'center',
     },
     rightItem: {
-        flex: 2,
+        flex: 3,
         alignItems: 'center',
     },
     itemWrapper: {
