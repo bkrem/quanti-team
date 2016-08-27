@@ -20,7 +20,7 @@ export type Action =
   | { type: 'NEW_ID_FAIL', error: Object }
 
   | { type: 'ADD_TASK_REQUEST' }
-  | { type: 'ADD_TASK_SUCCESS', success: boolean, taskAddr: string }
+  | { type: 'ADD_TASK_SUCCESS', isOverwrite: boolean, taskAddr: string }
   | { type: 'ADD_TASK_FAIL', error: Object }
 
   | { type: 'ADD_USER_REQUEST' }
