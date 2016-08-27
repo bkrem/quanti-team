@@ -64,6 +64,7 @@
      listMembers(members: Array<User>) {
          return members.map(member => {
              return (
+                 // TODO turn this into a full component
                  <Text style={styles.member} key={member.username}>
                      {member.name}
                  </Text>
