@@ -95,7 +95,9 @@ class TaskListView extends React.Component {
     // TODO Implement the loading fragment properly instead of abusing `renderEmptyList`
     renderEmptyList() {
         return (
-            <Loader title={"Tasks"} />
+            <View style={styles.emptyListContainer}>
+                <Text>Pull down to check for tasks</Text>
+            </View>
         );
     }
 
