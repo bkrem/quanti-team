@@ -16,7 +16,7 @@ import Colors from '../common/Colors';
 import type {Tab} from './../reducers/navigation';
 import TaskList from './tasks/TaskList';
 import Profile from './profile/Profile';
-import TeamView from './team/TeamView';
+import Team from './team/Team';
 
 const ICONSIZE = 30;
 
@@ -73,7 +73,7 @@ export default class TabsView extends React.Component {
                     selectedIconName="ios-people"
                     iconSize={ICONSIZE}
                 >
-                    <TeamView navigator={this.props.navigator} />
+                    <Team navigator={this.props.navigator} />
                 </Icon.TabBarItemIOS>
 
                 <Icon.TabBarItemIOS
