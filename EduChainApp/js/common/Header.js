@@ -62,7 +62,7 @@ class HeaderIOS extends React.Component {
                       style={styles.centerItem}>
                       {content}
                     </View>
-                    <View style={styles.leftItem}>
+                    <View style={styles.rightItem}>
                         <ItemWrapperIOS item={rightItem} />
                     </View>
                 </View>
@@ -135,7 +135,7 @@ var styles = StyleSheet.create({
     },
     leftItem: {
         flex: 3,
-        alignItems: 'center',
+        alignItems: 'flex-start',
     },
     centerItem: {
         flex: 4,
@@ -143,7 +143,7 @@ var styles = StyleSheet.create({
     },
     rightItem: {
         flex: 3,
-        alignItems: 'center',
+        alignItems: 'flex-end',
     },
     itemWrapper: {
         padding: 11,
