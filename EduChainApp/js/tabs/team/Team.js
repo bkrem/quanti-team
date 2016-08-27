@@ -19,6 +19,10 @@
  import type {User} from '../../reducers/user';
 
  class TeamView extends React.Component {
+     constructor(props) {
+         super(props);
+     }
+
      render() {
          return(
              <View>
@@ -39,10 +43,10 @@
                          />
                          <View style={styles.textContainer}>
                              <Text style={styles.teamname}>
-                                 Name: Teamname
+                                 Name: {this.props.name}
                              </Text>
                              <Text style={styles.score}>
-                                 Score: 5000
+                                 Score: {this.props.score}
                              </Text>
                          </View>
                      </View>
@@ -53,16 +57,15 @@
                      </View>
                  </View>
 
-
              </View>
          );
      }
 
      listMembers(members: Array<User>) {
-         members.map(member => {
+         return members.map(member => {
              return (
-                 <Text style={styles.member}>
-                     member.name
+                 <Text style={styles.member} key={member.username}>
+                     {member.name}
                  </Text>
              );
          });

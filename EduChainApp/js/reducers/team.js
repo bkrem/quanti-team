@@ -17,9 +17,9 @@ export type Team = {
 type State = Team;
 
 const initialState: State = {
-    name: 'swhoobs',
+    name: '',
     score: 0,
-    members: [{name: 'alpha'}, {name: 'beta'}],
+    members: [],
     address: ''
 };
 
