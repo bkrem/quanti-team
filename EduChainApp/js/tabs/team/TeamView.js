@@ -16,7 +16,14 @@
      render() {
          return(
              <View>
-                 <Header title="Team" />
+                 <Header title="Team"
+                     rightItem={{
+                         title: "Add Member",
+                         layout: "title",
+                         icon: "ios-add",
+                         onPress: () => this.props.navigator.push({id: "addMember"})
+                     }}
+                 />
              </View>
          );
      }
