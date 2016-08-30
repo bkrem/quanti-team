@@ -1,5 +1,6 @@
 /*
- * This is a third-party implementation of a SequenceArray.
+ * This is a third-party implementation of a SequenceArray, extracted into
+ * a separate contract from Eris's `hello-eris` example repository.
  * SOURCE: https://github.com/eris-ltd/hello-eris/blob/master/contracts/DealManager.sol
  */
 
