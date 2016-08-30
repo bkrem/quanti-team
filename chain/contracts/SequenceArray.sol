@@ -1,9 +1,9 @@
 /*
- * This is a third-party implementation of a SequenceList.
+ * This is a third-party implementation of a SequenceArray.
  * SOURCE: https://github.com/eris-ltd/hello-eris/blob/master/contracts/DealManager.sol
  */
 
-contract SequenceList {
+contract SequenceArray {
     // main map
     mapping(bytes32 => AddressElement) map;
     // separate list of known keys

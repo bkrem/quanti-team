@@ -1,8 +1,8 @@
-import "SequenceList.sol";
+import "SequenceArray.sol";
 import "User.sol";
 
 contract UserManager {
-    SequenceList list = new SequenceList();
+    SequenceArray list = new SequenceArray();
 
     /* TODO extend with eventObject if possible; `bytes32[]`? */
     event ActionEvent(address indexed userAddr, bytes32 actionType);

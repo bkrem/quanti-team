@@ -1,16 +1,16 @@
-import "SequenceList.sol";
+import "SequenceArray.sol";
 
 contract Team {
 
     bytes32 id;
     bytes32 name;
 
-    // SequenceList to manage the members of this team.
-    SequenceList members = new SequenceList();
+    // SequenceArray to manage the members of this team.
+    SequenceArray members = new SequenceArray();
 
-    // SequenceList to track all task addresses associated
-    // to this Team contract.
-    SequenceList taskAddressList = new SequenceList();
+    // SequenceArray to track all task addresses associated
+    // with this Team contract.
+    SequenceArray taskAddressList = new SequenceArray();
 
     // Constructor
     function Team(
@@ -22,6 +22,10 @@ contract Team {
         id = _id;
         name = _name;
 
+<<<<<<< HEAD
+=======
+        // team members are tracked in a SequenceArray
+>>>>>>> 03abd23... Refactor `SequenceList.sol` -> `SequenceArray.sol`
         members.insert(_founderUsername, _founderAddress);
     }
 

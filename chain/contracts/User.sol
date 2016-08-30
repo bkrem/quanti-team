@@ -1,4 +1,4 @@
-import "SequenceList.sol";
+import "SequenceArray.sol";
 
 contract User {
 
@@ -11,9 +11,9 @@ contract User {
     bytes32 public score; // TODO
     bytes32 public teamname; // TODO
 
-    // SequenceList to track all task addresses associated
+    // SequenceArray to track all task addresses associated
     // to this User contract.
-    SequenceList taskAddressList = new SequenceList();
+    SequenceArray taskAddressList = new SequenceArray();
 
     // Constructor
     function User(
