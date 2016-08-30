@@ -3,10 +3,10 @@
  */
 
 import "Task.sol";
-import "SequenceList.sol";
+import "SequenceArray.sol";
 
 contract TaskManager {
-    SequenceList list = new SequenceList();
+    SequenceArray list = new SequenceArray();
 
     /*modifier onlyOwner() {
         if (msg.sender != owner)

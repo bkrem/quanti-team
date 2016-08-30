@@ -1,8 +1,8 @@
 import "Team.sol";
-import "SequenceList.sol";
+import "SequenceArray.sol";
 
 contract TeamManager {
-    SequenceList teams = new SequenceList();
+    SequenceArray teams = new SequenceArray();
 
     event ActionEvent(address indexed userAddr, bytes32 actionType);
     function registerActionEvent(bytes32 actionType) {

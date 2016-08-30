@@ -20,7 +20,7 @@ describe('Team Manager', function () {
     this.timeout(3000);
 
     describe('addTeam()', function () {
-        it("adds a Team to the chain, registers its founder in the Team contract's SequenceList and return the team's address", function (done) {
+        it("adds a Team to the chain, registers its founder in the Team contract's SequenceArray and return the team's address", function (done) {
             teamManager.addTeam(testTeam, function (err, address) {
                 assert.isNull(err);
                 assert.isString(address, 'addTeam() should return an address string');
@@ -78,7 +78,7 @@ describe('Team Manager', function () {
     });
 
     describe('removeTeamMember()', function () {
-        it('attempts to remove a given username from the passed teamAddress\'s `members` SequenceList and returns an isOverwrite bool', function (done) {
+        it('attempts to remove a given username from the passed teamAddress\'s `members` SequenceArray and returns an isOverwrite bool', function (done) {
             teamManager.removeTeamMember(teamAddressRef, testMember.username, function (err, isOverwrite) {
                 assert.isNull(err);
                 assert.strictEqual(isOverwrite, true, 'should overwrite the previously added testMember');
