@@ -10,6 +10,7 @@
         "__config": false,
         "__contracts": false,
         "__abi": false,
+        "__uploader": false,
         "__NULL_ADDRESS": false
     },
     "extends": "eslint:recommended",

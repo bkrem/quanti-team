@@ -2,6 +2,8 @@ var express = require('express');
 var http = require('http');
 var bodyParser = require('body-parser');
 var Async = require('async');
+var multer = require('multer');
+var upload = multer({dest: __uploader+'/uploads/'});
 
 var logger = require(__libs+'/eris/eris-logger');
 var auth = require(__js+'/auth');
@@ -16,11 +18,13 @@ var init = function () {
     var portHTTP = process.env.IDI_PORT || __settings.eris.server.port_http || 8082;
     var app = express();
 
-    // Configure PORTAL
-    // app.use('/'+(__settings.eris.server.contextPath || 'hello-eris'), express.static(__dirname + '/ui'));
-
-    // Configure JSON parsing as default
+    // Parse JSON via req.body
     app.use(bodyParser.json());
+    // Parse form data via req.body
+    app.use(bodyParser.urlencoded({extended: true}));
+
+    // Set the directory for the file uploader's static content
+    app.use(express.static(__uploader+'/static'));
 
 
     /**
@@ -41,6 +45,19 @@ var init = function () {
     /**
      * ROUTING
      */
+
+     app.get('/', function (req, res) {
+         log.info('GET /');
+
+         res.sendFile(__uploader+'/index.html');
+     });
+
+     app.post('/upload', upload.single('attachment'), function (req, res) {
+         log.info('POST /upload');
+         log.debug(req.body);
+         log.debug(req.file); // -> undefined, FIXME
+         res.sendStatus(200);
+     });
 
     // GET all available task objects
     app.get('/tasks/:username', function (req, res) {
