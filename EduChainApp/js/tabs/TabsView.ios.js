@@ -13,12 +13,17 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../common/Colors';
-import type {Tab} from './../reducers/navigation';
 import TaskList from './tasks/TaskList';
 import Profile from './profile/Profile';
 import Team from './team/Team';
 
 const ICONSIZE = 30;
+
+type Tab =
+    'tasks'
+  | 'team'
+  | 'me'
+  ;
 
 type State = {
     selectedTab: string
