@@ -6,7 +6,7 @@ import "Task.sol";
 import "SequenceArray.sol";
 
 contract TaskManager {
-    SequenceArray list = new SequenceArray();
+    SequenceArray taskList = new SequenceArray();
 
     /*modifier onlyOwner() {
         if (msg.sender != owner)
@@ -38,7 +38,7 @@ contract TaskManager {
     {
         t = new Task(_id, _title, _desc, _status, _complete, _reward, _participants, _creator);
 
-        bool isOverwrite = list.insert(_id, t);
+        bool isOverwrite = taskList.insert(_id, t);
         registerActionEvent("ADD TASK");
         // TODO needs a verification of insert success
         return t;
@@ -46,21 +46,21 @@ contract TaskManager {
 
     function getTaskAtIndex(uint _idx) constant returns (address, uint) {
         registerActionEvent("GET TASK AT INDEX");
-        return list.valueAtIndexHasNext(_idx);
+        return taskList.valueAtIndexHasNext(_idx);
     }
 
     function getTaskAddress(bytes32 _id) constant returns (address) {
         registerActionEvent("GET TASK ADDRESS");
-        return list.value(_id);
+        return taskList.value(_id);
     }
 
     function getTaskKeyAtIndex(uint _idx) constant returns (bytes32) {
-        return list.keyAtIndex(_idx);
+        return taskList.keyAtIndex(_idx);
     }
 
     function getTaskListSize() constant returns (uint) {
         registerActionEvent("GET TASKLIST SIZE");
-        return list.size();
+        return taskList.size();
 
     }
 }
