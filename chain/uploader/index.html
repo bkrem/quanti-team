@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>QuantiTeam Attachment Uploader</title>
+    <meta name="description" content="QuantiTeam Attachment Uploader">
+    <meta name="author" content="Ben Kremer">
+
+    <link rel="stylesheet" href="css/main.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <h1>QuantiTeam</h2>
+    <h2>Task Attachment Upload</h2>
+
+    <div class="container-form" style="background-color: #ddd">
+        <form action="/upload" method="POST">
+            Task Token:
+            <input type="text" size="25" name="token" placeholder="Please enter your task token" />
+            <br />
+            Attachment:
+            <input type="file" name="attachment" accept=".txt" />
+            <br />
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+
+</body>
+</html>
