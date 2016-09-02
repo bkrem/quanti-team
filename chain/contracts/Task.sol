@@ -1,7 +1,7 @@
 contract Task {
 
     bytes32 public id; // immutable
-    bytes32 public title; // mutable?
+    bytes32 public title; // mutable
     bytes32 public desc; // mutable
     bytes32 public status; // mutable
     bytes32 public complete; // mutable

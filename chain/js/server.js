@@ -46,6 +46,7 @@ var init = function () {
      * ROUTING
      */
 
+     // GET index -> file uploader
      app.get('/', function (req, res) {
          log.info('GET /');
 
