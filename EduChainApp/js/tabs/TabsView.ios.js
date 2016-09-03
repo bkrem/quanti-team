@@ -26,7 +26,7 @@ type Tab =
   ;
 
 type State = {
-    selectedTab: string
+    selectedTab: Tab
 };
 
 type Props = {
