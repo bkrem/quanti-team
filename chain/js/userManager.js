@@ -4,7 +4,7 @@ var Async = require('async');
 var chainUtils = require(__js+'/util/chainUtils');
 var eris = require(__libs+'/eris/eris-wrapper');
 var logger = require(__libs+'/eris/eris-logger');
-var log = logger.getLogger('eris.chain.userManager');
+var log = logger.getLogger('chain.userManager');
 
 // ##############
 // The following part depends on local files that are generated during contract deployment via EPM

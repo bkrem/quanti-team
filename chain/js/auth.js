@@ -1,6 +1,6 @@
 var userManager = require(__js+'/userManager');
 var logger = require(__libs+'/eris/eris-logger');
-var log = logger.getLogger('eris.chain.auth');
+var log = logger.getLogger('chain.auth');
 
 
 /**

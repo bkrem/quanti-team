@@ -12,7 +12,7 @@ var chainUtils = require(__js+'/util/chainUtils');
 
 (function () {
 
-    var log = logger.getLogger('eris.chain.taskManager');
+    var log = logger.getLogger('chain.taskManager');
 
 
     // ##############

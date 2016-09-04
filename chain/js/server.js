@@ -13,7 +13,7 @@ var linker = require(__js+'/linker');
 
 var init = function () {
 
-    var log = logger.getLogger('eris.chain.server');
+    var log = logger.getLogger('chain.server');
 
     var portHTTP = process.env.IDI_PORT || __settings.eris.server.port_http || 8082;
     var app = express();
