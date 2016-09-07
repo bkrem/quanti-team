@@ -81,7 +81,7 @@ var init = function () {
         var user = req.body;
 
         log.info("POST /user/signup: ", user);
-        chain.addUser(user, function (err, address) {
+        chain.signup(user, function (err, address) {
             _handleErr(err, res);
             res.json({address: address});
         });
