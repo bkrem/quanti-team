@@ -3,6 +3,7 @@ import "SequenceArray.sol";
 contract Team {
 
     bytes32 public name;
+    bytes32 public score;
     bytes32 public founderUsername;
     address public founderAddress;
     bytes32 public createdAt;
@@ -25,6 +26,9 @@ contract Team {
         founderUsername = _founderUsername;
         founderAddress = _founderAddress;
         createdAt = _createdAt;
+
+        // initialise score to `0`
+        score = '0';
 
         // team members are tracked in a SequenceArray
         members.insert(_founderUsername, _founderAddress);
