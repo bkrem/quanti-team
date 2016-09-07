@@ -147,3 +147,5 @@
 
 ### Future Work
 - GPG verification of users
+- GPS logging for geographical corroboration
+- Beyond simple .txt files,
