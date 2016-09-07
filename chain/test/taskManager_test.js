@@ -12,7 +12,8 @@ var testTask = {
     complete: "0/?",
     reward: "200",
     participants: ["bkrem_", "yellouw", "drBombo"],
-    creator: "Ben"
+    creator: "Ben",
+    createdAt: Date.now()
 };
 
 // Establish proper task type by adding `address` key,

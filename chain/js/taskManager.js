@@ -101,6 +101,9 @@ var chainUtils = require(__js+'/util/chainUtils');
             },
             creator: function (callback) {
                 contract.creator( eris.convertibleCallback(callback, [eris.hex2str]) );
+            },
+            createdAt: function (callback) {
+                contract.createdAt( eris.convertibleCallback(callback, [eris.hex2str]) );
             }
         },
         function (err, results) {
@@ -133,6 +136,7 @@ var chainUtils = require(__js+'/util/chainUtils');
             hexTask.reward,
             hexTask.participants,
             hexTask.creator,
+            hexTask.createdAt,
              function (err, address) {
                  err ? log.error("addTask() -> Error: " + err.stack) : log.debug("Task address: " + address);
                  callback(err, address);

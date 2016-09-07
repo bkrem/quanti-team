@@ -32,11 +32,12 @@ contract TaskManager {
         bytes32 _complete,
         bytes32 _reward,
         bytes32 _participants,
-        bytes32 _creator
+        bytes32 _creator,
+        bytes32 _createdAt
         )
         returns (Task t)
     {
-        t = new Task(_id, _title, _desc, _status, _complete, _reward, _participants, _creator);
+        t = new Task(_id, _title, _desc, _status, _complete, _reward, _participants, _creator, _createdAt);
 
         bool isOverwrite = taskList.insert(_id, t);
         registerActionEvent("ADD TASK");

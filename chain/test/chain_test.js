@@ -21,7 +21,8 @@ var mockTask = {
     complete: "0/?",
     reward: "200",
     participants: ["alpha", "beta", "gamma"],
-    creator: "Ben"
+    creator: "Ben",
+    createdAt: Date.now()
 };
 
 describe('chain', function () {
