@@ -12,6 +12,7 @@ import TabsView from './tabs/TabsView';
 import TaskView from './tabs/tasks/TaskView';
 import SettingsListView from './settings/SettingsListView';
 import AddTask from './tabs/tasks/AddTask';
+import CreateTeam from './tabs/team/CreateTeam';
 import Login from './login/Login';
 import Signup from './signup/Signup';
 
@@ -28,6 +29,8 @@ export default class EduChainNavigator extends React.Component {
                 return (<TaskView task={route.task} navigator={navigator} />);
             case 'addTask':
                 return (<AddTask navigator={navigator} />);
+            case 'createTeam':
+                return (<CreateTeam navigator={navigator} />);
 
             case 'home':
             default:
@@ -36,10 +39,6 @@ export default class EduChainNavigator extends React.Component {
     }
 
     render() {
-        // const {user} = store.getState();
-        // `{}` returns TabsView via the switch statement's `default` case
-        // const initialRoute = user.isLoggedIn ? {} : {id: 'login'};
-
         return (
             <Navigator
                 ref="navigator"
