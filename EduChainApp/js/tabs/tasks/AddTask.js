@@ -45,7 +45,8 @@ class AddTaskView extends React.Component {
             complete: "IMPLEMENT ME",
             reward: "200",
             participants: ["Ben", "Liza", "Bombo"],
-            creator: "Ben"
+            creator: "Ben",
+            createdAt: Date.now()
         };
 
         this.props.addTask(partialTask, this.props.username);
