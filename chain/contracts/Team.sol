@@ -5,6 +5,7 @@ contract Team {
     bytes32 public name;
     bytes32 public founderUsername;
     address public founderAddress;
+    bytes32 public createdAt;
 
     // SequenceArray to manage the members of this team.
     SequenceArray members = new SequenceArray();
@@ -17,11 +18,13 @@ contract Team {
     function Team(
         bytes32 _name,
         bytes32 _founderUsername,
-        address _founderAddress)
+        address _founderAddress,
+        bytes32 _createdAt)
         {
         name = _name;
         founderUsername = _founderUsername;
         founderAddress = _founderAddress;
+        createdAt = _createdAt;
 
         // team members are tracked in a SequenceArray
         members.insert(_founderUsername, _founderAddress);

@@ -77,6 +77,9 @@ function _createTeamFromContract (contract, callback) {
         },
         founderAddress: function (callback) {
             contract.founderAddress( eris.convertibleCallback(callback) );
+        },
+        createdAt: function (callback) {
+            contract.createdAt( eris.convertibleCallback(callback, [eris.hex2str]) )
         }
     },
     function (err, results) {
