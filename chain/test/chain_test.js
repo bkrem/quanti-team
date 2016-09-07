@@ -81,6 +81,17 @@ describe('chain', function () {
         });
     });
 
+    describe('getUserTasks', function () {
+        it('accepts a username string and returns the set of task objects associated with that username', function (done) {
+            chain.getUserTasks(mockUser.username, function (err, tasks) {
+                assert.isNull(err);
+                assert.isArray(tasks, '`tasks` should be an array of task objects');
+                assert.notEqual(tasks.length, 0, '`tasks` array should not be empty');
+                done();
+            });
+        });
+    });
+
     describe('mintNewId(task)', function () {
         it('mints a new ID for the `task` data domain', function (done) {
             chain.mintNewId('task', function (err, id) {
@@ -103,19 +114,4 @@ describe('chain', function () {
         });
     });
 
-
 })
-
-
-/*
-describe('getUserTasks', function () {
-    it('accepts a username string and returns the set of task objects associated with that username', function (done) {
-        chain.getUserTasks('test_usermanager1', function (err, tasks) {
-            assert.isNull(err);
-            assert.isArray(tasks, '`tasks` should be an array of task objects');
-            assert.notEqual(tasks.length, 0, '`tasks` array should not be empty');
-            done();
-        });
-    });
-});
-*/
