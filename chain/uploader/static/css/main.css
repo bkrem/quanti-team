@@ -1,0 +1,24 @@
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial
+}
+
+h1,
+h2,
+h3,
+h4 {
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.container-form {
+    margin: 5% 20% 5% 20%;
+}
+
+.container-form input {
+    margin: 2% 0 2% 0;
+}

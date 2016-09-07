@@ -19,6 +19,7 @@
     "eris-contracts": "^0.13.3",
     "express": "^4.14.0",
     "log4js": "^0.6.37",
+    "multer": "^1.2.0",
     "toml-js": "0.0.8"
   },
   "devDependencies": {

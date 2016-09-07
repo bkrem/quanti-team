@@ -88,3 +88,5 @@ describe('Team Manager', function () {
     });
 
 });
+
+require('./chain_test');

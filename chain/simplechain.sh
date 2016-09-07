@@ -1,11 +1,13 @@
-# Automatically rolls, configures & begins logging a new 
+# Automatically rolls, configures & begins logging a new
 # `simplechain` instance.
 
 CHECKMARK="\u2713"
 
+# set variables for the relevant chain directories
 chain_dir=$HOME/.eris/chains/simplechain
 chain_dir_this=$chain_dir/simplechain_full_000
 
+# TODO make --account-types optional CLI arg
 eris chains make --account-types=Root:2,Full:1 simplechain &&
     echo "${CHECKMARK} Made a new simplechain"
 

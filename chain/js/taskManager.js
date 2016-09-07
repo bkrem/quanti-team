@@ -12,7 +12,7 @@ var chainUtils = require(__js+'/util/chainUtils');
 
 (function () {
 
-    var log = logger.getLogger('eris.chain.taskManager');
+    var log = logger.getLogger('chain.taskManager');
 
 
     // ##############
@@ -43,9 +43,9 @@ var chainUtils = require(__js+'/util/chainUtils');
     function _collectTaskAddresses (startIdx, addresses, callback) {
 
         taskManagerContract.getTaskAtIndex(startIdx, function (error, result) {
-            if (error) log.debug(error);
+            if (error) log.error(error);
             // If address is not a 0x0 nullPointer => push to array
-            if (result[0] !== 0)
+            if (result[0] !== __NULL_ADDRESS)
                 addresses.push(result[0]);
 
             // Reassign `startIdx` to next index
@@ -101,6 +101,9 @@ var chainUtils = require(__js+'/util/chainUtils');
             },
             creator: function (callback) {
                 contract.creator( eris.convertibleCallback(callback, [eris.hex2str]) );
+            },
+            createdAt: function (callback) {
+                contract.createdAt( eris.convertibleCallback(callback, [eris.hex2str]) );
             }
         },
         function (err, results) {
@@ -133,6 +136,7 @@ var chainUtils = require(__js+'/util/chainUtils');
             hexTask.reward,
             hexTask.participants,
             hexTask.creator,
+            hexTask.createdAt,
              function (err, address) {
                  err ? log.error("addTask() -> Error: " + err.stack) : log.debug("Task address: " + address);
                  callback(err, address);

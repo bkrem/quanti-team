@@ -1,12 +1,10 @@
 var fs = require('fs');
-var util = require('util');
-var EventEmitter = require('events');
 var Async = require('async');
 
 var chainUtils = require(__js+'/util/chainUtils');
 var eris = require(__libs+'/eris/eris-wrapper');
 var logger = require(__libs+'/eris/eris-logger');
-var log = logger.getLogger('eris.chain.userManager');
+var log = logger.getLogger('chain.userManager');
 
 // ##############
 // The following part depends on local files that are generated during contract deployment via EPM
@@ -26,7 +24,7 @@ var userContract = erisWrapper.createContract(userAbi, epmJSON['User']);
 chainUtils.createContractEventHandler(userManagerContract, log);
 
 /**  // TODO refactor to make this DRY
- * _collectTaskAddresses - description
+ * _collectUserTaskAddresses - description
  *
  * @param {String} userAddr description
  * @param  {int} startIdx  description
@@ -37,9 +35,9 @@ chainUtils.createContractEventHandler(userManagerContract, log);
 function _collectUserTaskAddresses (userAddr, startIdx, addresses, callback) {
 
     userManagerContract.getUserTaskAtIndex(userAddr, startIdx, function (error, result) {
-        if (error) log.debug(error);
+        if (error) log.error(error);
         // If address is not a 0x0 nullPointer => push to array
-        if (result[0] !== 0)
+        if (result[0] !== __NULL_ADDRESS)
             addresses.push(result[0]);
 
         // Reassign `startIdx` to next index
@@ -181,9 +179,10 @@ function isUsernameTaken (username, callback) {
  * @return {type}          description
  */
 function getUserListSize (callback) {
-    userManagerContract.getUserListSize(function (error, size) {
-        error ? log.error("getUserListSize() -> Error: " + error.stack) : log.debug("getUserListSize: " + size);
-        callback(error, size);
+    userManagerContract.getUserListSize(function (err, size) {
+        err ? log.error("getUserListSize() -> Error: " + err.stack)
+            : log.debug("getUserListSize: " + size);
+        callback(err, size);
     });
 }
 
@@ -198,7 +197,8 @@ function getUserListSize (callback) {
 function getUserAddress (username, callback) {
     log.debug('getUserAddress() -> username: ' + username);
     userManagerContract.getUserAddress(eris.str2hex(username), function (err, address) {
-        err ? log.error("getUserAddress() -> Error: " + err.stack) : log.debug("User address: " + address);
+        err ? log.error("getUserAddress("+username+") -> Error: " + err.stack)
+            : log.debug("getUserAddress("+username+") -> User address: " + address);
         callback(err, address);
     });
 }
@@ -232,13 +232,13 @@ function getUserTaskAddresses (username, callback) { // TODO refactor this to be
     getUserAddress(username, function (addrErr, userAddr) {
         if (addrErr)
             return callback(addrErr, null);
-        log.debug('getUserTaskAddresses() -> getUserAddress() ', userAddr);
+        log.debug('getUserTaskAddresses('+username+') -> getUserAddress(): ', userAddr);
 
         var idx = 0;
         var addresses = [];
 
         _collectUserTaskAddresses(userAddr, idx, addresses, function (err) {
-            log.debug('getUserTaskAddresses() -> _collectUserTaskAddresses(): ', addresses);
+            log.debug('getUserTaskAddresses('+username+') -> _collectUserTaskAddresses(): ', addresses);
             return callback(err, addresses);
         });
     });

@@ -1,5 +1,7 @@
 /**
- * TODO ADD FB SOURCE LINK
+ * This component was partially adapted from Facebook's open-source `F8Header` component
+ * SOURCE: https://github.com/fbsamples/f8app/blob/df8846840a481f7ac50dd4861c326fcbab85c504/js/common/F8Header.js
+ *
  * @flow
  */
 

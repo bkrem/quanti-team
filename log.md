@@ -136,4 +136,16 @@
 - State of Solidity as a bottleneck
 - Didn't make my tests atomic enough -> cascading failures if one test breaks -> lesson for next time
 - Trickiness involved in getting ListViews right in RN -> FB's `PureListView` helped a lot here to understand optimal structuring and mapping of data flow
+- Started with IDs in contract schema, didn't really need them -> addresses double as unique IDs
 - Should've only done quick mocks of views as sketches and then implemented statically ad-hoc, too much time wasted on now not-implemented views
+
+- [Chain] **!Issue!** Had to find a workaround for the `library` keyword bug in the eris platform --> simply turned it into a contract --> less flexible than an actual library type though.
+- [Chain] **!Issue!** Tested out the LinkedList implementation and replaced it with the SequenceArray implementation after running into retrieval issues
+- **!Issue!** Eris online compiler broke --> took forever to figure out that port `10113` was viable option because no goddamn documentation of it
+- **!Issue!** Eris local compiler Docker image did not do anything basically, TOTAL FAIL
+
+
+### Future Work
+- GPG verification of users
+- GPS logging for geographical corroboration
+- Beyond simple .txt files,
