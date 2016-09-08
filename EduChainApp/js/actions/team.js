@@ -66,9 +66,10 @@ export function createTeam(form: Object): ThunkAction {
 
         return fetch(ENV.__API_BRIDGE+'/team', request)
             .then(response => response.json())
-            .then(json =>
-                dispatch(createTeamSuccess(json.address))
-            )
+            .then(json => {
+                dispatch(createTeamSuccess(json.address));
+                return json.address;
+            })
             .catch(rejection =>
                 dispatch(createTeamFail(rejection))
             );

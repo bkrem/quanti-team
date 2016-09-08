@@ -9,6 +9,7 @@
  import {
      View,
      StyleSheet,
+     Alert,
  } from 'react-native';
  import {connect} from 'react-redux';
  import t from 'tcomb-form-native';
@@ -17,6 +18,16 @@
  import GlobalStyles from '../../common/GlobalStyles';
  import {createTeam} from '../../actions/team';
 
+ const alerts = {
+     createSuccess: {
+         title: "Success",
+         text: "Team created."
+     },
+     createFail: {
+         title: "Failed",
+         text: "Sorry, it seems like there was an issue with creating your team. Please try again with another name."
+     }
+ };
 
  class CreateTeamView extends React.Component {
      constructor(props) {
@@ -39,7 +50,13 @@
              createdAt: Date.now()
          };
 
-         this.props.createTeam(teamForm);
+         this.props.createTeam(teamForm)
+            .then(address => {
+                // if the new team's address was returned we've succeeded
+                address
+                ? Alert.alert(alerts.createSuccess.title, alerts.createSuccess.text)
+                : Alert.alert(alerts.createFail.title, alerts.createFail.text);
+            });
      }
 
      render() {
