@@ -34,10 +34,11 @@ export function addMemberRequest(form: Object): Action {
         form
     };
 }
-export function addMemberSuccess(username: string): Action {
+export function addMemberSuccess(username: string, linkSuccess: boolean): Action {
     return {
         type: 'ADD_MEMBER_SUCCESS',
-        username
+        username,
+        linkSuccess
     };
 }
 export function addMemberFail(error: Object): Action {
@@ -93,10 +94,10 @@ export function addTeamMember(form: Object): ThunkAction {
         return fetch(ENV.__API_BRIDGE+'/team/add-member', request)
             .then(response => response.json())
             .then(json => {
-                json.username
-                ? dispatch(addMemberSuccess(json.username))
+                json.linkSuccess
+                ? dispatch(addMemberSuccess(json.username, json.linkSuccess))
                 : dispatch(addMemberFail({error: 'Adding failed: `username` returned `null`'}));
-                return json.username;
+                return json.linkSuccess;
             })
             .catch(rejection =>
                 dispatch(addMemberFail(rejection))

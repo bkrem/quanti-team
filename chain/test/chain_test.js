@@ -122,12 +122,14 @@ describe('chain', function () {
             var form = {
                 username: mockUser.username,
                 userAddress: mockUser.address,
+                teamname: 'testTeam',
                 teamAddress: mockTeamAddress
             }
-            chain.addTeamMember(form, function (err, isTaken, username) {
+            chain.addTeamMember(form, function (err, isTaken, username, linkSuccess) {
                 assert.isNull(err);
                 assert.strictEqual(isTaken, true);
                 assert.strictEqual(username, form.username);
+                assert.strictEqual(linkSuccess, true);
                 done();
             });
         });

@@ -160,11 +160,12 @@ var init = function () {
         var form = req.body.form;
 
         log.info("POST /team/add-member", form);
-        chain.addTeamMember(form, function (err, isTaken, username) {
+        chain.addTeamMember(form, function (err, isTaken, username, linkSuccess) {
             _handleErr(err, res);
             res.json({
                 isTaken: isTaken,
-                username: username
+                username: username,
+                linkSuccess: linkSuccess
             });
         });
     });

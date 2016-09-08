@@ -43,6 +43,7 @@
 
          const memberForm = {
              username: partialForm.username.toLowerCase(),
+             teamname: this.props.teamname,
              teamAddress: this.props.teamAddress
          };
          this.props.addTeamMember(memberForm)
@@ -109,6 +110,7 @@
  // ##############
  const mapStateToProps = (state) => {
      return {
+         teamname: state.team.name,
          teamAddress: state.team.address
      };
  };
