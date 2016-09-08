@@ -59,7 +59,7 @@
                          title: "Add Member",
                          layout: "title",
                          icon: "ios-add",
-                         onPress: () => this.props.navigator.push({id: "addMember"}) // TODO popup dialog to add member
+                         onPress: () => this.props.navigator.push({id: "addMember"})
                      }}
                  />
 

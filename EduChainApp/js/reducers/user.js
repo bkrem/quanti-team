@@ -79,7 +79,7 @@ export default function user(state: State = initialState, action: Action): State
                     ...state.details,
                     ...action.profile
                 }
-            }
+            };
 
         case 'SIGNUP_FAIL':
         case 'CHECK_USERNAME_FAIL':

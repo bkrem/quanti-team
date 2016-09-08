@@ -9,8 +9,6 @@
  import {
      View,
      StyleSheet,
-     Text,
-     Image,
  } from 'react-native';
  import {connect} from 'react-redux';
  import t from 'tcomb-form-native';
