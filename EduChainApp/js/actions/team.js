@@ -93,7 +93,8 @@ export function addTeamMember(form: Object): ThunkAction {
             .then(json => {
                 json.username
                 ? dispatch(addMemberSuccess(json.username))
-                : dispatch(addMemberFail(new Error('Adding failed: `username` returned `null`')));
+                : dispatch(addMemberFail({error: 'Adding failed: `username` returned `null`'}));
+                return json.username;
             })
             .catch(rejection =>
                 dispatch(addMemberFail(rejection))

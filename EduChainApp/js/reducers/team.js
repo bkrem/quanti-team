@@ -47,11 +47,11 @@ export default function team(state: State = initialState, action: Action): State
             };
 
         case 'ADD_MEMBER_FAIL':
-            console.error(action.error);
+            console.log(action.error);
             return state;
 
         case 'CREATE_TEAM_FAIL':
-            console.error(action.error);
+            console.log(action.error);
             return initialState;
 
         default:
