@@ -17,15 +17,31 @@
  import Button from 'react-native-button';
  import Header from '../../common/Header';
  import GlobalStyles from '../../common/GlobalStyles';
+ import {createTeam} from '../../actions/team';
 
 
- class CreateTeam extends React.Component {
+ class CreateTeamView extends React.Component {
      constructor(props) {
          super(props);
      }
 
      onPress() {
+         const partialForm = this.refs.form.getValue();
+         // Validate all mandatory inputs have been filled
+         if (!partialForm) {
+             console.info("Form returned null, mandatory fields missing.");
+             return null;
+         }
 
+         console.log("Submitted a team form: ", partialForm);
+         const teamForm = {
+             ...partialForm,
+             founderUsername: this.props.founderUsername,
+             founderAddress: this.props.founderAddress,
+             createdAt: Date.now()
+         };
+
+         this.props.createTeam(teamForm);
      }
 
      render() {
@@ -63,16 +79,12 @@
 
  const Form = t.form.Form;
  const TeamForm = t.struct({
-     name: t.String,
-     members: t.maybe(t.String)
+     name: t.String
  });
  const options = {
      fields: {
          name: {
              placeholder: 'Add a team name...'
-         },
-         members: {
-             placeholder: 'Add others to this task with "@name"'
          }
      }
  };
@@ -83,4 +95,22 @@
      },
  });
 
+
+ // ##############
+ // REDUX BINDINGS
+ // ##############
+ const mapStateToProps = (state) => {
+     return {
+         founderUsername: state.user.details.username,
+         founderAddress: state.user.details.address
+     };
+ };
+
+ const mapDispatchToProps = (dispatch) => {
+     return {
+         createTeam: (form: Object) => dispatch(createTeam(form))
+     };
+ };
+
+ const CreateTeam = connect(mapStateToProps, mapDispatchToProps)(CreateTeamView);
  export default CreateTeam;

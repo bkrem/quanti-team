@@ -67,6 +67,7 @@ var init = function () {
 
     // ########################################################################
 
+    // TODO refactor this to a simple GET
     app.post('/user/taken', function (req, res) {
         var username = req.body.username;
 
@@ -133,6 +134,22 @@ var init = function () {
                 isOverwrite: isOverwrite,
                 taskAddr: taskAddr
             });
+        });
+    });
+
+    // ########################################################################
+
+    app.get('/team/taken/:teamname', function (req, res) {
+        // TODO
+    });
+
+    app.post('/team', function (req, res) {
+        var form = req.body.form;
+
+        log.info("POST /team", form);
+        chain.createTeam(form, function (err, address) {
+            _handleErr(err, res);
+            res.json({address: address});
         });
     });
 

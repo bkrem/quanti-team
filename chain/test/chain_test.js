@@ -22,7 +22,7 @@ var mockTask = {
     reward: "200",
     participants: ["alpha", "beta", "gamma"],
     creator: "Ben",
-    createdAt: Date.now()
+    createdAt: String(Date.now())
 };
 
 describe('chain', function () {
@@ -88,6 +88,24 @@ describe('chain', function () {
                 assert.isNull(err);
                 assert.isArray(tasks, '`tasks` should be an array of task objects');
                 assert.notEqual(tasks.length, 0, '`tasks` array should not be empty');
+                done();
+            });
+        });
+    });
+
+    describe('createTeam', function () {
+        it('accepts a team data object and returns the new team\'s address', function (done) {
+            var mockTeamForm = {
+                name: 'testTeam',
+                founderUsername: mockUser.username,
+                founderAddress: mockUser.address,
+                createdAt: String(Date.now())
+            }
+
+            chain.createTeam(mockTeamForm, function (err, address) {
+                assert.isNull(err);
+                assert.isString(address);
+                assert.notEqual(address, '', 'teamAddress should not be empty');
                 done();
             });
         });

@@ -2,6 +2,7 @@ var Async = require('async');
 var auth = require(__js+'/auth');
 var taskManager = require(__js+'/taskManager');
 var userManager = require(__js+'/userManager');
+var teamManager = require(__js+'/teamManager');
 var linker = require(__js+'/linker');
 
 var logger = require(__libs+'/eris/eris-logger');
@@ -81,7 +82,6 @@ function getUser (username, callback) {
 // TASK ENPOINTS
 // ######################
 
-
 /**
  * addTask - description
  *
@@ -131,6 +131,26 @@ function getUserTasks (username, callback) {
 }
 
 
+// ######################
+// TEAM ENPOINTS
+// ######################
+
+/**
+ * createTeam - description
+ *
+ * @param  {type} form     description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
+function createTeam (form, callback) {
+    log.info('chain.createTeam()');
+
+    teamManager.addTeam(form, function (err, address) {
+        callback(err, address);
+    });
+}
+
+
 /**
  * mintNewId - description
  *
@@ -174,5 +194,6 @@ module.exports = {
     getUser: getUser,
     addTask: addTask,
     getUserTasks: getUserTasks,
+    createTeam: createTeam,
     mintNewId: mintNewId
 };
