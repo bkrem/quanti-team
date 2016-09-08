@@ -155,8 +155,7 @@ export function signup(partialUser: User): ThunkAction {
                 .then(json => {
                     dispatch(signupSuccess(json.address));
                     dispatch(getProfile(user.username));
-                }
-                )
+                })
                 .catch(rejection =>
                     dispatch(signupFail(rejection))
                 );
