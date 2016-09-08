@@ -2,6 +2,7 @@ var Async = require('async');
 var auth = require(__js+'/auth');
 var taskManager = require(__js+'/taskManager');
 var userManager = require(__js+'/userManager');
+var teamManager = require(__js+'/teamManager');
 var linker = require(__js+'/linker');
 
 var logger = require(__libs+'/eris/eris-logger');
@@ -81,7 +82,6 @@ function getUser (username, callback) {
 // TASK ENPOINTS
 // ######################
 
-
 /**
  * addTask - description
  *
@@ -131,6 +131,70 @@ function getUserTasks (username, callback) {
 }
 
 
+// ######################
+// TEAM ENPOINTS
+// ######################
+
+/**
+ * createTeam - description
+ *
+ * @param  {type} form     description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
+function createTeam (form, callback) {
+    log.info('chain.createTeam()');
+
+    teamManager.addTeam(form, function (err, address) {
+        if (err)
+            return callback(err, null , null);
+        // link the team founder's User contract to the new team
+        linker.linkTeamToUser(form.founderUsername, form.name, function (linkErr, linkSuccess) {
+            return callback(linkErr, address, linkSuccess);
+        });
+    });
+}
+
+
+/**
+ * addTeamMember - description
+ *
+ * @param  {type} form     description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
+function addTeamMember (form, callback) {
+    log.info('chain.addTeamMember()');
+    var username = form.username;
+    var teamname = form.teamname;
+    var teamAddress = form.teamAddress;
+
+    // check whether username exists/is valid
+    userManager.isUsernameTaken(username, function (err, isTaken) {
+        if (err)
+            return callback(err, null, null, null);
+
+        // if the username doesn't exist we can't add it
+        if (isTaken === false)
+            return callback(err, isTaken, null, null);
+
+        userManager.getUserAddress(username, function (addressErr, userAddress) {
+            if (addressErr)
+                return callback(addressErr, isTaken, null, null);
+
+            teamManager.addTeamMember(teamAddress, username, userAddress, function (addErr, isOverwrite) {
+                if (addErr)
+                    return callback(addErr, isTaken, null, null);
+
+                linker.linkTeamToUser(username, teamname, function (linkErr, linkSuccess) {
+                    return callback(addErr, isTaken, username, linkSuccess);
+                });
+            });
+        });
+    });
+}
+
+
 /**
  * mintNewId - description
  *
@@ -174,5 +238,7 @@ module.exports = {
     getUser: getUser,
     addTask: addTask,
     getUserTasks: getUserTasks,
+    createTeam: createTeam,
+    addTeamMember: addTeamMember,
     mintNewId: mintNewId
 };

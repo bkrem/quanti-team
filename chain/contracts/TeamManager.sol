@@ -12,7 +12,8 @@ contract TeamManager {
     function addTeam(
         bytes32 _name,
         bytes32 _founderUsername,
-        address _founderAddress)
+        address _founderAddress,
+        bytes32 _createdAt)
         returns (address)
         {
             registerActionEvent("ADD TEAM");
@@ -20,7 +21,7 @@ contract TeamManager {
             if (teams.exists(_name)) {
                 return 0x0;
             }
-            Team tm = new Team(_name, _founderUsername, _founderAddress);
+            Team tm = new Team(_name, _founderUsername, _founderAddress, _createdAt);
             teams.insert(_name, tm);
             return tm;
     }

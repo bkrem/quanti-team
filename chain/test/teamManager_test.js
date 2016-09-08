@@ -6,7 +6,8 @@ var teamManager = require(__js+'/teamManager');
 var testTeam = {
     name: 'Test Team',
     founderUsername: 'test_usermanager1',
-    founderAddress: '2BEBAD695E48A6F16B34A35EC355112A9B12BAA3'
+    founderAddress: '2BEBAD695E48A6F16B34A35EC355112A9B12BAA3',
+    createdAt: String(Date.now())
 };
 
 var testMember = {

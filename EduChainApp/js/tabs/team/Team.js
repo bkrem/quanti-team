@@ -24,14 +24,42 @@
      }
 
      render() {
-         return(
+         if (!this.props.address) {
+             console.info('TeamView: no team address present, rendering static "Create Team" info');
+             return (
+                 <View>
+                     <Header title="Team"
+                         rightItem={{
+                             title: "Create Team",
+                             layout: "title",
+                             icon: "ios-add",
+                             onPress: () => this.props.navigator.push({id: "createTeam"})
+                         }}
+                     />
+
+                    <View style={[GlobalStyles.contentWrapper, styles.infoContainer]}>
+                        <Text style={GlobalStyles.sectionHeader}>
+                            You're currently not a member of a team
+                        </Text>
+                        <Text>
+                            Create your own team by tapping "Create Team", or by
+                            asking another QuantiTeam user to add you to their team.
+                        </Text>
+                    </View>
+
+                 </View>
+             );
+         }
+
+         // if user is in a team -> show the regular TeamView
+         return (
              <View>
                  <Header title="Team"
                      rightItem={{
                          title: "Add Member",
                          layout: "title",
                          icon: "ios-add",
-                         onPress: () => this.props.navigator.push({id: "addMember"}) // TODO popup dialog to add member
+                         onPress: () => this.props.navigator.push({id: "addMember"})
                      }}
                  />
 
@@ -41,7 +69,7 @@
                              style={styles.thumb}
                              source={require("../../img/team-default.png")}
                          />
-                         <View style={styles.textContainer}>
+                     <View style={styles.infoContainer}>
                              <Text style={styles.teamname}>
                                  Name: {this.props.name}
                              </Text>
@@ -61,12 +89,12 @@
          );
      }
 
-     listMembers(members: Array<User>) {
+     listMembers(members: Array<string>) {
          return members.map(member => {
              return (
                  // TODO turn this into a full component
-                 <Text style={styles.member} key={member.username}>
-                     {member.name}
+                 <Text style={styles.member} key={member}>
+                     {member}
                  </Text>
              );
          });
@@ -98,6 +126,14 @@
      },
      username: {
          color: '#bbb'
+     },
+     infoContainer: {
+         flex: 1,
+         flexDirection: 'column',
+         alignItems: 'center',
+         justifyContent: 'center',
+         paddingTop: 20,
+         marginBottom: 10,
      }
  });
 
@@ -107,6 +143,7 @@
  // ##############
  const mapStateToProps = (state) => {
      return {
+         address: state.team.address,
          name: state.team.name,
          score: state.team.score,
          members: state.team.members

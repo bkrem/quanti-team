@@ -7,6 +7,7 @@
 
 import type {Task} from '../reducers/tasks';
 import type {User, Login} from '../reducers/user';
+import type {Team} from '../reducers/team';
 
 export type Action =
     { type: 'REFRESH_TASKLIST' }
@@ -42,6 +43,14 @@ export type Action =
   | { type: 'GET_PROFILE_REQUEST', username: string }
   | { type: 'GET_PROFILE_SUCCESS', profile: User }
   | { type: 'GET_PROFILE_FAIL', error: Object }
+
+  | { type: 'CREATE_TEAM_REQUEST', form: Object }
+  | { type: 'CREATE_TEAM_SUCCESS', address: string, linkSuccess: boolean }
+  | { type: 'CREATE_TEAM_FAIL', error: Object }
+
+  | { type: 'ADD_MEMBER_REQUEST', form: Object }
+  | { type: 'ADD_MEMBER_SUCCESS', username: string, linkSuccess: boolean }
+  | { type: 'ADD_MEMBER_FAIL', error: Object }
   ;
 
 export type PromiseAction = Promise<Action>;

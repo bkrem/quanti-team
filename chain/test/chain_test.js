@@ -22,8 +22,10 @@ var mockTask = {
     reward: "200",
     participants: ["alpha", "beta", "gamma"],
     creator: "Ben",
-    createdAt: Date.now()
+    createdAt: String(Date.now())
 };
+
+var mockTeamAddress;
 
 describe('chain', function () {
     this.timeout(5000);
@@ -88,6 +90,46 @@ describe('chain', function () {
                 assert.isNull(err);
                 assert.isArray(tasks, '`tasks` should be an array of task objects');
                 assert.notEqual(tasks.length, 0, '`tasks` array should not be empty');
+                done();
+            });
+        });
+    });
+
+    describe('createTeam', function () {
+        it('accepts a team data object and returns the new team\'s address', function (done) {
+            var mockTeamForm = {
+                name: 'testTeam',
+                founderUsername: mockUser.username,
+                founderAddress: mockUser.address,
+                createdAt: String(Date.now())
+            }
+
+            chain.createTeam(mockTeamForm, function (err, address, linkSuccess) {
+                assert.isNull(err);
+                assert.isString(address);
+                assert.notEqual(address, '', 'teamAddress should not be empty');
+                assert.strictEqual(linkSuccess, true, 'The team should be linked to the founder\'s contract');
+                // save as a ref
+                mockTeamAddress = address;
+                done();
+            });
+        });
+    });
+
+    describe('addTeamMember', function () {
+        it('takes a form object, determines if the username is valid, adds the user and returns an `err`, `isTaken` bool & `username`',
+        function (done) {
+            var form = {
+                username: mockUser.username,
+                userAddress: mockUser.address,
+                teamname: 'testTeam',
+                teamAddress: mockTeamAddress
+            }
+            chain.addTeamMember(form, function (err, isTaken, username, linkSuccess) {
+                assert.isNull(err);
+                assert.strictEqual(isTaken, true);
+                assert.strictEqual(username, form.username);
+                assert.strictEqual(linkSuccess, true);
                 done();
             });
         });

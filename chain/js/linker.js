@@ -44,16 +44,32 @@ function linkTaskToUser (taskAddr, username, callback) {
     });
 }
 
-function linkUserToTeam () {
-    // TODO
+
+/**
+ * linkTeamToUser - description
+ *
+ * @param  {type} username description
+ * @param  {type} teamname description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
+function linkTeamToUser (username, teamname, callback) {
+    log.debug("linkTeamToUser() -> username: %s, teamname: %s", username, teamname);
+    // fetch address of user contract for passed username
+    userManager.getUserAddress(username, function (addrErr, userAddr) {
+        if (addrErr)
+            return callback(addrErr, null);
+        log.debug("linkTeamToUser() -> UM.getUserAddress() -> address returned: ", userAddr);
+
+        // Link the teamname to the user at address `userAddr`
+        LinkerContract.linkTeamToUser(userAddr, eris.str2hex(teamname), function (err, success) {
+            log.debug("linkTeamToUser() -> LinkerContract -> success: ", success);
+            return err ? callback(err, null) : callback(err, success);
+        });
+    });
 }
 
 module.exports = {
     linkTaskToUser: linkTaskToUser,
-    linkUserToTeam: linkUserToTeam
+    linkTeamToUser: linkTeamToUser
 };
-
-/* userManager.getUser(address, function (err, user) {
-    log.debug("linkTaskToUser() -> UM.getUser() -> user returned: ", user);
-    return callback(err, user);
-}); */

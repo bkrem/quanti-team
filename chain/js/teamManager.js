@@ -77,6 +77,9 @@ function _createTeamFromContract (contract, callback) {
         },
         founderAddress: function (callback) {
             contract.founderAddress( eris.convertibleCallback(callback) );
+        },
+        createdAt: function (callback) {
+            contract.createdAt( eris.convertibleCallback(callback, [eris.hex2str]) );
         }
     },
     function (err, results) {
@@ -104,8 +107,8 @@ function addTeam (team, callback) {
         hexTeam.name,
         hexTeam.founderUsername,
         // take the unaltered address string from `team`
-        // TODO find a reliable way to include this in `marshalForChain()`
-        team.founderAddress,
+        team.founderAddress, // TODO find a reliable way to include this in `marshalForChain()`
+        hexTeam.createdAt,
         function (err, address) {
             err ? log.error("addTeam("+team.name+") -> Error: " + err.stack)
                 : log.debug("addTeam("+team.name+") -> Team contract address: " + address);

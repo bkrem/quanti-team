@@ -67,6 +67,7 @@ var init = function () {
 
     // ########################################################################
 
+    // TODO refactor this to a simple GET
     app.post('/user/taken', function (req, res) {
         var username = req.body.username;
 
@@ -81,7 +82,7 @@ var init = function () {
         var user = req.body;
 
         log.info("POST /user/signup: ", user);
-        chain.addUser(user, function (err, address) {
+        chain.signup(user, function (err, address) {
             _handleErr(err, res);
             res.json({address: address});
         });
@@ -132,6 +133,39 @@ var init = function () {
             res.json({
                 isOverwrite: isOverwrite,
                 taskAddr: taskAddr
+            });
+        });
+    });
+
+    // ########################################################################
+
+    app.get('/team/taken/:teamname', function (req, res) {
+        // TODO
+    });
+
+    app.post('/team', function (req, res) {
+        var form = req.body.form;
+
+        log.info("POST /team", form);
+        chain.createTeam(form, function (err, address, linkSuccess) {
+            _handleErr(err, res);
+            res.json({
+                address: address,
+                linkSuccess: linkSuccess
+            });
+        });
+    });
+
+    app.post('/team/add-member', function (req, res) {
+        var form = req.body.form;
+
+        log.info("POST /team/add-member", form);
+        chain.addTeamMember(form, function (err, isTaken, username, linkSuccess) {
+            _handleErr(err, res);
+            res.json({
+                isTaken: isTaken,
+                username: username,
+                linkSuccess: linkSuccess
             });
         });
     });

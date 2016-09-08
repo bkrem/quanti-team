@@ -14,4 +14,9 @@ contract Linker {
         return User(userAddr).associateWithTaskAddress(taskAddr);
     }
 
+    function linkTeamToUser(address userAddress, bytes32 teamname) returns (bool) {
+        registerActionEvent('LINK TEAM TO USER');
+        return User(userAddress).associateWithTeam(teamname);
+    }
+
 }
