@@ -104,10 +104,12 @@ describe('chain', function () {
                 createdAt: String(Date.now())
             }
 
-            chain.createTeam(mockTeamForm, function (err, address) {
+            chain.createTeam(mockTeamForm, function (err, address, linkSuccess) {
                 assert.isNull(err);
                 assert.isString(address);
                 assert.notEqual(address, '', 'teamAddress should not be empty');
+                assert.strictEqual(linkSuccess, true, 'The team should be linked to the founder\'s contract');
+                // save as a ref
                 mockTeamAddress = address;
                 done();
             });

@@ -9,7 +9,8 @@ contract User {
     bytes32 public password;
 
     bytes32 public score; // TODO
-    bytes32 public teamname; // TODO
+
+    bytes32 public teamname;
 
     // SequenceArray to track all task addresses associated
     // to this User contract.
@@ -36,6 +37,19 @@ contract User {
     function associateWithTaskAddress(address _taskAddr) returns (bool isOverwrite) {
         isOverwrite = taskAddressList.insert(bytes32(_taskAddr), _taskAddr);
         return isOverwrite;
+    }
+
+    function associateWithTeam(bytes32 _teamname) returns (bool) {
+        teamname = _teamname;
+        return true;
+    }
+
+    function hasTeam() returns (bool) {
+        if (teamname != 0x0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function getUserTaskAtIndex(uint _idx) constant returns (address, uint) {

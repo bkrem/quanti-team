@@ -146,7 +146,12 @@ function createTeam (form, callback) {
     log.info('chain.createTeam()');
 
     teamManager.addTeam(form, function (err, address) {
-        callback(err, address);
+        if (err)
+            return callback(err, null , null);
+        // link the team founder's User contract to the new team
+        linker.linkTeamToUser(form.founderUsername, form.name, function (linkErr, linkSuccess) {
+            return callback(linkErr, address, linkSuccess);
+        });
     });
 }
 

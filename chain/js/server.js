@@ -147,9 +147,12 @@ var init = function () {
         var form = req.body.form;
 
         log.info("POST /team", form);
-        chain.createTeam(form, function (err, address) {
+        chain.createTeam(form, function (err, address, linkSuccess) {
             _handleErr(err, res);
-            res.json({address: address});
+            res.json({
+                address: address,
+                linkSuccess: linkSuccess
+            });
         });
     });
 

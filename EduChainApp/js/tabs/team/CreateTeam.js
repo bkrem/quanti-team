@@ -51,9 +51,9 @@
          };
 
          this.props.createTeam(teamForm)
-            .then(address => {
+            .then(success => {
                 // if the new team's address was returned we've succeeded
-                address
+                success
                 ? Alert.alert(alerts.createSuccess.title, alerts.createSuccess.text)
                 : Alert.alert(alerts.createFail.title, alerts.createFail.text);
             });

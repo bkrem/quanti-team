@@ -68,7 +68,7 @@ export function createTeam(form: Object): ThunkAction {
             .then(response => response.json())
             .then(json => {
                 dispatch(createTeamSuccess(json.address));
-                return json.address;
+                return json.linkSuccess;
             })
             .catch(rejection =>
                 dispatch(createTeamFail(rejection))
