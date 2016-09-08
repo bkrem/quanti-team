@@ -25,6 +25,8 @@ var mockTask = {
     createdAt: String(Date.now())
 };
 
+var mockTeamAddress;
+
 describe('chain', function () {
     this.timeout(5000);
 
@@ -106,6 +108,24 @@ describe('chain', function () {
                 assert.isNull(err);
                 assert.isString(address);
                 assert.notEqual(address, '', 'teamAddress should not be empty');
+                mockTeamAddress = address;
+                done();
+            });
+        });
+    });
+
+    describe('addTeamMember', function () {
+        it('takes a form object, determines if the username is valid, adds the user and returns an `err`, `isTaken` bool & `username`',
+        function (done) {
+            var form = {
+                username: mockUser.username,
+                userAddress: mockUser.address,
+                teamAddress: mockTeamAddress
+            }
+            chain.addTeamMember(form, function (err, isTaken, username) {
+                assert.isNull(err);
+                assert.strictEqual(isTaken, true);
+                assert.strictEqual(username, form.username);
                 done();
             });
         });

@@ -14,6 +14,7 @@
  import Button from 'react-native-button';
  import Header from '../../common/Header';
  import GlobalStyles from '../../common/GlobalStyles';
+ import {addTeamMember} from '../../actions/team';
 
  class AddMemberView extends React.Component {
      constructor(props) {
@@ -21,7 +22,18 @@
      }
 
      onPress() {
+         const partialForm = this.refs.form.getValue();
+         // Validate all mandatory inputs have been filled
+         if (!partialForm) {
+             console.info("Form returned null, mandatory fields missing.");
+             return null;
+         }
 
+         const memberForm = {
+             ...partialForm,
+             teamAddress: this.props.teamAddress
+         };
+         this.props.addTeamMember(memberForm);
      }
 
      render() {
@@ -79,13 +91,13 @@
  // ##############
  const mapStateToProps = (state) => {
      return {
-
+         teamAddress: state.team.address
      };
  };
 
  const mapDispatchToProps = (dispatch) => {
      return {
-
+         addTeamMember: (memberForm) => dispatch(addTeamMember(memberForm))
      };
  };
 

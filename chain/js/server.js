@@ -153,6 +153,19 @@ var init = function () {
         });
     });
 
+    app.post('/team/add-member', function (req, res) {
+        var form = req.body.form;
+
+        log.info("POST /team/add-member", form);
+        chain.addTeamMember(form, function (err, isTaken, username) {
+            _handleErr(err, res);
+            res.json({
+                isTaken: isTaken,
+                username: username
+            });
+        });
+    });
+
     // ########################################################################
 
     // TODO not DRY, abstract this further

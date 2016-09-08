@@ -27,6 +27,25 @@ export function createTeamFail(error: Object): Action {
     };
 }
 
+export function addMemberRequest(form: Object): Action {
+    return {
+        type: 'ADD_MEMBER_REQUEST',
+        form
+    };
+}
+export function addMemberSuccess(username: string): Action {
+    return {
+        type: 'ADD_MEMBER_SUCCESS',
+        username
+    };
+}
+export function addMemberFail(error: Object): Action {
+    return {
+        type: 'ADD_MEMBER_FAIL',
+        error
+    };
+}
+
 
 // ##############################
 // THUNK ACTIONS
@@ -52,6 +71,32 @@ export function createTeam(form: Object): ThunkAction {
             )
             .catch(rejection =>
                 dispatch(createTeamFail(rejection))
+            );
+    };
+}
+
+export function addTeamMember(form: Object): ThunkAction {
+    return (dispatch) => {
+        dispatch(addMemberRequest(form));
+
+        const request = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({form: form})
+        };
+
+        return fetch(ENV.__API_BRIDGE+'/team/add-member', request)
+            .then(response => response.json())
+            .then(json => {
+                json.username
+                ? dispatch(addMemberSuccess(json.username))
+                : dispatch(addMemberFail(new Error('Adding failed: `username` returned `null`')));
+            })
+            .catch(rejection =>
+                dispatch(addMemberFail(rejection))
             );
     };
 }

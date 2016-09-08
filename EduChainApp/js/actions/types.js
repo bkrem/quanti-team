@@ -47,6 +47,10 @@ export type Action =
   | { type: 'CREATE_TEAM_REQUEST', form: Object }
   | { type: 'CREATE_TEAM_SUCCESS', address: string }
   | { type: 'CREATE_TEAM_FAIL', error: Object }
+
+  | { type: 'ADD_MEMBER_REQUEST', form: Object }
+  | { type: 'ADD_MEMBER_SUCCESS', username: string }
+  | { type: 'ADD_MEMBER_FAIL', error: Object }
   ;
 
 export type PromiseAction = Promise<Action>;

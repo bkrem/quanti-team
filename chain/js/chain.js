@@ -152,6 +152,42 @@ function createTeam (form, callback) {
 
 
 /**
+ * addTeamMember - description
+ *
+ * @param  {type} form     description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
+function addTeamMember (form, callback) {
+    log.info('chain.addTeamMember()');
+    var username = form.username;
+    var teamAddress = form.teamAddress;
+
+    // check whether username exists/is valid
+    userManager.isUsernameTaken(username, function (err, isTaken) {
+        if (err)
+            return callback(err, null, null);
+
+        // if the username doesn't exist we can't add it
+        if (isTaken === false)
+            return callback(err, isTaken, null);
+
+        userManager.getUserAddress(username, function (addressErr, userAddress) {
+            if (addressErr)
+                return callback(addressErr, isTaken, null);
+
+            teamManager.addTeamMember(teamAddress, username, userAddress, function (addErr, isOverwrite) {
+                if (err)
+                    return callback(addErr, isTaken, null);
+                // if no error was returned -> username was added to team so we return it
+                return callback(addErr, isTaken, username);
+            });
+        });
+    });
+}
+
+
+/**
  * mintNewId - description
  *
  * @param  {type} domain   description
@@ -195,5 +231,6 @@ module.exports = {
     addTask: addTask,
     getUserTasks: getUserTasks,
     createTeam: createTeam,
+    addTeamMember: addTeamMember,
     mintNewId: mintNewId
 };
