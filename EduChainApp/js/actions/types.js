@@ -45,7 +45,7 @@ export type Action =
   | { type: 'GET_PROFILE_FAIL', error: Object }
 
   | { type: 'CREATE_TEAM_REQUEST', form: Object }
-  | { type: 'CREATE_TEAM_SUCCESS', address: string }
+  | { type: 'CREATE_TEAM_SUCCESS', address: string, linkSuccess: boolean }
   | { type: 'CREATE_TEAM_FAIL', error: Object }
 
   | { type: 'ADD_MEMBER_REQUEST', form: Object }

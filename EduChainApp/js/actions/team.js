@@ -14,10 +14,11 @@ export function createTeamRequest(form: Object): Action {
         form
     };
 }
-export function createTeamSuccess(address: string): Action {
+export function createTeamSuccess(address: string, linkSuccess: boolean): Action {
     return {
         type: 'CREATE_TEAM_SUCCESS',
-        address
+        address,
+        linkSuccess
     };
 }
 export function createTeamFail(error: Object): Action {
@@ -67,7 +68,7 @@ export function createTeam(form: Object): ThunkAction {
         return fetch(ENV.__API_BRIDGE+'/team', request)
             .then(response => response.json())
             .then(json => {
-                dispatch(createTeamSuccess(json.address));
+                dispatch(createTeamSuccess(json.address, json.linkSuccess));
                 return json.linkSuccess;
             })
             .catch(rejection =>
