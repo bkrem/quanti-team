@@ -2,6 +2,7 @@ var fs = require('fs');
 var Async = require('async');
 var chainUtils = require(__js+'/util/chainUtils');
 var eris = require(__libs+'/eris/eris-wrapper');
+var userManager = require(__js+'/userManager');
 var logger = require(__libs+'/eris/eris-logger');
 var log = logger.getLogger('chain.teamManager');
 
@@ -84,11 +85,20 @@ function _createTeamFromContract (contract, callback) {
     },
     function (err, results) {
         if (err)
-            return callback(err, {});
+            return callback(err, null);
         team = results;
         team.address = contract.address;
-        log.debug("Compiled team object:\n", team);
-        return callback(null, team);
+        // collect addresses of team members, then hydrate user objects
+        getTeamMemberAddresses(team.name, function (addressErr, addresses) {
+            if (err)
+                return callback(err, null);
+            Async.map(addresses, userManager.getUser, function (mapErr, members) {
+                // assign `members` array to `team` object
+                team.members = members;
+                log.debug("Compiled team object:\n", team);
+                callback(mapErr, team);
+            });
+        });
     });
 }
 

@@ -52,8 +52,21 @@ function signup (user, callback) {
  */
 function login (credentials, callback) {
     log.info('chain.login()');
-    auth.login(credentials.username, credentials.password, function (err, isValid) {
-        return callback(err, isValid);
+    auth.login(credentials.username, credentials.password, function (err, isValid, user) {
+        if (err || isValid === false)
+            return callback(err, isValid, null, null);
+
+        // if the user has no team, simply return user details
+        if (user.teamname === '')
+            return callback(err, isValid, user, null);
+
+        teamManager.getTeamAddress(user.teamname, function (addressErr, teamAddr) {
+            if (addressErr)
+                return callback(addressErr, isValid, user, null);
+            teamManager.getTeamDetails(teamAddr, function (teamErr, team) {
+                return callback(teamErr, isValid, user, team);
+            });
+        });
     });
 }
 
@@ -74,6 +87,20 @@ function getUser (username, callback) {
         userManager.getUser(userAddr, function (err, profile) {
             return callback(err, profile);
         });
+    });
+}
+
+
+/**
+ * getUserFromAddress - description
+ *
+ * @param  {type} userAddr description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
+function getUserFromAddress (userAddr, callback) {
+    userManager.getUser(userAddr, function (err, profile) {
+        return callback(err, profile);
     });
 }
 

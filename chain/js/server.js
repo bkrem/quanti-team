@@ -92,9 +92,13 @@ var init = function () {
         var credentials = req.body;
 
         log.info("POST /user/login", credentials);
-        chain.login(credentials, function (err, isValid) {
+        chain.login(credentials, function (err, isValid, user, team) {
             _handleErr(err, res);
-            res.json({isValid: isValid});
+            res.json({
+                isValid: isValid,
+                user: user,
+                team: team
+            });
         });
     });
 

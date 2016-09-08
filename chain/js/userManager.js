@@ -84,7 +84,7 @@ function _createUserFromContract (contract, callback) {
         score: function (callback) {
             contract.score( eris.convertibleCallback(callback, [eris.hex2str]) );
         },
-        teamId: function (callback) {
+        teamname: function (callback) {
             contract.teamname( eris.convertibleCallback(callback, [eris.hex2str]) );
         },
         password: function (callback) {

@@ -9,8 +9,8 @@ var testUser1 = {
     username: 'test_usermanager1',
     email: 'testuser@test.com',
     name: 'test user',
-    score: '3.14',
-    teamId: 'testTeam0',
+    score: '0',
+    teamname: '',
     password: 'testpass'
 };
 
@@ -19,8 +19,8 @@ var testUser2 = {
     username: 'test_usermanager2',
     email: 'testuser@test.com',
     name: 'test user',
-    score: '3.14',
-    teamId: 'testTeam0',
+    score: '0',
+    teamname: '',
     password: 'testpass'
 };
 
@@ -117,7 +117,7 @@ describe('User Manager', function () {
             // mocking the linkage
             linker.linkTaskToUser(pseudoTaskAddr, testUser1.username, function (linkErr, isOverwrite) {
                 assert.isNull(linkErr, 'linkTaskToUser() should return no error');
-                
+
                 userManager.getUserTaskAddresses(testUser1.username, function (err, addresses) {
                     assert.isNull(err);
                     assert.strictEqual(addresses[0], pseudoTaskAddr);

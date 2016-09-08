@@ -9,7 +9,7 @@ var mockUser = {
     email: 'testchainuser@test.com',
     name: 'test chain user',
     score: '0',
-    teamId: '',
+    teamname: '',
     password: 'testpass'
 }
 
@@ -45,16 +45,6 @@ describe('chain', function () {
             chain.signup(mockUser, function (err, address) {
                 assert.isNull(err);
                 assert.notEqual(address, '', 'returned user address from signup should not be empty');
-                done();
-            });
-        });
-    });
-
-    describe('login()', function () {
-        it('verifies a user with the passed credentials and returns an `isValid` boolean', function (done) {
-            chain.login(mockUser, function (err, isValid) {
-                assert.isNull(err);
-                assert.strictEqual(isValid, true);
                 done();
             });
         });
@@ -111,6 +101,7 @@ describe('chain', function () {
                 assert.strictEqual(linkSuccess, true, 'The team should be linked to the founder\'s contract');
                 // save as a ref
                 mockTeamAddress = address;
+                mockUser.teamname = mockTeamForm.name;
                 done();
             });
         });
@@ -130,6 +121,19 @@ describe('chain', function () {
                 assert.strictEqual(isTaken, true);
                 assert.strictEqual(username, form.username);
                 assert.strictEqual(linkSuccess, true);
+                done();
+            });
+        });
+    });
+
+    describe('login()', function () {
+        it('verifies a user with the passed credentials; returns an `isValid` boolean, a user object, and a team object',
+        function (done) {
+            chain.login(mockUser, function (err, isValid, user, team) {
+                assert.isNull(err);
+                assert.strictEqual(isValid, true);
+                assert.deepEqual(user, mockUser);
+                assert.isObject(team);
                 done();
             });
         });
