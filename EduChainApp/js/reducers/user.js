@@ -86,7 +86,7 @@ export default function user(state: State = initialState, action: Action): State
         case 'LOGIN_FAIL':
         case 'GET_PROFILE_FAIL':
             console.error(action.error);
-            return initialState;
+            return state;
 
         default:
             return state;
