@@ -8,6 +8,7 @@
  import {
      View,
      StyleSheet,
+     Alert,
  } from 'react-native';
  import {connect} from 'react-redux';
  import t from 'tcomb-form-native';
@@ -15,6 +16,17 @@
  import Header from '../../common/Header';
  import GlobalStyles from '../../common/GlobalStyles';
  import {addTeamMember} from '../../actions/team';
+
+ const alerts = {
+     addSuccess: {
+         title: "Success",
+         text: "Member added."
+     },
+     addFail: {
+         title: "Failed",
+         text: "Sorry, it seems like there was an issue with adding this user. Is the username spelt correctly?"
+     }
+ };
 
  class AddMemberView extends React.Component {
      constructor(props) {
@@ -30,10 +42,16 @@
          }
 
          const memberForm = {
-             ...partialForm,
+             username: partialForm.username.toLowerCase(),
              teamAddress: this.props.teamAddress
          };
-         this.props.addTeamMember(memberForm);
+         this.props.addTeamMember(memberForm)
+            .then(username => {
+                // if the username was returned -> added successfully
+                username
+                ? Alert.alert(alerts.addSuccess.title, alerts.addSuccess.text)
+                : Alert.alert(alerts.addFail.title, alerts.addFail.text);
+            });
      }
 
      render() {
