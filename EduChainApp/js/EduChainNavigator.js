@@ -13,6 +13,7 @@ import TaskView from './tabs/tasks/TaskView';
 import SettingsListView from './settings/SettingsListView';
 import AddTask from './tabs/tasks/AddTask';
 import CreateTeam from './tabs/team/CreateTeam';
+import AddMember from './tabs/team/AddMember';
 import Login from './login/Login';
 import Signup from './signup/Signup';
 
@@ -31,6 +32,8 @@ export default class EduChainNavigator extends React.Component {
                 return (<AddTask navigator={navigator} />);
             case 'createTeam':
                 return (<CreateTeam navigator={navigator} />);
+            case 'addMember':
+                return (<AddMember navigator={navigator} />);
 
             case 'home':
             default:
