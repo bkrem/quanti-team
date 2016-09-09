@@ -7,6 +7,7 @@
 import ENV from '../common/Environment';
 import type {Action, ThunkAction} from './types';
 import type {Team} from '../reducers/team';
+import type {User} from '../reducers/user';
 
 export function createTeamRequest(form: Object): Action {
     return {
@@ -35,7 +36,6 @@ export function addMemberRequest(form: Object): Action {
         form
     };
 }
-// TODO return the full user object not just the username
 export function addMemberSuccess(username: string, linkSuccess: boolean): Action {
     return {
         type: 'ADD_MEMBER_SUCCESS',
@@ -100,6 +100,17 @@ export function createTeam(form: Object): ThunkAction {
     };
 }
 
+export function getTeamDetails(teamname: string): ThunkAction {
+    return (dispatch) => {
+        dispatch(getTeamDetailsRequest(teamname));
+
+        return fetch(ENV.__API_BRIDGE+`/team/${teamname}`)
+            .then(response => response.json())
+            .then(json => dispatch(getTeamDetailsSuccess(json.team)))
+            .catch(rejection => dispatch(getTeamDetailsFail(rejection)));
+    };
+}
+
 export function addTeamMember(form: Object): ThunkAction {
     return (dispatch) => {
         dispatch(addMemberRequest(form));
@@ -116,9 +127,15 @@ export function addTeamMember(form: Object): ThunkAction {
         return fetch(ENV.__API_BRIDGE+'/team/add-member', request)
             .then(response => response.json())
             .then(json => {
-                json.linkSuccess
-                ? dispatch(addMemberSuccess(json.username, json.linkSuccess))
-                : dispatch(addMemberFail({error: 'Adding failed: `username` returned `null`'}));
+                if (json.linkSuccess) {
+                    dispatch(addMemberSuccess(json.username, json.linkSuccess));
+                    // fetch the team details again now there's a new member
+                    dispatch(getTeamDetails(form.teamname));
+                } else {
+                    dispatch(addMemberFail({error: 'Adding failed: `username` returned `null`'}));
+                }
+
+
                 return json.linkSuccess;
             })
             .catch(rejection =>

@@ -184,6 +184,27 @@ function createTeam (form, callback) {
 
 
 /**
+ * getTeamDetails - description
+ *
+ * @param  {type} teamname description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
+function getTeamDetails (teamname, callback) {
+    log.info('chain.getTeamDetails()');
+
+    teamManager.getTeamAddress(teamname, function (err, teamAddr) {
+        if (err)
+            return callback(err, null);
+
+        teamManager.getTeamDetails(teamAddr, function (teamErr, team) {
+            callback(teamErr, team);
+        });
+    });
+}
+
+
+/**
  * addTeamMember - description
  *
  * @param  {type} form     description
@@ -266,6 +287,7 @@ module.exports = {
     addTask: addTask,
     getUserTasks: getUserTasks,
     createTeam: createTeam,
+    getTeamDetails: getTeamDetails,
     addTeamMember: addTeamMember,
     mintNewId: mintNewId
 };

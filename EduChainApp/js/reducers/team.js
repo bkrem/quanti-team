@@ -41,12 +41,6 @@ export default function team(state: State = initialState, action: Action): State
                 address: action.address
             };
 
-        case 'ADD_MEMBER_SUCCESS':
-            return {
-                ...state,
-                members: state.members.concat(action.username)
-            };
-
         case 'GET_TEAM_DETAILS_SUCCESS':
             return {
                 ...state,

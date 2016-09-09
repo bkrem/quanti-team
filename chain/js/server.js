@@ -160,6 +160,16 @@ var init = function () {
         });
     });
 
+    app.get('/team/:teamname', function (req, res) {
+        var teamname = req.params.teamname;
+
+        log.info("GET /team/"+teamname);
+        chain.getTeamDetails(teamname, function (err, team) {
+            _handleErr(err, res);
+            res.json({team: team});
+        });
+    });
+
     app.post('/team/add-member', function (req, res) {
         var form = req.body.form;
 

@@ -107,6 +107,16 @@ describe('chain', function () {
         });
     });
 
+    describe('getTeamDetails', function () {
+        it('takes a teamname and returns `err` and a `team` object', function (done) {
+            chain.getTeamDetails('testTeam', function (err, team) {
+                assert.isNull(err);
+                assert.isObject(team);
+                done();
+            });
+        });
+    });
+
     describe('addTeamMember', function () {
         it('takes a form object, determines if the username is valid, adds the user and returns an `err`, `isTaken` bool & `username`',
         function (done) {
