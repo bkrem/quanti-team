@@ -51,6 +51,10 @@ export type Action =
   | { type: 'ADD_MEMBER_REQUEST', form: Object }
   | { type: 'ADD_MEMBER_SUCCESS', username: string, linkSuccess: boolean }
   | { type: 'ADD_MEMBER_FAIL', error: Object }
+
+  | { type:'GET_TEAM_DETAILS_REQUEST', teamname: string }
+  | { type: 'GET_TEAM_DETAILS_SUCCESS', team: Team }
+  | { type: 'GET_TEAM_DETAILS_FAIL', error: Object }
   ;
 
 export type PromiseAction = Promise<Action>;

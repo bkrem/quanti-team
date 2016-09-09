@@ -16,6 +16,7 @@
  import {connect} from 'react-redux';
  import Header from '../../common/Header';
  import GlobalStyles from '../../common/GlobalStyles';
+ import MemberRow from './MemberRow';
  import type {User} from '../../reducers/user';
 
  class TeamView extends React.Component {
@@ -89,13 +90,10 @@
          );
      }
 
-     listMembers(members: Array<string>) {
+     listMembers(members: Array<User>) {
          return members.map(member => {
              return (
-                 // TODO turn this into a full component
-                 <Text style={styles.member} key={member}>
-                     {member}
-                 </Text>
+                 <MemberRow member={member} key={member.address} />
              );
          });
      }

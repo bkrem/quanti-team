@@ -20,20 +20,21 @@ function login (username, password, callback) {
     // Retrieve the user contract address from the chain
     userManager.getUserAddress(username, function (addrErr, address) {
         if (addrErr)
-            return callback(addrErr, isValid);
+            return callback(addrErr, isValid, null);
         // Create a user object if there was no address error
         userManager.getUser(address, function (err, user) {
             if (err)
-                return callback(err, isValid);
+                return callback(err, isValid, null);
             // Compare the passed and retrieved login details to set `isValid`
             if (user.username === username && user.password === password) {
                 isValid = true;
+                return callback(null, isValid, user);
             }
-            return callback(null, isValid);
+
+            // if validation failed, don't return the `user` object
+            return callback(null, isValid, null);
         });
     });
 }
 
-module.exports = {
-    login: login
-}
+module.exports = {login: login};

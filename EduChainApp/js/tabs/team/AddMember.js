@@ -47,9 +47,9 @@
              teamAddress: this.props.teamAddress
          };
          this.props.addTeamMember(memberForm)
-            .then(username => {
-                // if the username was returned -> added successfully
-                username
+            .then(linkSuccess => {
+                // if the linkSuccess was returned -> added successfully
+                linkSuccess
                 ? Alert.alert(alerts.addSuccess.title, alerts.addSuccess.text)
                 : Alert.alert(alerts.addFail.title, alerts.addFail.text);
             });

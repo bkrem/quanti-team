@@ -92,9 +92,13 @@ var init = function () {
         var credentials = req.body;
 
         log.info("POST /user/login", credentials);
-        chain.login(credentials, function (err, isValid) {
+        chain.login(credentials, function (err, isValid, user, team) {
             _handleErr(err, res);
-            res.json({isValid: isValid});
+            res.json({
+                isValid: isValid,
+                user: user,
+                team: team
+            });
         });
     });
 
@@ -153,6 +157,16 @@ var init = function () {
                 address: address,
                 linkSuccess: linkSuccess
             });
+        });
+    });
+
+    app.get('/team/:teamname', function (req, res) {
+        var teamname = req.params.teamname;
+
+        log.info("GET /team/"+teamname);
+        chain.getTeamDetails(teamname, function (err, team) {
+            _handleErr(err, res);
+            res.json({team: team});
         });
     });
 
