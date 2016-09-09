@@ -7,7 +7,6 @@
 import ENV from '../common/Environment';
 import type {Action, ThunkAction} from './types';
 import type {Team} from '../reducers/team';
-import type {User} from '../reducers/user';
 
 export function createTeamRequest(form: Object): Action {
     return {

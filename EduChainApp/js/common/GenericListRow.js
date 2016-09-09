@@ -10,7 +10,6 @@ import React from 'react';
 import {
     Text,
     View,
-    ListView,
     StyleSheet,
     TouchableOpacity,
 } from 'react-native';
