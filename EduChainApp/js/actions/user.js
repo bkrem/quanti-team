@@ -7,6 +7,7 @@
 import ENV from '../common/Environment';
 import type {Action, ThunkAction} from './types';
 import type {User, Login} from '../reducers/user';
+import {getTeamDetailsSuccess} from '../actions/team';
 import {assignNewId} from './util';
 
 // #############################
@@ -179,7 +180,8 @@ export function login(form: Object): ThunkAction {
             .then(response => response.json())
             .then(json => {
                 dispatch(loginResponse(json.isValid));
-                dispatch(getProfile(form.username));
+                dispatch(getProfileSuccess(json.user));
+                dispatch(getTeamDetailsSuccess(json.team));
                 return json.isValid;
             })
             .catch(rejection =>

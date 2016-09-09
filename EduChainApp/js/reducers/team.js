@@ -5,11 +5,12 @@
 'use strict';
 
 import type {Action} from '../actions/types';
+import type {User} from '../reducers/user';
 
 export type Team = {
     name: string;
     score: number;
-    members: Array<string>;
+    members: Array<User>;
     founderUsername: string,
     founderAddress: string,
     address?: string;
@@ -46,11 +47,18 @@ export default function team(state: State = initialState, action: Action): State
                 members: state.members.concat(action.username)
             };
 
+        case 'GET_TEAM_DETAILS_SUCCESS':
+            return {
+                ...state,
+                ...action.team
+            };
+
         case 'ADD_MEMBER_FAIL':
             console.log(action.error);
             return state;
 
         case 'CREATE_TEAM_FAIL':
+        case 'GET_TEAM_DETAILS_FAIL':
             console.log(action.error);
             return initialState;
 

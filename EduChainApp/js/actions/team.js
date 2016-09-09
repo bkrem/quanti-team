@@ -28,12 +28,14 @@ export function createTeamFail(error: Object): Action {
     };
 }
 
+
 export function addMemberRequest(form: Object): Action {
     return {
         type: 'ADD_MEMBER_REQUEST',
         form
     };
 }
+// TODO return the full user object not just the username
 export function addMemberSuccess(username: string, linkSuccess: boolean): Action {
     return {
         type: 'ADD_MEMBER_SUCCESS',
@@ -44,6 +46,26 @@ export function addMemberSuccess(username: string, linkSuccess: boolean): Action
 export function addMemberFail(error: Object): Action {
     return {
         type: 'ADD_MEMBER_FAIL',
+        error
+    };
+}
+
+
+export function getTeamDetailsRequest(teamname: string) {
+    return {
+        type: 'GET_TEAM_DETAILS_REQUEST',
+        teamname
+    };
+}
+export function getTeamDetailsSuccess(team: Team) {
+    return {
+        type: 'GET_TEAM_DETAILS_SUCCESS',
+        team
+    };
+}
+export function getTeamDetailsFail(error: Object) {
+    return {
+        type: 'GET_TEAM_DETAILS_FAIL',
         error
     };
 }

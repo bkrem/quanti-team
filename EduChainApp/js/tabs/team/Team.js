@@ -89,12 +89,12 @@
          );
      }
 
-     listMembers(members: Array<string>) {
+     listMembers(members: Array<User>) {
          return members.map(member => {
              return (
                  // TODO turn this into a full component
-                 <Text style={styles.member} key={member}>
-                     {member}
+                 <Text style={styles.member} key={member.address}>
+                     {member.name} (@{member.username}) {member.score}
                  </Text>
              );
          });
