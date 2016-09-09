@@ -10,7 +10,7 @@ export type User = {
     id: number;
     name: string;
     username: string;
-    score: number;
+    score: string;
     teamname?: string;
     email?: string;
     address?: string;
@@ -32,7 +32,7 @@ const initialState: State = {
         id: -1,
         name: '',
         username: '',
-        score: 0,
+        score: '',
         teamname: '',
         email: '',
         address: ''
