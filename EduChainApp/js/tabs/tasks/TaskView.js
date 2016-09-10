@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import GlobalStyles from '../../common/GlobalStyles';
 import Header from '../../common/Header';
-import CommentBox from '../../comments/CommentBox';
+import Button from 'react-native-button';
 import type {Task} from '../../reducers/tasks';
 
 type Props = {
@@ -27,13 +27,8 @@ export default class TaskView extends React.Component {
     props: Props;
 
     render() {
-        const {title, status, desc, reward, complete} = this.props.task;
+        const {title, status, desc, reward, complete, token} = this.props.task;
 
-        var comments = [
-            {id: 1, author: "Pete Hunt", thumbURI: "https://randomuser.me/api/portraits/thumb/men/1.jpg", text: "This is one comment"},
-            {id: 2, author: "Jordan Walke", thumbURI: "https://randomuser.me/api/portraits/thumb/men/2.jpg", text: "This is *another* comment"}
-        ];
-        /* TODO pass taskId to CommentBox and fetch comments */
         return (
             <View>
                 <Header
@@ -45,12 +40,13 @@ export default class TaskView extends React.Component {
                         onPress: () => this.props.navigator.pop()
                     }}
                 />
-                <View style={GlobalStyles.contentWrapper}>
+            <View style={[GlobalStyles.contentWrapper, styles.container]}>
                     <View style={styles.taskSummary}>
                         <Text style={[GlobalStyles.sectionHeader, styles.taskTitle]}>{title}</Text>
                         <Text style={styles.status}>Status: {status}</Text>
                         <Text style={styles.reward}>Reward: {reward}</Text>
                         <Text style={styles.complete}>Completed: {complete}</Text>
+                        <Text style={styles.token}>Token: {token}</Text>
                     </View>
                     <View style={styles.desc}>
                         <Text style={GlobalStyles.sectionHeader}>Description</Text>
@@ -58,7 +54,13 @@ export default class TaskView extends React.Component {
                             {desc}
                         </Text>
                     </View>
-                    <CommentBox comments={comments} />
+                    <Button
+                        containerStyle={[GlobalStyles.buttonContainer, styles.buttonContainer]}
+                        style={styles.button}
+                        onPress={() => {}}
+                    >
+                        Mark Task Complete
+                    </Button>
                 </View>
             </View>
         );
@@ -66,7 +68,17 @@ export default class TaskView extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
     taskSummary: {
+    },
+    buttonContainer: {
+        marginTop: 300,
+        backgroundColor: '#0BD318'
+    },
+    button: {
+        color: '#fff'
     },
     taskTitle: {
         marginBottom: 5,
