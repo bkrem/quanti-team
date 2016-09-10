@@ -147,6 +147,16 @@ var init = function () {
         });
     });
 
+    app.get('/task/completed/:token', function (req, res) {
+        var taskToken = req.params.token;
+
+        log.info("GET /task/completed/"+taskToken);
+        chain.markTaskCompleted(taskToken, function (err, success) {
+            _handleErr(err, res);
+            res.json({success: success});
+        });
+    });
+
     // ########################################################################
 
     app.get('/team/taken/:teamname', function (req, res) {

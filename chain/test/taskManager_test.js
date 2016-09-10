@@ -97,6 +97,16 @@ describe("Task Manager", function () {
         });
     });
 
+    describe("markTaskCompleted", function () {
+        it("marks the task associated to the passed address as complete and returns a success bool", function (done) {
+            taskManager.markTaskCompleted(refAddr, function (err, success) {
+                assert.isNull(err);
+                assert.strictEqual(success, true);
+                done();
+            });
+        });
+    });
+
 });
 
 require('./userManager_test');

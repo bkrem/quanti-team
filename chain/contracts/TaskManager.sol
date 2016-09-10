@@ -62,4 +62,8 @@ contract TaskManager {
         registerActionEvent("GET TASKLIST SIZE");
         return taskList.size();
     }
+
+    function markTaskCompleted(address taskAddr, bytes32 status) returns (bool) {
+        return Task(taskAddr).markComplete(status);
+    }
 }

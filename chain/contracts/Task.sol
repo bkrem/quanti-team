@@ -43,4 +43,10 @@ contract Task {
         isOverwrite = attachments.insert(fileHash, this);
         return isOverwrite;
     }
+
+    function markComplete(bytes32 _status) returns (bool success) {
+        status = _status;
+        success = true;
+        return success;
+    }
 }

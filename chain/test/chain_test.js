@@ -160,7 +160,17 @@ describe('chain', function () {
                 done();
             });
         });
-    })
+    });
+
+    describe("markTaskCompleted", function () {
+        it("marks the task associated to the passed token as complete and returns a success bool", function (done) {
+            chain.markTaskCompleted(mockTask.token, function (err, success) {
+                assert.isNull(err);
+                assert.strictEqual(success, true);
+                done();
+            });
+        });
+    });
 
     describe('mintNewId(task)', function () {
         it('mints a new ID for the `task` data domain', function (done) {

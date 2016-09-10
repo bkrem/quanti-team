@@ -189,6 +189,19 @@ function getUserTasks (username, callback) {
     });
 }
 
+function markTaskCompleted (taskToken, callback) {
+    log.info('chain.markTaskCompleted()');
+
+    taskManager.getTaskAddressFromToken(taskToken, function (err, taskAddr) {
+        if (err)
+            return callback(err, null);
+
+        taskManager.markTaskCompleted(taskAddr, function (markErr, success) {
+            return callback(markErr, success);
+        });
+    });
+}
+
 
 // ######################
 // TEAM ENPOINTS
@@ -319,6 +332,7 @@ module.exports = {
     getUser: getUser,
     addTask: addTask,
     getUserTasks: getUserTasks,
+    markTaskCompleted: markTaskCompleted,
     createTeam: createTeam,
     getTeamDetails: getTeamDetails,
     addTeamMember: addTeamMember,

@@ -244,6 +244,18 @@ var chainUtils = require(__js+'/util/chainUtils');
         });
     }
 
+    // TODO refactor
+    function markTaskCompleted (taskAddr, callback) {
+        var status = "Yes";
+
+        taskManagerContract.markTaskCompleted(taskAddr, eris.str2hex(status), function (error, success) {
+            error
+            ? log.error("markTaskCompleted() -> Error: " + error.stack)
+            : log.debug("markTaskCompleted() -> success: ", success);
+            callback(error, success);
+        });
+    }
+
     module.exports = {
         addTask: addTask,
         getAllTaskAddresses: getAllTaskAddresses,
@@ -251,6 +263,7 @@ var chainUtils = require(__js+'/util/chainUtils');
         getTaskAtAddress: getTaskAtAddress,
         getTaskListSize: getTaskListSize,
         getTaskKeyAtIndex: getTaskKeyAtIndex,
-        getTaskAddressFromToken: getTaskAddressFromToken
+        getTaskAddressFromToken: getTaskAddressFromToken,
+        markTaskCompleted: markTaskCompleted
     };
 }());
