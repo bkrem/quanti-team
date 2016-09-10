@@ -55,6 +55,8 @@ export type Action =
   | { type:'GET_TEAM_DETAILS_REQUEST', teamname: string }
   | { type: 'GET_TEAM_DETAILS_SUCCESS', team: Team }
   | { type: 'GET_TEAM_DETAILS_FAIL', error: Object }
+
+  | { type: 'LOGOUT' }
   ;
 
 export type PromiseAction = Promise<Action>;

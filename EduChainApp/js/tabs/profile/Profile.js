@@ -18,17 +18,23 @@
  import Header from '../../common/Header';
  import ProfileSummary from './ProfileSummary';
  import type {User} from '../../reducers/user';
- import {getProfile} from '../../actions/user';
+ import {getProfile, logout} from '../../actions/user';
 
  type Props = {
      username: string;
      details: User;
      getProfile: (username: string) => void;
+     logout: () => void;
      navigator: Navigator;
  }
 
  class ProfileView extends React.Component {
      props: Props;
+
+     onLogout() {
+         this.props.logout();
+         this.props.navigator.push({id: "login"});
+     }
 
      render() {
          return (
@@ -36,10 +42,9 @@
                  <Header
                      title="Me"
                      rightItem={{
-                         title: "Settings",
-                         layout: "icon",
-                         icon: "ios-settings",
-                         onPress: () => this.props.navigator.push({id: "settings"})
+                         title: "Log out",
+                         layout: "title",
+                         onPress: () => this.onLogout()
                      }}
                  />
 
@@ -74,7 +79,8 @@
 
  const mapDispatchToProps = (dispatch) => {
      return {
-         getProfile: (username: string) => dispatch(getProfile(username))
+         getProfile: (username: string) => dispatch(getProfile(username)),
+         logout: () => dispatch(logout())
      };
  };
 

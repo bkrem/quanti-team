@@ -81,6 +81,9 @@ export default function user(state: State = initialState, action: Action): State
                 }
             };
 
+        case 'LOGOUT':
+            return initialState;
+
         case 'SIGNUP_FAIL':
         case 'CHECK_USERNAME_FAIL':
         case 'LOGIN_FAIL':
