@@ -36,7 +36,6 @@
                      </View>
                      <View style={styles.rightColumn}>
                          <Text style={styles.reward}>Reward: {reward}</Text>
-                         <Text style={styles.complete}>Completed: {complete}</Text>
                      </View>
                  </View>
              </TouchableOpacity>

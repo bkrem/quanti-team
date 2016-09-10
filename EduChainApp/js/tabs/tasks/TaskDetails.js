@@ -13,21 +13,28 @@ import {
     StyleSheet,
     Navigator,
 } from 'react-native';
+import {connect} from 'react-redux'
 import GlobalStyles from '../../common/GlobalStyles';
 import Header from '../../common/Header';
 import Button from 'react-native-button';
 import type {Task} from '../../reducers/tasks';
+import {markTaskCompleted} from '../../actions/tasks';
 
 type Props = {
     task: Task,
+    markTaskCompleted: (taskToken: string) => void;
     navigator: Navigator,
 }
 
-export default class TaskView extends React.Component {
+class TaskDetailsView extends React.Component {
     props: Props;
 
+    onComplete() {
+        this.props.markTaskCompleted(this.props.task.token);
+    }
+
     render() {
-        const {title, status, desc, reward, complete, token} = this.props.task;
+        const {title, status, desc, reward, token} = this.props.task;
 
         return (
             <View>
@@ -45,7 +52,6 @@ export default class TaskView extends React.Component {
                         <Text style={[GlobalStyles.sectionHeader, styles.taskTitle]}>{title}</Text>
                         <Text style={styles.status}>Status: {status}</Text>
                         <Text style={styles.reward}>Reward: {reward}</Text>
-                        <Text style={styles.complete}>Completed: {complete}</Text>
                         <Text style={styles.token}>Token: {token}</Text>
                     </View>
                     <View style={styles.desc}>
@@ -57,7 +63,7 @@ export default class TaskView extends React.Component {
                     <Button
                         containerStyle={[GlobalStyles.buttonContainer, styles.buttonContainer]}
                         style={styles.button}
-                        onPress={() => {}}
+                        onPress={this.onComplete.bind(this)}
                     >
                         Mark Task Complete
                     </Button>
@@ -85,3 +91,20 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
     },
 });
+
+
+// ##############
+// REDUX BINDINGS
+// ##############
+const mapStateToProps = (state) => {
+    return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        markTaskCompleted: (taskToken: string) => dispatch(markTaskCompleted(taskToken))
+    };
+};
+
+const TaskDetails = connect(mapStateToProps, mapDispatchToProps)(TaskDetailsView);
+export default TaskDetails;
