@@ -246,7 +246,7 @@ var chainUtils = require(__js+'/util/chainUtils');
 
     // TODO refactor
     function markTaskCompleted (taskAddr, callback) {
-        var status = "Yes";
+        var status = "Complete";
 
         taskManagerContract.markTaskCompleted(taskAddr, eris.str2hex(status), function (error, success) {
             error
