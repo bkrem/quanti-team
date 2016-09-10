@@ -19,9 +19,9 @@ First, let's move into QuantiTeam's API directory with the following command:
 cd chain
 ```
 
-Creating a local dev `simplechain`:
-- Automatically - Run `simplechain.sh` in the repository's root directory, which should start logging the chain's activities after setup.  
-- Manually - Follow Eris's brief [tutorial](https://docs.erisindustries.com/tutorials/chain-making/).  
+Creating a local dev `simplechain`:  
+- Automatically: Run `simplechain.sh` in the repository's root directory, which should start logging the chain's activities after setup.  
+- Manually: Follow Eris's brief [tutorial](https://docs.erisindustries.com/tutorials/chain-making/).  
 
 
 ## Running a local development chain
