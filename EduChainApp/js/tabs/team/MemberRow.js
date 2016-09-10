@@ -35,11 +35,10 @@ export default class MemberRow extends React.Component {
                 <View style={styles.container}>
                     <View style={styles.leftColumn}>
                         <Text style={styles.name}>{name}</Text>
-                        <Text style={styles.username}>{username}</Text>
+                        <Text style={styles.username}>(@{username})</Text>
                     </View>
                     <View style={styles.rightColumn}>
                         <Text style={styles.score}>Score: {score}</Text>
-                        <Text style={styles.complete}>Completed</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -51,13 +50,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
+        marginTop: 5,
         backgroundColor: '#dedede'
     },
     leftColumn: {
         flex: 7,
         backgroundColor: '#ededed',
         justifyContent: 'center',
-        alignItems: 'center'
+        //alignItems: 'center'
     },
     rightColumn: {
         flex: 3,
