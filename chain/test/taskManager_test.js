@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 var assert = require('chai').assert;
+var randtoken = require('rand-token');
 var taskManager = require(__js+'/taskManager');
 
 var refAddr;
@@ -13,7 +14,8 @@ var testTask = {
     reward: "200",
     participants: ["bkrem_", "yellouw", "drBombo"],
     creator: "Ben",
-    createdAt: String(Date.now())
+    createdAt: String(Date.now()),
+    token: randtoken.generate(8)
 };
 
 // Establish proper task type by adding `address` key,

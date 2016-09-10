@@ -9,13 +9,6 @@ contract TaskManager {
 
     SequenceArray taskList = new SequenceArray();
 
-    /*modifier onlyOwner() {
-        if (msg.sender != owner)
-        throw;
-
-        _ // `_` is synonymous to JS middleware's `next()`
-    }*/
-
     // TODO extend with eventObject if possible; `bytes32[]`?
     event ActionEvent(address indexed userAddr, bytes32 actionType);
     function registerActionEvent(bytes32 actionType) {
@@ -34,11 +27,12 @@ contract TaskManager {
         bytes32 _reward,
         bytes32 _participants,
         bytes32 _creator,
-        bytes32 _createdAt
+        bytes32 _createdAt,
+        bytes32 _token
         )
         returns (Task t)
     {
-        t = new Task(_id, _title, _desc, _status, _complete, _reward, _participants, _creator, _createdAt);
+        t = new Task(_id, _title, _desc, _status, _complete, _reward, _participants, _creator, _createdAt, _token);
 
         bool isOverwrite = taskList.insert(_id, t);
         registerActionEvent("ADD TASK");

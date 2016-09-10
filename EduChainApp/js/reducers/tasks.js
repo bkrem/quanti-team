@@ -16,6 +16,7 @@ export type Task = {
     status: string,
     participants: Array<string>,
     creator: string,
+    token: string,
     address?: string
 }
 

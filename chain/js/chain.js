@@ -1,4 +1,5 @@
 var Async = require('async');
+var randtoken = require('rand-token');
 var auth = require(__js+'/auth');
 var taskManager = require(__js+'/taskManager');
 var userManager = require(__js+'/userManager');
@@ -119,6 +120,12 @@ function getUserFromAddress (userAddr, callback) {
  */
 function addTask (task, username, callback) {
     log.info('chain.addTask()');
+
+    // Generate a random token to verify file attachments via the uploader
+    var token = randtoken.generate(8);
+
+    log.info("TASK TOKEN: ", token);
+    task.token = token;
 
     taskManager.addTask(task, function (err, taskAddr) {
         if (err)
