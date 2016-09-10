@@ -5,7 +5,7 @@
 # simplify the usage of `eris` drastically, such as the chain directory ($chain_dir)
 # and the address of the contract owner ($addr) if a contract is to be deployed onto the chain.
 
-echo "Running eduChain environment setup..."
+echo "Running QuantiTeam environment setup..."
 
 # Set references to the chain & account
 chain_dir=$HOME/.eris/chains/simplechain
