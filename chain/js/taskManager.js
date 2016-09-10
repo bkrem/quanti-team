@@ -227,12 +227,30 @@ var chainUtils = require(__js+'/util/chainUtils');
         });
     }
 
+
+    /**
+     * getTaskAddressFromToken - description
+     *
+     * @param  {type} token    description
+     * @param  {type} callback description
+     * @return {type}          description
+     */
+    function getTaskAddressFromToken (token, callback) {
+        taskManagerContract.getTaskFromToken(eris.str2hex(token), function (error, taskAddr) {
+            error
+            ? log.error("getTaskAddressFromToken() -> Error: " + error.stack)
+            : log.debug("getTaskAddressFromToken: ", token);
+            callback(error, taskAddr);
+        });
+    }
+
     module.exports = {
         addTask: addTask,
         getAllTaskAddresses: getAllTaskAddresses,
         getTaskAtIndex: getTaskAtIndex,
         getTaskAtAddress: getTaskAtAddress,
         getTaskListSize: getTaskListSize,
-        getTaskKeyAtIndex: getTaskKeyAtIndex
+        getTaskKeyAtIndex: getTaskKeyAtIndex,
+        getTaskAddressFromToken: getTaskAddressFromToken
     };
 }());

@@ -8,7 +8,7 @@ var username = 'test_usermanager1';
 var pseudoTaskAddr = '2BEBADFCA9F0A28AF3631BC01E8DFF1AA18ABABA';
 
 describe('Linker', function () {
-    this.timeout(3000);
+    this.timeout(5000);
 
     describe('linkTaskToUser()', function () {
         it('links a task address to a user contract', function (done) {

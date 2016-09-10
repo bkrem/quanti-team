@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 var assert = require('chai').assert;
+var randtoken = require('rand-token');
 var chain = require(__js+'/chain');
 
 var mockUser = {
@@ -22,7 +23,8 @@ var mockTask = {
     reward: "200",
     participants: ["alpha", "beta", "gamma"],
     creator: "Ben",
-    createdAt: String(Date.now())
+    createdAt: String(Date.now()),
+    token: randtoken.generate(8)
 };
 
 var mockTeamAddress;
@@ -148,6 +150,17 @@ describe('chain', function () {
             });
         });
     });
+
+    describe('attachFileToTask', function () {
+        it('attaches a file reference hash to the passed token\'s associated task', function (done) {
+            var mockHash = 'abcdefghijklmnop';
+            chain.attachFileToTask(mockTask.token, mockHash, function (err, isOverwrite) {
+                assert.isNull(err);
+                assert.isBoolean(isOverwrite);
+                done();
+            });
+        });
+    })
 
     describe('mintNewId(task)', function () {
         it('mints a new ID for the `task` data domain', function (done) {

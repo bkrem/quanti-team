@@ -15,6 +15,31 @@ var log = logger.getLogger('chain.api');
 // ######################
 
 /**
+ * attachFileToTask - description
+ *
+ * @param  {type} token    description
+ * @param  {type} fileHash description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
+function attachFileToTask (token, fileHash, callback) {
+    log.info('chain.attachFileToTask()');
+    taskManager.getTaskAddressFromToken(token, function (tokenErr, taskAddr) {
+        if (tokenErr)
+            return callback(tokenErr, null);
+
+        linker.linkFileToTask(taskAddr, fileHash, function (err, isOverwrite) {
+            return callback(err, isOverwrite);
+        });
+    });
+}
+
+
+// ######################
+// USER ENPOINTS
+// ######################
+
+/**
  * isUsernameTaken - description
  *
  * @param  {type} username description
@@ -287,6 +312,7 @@ function mintNewId (domain, callback) {
 
 
 module.exports = {
+    attachFileToTask: attachFileToTask,
     isUsernameTaken: isUsernameTaken,
     signup: signup,
     login: login,

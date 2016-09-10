@@ -54,10 +54,16 @@ var init = function () {
      });
 
      app.post('/upload', upload.single('attachment'), function (req, res) {
+         var token = req.body.token;
+         var fileHash = req.file.filename;
+
          log.info('POST /upload');
-         log.debug(req.body);
-         log.debug(req.file); // -> undefined, FIXME
-         res.sendStatus(200);
+         log.info("Passed task token: ", token);
+         log.info("Passed .txt file: ", req.file);
+
+         chain.attachFileToTask(token, fileHash, function (err, isOverwrite) {
+             err ? res.sendStatus(500) : res.sendStatus(200);
+         });
      });
 
 

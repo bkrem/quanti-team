@@ -34,7 +34,7 @@ contract TaskManager {
     {
         t = new Task(_id, _title, _desc, _status, _complete, _reward, _participants, _creator, _createdAt, _token);
 
-        bool isOverwrite = taskList.insert(_id, t);
+        bool isOverwrite = taskList.insert(_token, t);
         registerActionEvent("ADD TASK");
         // TODO needs a verification of insert success
         return t;
@@ -54,9 +54,12 @@ contract TaskManager {
         return taskList.keyAtIndex(_idx);
     }
 
+    function getTaskFromToken(bytes32 token) constant returns (address) {
+        return taskList.value(token);
+    }
+
     function getTaskListSize() constant returns (uint) {
         registerActionEvent("GET TASKLIST SIZE");
         return taskList.size();
-
     }
 }

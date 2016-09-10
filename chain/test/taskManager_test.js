@@ -87,6 +87,16 @@ describe("Task Manager", function () {
         });
     });
 
+    describe("getTaskAddressFromToken", function () {
+        it("retrieves a task address that matches the passed attachment token", function (done) {
+            taskManager.getTaskAddressFromToken(testTask.token, function (err, taskAddr) {
+                assert.isNull(err);
+                assert.strictEqual(taskAddr, refAddr);
+                done();
+            });
+        });
+    });
+
 });
 
 require('./userManager_test');
