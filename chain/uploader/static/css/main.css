@@ -17,6 +17,8 @@ h4 {
 
 .container-form {
     margin: 5% 20% 5% 20%;
+    background-color: gainsboro;
+    padding: 10px;
 }
 
 .container-form input {
