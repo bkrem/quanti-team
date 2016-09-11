@@ -30,31 +30,6 @@ Assuming we now have a functioning `simplechain` instance, let's boot it up and 
 . ./chain-up.sh; . ./envsetup.sh
 ```
 
-Which should give us output similar to the following:
-```
-Starting "default"...
-(default) Check network to re-create if needed...
-(default) Waiting for an IP...
-Machine "default" was started.
-Waiting for SSH to be available...
-Detecting the provisioner...
-Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
-✓ docker-machine instance has booted
-✓ eval'd local environment for docker-machine
-✓ booted chain instance
-CHAIN           ON     CONTAINER ID     DATA CONTAINER     IMAGE                          COMMAND     PORTS
-simplechain     *      8bc5938c66       0f573eb9b3         quay.io/eris/erisdb:0.11.4     [run]       0.0.0.0:1337->1337/tcp, 0.0.0.0:46656->46656/tcp, 0.0.0.0:46657->46657/tcp
-
-✓ booted the chain service
-Running QuantiTeam environment setup...
-chain_dir: /Users/<YOURNAME>/.eris/chains/simplechain
-chain_dir_this: /Users/<YOURNAME>/.eris/chains/simplechain/simplechain_full_000
-addr: 0D96023ED9C172AE89FF478F8C560741B6DCE5E4
-'host' set to docker-machine IP: 192.168.99.100
-compiler_addr:
-IDI_PORT set to 8082
-```
-
 We can easily verify whether the `simplechain` instance is running as expected by following its log output:
 ```
 npm run chainlog
@@ -97,6 +72,7 @@ QuantiTeam's API exposes the following HTTP endpoints:
 - GET `/user/profile/:username` - Get the profile of the username passed via `req.params.username`.  
 - GET `/tasks/:username` - Get the tasks of the username passed via `req.params.username`.  
 - POST `/task` - Add a new task to the blockchain via the form data passed in `req.body.task` for the username in `req.body.username`.  
+- GET `/task/completed/:token` - Mark the task associated with the token passed in `req.params.token` as completed.
 - GET `/team/taken/:teamname` - Check whether the teamname passed as `req.params.teamname` is already taken.  
 - POST `/team` - Add a new team to the blockchain via the form data passed in `req.body.form`.  
 - GET `/team/:teamname` - Get the team profile for the teamname passed as `req.params.teamname`.  
