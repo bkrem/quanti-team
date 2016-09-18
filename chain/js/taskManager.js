@@ -220,6 +220,7 @@ var chainUtils = require(__js+'/util/chainUtils');
      * @param  {type} callback description
      * @return {type}          description
      */
+     /* istanbul ignore next */
     function getTaskKeyAtIndex (idx, callback) {
         taskManagerContract.getTaskKeyAtIndex(idx, function (error, key) {
             error ? log.error("getTaskKeyAtIndex() -> Error: " + error.stack) : log.debug("getTaskKeyAtIndex " + idx, eris.hex2str(key));
