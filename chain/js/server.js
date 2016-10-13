@@ -54,12 +54,18 @@ var init = function () {
      });
 
      app.post('/upload', upload.single('attachment'), function (req, res) {
+         var token = req.body.token;
+         var fileHash = req.file.filename;
+
          log.info('POST /upload');
-         log.debug(req.body);
-         log.debug(req.file); // -> undefined, FIXME
-         res.sendStatus(200);
+         log.info("Passed task token: ", token);
+         log.info("Passed .txt file: ", req.file);
+
+         chain.attachFileToTask(token, fileHash, function (err, isOverwrite) {
+             err ? res.sendStatus(500) : res.sendStatus(200);
+         });
      });
-     
+
 
      // ######################
      // API
@@ -138,6 +144,16 @@ var init = function () {
                 isOverwrite: isOverwrite,
                 taskAddr: taskAddr
             });
+        });
+    });
+
+    app.get('/task/completed/:token', function (req, res) {
+        var taskToken = req.params.token;
+
+        log.info("GET /task/completed/"+taskToken);
+        chain.markTaskCompleted(taskToken, function (err, success) {
+            _handleErr(err, res);
+            res.json({success: success});
         });
     });
 

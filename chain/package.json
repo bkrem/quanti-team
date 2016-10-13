@@ -13,13 +13,13 @@
   },
   "dependencies": {
     "async": "^2.0.0",
-    "bcrypt": "^0.8.7",
     "binstring": "^0.2.1",
     "body-parser": "^1.15.2",
     "eris-contracts": "^0.13.3",
     "express": "^4.14.0",
     "log4js": "^0.6.37",
     "multer": "^1.2.0",
+    "rand-token": "^0.2.1",
     "toml-js": "0.0.8"
   },
   "devDependencies": {

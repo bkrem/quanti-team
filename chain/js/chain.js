@@ -1,4 +1,5 @@
 var Async = require('async');
+var randtoken = require('rand-token');
 var auth = require(__js+'/auth');
 var taskManager = require(__js+'/taskManager');
 var userManager = require(__js+'/userManager');
@@ -7,6 +8,31 @@ var linker = require(__js+'/linker');
 
 var logger = require(__libs+'/eris/eris-logger');
 var log = logger.getLogger('chain.api');
+
+
+// ######################
+// USER ENPOINTS
+// ######################
+
+/**
+ * attachFileToTask - description
+ *
+ * @param  {type} token    description
+ * @param  {type} fileHash description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
+function attachFileToTask (token, fileHash, callback) {
+    log.info('chain.attachFileToTask()');
+    taskManager.getTaskAddressFromToken(token, function (tokenErr, taskAddr) {
+        if (tokenErr)
+            return callback(tokenErr, null);
+
+        linker.linkFileToTask(taskAddr, fileHash, function (err, isOverwrite) {
+            return callback(err, isOverwrite);
+        });
+    });
+}
 
 
 // ######################
@@ -120,6 +146,12 @@ function getUserFromAddress (userAddr, callback) {
 function addTask (task, username, callback) {
     log.info('chain.addTask()');
 
+    // Generate a random token to verify file attachments via the uploader
+    var token = randtoken.generate(8);
+
+    log.info("TASK TOKEN: ", token);
+    task.token = token;
+
     taskManager.addTask(task, function (err, taskAddr) {
         if (err)
             return callback(err, null, null);
@@ -154,6 +186,19 @@ function getUserTasks (username, callback) {
         }
     ], function (err, tasks) {
         callback(err, tasks);
+    });
+}
+
+function markTaskCompleted (taskToken, callback) {
+    log.info('chain.markTaskCompleted()');
+
+    taskManager.getTaskAddressFromToken(taskToken, function (err, taskAddr) {
+        if (err)
+            return callback(err, null);
+
+        taskManager.markTaskCompleted(taskAddr, function (markErr, success) {
+            return callback(markErr, success);
+        });
     });
 }
 
@@ -280,12 +325,14 @@ function mintNewId (domain, callback) {
 
 
 module.exports = {
+    attachFileToTask: attachFileToTask,
     isUsernameTaken: isUsernameTaken,
     signup: signup,
     login: login,
     getUser: getUser,
     addTask: addTask,
     getUserTasks: getUserTasks,
+    markTaskCompleted: markTaskCompleted,
     createTeam: createTeam,
     getTeamDetails: getTeamDetails,
     addTeamMember: addTeamMember,

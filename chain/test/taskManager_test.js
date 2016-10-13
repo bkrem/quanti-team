@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 var assert = require('chai').assert;
+var randtoken = require('rand-token');
 var taskManager = require(__js+'/taskManager');
 
 var refAddr;
@@ -13,7 +14,8 @@ var testTask = {
     reward: "200",
     participants: ["bkrem_", "yellouw", "drBombo"],
     creator: "Ben",
-    createdAt: String(Date.now())
+    createdAt: String(Date.now()),
+    token: randtoken.generate(8)
 };
 
 // Establish proper task type by adding `address` key,
@@ -80,6 +82,26 @@ describe("Task Manager", function () {
                     if ({}.hasOwnProperty.call(task, prop))
                         assert.notStrictEqual(task[prop], "", "returned task object should have no empty string values");
                 }
+                done();
+            });
+        });
+    });
+
+    describe("getTaskAddressFromToken", function () {
+        it("retrieves a task address that matches the passed attachment token", function (done) {
+            taskManager.getTaskAddressFromToken(testTask.token, function (err, taskAddr) {
+                assert.isNull(err);
+                assert.strictEqual(taskAddr, refAddr);
+                done();
+            });
+        });
+    });
+
+    describe("markTaskCompleted", function () {
+        it("marks the task associated to the passed address as complete and returns a success bool", function (done) {
+            taskManager.markTaskCompleted(refAddr, function (err, success) {
+                assert.isNull(err);
+                assert.strictEqual(success, true);
                 done();
             });
         });

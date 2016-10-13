@@ -1,3 +1,5 @@
+import "SequenceArray.sol";
+
 contract Task {
 
     bytes32 public id; // immutable
@@ -9,6 +11,9 @@ contract Task {
     bytes32 public participants; // mutable
     bytes32 public creator; // immutable
     bytes32 public createdAt; // immutable
+    bytes32 public token; // immutable
+
+    SequenceArray attachments = new SequenceArray();
 
     // Constructor
     function Task(
@@ -20,8 +25,8 @@ contract Task {
         bytes32 _reward,
         bytes32 _participants,
         bytes32 _creator,
-        bytes32 _createdAt
-        ) {
+        bytes32 _createdAt,
+        bytes32 _token) {
         id = _id;
         title = _title;
         desc = _desc;
@@ -31,5 +36,17 @@ contract Task {
         participants = _participants;
         creator = _creator;
         createdAt = _createdAt;
+        token = _token;
+    }
+
+    function associateWithFile(bytes32 fileHash) returns (bool isOverwrite) {
+        isOverwrite = attachments.insert(fileHash, this);
+        return isOverwrite;
+    }
+
+    function markComplete(bytes32 _status) returns (bool success) {
+        status = _status;
+        success = true;
+        return success;
     }
 }

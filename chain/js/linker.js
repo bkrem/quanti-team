@@ -69,7 +69,25 @@ function linkTeamToUser (username, teamname, callback) {
     });
 }
 
+
+/**
+ * linkFileToTask - description
+ *
+ * @param  {type} taskAddr description
+ * @param  {type} fileHash description
+ * @param  {type} callback description
+ * @return {type}          description
+ */
+function linkFileToTask (taskAddr, fileHash, callback) {
+    log.debug("linkFileToTask() -> taskAddr: %s, fileHash: %s", taskAddr, fileHash);
+    LinkerContract.linkFileToTask(taskAddr, eris.str2hex(fileHash), function (err, isOverwrite) {
+        log.debug("linkFileToTask() -> LinkerContract -> isOverwrite: ", isOverwrite);
+        return err ? callback(err, null) : callback(err, isOverwrite);
+    });
+}
+
 module.exports = {
     linkTaskToUser: linkTaskToUser,
-    linkTeamToUser: linkTeamToUser
+    linkTeamToUser: linkTeamToUser,
+    linkFileToTask: linkFileToTask
 };

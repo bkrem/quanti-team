@@ -9,7 +9,7 @@ import React from 'react';
 import {Navigator} from 'react-native';
 
 import TabsView from './tabs/TabsView';
-import TaskView from './tabs/tasks/TaskView';
+import TaskDetails from './tabs/tasks/TaskDetails';
 import SettingsListView from './settings/SettingsListView';
 import AddTask from './tabs/tasks/AddTask';
 import CreateTeam from './tabs/team/CreateTeam';
@@ -27,7 +27,7 @@ export default class EduChainNavigator extends React.Component {
             case 'settings':
                 return (<SettingsListView navigator={navigator} />);
             case 'task':
-                return (<TaskView task={route.task} navigator={navigator} />);
+                return (<TaskDetails task={route.task} navigator={navigator} />);
             case 'addTask':
                 return (<AddTask navigator={navigator} />);
             case 'createTeam':

@@ -25,18 +25,17 @@
      props: Props;
 
      render() {
-         const {title, desc, reward, complete} = this.props.row;
+         const {title, reward, complete, token} = this.props.row;
 
          return (
              <TouchableOpacity onPress={this.props.onPress.bind(this)}>
                  <View style={styles.container}>
                      <View style={styles.leftColumn}>
                          <Text style={styles.title}>{title}</Text>
-                         <Text style={styles.desc}>{desc}</Text>
+                         <Text style={styles.token}>{token}</Text>
                      </View>
                      <View style={styles.rightColumn}>
                          <Text style={styles.reward}>Reward: {reward}</Text>
-                         <Text style={styles.complete}>Completed: {complete}</Text>
                      </View>
                  </View>
              </TouchableOpacity>
@@ -64,7 +63,7 @@
      title: {
          fontSize: 20,
      },
-     desc: {
+     token: {
 
      },
      reward: {

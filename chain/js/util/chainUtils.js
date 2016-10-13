@@ -65,10 +65,12 @@ var chainUtils = {
     },
 
     /**
-     * marshalForChain - description
+     * marshalForChain - Takes an object, iterates its own properties and
+     * encodes them as hexadecimal strings so they can be fed into Solidity
+     * contracts easily.
      *
-     * @param  {type} obj description
-     * @return {type}     description
+     * @param  {Object} obj The object to be marshalled.
+     * @return {Object} hexObj `obj` with hexadecimal-encoded properties
      */
     marshalForChain: function (obj) {
         var hexObj = {};

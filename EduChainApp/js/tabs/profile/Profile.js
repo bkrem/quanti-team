@@ -18,17 +18,23 @@
  import Header from '../../common/Header';
  import ProfileSummary from './ProfileSummary';
  import type {User} from '../../reducers/user';
- import {getProfile} from '../../actions/user';
+ import {getProfile, logout} from '../../actions/user';
 
  type Props = {
      username: string;
      details: User;
      getProfile: (username: string) => void;
+     logout: () => void;
      navigator: Navigator;
  }
 
  class ProfileView extends React.Component {
      props: Props;
+
+     onLogout() {
+         this.props.logout();
+         this.props.navigator.push({id: "login"});
+     }
 
      render() {
          return (
@@ -36,22 +42,14 @@
                  <Header
                      title="Me"
                      rightItem={{
-                         title: "Settings",
-                         layout: "icon",
-                         icon: "ios-settings",
-                         onPress: () => this.props.navigator.push({id: "settings"})
+                         title: "Log out",
+                         layout: "title",
+                         onPress: () => this.onLogout()
                      }}
                  />
 
              <View style={GlobalStyles.contentWrapper}>
                     <ProfileSummary details={this.props.details} />
-
-                    <View ref="bioContainer" style={styles.bioContainer}>
-                        <Text ref="bioTitle" style={[GlobalStyles.sectionHeader, styles.bioTitle]}>Bio</Text>
-                        <Text ref="bio" style={styles.bioContent}>
-                           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                       </Text>
-                   </View>
 
                 </View>
              </View>
@@ -74,7 +72,8 @@
 
  const mapDispatchToProps = (dispatch) => {
      return {
-         getProfile: (username: string) => dispatch(getProfile(username))
+         getProfile: (username: string) => dispatch(getProfile(username)),
+         logout: () => dispatch(logout())
      };
  };
 

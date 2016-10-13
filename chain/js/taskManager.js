@@ -104,6 +104,9 @@ var chainUtils = require(__js+'/util/chainUtils');
             },
             createdAt: function (callback) {
                 contract.createdAt( eris.convertibleCallback(callback, [eris.hex2str]) );
+            },
+            token: function (callback) {
+                contract.token( eris.convertibleCallback(callback, [eris.hex2str]) );
             }
         },
         function (err, results) {
@@ -137,6 +140,7 @@ var chainUtils = require(__js+'/util/chainUtils');
             hexTask.participants,
             hexTask.creator,
             hexTask.createdAt,
+            hexTask.token,
              function (err, address) {
                  err ? log.error("addTask() -> Error: " + err.stack) : log.debug("Task address: " + address);
                  callback(err, address);
@@ -216,10 +220,40 @@ var chainUtils = require(__js+'/util/chainUtils');
      * @param  {type} callback description
      * @return {type}          description
      */
+     /* istanbul ignore next */
     function getTaskKeyAtIndex (idx, callback) {
         taskManagerContract.getTaskKeyAtIndex(idx, function (error, key) {
             error ? log.error("getTaskKeyAtIndex() -> Error: " + error.stack) : log.debug("getTaskKeyAtIndex " + idx, eris.hex2str(key));
             callback(error, key);
+        });
+    }
+
+
+    /**
+     * getTaskAddressFromToken - description
+     *
+     * @param  {type} token    description
+     * @param  {type} callback description
+     * @return {type}          description
+     */
+    function getTaskAddressFromToken (token, callback) {
+        taskManagerContract.getTaskFromToken(eris.str2hex(token), function (error, taskAddr) {
+            error
+            ? log.error("getTaskAddressFromToken() -> Error: " + error.stack)
+            : log.debug("getTaskAddressFromToken: ", token);
+            callback(error, taskAddr);
+        });
+    }
+
+    // TODO refactor
+    function markTaskCompleted (taskAddr, callback) {
+        var status = "Complete";
+
+        taskManagerContract.markTaskCompleted(taskAddr, eris.str2hex(status), function (error, success) {
+            error
+            ? log.error("markTaskCompleted() -> Error: " + error.stack)
+            : log.debug("markTaskCompleted() -> success: ", success);
+            callback(error, success);
         });
     }
 
@@ -229,6 +263,8 @@ var chainUtils = require(__js+'/util/chainUtils');
         getTaskAtIndex: getTaskAtIndex,
         getTaskAtAddress: getTaskAtAddress,
         getTaskListSize: getTaskListSize,
-        getTaskKeyAtIndex: getTaskKeyAtIndex
+        getTaskKeyAtIndex: getTaskKeyAtIndex,
+        getTaskAddressFromToken: getTaskAddressFromToken,
+        markTaskCompleted: markTaskCompleted
     };
 }());

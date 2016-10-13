@@ -16,6 +16,10 @@ export type Action =
   | { type: 'FETCH_TASKS_SUCCESS', tasks: Array<Task>, receivedAt: number }
   | { type: 'FETCH_TASKS_FAIL', error: Object }
 
+  | { type: 'MARK_TASK_COMPLETE_REQUEST', taskToken: string }
+  | { type: 'MARK_TASK_COMPLETE_SUCCESS', success: boolean }
+  | { type: 'MARK_TASK_COMPLETE_FAIL', error: Object }
+
   | { type: 'NEW_ID_REQUEST', target: string }
   | { type: 'NEW_ID_SUCCESS', newId: string }
   | { type: 'NEW_ID_FAIL', error: Object }
@@ -55,6 +59,8 @@ export type Action =
   | { type:'GET_TEAM_DETAILS_REQUEST', teamname: string }
   | { type: 'GET_TEAM_DETAILS_SUCCESS', team: Team }
   | { type: 'GET_TEAM_DETAILS_FAIL', error: Object }
+
+  | { type: 'LOGOUT' }
   ;
 
 export type PromiseAction = Promise<Action>;

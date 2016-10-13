@@ -64,6 +64,25 @@ export function addTaskFail(error: Object): Action {
     };
 }
 
+export function markCompleteRequest(taskToken: string): Action {
+    return {
+        type: 'MARK_TASK_COMPLETE_REQUEST',
+        taskToken
+    };
+}
+export function markCompleteSuccess(success: boolean): Action {
+    return {
+        type: 'MARK_TASK_COMPLETE_SUCCESS',
+        success
+    };
+}
+export function markCompleteFail(error: Object): Action {
+    return {
+        type: 'MARK_TASK_COMPLETE_FAIL',
+        error
+    };
+}
+
 
 // ##############################
 // THUNK ACTIONS
@@ -108,5 +127,22 @@ export function addTask(partialTask: Task, username: string): ThunkAction {
                     dispatch(addTaskFail(rejection))
                 );
         });
+    };
+}
+
+export function markTaskCompleted(taskToken: string): ThunkAction {
+    return (dispatch) => {
+        dispatch(markCompleteRequest(taskToken));
+
+        return fetch(ENV.__API_BRIDGE+`/task/completed/${taskToken}`)
+            .then(response => response.json())
+            .then(json => {
+                json.success
+                ? dispatch(markCompleteSuccess(json.success))
+                : dispatch(markCompleteFail({error: "markTaskCompleted returned `false`"}));
+            })
+            .catch(rejection =>
+                dispatch(markCompleteFail(rejection))
+            );
     };
 }

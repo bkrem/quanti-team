@@ -13,7 +13,11 @@ import {assignNewId} from './util';
 // #############################
 // UI EVENTS
 // #############################
-
+export function logout(): Action {
+    return {
+        type: 'LOGOUT'
+    };
+}
 
 // ####################################
 // POST `/user/signup` API ENDPOINT ACTIONS

@@ -42,7 +42,7 @@ class AddTaskView extends React.Component {
         // TODO remove temporary hardcoded fill
         let partialTask = {
             ...taskForm,
-            complete: "IMPLEMENT ME",
+            complete: "No",
             reward: "200",
             participants: ["Ben", "Liza", "Bombo"],
             creator: "Ben",

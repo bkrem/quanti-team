@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 var assert = require('chai').assert;
+var randtoken = require('rand-token');
 var chain = require(__js+'/chain');
 
 var mockUser = {
@@ -22,7 +23,8 @@ var mockTask = {
     reward: "200",
     participants: ["alpha", "beta", "gamma"],
     creator: "Ben",
-    createdAt: String(Date.now())
+    createdAt: String(Date.now()),
+    token: randtoken.generate(8)
 };
 
 var mockTeamAddress;
@@ -144,6 +146,27 @@ describe('chain', function () {
                 assert.strictEqual(isValid, true);
                 assert.deepEqual(user, mockUser);
                 assert.isObject(team);
+                done();
+            });
+        });
+    });
+
+    describe('attachFileToTask', function () {
+        it('attaches a file reference hash to the passed token\'s associated task', function (done) {
+            var mockHash = 'abcdefghijklmnop';
+            chain.attachFileToTask(mockTask.token, mockHash, function (err, isOverwrite) {
+                assert.isNull(err);
+                assert.isBoolean(isOverwrite);
+                done();
+            });
+        });
+    });
+
+    describe("markTaskCompleted", function () {
+        it("marks the task associated to the passed token as complete and returns a success bool", function (done) {
+            chain.markTaskCompleted(mockTask.token, function (err, success) {
+                assert.isNull(err);
+                assert.strictEqual(success, true);
                 done();
             });
         });

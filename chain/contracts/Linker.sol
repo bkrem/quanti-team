@@ -1,4 +1,5 @@
 import "User.sol";
+import "Task.sol";
 
 contract Linker {
 
@@ -17,6 +18,11 @@ contract Linker {
     function linkTeamToUser(address userAddress, bytes32 teamname) returns (bool) {
         registerActionEvent('LINK TEAM TO USER');
         return User(userAddress).associateWithTeam(teamname);
+    }
+
+    function linkFileToTask(address taskAddr, bytes32 fileHash) returns (bool) {
+        registerActionEvent('LINK FILE TO TASK');
+        return Task(taskAddr).associateWithFile(fileHash);
     }
 
 }

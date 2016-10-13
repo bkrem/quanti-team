@@ -19,8 +19,8 @@
     <h1>QuantiTeam</h2>
     <h2>Task Attachment Upload</h2>
 
-    <div class="container-form" style="background-color: #ddd">
-        <form action="/upload" method="POST">
+    <div class="container-form">
+        <form action="/upload" method="POST" enctype="multipart/form-data">
             Task Token:
             <input type="text" size="25" name="token" placeholder="Please enter your task token" />
             <br />
