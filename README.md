@@ -65,7 +65,8 @@ Please refer to `package.json` for more detailed insights into which shell comma
 
 ## API
 QuantiTeam's API exposes the following HTTP endpoints:
-- POST `/upload` - Upload a task related file via `multipart/form-data`.  
+
+### Stable
 - POST `/user/taken` - Check whether the the username in `req.body.username` is already taken.  
 - POST `/user/signup` - Sign up a new user with the form data passed in `req.body`.  
 - POST `/user/login` - Log in an existing user with the form data passed in `req.body`.  
@@ -77,6 +78,9 @@ QuantiTeam's API exposes the following HTTP endpoints:
 - POST `/team` - Add a new team to the blockchain via the form data passed in `req.body.form`.  
 - GET `/team/:teamname` - Get the team profile for the teamname passed as `req.params.teamname`.  
 - POST `/team/add-member` - Add a new member to a team with the form data passed in `req.body.form`.  
+
+### Experimental
+- POST `/upload` - Upload a task related file via `multipart/form-data`.
 
 
 ## Shutting down
