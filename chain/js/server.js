@@ -186,6 +186,7 @@ var init = function () {
         });
     });
 
+    // TODO refactor this endpoint; return values are convoluted
     app.post('/team/add-member', function (req, res) {
         var form = req.body.form;
 

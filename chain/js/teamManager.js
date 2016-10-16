@@ -127,7 +127,8 @@ function addTeam (team, callback) {
                 err = "addTeam("+team.name+") failed: team name already exists";
 
             callback(err, address);
-        });
+        }
+    );
 }
 
 /**
