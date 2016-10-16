@@ -20,7 +20,7 @@ cd chain
 ```
 
 Creating a local dev `simplechain`:  
-- Automatically: Run `simplechain.sh` in the repository's root directory, which should start logging the chain's activities after setup.  
+- Automatically: Run `. ./simplechain.sh` in the repository's root directory, which should start logging the chain's activities after setup.  
 - Manually: Follow Eris's brief [tutorial](https://docs.erisindustries.com/tutorials/chain-making/).  
 
 
@@ -59,7 +59,7 @@ The chain service itself can be built & booted simply with:
 ```
 npm run build
 ```
-Anytime a change is made to the node server, `build` should be run as it builds the new service container via `docker` and replaces it with the previous one via `eris`.  
+Anytime a change is made to the node server, `build` should be run as it builds a new service container via `docker` and replaces it with the previous one via `eris`.  
 Please refer to `package.json` for more detailed insights into which shell commands each NPM script executes.
 
 
@@ -67,17 +67,220 @@ Please refer to `package.json` for more detailed insights into which shell comma
 QuantiTeam's API exposes the following HTTP endpoints:
 
 ### Stable
-- POST `/user/taken` - Check whether the the username in `req.body.username` is already taken.  
-- POST `/user/signup` - Sign up a new user with the form data passed in `req.body`.  
-- POST `/user/login` - Log in an existing user with the form data passed in `req.body`.  
-- GET `/user/profile/:username` - Get the profile of the username passed via `req.params.username`.  
-- GET `/tasks/:username` - Get the tasks of the username passed via `req.params.username`.  
-- POST `/task` - Add a new task to the blockchain via the form data passed in `req.body.task` for the username in `req.body.username`.  
-- GET `/task/completed/:token` - Mark the task associated with the token passed in `req.params.token` as completed.
-- GET `/team/taken/:teamname` - Check whether the teamname passed as `req.params.teamname` is already taken.  
-- POST `/team` - Add a new team to the blockchain via the form data passed in `req.body.form`.  
-- GET `/team/:teamname` - Get the team profile for the teamname passed as `req.params.teamname`.  
-- POST `/team/add-member` - Add a new member to a team with the form data passed in `req.body.form`.  
+#### Users
+##### `/user/taken`  
+- Description: Checks whether the the username in `req.body.username` is already taken. Returns a boolean.  
+- Method: POST  
+- Request body:
+```js
+{
+    username: string
+}
+```
+- Response:
+```js
+{
+    isTaken: boolean
+}
+```
+
+##### `/user/signup`
+- Description: Signs up a new user with the credentials in `req.body.form`. Returns the new `User` contract's hex address.
+- Method: POST
+- Request body:
+```js
+{
+    form: {
+        name: string,
+        email: string,
+        username: string,
+        password: string
+    }
+}
+```
+- Response:
+```js
+{
+    address: string
+}
+```
+
+##### `/user/login`
+- Description: Logs in an existing user with the credentials passed in `req.body.form`. Returns `isValid` boolean to signify validity of credentials, and a `user` object if the login was successful. Additionally a `team` object is returned if the user is part of a team.
+- Method: POST
+- Request body:
+```js
+{
+    form: {
+        username: string,
+        password: string
+    }
+}
+```
+- Response:
+```js
+{
+    isValid: boolean,
+    user: {
+        name: string,
+        username: string,
+        score: string,
+        teamname?: string,
+        email?: string,
+        address?: string
+    },
+    team: {
+        name: string,
+        score: number;
+        members: Array<User>,
+        founderUsername: string,
+        founderAddress: string,
+        address?: string
+    }
+}
+```
+**Note**
+- `user` & `team` props will be `null` if `isValid === false`.
+- `team` prop will automatically be null if the user is not part of a team.
+
+
+##### `/user/profile/:username`
+- Description: Gets the profile of the username passed via `req.params.username`. Returns a `profile` object.
+- Method: GET
+- Request: `/user/profile/johndoe`
+- Response:
+```js
+{
+    profile: {
+        name: string,
+        username: string,
+        score: string,
+        teamname?: string,
+        email?: string,
+        address?: string
+    }
+}
+```
+
+#### Tasks
+##### `/tasks/:username`
+- Description: Gets the tasks of the username passed via `req.params.username`. Returns an array of `Task`-type objects. Returns an empty array if `:username` param has no tasks associated with it.
+- Method: GET
+- Request: `/tasks/johndoe`
+- Response:
+```js
+{
+    data: Array<Task>
+}
+```
+
+##### `/task`
+- Description: Adds a new task to the blockchain via the form data passed in `req.body.task` for the username in `req.body.username`. Returns a boolean indicating whether a previously existing task was overwritten, along with the task's hex address.
+- Method: POST
+- Request body:
+```js
+{
+    username: string,
+    task: {
+        id: string,
+        title: string,
+        desc: string,
+        reward: string,
+        complete: string,
+        status: "To Do" || "Completed" // enum
+        participants: Array<string>,
+        creator: string,
+        token: string,
+        createdAt: number // unix timestamp
+    }
+}
+```
+- Response:
+```js
+{
+    isOverwrite: boolean,
+    taskAddr: string
+}
+```
+
+##### `/task/completed/:token`
+- Description: Marks the task associated with the token passed in `req.params.token` as completed. Returns a boolean indicating whether marking the task was successful.
+- Method: GET
+- Request: `/task/completed/xyz123`
+- Response:
+```js
+{
+    success: boolean
+}
+```
+
+
+#### Teams
+##### `/team/taken/:teamname`
+- Description: Checks whether the teamname passed as `req.params.teamname` is already taken. Returns a boolean indicating whether the team name is already taken or not.
+- Method: GET
+**TODO**
+
+##### `/team`
+- Description: Adds a new team to the blockchain via the form data passed in `req.body.form`. Returns the new team's hex address in the blockchain and a boolean indicating whether the team was successfully linked to it's founder in the blockchain.
+- Method: POST
+- Request body:
+```js
+{
+    form: {
+        name: string,
+        founderUsername: string,
+        founderAddress: string, // hex address
+        createdAt: number // unix timestamp
+    }
+}
+```
+- Response:
+```js
+{
+    address: string, // hex address
+    linkSuccess: boolean
+}
+```
+
+##### `/team/:teamname`
+- Description: Gets the team profile for the teamname passed as `req.params.teamname`. Returns a `Team`-type object.
+- Method: GET
+- Request: `/team/myteamname`
+- Response:
+```js
+{
+    name: string,
+    score: number,
+    members: Array<User>,
+    founderUsername: string,
+    founderAddress: string,
+    address: string // hex address
+}
+```
+
+
+##### `/team/add-member`
+Description: Adds a new member to a team with the form data passed in `req.body.form`. Returns a boolean indicating whether the passed username was successfully linked to the team, along with an indicator of whether the username actually exists.
+Method: POST
+- Request body:
+```js
+{
+    form: {
+        username: string,
+        teamname: string,
+        teamAddress: string // hex address
+    }
+}
+```
+- Response:
+```js
+{
+    isTaken: boolean,
+    username: string,
+    linkSuccess: boolean
+}
+```
 
 ### Experimental
 - POST `/upload` - Upload a task related file via `multipart/form-data`.
