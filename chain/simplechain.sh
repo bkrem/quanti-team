@@ -18,5 +18,4 @@ eris chains new simplechain --dir $chain_dir_this &&
 mv $chain_dir/accounts.json accounts.json &&
     echo "${CHECKMARK} Copied across `accounts.json` into local directory"
 
-echo "Starting chain log...";
-eris chains logs simplechain -f;
+echo "To see log output for the new simplechain instance run: 'npm run chainlog'"
