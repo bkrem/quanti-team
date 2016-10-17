@@ -10,3 +10,6 @@ epm.json
 
 # Ignore `istanbul` test coverage reports
 test/coverage/*
+
+# Don't track accounts.json (should be imported from $chain_dir)
+accounts.json
