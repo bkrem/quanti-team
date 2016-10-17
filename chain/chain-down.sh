@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # stop the chain instance
 eris chains stop simplechain
 

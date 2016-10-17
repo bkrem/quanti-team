@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # This script should be run to configure `docker-machine`'s environment within the
 # terminal session, as well as to set up local environment variables which

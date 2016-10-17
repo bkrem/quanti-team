@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Automatically rolls, configures & begins logging a new
 # `simplechain` instance.
 
@@ -11,11 +13,8 @@ chain_dir_this=$chain_dir/simplechain_full_000
 eris chains make --account-types=Root:2,Full:1 simplechain &&
     echo "${CHECKMARK} Made a new simplechain"
 
-eris chains new simplechain --dir $chain_dir_this &&
-    echo "${CHECKMARK} Started the chain" &&
-    eris chains ls -a
+eris chains new simplechain --dir $chain_dir_this && echo "${CHECKMARK} Started the chain" && eris chains ls -a
 
-mv $chain_dir/accounts.json accounts.json &&
-    echo "${CHECKMARK} Copied across `accounts.json` into local directory"
+cp $chain_dir/accounts.json . && echo "${CHECKMARK} Copied across accounts.json into local directory"
 
 echo "To see log output for the new simplechain instance run: 'npm run chainlog'"

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 CHECKMARK="\u2713"
 
 docker-machine start default &&
