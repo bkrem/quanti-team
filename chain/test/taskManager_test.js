@@ -7,7 +7,7 @@ var taskManager = require(__js+'/taskManager');
 var refAddr;
 var testTask = {
     id: "test0",
-    title: "TestTitle",
+    title: "TestTitle_taskManager",
     desc: "Test Description",
     status: "To Do",
     complete: "0/?",
@@ -64,7 +64,8 @@ describe("Task Manager", function () {
                assert.isNull(err);
                assert.isNotNull(addresses, "`addresses` array should not be null");
                assert.isAtLeast(addresses.length, 1, "There should be at least 1 element from running the `addTask` test");
-               refAddr = addresses[0];
+               // address of `mockTest` is the latest addition to array
+               refAddr = addresses[addresses.length-1];
                done();
            });
        })

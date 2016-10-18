@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+var app = require('../app');
 var assert = require('chai').assert;
 var randtoken = require('rand-token');
 var chain = require(__js+'/chain');
@@ -16,7 +17,7 @@ var mockUser = {
 
 var mockTask = {
     id: "testchaintask",
-    title: "TestTitle",
+    title: "TestTitle_Chain",
     desc: "Test Description",
     status: "To Do",
     complete: "0/?",

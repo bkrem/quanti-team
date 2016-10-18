@@ -1,6 +1,5 @@
 var Async = require('async');
 var randtoken = require('rand-token');
-var auth = require(__js+'/auth');
 var taskManager = require(__js+'/taskManager');
 var userManager = require(__js+'/userManager');
 var teamManager = require(__js+'/teamManager');
@@ -72,26 +71,46 @@ function signup (user, callback) {
 /**
  * login - description
  *
- * @param  {type} credentials description
- * @param  {type} callback    description
- * @return {type}             description
+ * @param  {Object} credentials description
+ * @param  {fn} callback    description
+ * @return {@callback}      description
  */
 function login (credentials, callback) {
-    log.info('chain.login()');
-    auth.login(credentials.username, credentials.password, function (err, isValid, user) {
-        if (err || isValid === false)
-            return callback(err, isValid, null, null);
+    var username = credentials.username;
+    var password = credentials.password;
+    var isValid = false;
 
-        // if the user has no team, simply return user details
-        if (user.teamname === '')
-            return callback(err, isValid, user, null);
+    log.debug("chain.login() for: ", username);
 
-        teamManager.getTeamAddress(user.teamname, function (addressErr, teamAddr) {
-            if (addressErr)
-                return callback(addressErr, isValid, user, null);
-            teamManager.getTeamDetails(teamAddr, function (teamErr, team) {
-                return callback(teamErr, isValid, user, team);
-            });
+    // TODO HASH THE PASSWORD
+    // TODO make this an async.waterfall()
+
+    // Retrieve the user contract address from the chain
+    userManager.getUserAddress(username, function (addrErr, address) {
+        if (addrErr)
+            return callback(addrErr, isValid, null, null);
+        // Create a user object if there was no address error
+        userManager.getUser(address, function (err, user) {
+            if (err)
+                return callback(err, isValid, null, null);
+            // Compare the passed and retrieved login details to set `isValid`
+            if (user.username === username && user.password === password) {
+                isValid = true;
+                // if the user has no team, simply return user details
+                if (user.teamname === '')
+                    return callback(err, isValid, user, null);
+
+                teamManager.getTeamAddress(user.teamname, function (addressErr, teamAddr) {
+                    if (addressErr)
+                        return callback(addressErr, isValid, user, null);
+                    teamManager.getTeamDetails(teamAddr, function (teamErr, team) {
+                        return callback(teamErr, isValid, user, team);
+                    });
+                });
+            } else {
+                // if validation failed, don't return the `user` or `team` object
+                return callback(null, isValid, null, null);
+            }
         });
     });
 }
