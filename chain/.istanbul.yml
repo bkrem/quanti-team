@@ -1,4 +1,4 @@
 instrumentation:
-    excludes: ['**/libs/**', 'server.js']
+    excludes: ['**/libs/**', 'js/server.js']
 reporting:
     dir: ./test/coverage
