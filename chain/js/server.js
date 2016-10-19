@@ -26,14 +26,14 @@ var init = function () {
     /**
      * _handleErr - description
      *
-     * @param  {type} err description
-     * @param  {type} res description
-     * @return {type}     description
+     * @param  {Object} err error object passed by chain API func
+     * @param  {Object} res response object passed from `app.get|.post`
+     * @return {void}
      */
     function _handleErr (err, res) {
         if (err) {
             log.error(err.stack);
-            res.sendStatus(500);
+            res.status(500).send(err);
         }
     }
 
