@@ -79,7 +79,7 @@
         "lines-around-comment": "error",
         "max-depth": "error",
         "max-len": "off",
-        "max-lines": "error",
+        "max-lines": ["warn", {"max": 500}],
         "max-nested-callbacks": "error",
         "max-params": "warn",
         "max-statements": ["error", 10, { "ignoreTopLevelFunctions": true }],
