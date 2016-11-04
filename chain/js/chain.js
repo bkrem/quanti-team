@@ -1,5 +1,6 @@
 var Async = require('async');
 var randtoken = require('rand-token');
+var bcrypt = require('bcrypt-nodejs');
 var taskManager = require(__js+'/taskManager');
 var userManager = require(__js+'/userManager');
 var teamManager = require(__js+'/teamManager');
@@ -62,6 +63,10 @@ function isUsernameTaken (username, callback) {
  */
 function signup (user, callback) {
     log.info('chain.signup()');
+
+    // hash the password
+    user.password = bcrypt.hashSync(user.password);
+
     userManager.addUser(user, function (err, address) {
         return callback(err, address);
     });
@@ -77,12 +82,12 @@ function signup (user, callback) {
  */
 function login (credentials, callback) {
     var username = credentials.username;
-    var password = credentials.password;
+    // NOTE Due to `bytes32` solidity limitation, pass is truncated to 28 chars on initial signup
+    var passHash = bcrypt.hashSync(credentials.password).substring(0, 29); // FIXME use a custom salt
     var isValid = false;
 
     log.debug("chain.login() for: ", username);
 
-    // TODO HASH THE PASSWORD
     // TODO make this an async.waterfall()
 
     // Retrieve the user contract address from the chain
@@ -94,7 +99,8 @@ function login (credentials, callback) {
             if (err)
                 return callback(err, isValid, null, null);
             // Compare the passed and retrieved login details to set `isValid`
-            if (user.username === username && user.password === password) {
+            log.debug("PASSED HASH: %s,\nRETRIEVED HASH: %s", passHash, user.password);
+            if (user.username === username && user.password === passHash) {
                 isValid = true;
                 // if the user has no team, simply return user details
                 if (user.teamname === '')
