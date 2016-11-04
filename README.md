@@ -270,8 +270,8 @@ QuantiTeam's API exposes the following HTTP endpoints:
 
 
 ##### `/team/add-member`
-Description: Adds a new member to a team with the form data passed in `req.body.form`. Returns a boolean indicating whether the passed username was successfully linked to the team, along with an indicator of whether the username actually exists.
-Method: POST
+- Description: Adds a new member to a team with the form data passed in `req.body.form`. Returns a boolean indicating whether the passed username was successfully linked to the team, along with an indicator of whether the username actually exists.
+- Method: POST
 - Request body:
 ```js
 {
