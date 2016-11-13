@@ -110,7 +110,7 @@ QuantiTeam's API exposes the following HTTP endpoints:
 - Response:
 ```js
 {
-    address: string
+    address: string // hex address
 }
 ```
 
@@ -143,7 +143,7 @@ QuantiTeam's API exposes the following HTTP endpoints:
         score: number;
         members: Array<User>,
         founderUsername: string,
-        founderAddress: string,
+        founderAddress: string, // hex address
         address?: string
     }
 }
